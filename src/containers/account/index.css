@@ -11,9 +11,7 @@
 :local(.wlop) .ant-layout{
     height: 100%!important;
 }
-:local(.logo){
 
-}
 :local(.header){
     height: 64px;
     width: 100%;

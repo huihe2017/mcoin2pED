@@ -1,61 +1,44 @@
 import React from 'react';
 import style from './index.css';
-import { Menu, Icon} from 'antd';
 import {hashHistory} from 'react-router'
+import { Layout, Menu, Breadcrumb, Icon } from 'antd';
 
-const SubMenu = Menu.SubMenu;
+const { SubMenu } = Menu;
+const { Header, Content, Sider } = Layout;
 
-class Header extends React.Component{
+class Hheader extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
-            openKeys: ['sub1'],
+
         };
 
     }
-    rootSubmenuKeys = ['sub1', 'sub2', 'sub4'];
 
-    onOpenChange = (openKeys) => {
-        const latestOpenKey = openKeys.find(key => this.state.openKeys.indexOf(key) === -1);
-        if (this.rootSubmenuKeys.indexOf(latestOpenKey) === -1) {
-            this.setState({ openKeys });
-        } else {
-            this.setState({
-                openKeys: latestOpenKey ? [latestOpenKey] : [],
-            });
-        }
-    }
     render(){
         return(
-            <div className={style.contentlist}>
-                <Menu
-                    mode="inline"
-                    openKeys={this.state.openKeys}
-                    onOpenChange={this.onOpenChange}
-                    style={{ width: 256 }}
-                >
-                    <SubMenu key="sub1" title={<span><Icon type="mail" /><span>Navigation One</span></span>}>
-                        <Menu.Item key="1">Option 1</Menu.Item>
-                        <Menu.Item key="2">Option 2</Menu.Item>
-                        <Menu.Item key="3">Option 3</Menu.Item>
-                        <Menu.Item key="4">Option 4</Menu.Item>
-                    </SubMenu>
-                    <SubMenu key="sub2" title={<span><Icon type="appstore" /><span>Navigation Two</span></span>}>
-                        <Menu.Item key="5">Option 5</Menu.Item>
-                        <Menu.Item key="6">Option 6</Menu.Item>
-
-                    </SubMenu>
-                    <SubMenu key="sub4" title={<span><Icon type="setting" /><span>Navigation Three</span></span>}>
-                        <Menu.Item key="9">Option 9</Menu.Item>
-                        <Menu.Item key="10">Option 10</Menu.Item>
-                        <Menu.Item key="11">Option 11</Menu.Item>
-                        <Menu.Item key="12">Option 12</Menu.Item>
-                    </SubMenu>
-                </Menu>
-            </div>
+            <Layout>
+                <Header>
+                    <div className={style.logo} />
+                    <Menu
+                        theme="dark"
+                        mode="horizontal"
+                        defaultSelectedKeys={['1']}
+                        style={{ lineHeight: '64px' }}
+                    >
+                        <Menu.Item key="1">账号系统</Menu.Item>
+                        <Menu.Item key="2">公告与资讯</Menu.Item>
+                        <Menu.Item key="3">基金管理</Menu.Item>
+                        <Menu.Item key="4">首页配置</Menu.Item>
+                        <Menu.Item key="5">运营活动</Menu.Item>
+                        <Menu.Item key="6">钱包管理</Menu.Item>
+                        <Menu.Item key="7">审核管理</Menu.Item>
+                    </Menu>
+                </Header>
+            </Layout>
         )
     }
 
 }
 
-export default Header
+export default Hheader
