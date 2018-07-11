@@ -156,48 +156,11 @@ class Home extends React.Component {
         }];
         return (
             <div className={style.wlop}>
-                <Layout>
-                    <div className={style.header}>
-                        <Header1/>
-                    </div>
-
-                    <Layout>
-                        <Sider width={200} style={{ background: '#fff' }}>
-                            <Menu
-                                mode="inline"
-                                defaultSelectedKeys={['1']}
-                                defaultOpenKeys={['sub1']}
-                                style={{ height: '100%', borderRight: 0 }}
-                            >
-                                <Menu.Item key="1">
-                                    账号管理
-                                </Menu.Item>
-                                <Menu.Item key="2">
-                                    角色管理
-                                </Menu.Item>
-                                <Menu.Item key="3">
-                                    安全设置
-                                </Menu.Item>
-                                <Menu.Item key="4">
-                                    操作日志
-                                </Menu.Item>
-
-                            </Menu>
-                        </Sider>
-                        <Layout style={{ padding: '24px' }}>
-                            <Content style={{ background: '#fff', padding: 24, margin: 0, minHeight: 280 }}>
-                                <span className={style.title}>账号管理</span>
-                                <Button type="primary" size='large' onClick={()=>hashHistory.push('/addAccount')}>创建账号</Button>
-                                <div className={style.table}>
-                                    <Table columns={columns} dataSource={data} />
-                                </div>
-
-                            </Content>
-
-                            
-                        </Layout>
-                    </Layout>
-                </Layout>
+                <span className={style.title}>账号管理</span>
+                <Button type="primary" size='large' onClick={()=>hashHistory.push('/addAccount')}>创建账号</Button>
+                <div className={style.table}>
+                    <Table columns={columns} dataSource={data} />
+                </div>
             </div>
 
 

@@ -1,15 +1,16 @@
+import config from '../../src/config'
 import {Toast} from "antd-mobile/lib/index";
 import {http} from '../common/util'
 
-export function getUserMsg(data, callback) {
+export function getUserList(data, callback) {
     return dispatch => {
         http({
             type:'post',
             data,
             callback,
-            url:'adm/privilege',
+            url:'adm/userlist',
             success:(response)=>{
-                dispatch({type: 'GET_USER_MSG', data: response.data})
+                dispatch({type: 'GET_USER_LIST', data: response.data})
             }
 
         })

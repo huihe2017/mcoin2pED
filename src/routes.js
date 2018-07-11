@@ -13,16 +13,11 @@ import Wrap from './containers/wrap/'
 export default () => {
     return (
         <Router history={hashHistory}>
-            <Route path="/" component={Account}/>
-            <Route path="/wrap" component={Wrap}/>
-            <Route path="/notice" component={Notice}/>
-            <Route path="/fund" component={Fund}/>
-            <Route path="/home" component={Home}/>
-            <Route path="/operation" component={Operation}/>
-            <Route path="/wallet" component={Wallet}/>
-            <Route path="/audit" component={Audit}/>
+            <Route path="/" component={Wrap}>
+                <IndexRoute component={Account}/>
+                {/*<Route path="/role" component={role}/>*/}
+            </Route>
 
-            <Route path="/addAccount" component={AddAccount}/>
         </Router>
     )
 }

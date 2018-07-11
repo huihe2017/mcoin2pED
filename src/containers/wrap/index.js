@@ -3,81 +3,12 @@ import style from './index.css'
 import {hashHistory} from 'react-router'
 import Header1 from '../../components/header'
 import { Layout, Menu, Breadcrumb, Icon,Button,Table,Dropdown,notification  } from 'antd';
-
+import {connect} from 'react-redux'
+import {bindActionCreators} from 'redux'
+import {getUserMsg} from '../../actions/user'
 const { SubMenu } = Menu;
 const { Header, Content, Sider } = Layout;
 
-const data = [{
-    key: '1',
-    account:'name1@p95.com',
-    name: 'John Brown',
-    role:'基金组',
-    telephone: 13488888888,
-    state: '状态',
-}, {
-    key: '2',
-    account:'name1@p95.com',
-    name: 'John Brown',
-    role:'基金组',
-    telephone: 13488888888,
-    state: '状态',
-}, {
-    key: '3',
-    account:'name1@p95.com',
-    name: 'John Brown',
-    role:'基金组',
-    telephone: 13488888888,
-    state: '状态',
-}, {
-    key: '4',
-    account:'name1@p95.com',
-    name: 'John Brown',
-    role:'基金组',
-    telephone: 13488888888,
-    state: '状态',
-}, {
-    key: '5',
-    account:'name1@p95.com',
-    name: 'John Brown',
-    role:'基金组',
-    telephone: 13488888888,
-    state: '状态',
-}, {
-    key: '6',
-    account:'name1@p95.com',
-    name: 'John Brown',
-    role:'基金组',
-    telephone: 13488888888,
-    state: '状态',
-}, {
-    key: '7',
-    account:'name1@p95.com',
-    name: 'John Brown',
-    role:'基金组',
-    telephone: 13488888888,
-    state: '状态',
-}, {
-    key: '8',
-    account:'name1@p95.com',
-    name: 'John Brown',
-    role:'基金组',
-    telephone: 13488888888,
-    state: '状态',
-}, {
-    key: '9',
-    account:'name1@p95.com',
-    name: 'John Brown',
-    role:'基金组',
-    telephone: 13488888888,
-    state: '状态',
-}, {
-    key: '10',
-    account:'name1@p95.com',
-    name: 'John Brown',
-    role:'基金组',
-    telephone: 13488888888,
-    state: '状态',
-}];
 
 class Home extends React.Component {
     constructor(props) {
@@ -87,73 +18,18 @@ class Home extends React.Component {
         };
     }
 
-    render() {
-        const columns = [{
-            title: '账号',
-            dataIndex: 'account',
-            key: 'account',
-            render: text => <a href="#">{text}</a>,
-        }, {
-            title: '员工姓名',
-            dataIndex: 'name',
-            key: 'name',
-        }, {
-            title: '角色',
-            dataIndex: 'role',
-            key: 'role',
-        }, {
-            title: '联系电话',
-            dataIndex: 'telephone',
-            key: 'telephone',
-        }, {
-            title: '状态',
-            dataIndex: 'state',
-            key: 'state',
-        }, {
-            title: '操作',
-            key: 'action',
-            render: (text, record) => (
-                <Dropdown trigger={['click']} overlay={<Menu>
-                    <Menu.Item>
-                        <a target="_blank" rel="noopener noreferrer" href="javascript:void (0)" onClick={() => {
-                            notification.open({
-                                message: '提示',
-                                description: '编辑成功',
-                            });
-                        }}>编辑</a>
-                    </Menu.Item>
-                    <Menu.Item>
-                        <a target="_blank" rel="noopener noreferrer" href="javascript:void (0)" onClick={() => {
-                            notification.open({
-                                message: '提示',
-                                description: '重置密码成功',
-                            });
-                        }}>重置密码</a>
-                    </Menu.Item>
-                    <Menu.Item>
-                        <a target="_blank" rel="noopener noreferrer" href="javascript:void (0)" onClick={() => {
-                            notification.open({
-                                message: '提示',
-                                description: '重置PIN码成功',
-                            });
-                        }}>重置PIN码</a>
-                    </Menu.Item>
-                    <Menu.Item>
-                        <a target="_blank" rel="noopener noreferrer" href="javascript:void (0)" onClick={() => {
-                            notification.open({
-                                message: '提示',
-                                description: '停用成功',
-                            });
-                        }}>停用</a>
-                    </Menu.Item>
+    componentDidMount(){
+        this.props.getUserMsg({
 
-                </Menu>}>
-                    <a className="ant-dropdown-link" href="#">
-                        管理 <Icon type="down" />
-                    </a>
-                </Dropdown>
-            ),
-        }];
+        })
+    }
+
+    render() {
+
+        if(!this.props.user.userMsg){
+            return null
+        }
+
         return (
             <div className={style.wlop}>
                 <Layout>
@@ -203,7 +79,7 @@ class Home extends React.Component {
                         <Layout style={{ padding: '24px' }}>
                             <Content style={{ background: '#fff', padding: 24, margin: 0, minHeight: 280 }}>
 
-
+                                {this.props.children}
                             </Content>
 
                             
@@ -217,5 +93,19 @@ class Home extends React.Component {
     }
 }
 
+function mapStateToProps(state, props) {
+    return {
+        user:state.user
+    }
+}
 
-export default Home
+function mapDispatchToProps(dispatch) {
+    return {
+        getUserMsg:bindActionCreators(getUserMsg,dispatch)
+    }
+}
+
+Home = connect(mapStateToProps, mapDispatchToProps)(Home)
+
+
+export default Home;
