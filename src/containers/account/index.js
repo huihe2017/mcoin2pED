@@ -88,7 +88,8 @@ class Home extends React.Component {
     }
 
     render() {
-        const columns = [{
+        const columns = [
+            {
             title: '账号',
             dataIndex: 'account',
             key: 'account',
