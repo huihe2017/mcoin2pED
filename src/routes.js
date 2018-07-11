@@ -1,6 +1,7 @@
 import React from 'react'
 import {Route, Router,IndexRoute, hashHistory} from 'react-router'
 import Account from './containers/account/'
+import AddAccount from './containers/addAccount/'
 import Notice from './containers/notice/'
 import Fund from './containers/fund/'
 import Home from './containers/home/'
@@ -18,6 +19,8 @@ export default () => {
             <Route path="/operation" component={Operation}/>
             <Route path="/wallet" component={Wallet}/>
             <Route path="/audit" component={Audit}/>
+
+            <Route path="/addAccount" component={AddAccount}/>
         </Router>
     )
 }
