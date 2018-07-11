@@ -76,7 +76,6 @@ class Home extends React.Component {
                                             随机生成
                                         </a>
                                     </div>
-
                                     <div className={style.inputBox}>
                                         <span className={style.inputBoxT}>
                                             员工姓名
@@ -89,16 +88,11 @@ class Home extends React.Component {
                                         </span>
                                         <Input size="large" placeholder="" />
                                     </div>
-
                                 </div>
                                 <div className={style.button}>
                                     <Button type="primary" size={'large'}>下一步</Button>
                                 </div>
-
-
                             </Content>
-
-                            
                         </Layout>
                     </Layout>
                 </Layout>

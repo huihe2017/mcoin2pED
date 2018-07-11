@@ -8,11 +8,13 @@ import Home from './containers/home/'
 import Operation from './containers/operation/'
 import Wallet from './containers/wallet/'
 import Audit from './containers/audit/'
+import Wrap from './containers/wrap/'
 
 export default () => {
     return (
         <Router history={hashHistory}>
             <Route path="/" component={Account}/>
+            <Route path="/wrap" component={Wrap}/>
             <Route path="/notice" component={Notice}/>
             <Route path="/fund" component={Fund}/>
             <Route path="/home" component={Home}/>

@@ -1,0 +1,24 @@
+:local(.wrap){
+    display: flex;
+
+}
+:local(.headerBox){
+
+}
+:local(.wlop) {
+    height: 100%;
+}
+:local(.wlop) .ant-layout{
+    height: 100%!important;
+}
+
+:local(.logo){
+    width: 120px;
+    height: 31px;
+    background: rgba(255,255,255,.2);
+    margin: 16px 30px 16px 0;
+    float: left;
+}
+
+
+
