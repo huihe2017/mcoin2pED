@@ -21,7 +21,7 @@ export default () => {
         <Router history={hashHistory}>
             <Route path="/login" component={Login}/>
             <Route path="/" component={Wrap}>
-                <IndexRoute component={Account}/>
+                <Route path="/Account" component={Account}/>
 
                 <Route path="/audit" component={Audit}/>
                 <Route path="/wallet" component={Wallet}/>
