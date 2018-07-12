@@ -15,6 +15,12 @@ import SafeSetting from './containers/safeSetting/'
 import PinSetting from './containers/pinSetting/'
 import PinAmend from './containers/pinAmend/'
 import AddRole from './containers/addRole/'
+import PasswordAmend from './containers/passwordAmend/'
+import OperationLog from './containers/operationLog/'
+import LogDetails from './containers/logDetails/'
+import Information from './containers/information/'
+import InformationType from './containers/informationType/'
+import AddType from './containers/addType/'
 
 export default () => {
     return (
@@ -36,6 +42,12 @@ export default () => {
                 <Route path="/pinSetting" component={PinSetting}/>
                 <Route path="/pinAmend" component={PinAmend}/>
                 <Route path="/addRole" component={AddRole}/>
+                <Route path="/passwordAmend" component={PasswordAmend}/>
+                <Route path="/operationLog" component={OperationLog}/>
+                <Route path="/logDetails" component={LogDetails}/>
+                <Route path="/information" component={Information}/>
+                <Route path="/informationType" component={InformationType}/>
+                <Route path="/addType" component={AddType}/>
             </Route>
 
         </Router>

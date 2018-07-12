@@ -114,7 +114,7 @@ class Home extends React.Component {
         return (
             <div className={style.wlop}>
                 <span className={style.title}>角色管理</span>
-                <Button type="primary" size='large' onClick={()=>hashHistory.push('/addAccount')}>创建角色</Button>
+                <Button type="primary" size='large' onClick={()=>hashHistory.push('/addRole')}>创建角色</Button>
                 <div className={style.table}>
                     <Table columns={columns} dataSource={data} />
                 </div>

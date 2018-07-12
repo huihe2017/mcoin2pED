@@ -32,7 +32,8 @@ class Home extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            rowSelection: {},
+
+            selectedRowKeys: [],
         };
     }
 
@@ -40,9 +41,15 @@ class Home extends React.Component {
         console.log(`Selected: ${value}`);
     }
 
-
+    onSelectChange = (selectedRowKeys) => {
+        console.log('selectedRowKeys changed: ', selectedRowKeys);
+        this.setState({ selectedRowKeys });
+    }
 
     handleSubmit = (e) => {
+        this.setState({
+            selectedRowKeys: [],
+        });
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
@@ -54,16 +61,12 @@ class Home extends React.Component {
     render() {
         const { getFieldDecorator } = this.props.form;
         const state = this.state;
-        const menu = (
-            <Menu>
-                <Menu.Item>
-                    Action 1
-                </Menu.Item>
-                <Menu.Item>
-                    Action 2
-                </Menu.Item>
-            </Menu>
-        );
+
+        const { loading, selectedRowKeys } = this.state;
+        const rowSelection = {
+            selectedRowKeys,
+            onChange: this.onSelectChange,
+        };
 
         const expandedRowRender = () => {
                 const columns = [
@@ -120,8 +123,10 @@ class Home extends React.Component {
                         columns={columns}
                         dataSource={data}
                         pagination={false}
+                        rowSelection={{}}
                     />
                 );
+
             };
 
         const columns = [
@@ -133,7 +138,7 @@ class Home extends React.Component {
         ];
         return (
             <div className={style.wlop}>
-                <span className={style.title}>创建账号</span>
+                <span className={style.title}>创建角色</span>
                 <Form onSubmit={this.handleSubmit.bind(this)} className="login-form">
                     <div className={style.content}>
                         <div className={style.inputBox}>
@@ -155,7 +160,7 @@ class Home extends React.Component {
                             columns={columns}
                             expandedRowRender={expandedRowRender}
                             dataSource={data}
-                            rowSelection={{}}
+                            rowSelection={rowSelection}
                         />
                     </div>
                     <div className={style.button}>

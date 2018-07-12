@@ -27,6 +27,30 @@ const data=[
             title:'公告标题限定二十个字',
             priority:'29',
             state:'启用',
+        },{
+            title:'公告标题限定二十个字',
+            priority:'99',
+            state:'启用',
+        },{
+            title:'二十个字二十个字二十个字二十个字二十个字',
+            priority:'11',
+            state:'停用',
+        },{
+            title:'公告标题限定二十个字',
+            priority:'9',
+            state:'停用',
+        },{
+            title:'公告标题限定二十个字',
+            priority:'29',
+            state:'启用',
+        },{
+            title:'公告标题限定二十个字',
+            priority:'9',
+            state:'停用',
+        },{
+            title:'公告标题限定二十个字',
+            priority:'29',
+            state:'启用',
         },
     ]
 class Home extends React.Component {
@@ -45,10 +69,10 @@ class Home extends React.Component {
 
         const columns = [
             {
-                title: '公告标题',
+                title: '资讯标题',
                 dataIndex: 'title'
             }, {
-                title: '优先级',
+                title: '资讯类型',
                 dataIndex: 'priority'
             }, {
                 title: '状态',
@@ -86,8 +110,8 @@ class Home extends React.Component {
             }];
         return (
             <div className={style.wlop}>
-                <span className={style.title}>公告</span>
-                <Button type="primary" size='large' onClick={() => hashHistory.push('/addAccount')}>创建公告</Button>
+                <span className={style.title}>资讯</span>
+                <Button type="primary" size='large' onClick={() => hashHistory.push('/addAccount')}>创建资讯</Button>
                 <div className={style.table}>
                     <Table columns={columns} dataSource={data}/>
                 </div>
