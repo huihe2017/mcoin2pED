@@ -2,6 +2,7 @@ import {Toast} from 'antd-mobile';
 import axios from "./axiosConf";
 import config from "../config";
 import {hashHistory} from "react-router";
+import {notification} from 'antd';
 
 export function checkPhone() {
     if (!/^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/.test(this.state.phone)) {
@@ -65,9 +66,10 @@ export function http(option) {
     })
         .then(function (response) {
             if (response.data.code === 0) {
-                option.success(response)
+
 
                 try {
+                    option.success(response)
                     option.callback && option.callback()
                 }
                 catch (err) {
@@ -75,19 +77,20 @@ export function http(option) {
                 }
 
             } else if (response.data.code === 501) {
-                // Toast.fail(response.data.msg, 2, null, false)
-                hashHistory.push('/auth')
-            } else if (response.data.code === 3004) {
-                hashHistory.push('/safeSet')
-            } else if (response.data.code === 3008) {
-                hashHistory.push('/importSafe')
+                hashHistory.push('/login')
             } else {
-                Toast.fail(response.data.msg, 2, null, false)
+                notification.open({
+                    message: '提示',
+                    description: response.data.msg,
+                });
             }
         })
         .catch(function (error) {
             debugger
-            Toast.fail('网络错误，请稍后再试')
+            notification.open({
+                message: '提示',
+                description: '网络错误，请稍后再试',
+            });
         });
 }
 

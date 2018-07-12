@@ -17,4 +17,45 @@ export function getUserList(data, callback) {
     }
 }
 
+export function resetPwd(data, callback) {
+    return dispatch => {
+        http({
+            type:'post',
+            data,
+            callback,
+            url:'adm/resetpassword',
+            success:(response)=>{
+            }
 
+        })
+    }
+}
+export function resetPin(data, callback) {
+    return dispatch => {
+        http({
+            type:'post',
+            data,
+            callback,
+            url:'adm/resetpin',
+            success:(response)=>{
+            }
+
+        })
+    }
+}
+
+export function setAccountStatus(data, callback) {
+    return dispatch => {
+        http({
+            type:'post',
+            data,
+            callback,
+            url:'adm/userstatus',
+            success:(response)=>{
+                debugger
+                dispatch({type: 'SET_ACCOUNT_STATUS', data: data})
+            }
+
+        })
+    }
+}

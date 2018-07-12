@@ -2,31 +2,31 @@ import React from 'react'
 import style from './index.css'
 import {hashHistory} from 'react-router'
 import Header1 from '../../components/header'
-import { Layout, Menu, Breadcrumb, Icon,Button,Table,Dropdown,notification  } from 'antd';
+import {Layout, Menu, Breadcrumb, Icon, Button, Table, Dropdown, notification} from 'antd';
 import {connect} from 'react-redux'
+import {Link} from 'react-router'
 import {bindActionCreators} from 'redux'
 import {getUserMsg} from '../../actions/user'
-const { SubMenu } = Menu;
-const { Header, Content, Sider } = Layout;
+import {setMenu} from '../../actions/menu'
+
+const {SubMenu} = Menu;
+const {Header, Content, Sider} = Layout;
 
 
 class Home extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-
-        };
+        this.state = {};
     }
 
-    componentDidMount(){
-        this.props.getUserMsg({
-
+    componentDidMount() {
+        this.props.getUserMsg({}, () => {
         })
     }
 
     render() {
 
-        if(!this.props.user.userMsg){
+        if (!this.props.user.userMsg) {
             return null
         }
 
@@ -35,54 +35,54 @@ class Home extends React.Component {
                 <Layout>
                     <div className={style.header}>
                         <Header>
-                            <div className={style.logo} />
+                            <div className={style.logo}/>
                             <Menu
                                 theme="dark"
                                 mode="horizontal"
                                 defaultSelectedKeys={['1']}
-                                style={{ lineHeight: '64px' }}
+                                style={{lineHeight: '64px'}}
+                                onClick={(a,b)=>{
+                                    console.log(this.props);
+                                    this.props.setMenu({
+                                        list:this.props.user.userMsg.permissionList,
+                                        id:a.key
+                                    })
+                                    console.log(a.key);
+                                }}
                             >
-                                <Menu.Item key="1">账号系统</Menu.Item>
-                                <Menu.Item key="2">公告与资讯</Menu.Item>
-                                <Menu.Item key="3">基金管理</Menu.Item>
-                                <Menu.Item key="4">首页配置</Menu.Item>
-                                <Menu.Item key="5">运营活动</Menu.Item>
-                                <Menu.Item key="6">钱包管理</Menu.Item>
-                                <Menu.Item key="7">审核管理</Menu.Item>
+
+                                {this.props.menu.level1.map((obj, index) => {
+                                    return <Menu.Item onChange={()=>{alert(11)}} key={obj.id}>{obj.name}</Menu.Item>
+                                })}
                             </Menu>
                         </Header>
                     </div>
 
                     <Layout>
-                        <Sider width={200} style={{ background: '#fff' }}>
+                        <Sider width={200} style={{background: '#fff'}}>
                             <Menu
                                 mode="inline"
                                 defaultSelectedKeys={['1']}
                                 defaultOpenKeys={['sub1']}
-                                style={{ height: '100%', borderRight: 0 }}
+                                style={{height: '100%', borderRight: 0}}
                             >
-                                <Menu.Item key="1">
-                                    账号管理
-                                </Menu.Item>
-                                <Menu.Item key="2">
-                                    角色管理
-                                </Menu.Item>
-                                <Menu.Item key="3">
-                                    安全设置
-                                </Menu.Item>
-                                <Menu.Item key="4">
-                                    操作日志
-                                </Menu.Item>
+
+                                {this.props.menu.level2.map((obj, index) => {
+                                    return <Menu.Item key={index}>
+                                        <Link to={obj.url} >{obj.name}</Link>
+                                    </Menu.Item>
+                                })}
+
 
                             </Menu>
                         </Sider>
-                        <Layout style={{ padding: '24px' }}>
-                            <Content style={{ background: '#fff', padding: 24, margin: 0, minHeight: 280 }}>
+                        <Layout style={{padding: '24px'}}>
+                            <Content style={{background: '#fff', padding: 24, margin: 0, minHeight: 280}}>
 
                                 {this.props.children}
                             </Content>
 
-                            
+
                         </Layout>
                     </Layout>
                 </Layout>
@@ -95,13 +95,16 @@ class Home extends React.Component {
 
 function mapStateToProps(state, props) {
     return {
-        user:state.user
+        user: state.user,
+        menu: state.menu
+
     }
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        getUserMsg:bindActionCreators(getUserMsg,dispatch)
+        getUserMsg: bindActionCreators(getUserMsg, dispatch),
+        setMenu: bindActionCreators(setMenu, dispatch)
     }
 }
 

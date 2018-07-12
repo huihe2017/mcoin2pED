@@ -6,6 +6,16 @@ export default function account(state = initialState, action = {}) {
         case 'GET_USER_LIST':
             state.userList = action.data.data
             return Object.assign({}, state, {})
+        case 'SET_ACCOUNT_STATUS':
+            debugger
+            let indexArr
+            state.userList.list.filter((item, index) => {
+                if(action.data.userId == item.id){
+                    indexArr = index
+                }
+            })
+            state.userList.list[indexArr].status = (state.userList.list[indexArr].status === 0 ? 1 : 0)
+            return Object.assign({}, state, {})
         default:
             return state
     }

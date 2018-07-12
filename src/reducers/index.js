@@ -5,11 +5,15 @@ import merge from 'lodash/merge'
 import foreignExchange from './foreignExchange'
 import user from './user'
 import auth from './auth'
+import menu from './menu'
+import account from './account'
 
 let states = {
     foreignExchange,
     user,
-    auth
+    menu,
+    account
+
 
 }
 
