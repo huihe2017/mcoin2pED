@@ -10,6 +10,11 @@ import Wallet from './containers/wallet/'
 import Audit from './containers/audit/'
 import Wrap from './containers/wrap/'
 import Login from './containers/login/'
+import RoleManage from './containers/roleManage/'
+import SafeSetting from './containers/safeSetting/'
+import PinSetting from './containers/pinSetting/'
+import PinAmend from './containers/pinAmend/'
+import AddRole from './containers/addRole/'
 
 export default () => {
     return (
@@ -26,6 +31,11 @@ export default () => {
                 <Route path="/fund" component={Fund}/>
                 <Route path="/notice" component={Notice}/>
                 <Route path="/addAccount" component={AddAccount}/>
+                <Route path="/roleManage" component={RoleManage}/>
+                <Route path="/safeSetting" component={SafeSetting}/>
+                <Route path="/pinSetting" component={PinSetting}/>
+                <Route path="/pinAmend" component={PinAmend}/>
+                <Route path="/addRole" component={AddRole}/>
             </Route>
 
         </Router>

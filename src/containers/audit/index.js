@@ -1,7 +1,6 @@
 import React from 'react'
 import style from './index.css'
 import {hashHistory} from 'react-router'
-import Header1 from '../../components/header'
 import { Layout, Menu, Breadcrumb, Icon } from 'antd';
 
 const { SubMenu } = Menu;

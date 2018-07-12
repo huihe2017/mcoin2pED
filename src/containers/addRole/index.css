@@ -1,21 +1,8 @@
-:local(.wrap){
-    display: flex;
-
-}
-:local(.headerBox){
-
-}
 :local(.wlop) {
-    height: 100%;
-}
-:local(.wlop) .ant-layout{
-    height: 100%!important;
+    /*min-height: 100%;*/
 }
 
-:local(.header){
-    height: 64px;
-    width: 100%;
-}
+
 :local(.title){
     display: block;
     font-size: 24px;
@@ -34,9 +21,11 @@
 :local(.inputBoxT){
     font-size: 16px;
     line-height: 30px;
+
 }
 :local(.inputBox){
     width: 300px;
+
     height: 95px;
 }
 :local(.inputBBox){
@@ -53,6 +42,16 @@
     display: flex;
     justify-content: space-between;
 }
+:local(.tableBox){
 
+}
+:local(.wlop) .ant-layout{
+    height: 100%!important;
+    overflow: auto;
+}
+:local(.wlop) .ant-layout-content{
+    overflow: auto;
+    min-height: auto!important;
+}
 
 

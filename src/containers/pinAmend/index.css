@@ -37,7 +37,8 @@
 }
 :local(.inputBox){
     width: 300px;
-    height: 95px;
+
+    height: 105px;
 }
 :local(.inputBBox){
     display: flex;
@@ -52,6 +53,15 @@
     width: 150px;
     display: flex;
     justify-content: space-between;
+}
+:local(.inputBox1){
+    display: flex;
+}
+:local(.tip){
+    margin-top: 44px;
+    margin-left: 10px;
+    font-size: 14px;
+    color: #5262ff;
 }
 
 

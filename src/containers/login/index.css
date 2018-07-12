@@ -14,7 +14,6 @@
 :local(.wlopContent){
     width: 300px;
     height: 300px;
-
 }
 :local(.title){
     display: block;
@@ -35,4 +34,5 @@
     z-index: 1;
     border-radius: 0 3px 3px 0;
 }
+
 
