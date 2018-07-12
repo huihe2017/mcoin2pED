@@ -155,7 +155,7 @@ class Home extends React.Component {
                             columns={columns}
                             expandedRowRender={expandedRowRender}
                             dataSource={data}
-                            {...this.state}
+                            rowSelection={{}}
                         />
                     </div>
                     <div className={style.button}>
