@@ -1,0 +1,29 @@
+:local(.wlop){
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height:100%;
+}
+
+:local(.wlopContent){
+    width: 300px;
+    height: 300px;
+}
+:local(.title){
+    display: block;
+    text-align: center;
+    font-size: 30px;
+    line-height: 50px;
+    margin-bottom: 30px;
+}
+:local(.button){
+   float: right;
+}
+:local(.forget){
+   float: left;
+}
+
+
+
+
+

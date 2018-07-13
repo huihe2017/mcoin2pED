@@ -1,39 +1,93 @@
 import React from 'react'
 import style from './index.css'
 import {hashHistory} from 'react-router'
-import {Layout, Menu, Breadcrumb, Icon, Button, Table, Dropdown, notification, Steps, Input,Select,Form,Badge} from 'antd';
+import {
+    Layout,
+    Menu,
+    Breadcrumb,
+    Icon,
+    Button,
+    Table,
+    Dropdown,
+    notification,
+    Steps,
+    Input,
+    Select,
+    Form,
+    Badge
+} from 'antd';
 
 const Option = Select.Option;
 const {SubMenu} = Menu;
 const {Header, Content, Sider} = Layout;
 const Step = Steps.Step;
 const FormItem = Form.Item;
-
-const data=[
-    {
-        key: 1,
-        describe: '基金管理模块',
-        visit: '无权访问',
-        authority: '基金管理',
-    },{
-        key: 2,
-        describe: '钱包管理模块',
-        visit: '个别访问权',
-        authority: '钱包管理',
-    },{
-        key: 3,
-        describe: '公告与资讯模块',
-        visit: '完全访问权',
-        authority: '公告与资讯',
-    },
-]
+const columns = [{
+    title: 'Name',
+    dataIndex: 'name',
+}, {
+    title: 'Age',
+    dataIndex: 'age',
+}, {
+    title: 'Address',
+    dataIndex: 'address',
+}];
+const data = [{
+    key: 1,
+    name: 'John Brown sr.',
+    age: 60,
+    address: 'New York No. 1 Lake Park',
+    children: [{
+        key: 11,
+        name: 'John Brown',
+        age: 42,
+        address: 'New York No. 2 Lake Park',
+    }, {
+        key: 12,
+        name: 'John Brown jr.',
+        age: 30,
+        address: 'New York No. 3 Lake Park',
+        children: [{
+            key: 121,
+            name: 'Jimmy Brown',
+            age: 16,
+            address: 'New York No. 3 Lake Park',
+        }],
+    }, {
+        key: 13,
+        name: 'Jim Green sr.',
+        age: 72,
+        address: 'London No. 1 Lake Park',
+        children: [{
+            key: 131,
+            name: 'Jim Green',
+            age: 42,
+            address: 'London No. 2 Lake Park',
+            children: [{
+                key: 1311,
+                name: 'Jim Green jr.',
+                age: 25,
+                address: 'London No. 3 Lake Park',
+            }, {
+                key: 1312,
+                name: 'Jimmy Green sr.',
+                age: 18,
+                address: 'London No. 4 Lake Park',
+            }],
+        }],
+    }],
+}, {
+    key: 2,
+    name: 'Joe Black',
+    age: 32,
+    address: 'Sidney No. 1 Lake Park',
+}];
 
 class Home extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-
-            selectedRowKeys: [],
+            selectedRowKeys: [1, 2, 11], // Check here to configure the default column
         };
     }
 
@@ -43,13 +97,11 @@ class Home extends React.Component {
 
     onSelectChange = (selectedRowKeys) => {
         console.log('selectedRowKeys changed: ', selectedRowKeys);
-        this.setState({ selectedRowKeys });
+        this.setState({selectedRowKeys});
     }
 
+
     handleSubmit = (e) => {
-        this.setState({
-            selectedRowKeys: [],
-        });
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
@@ -60,85 +112,51 @@ class Home extends React.Component {
 
     render() {
         const { getFieldDecorator } = this.props.form;
-        const state = this.state;
-
-        const { loading, selectedRowKeys } = this.state;
+        const {selectedRowKeys} = this.state;
         const rowSelection = {
             selectedRowKeys,
             onChange: this.onSelectChange,
+            hideDefaultSelections: true,
+            selections: [{
+                key: 'all-data',
+                text: 'Select All Data',
+                onSelect: () => {
+                    this.setState({
+                        selectedRowKeys: [...Array(46).keys()], // 0...45
+                    });
+                },
+            }, {
+                key: 'odd',
+                text: 'Select Odd Row',
+                onSelect: (changableRowKeys) => {
+                    let newSelectedRowKeys = [];
+                    newSelectedRowKeys = changableRowKeys.filter((key, index) => {
+                        if (index % 2 !== 0) {
+                            return false;
+                        }
+                        return true;
+                    });
+                    this.setState({selectedRowKeys: newSelectedRowKeys});
+                },
+            }, {
+                key: 'even',
+                text: 'Select Even Row',
+                onSelect: (changableRowKeys) => {
+                    let newSelectedRowKeys = [];
+                    newSelectedRowKeys = changableRowKeys.filter((key, index) => {
+                        if (index % 2 !== 0) {
+                            return true;
+                        }
+                        return false;
+                    });
+                    this.setState({selectedRowKeys: newSelectedRowKeys});
+                },
+            }],
+            onSelection: this.onSelection,
         };
-
-        const expandedRowRender = () => {
-                const columns = [
-                    { title: '模块', dataIndex: 'module', key: 'module' },
-                    { title: '资源', dataIndex: 'resource', key: 'resource' },
-                    { title: '控制权', dataIndex: 'control', key: 'control' },
-
-                ];
-
-                const data = [{
-                    key: 1,
-                    module: '钱包信息',
-                    resource: '导航入口',
-                    control: '允许访问（验证级别）',
-                },{
-                    key: 2,
-                    module: '钱包信息',
-                    resource: '数据列表-BTC余额',
-                    control: '显示/隐藏',
-                },{
-                    key: 3,
-                    module: '钱包信息',
-                    resource: '数据列表-ETC余额',
-                    control: '显示/隐藏',
-                },{
-                    key: 4,
-                    module: '账号记录',
-                    resource: '导航入口',
-                    control: '允许访问（验证级别）',
-                },{
-                    key: 5,
-                    module: '账号记录',
-                    resource: '账号列表',
-                    control: '读取数据-个人',
-                },{
-                    key: 6,
-                    module: '账号记录',
-                    resource: '账号列表',
-                    control: '读取数据-个人',
-                },{
-                    key: 7,
-                    module: '转出地址管理',
-                    resource: '导航入口',
-                    control: '允许访问（验证级别）',
-                },{
-                    key: 8,
-                    module: '转出地址管理',
-                    resource: '创建地址',
-                    control: '显示/隐藏',
-                },]
-
-                return (
-                    <Table
-                        columns={columns}
-                        dataSource={data}
-                        pagination={false}
-                        rowSelection={{}}
-                    />
-                );
-
-            };
-
-        const columns = [
-            { title: '权限名称', dataIndex: 'authority', key: 'authority' },
-            { title: '访问权限', dataIndex: 'visit', key: 'visit' },
-            { title: '描述', dataIndex: 'describe', key: 'describe' },
-
-
-        ];
         return (
             <div className={style.wlop}>
-                <span className={style.title}>创建角色</span>
+                <span className={style.title}>创建账号</span>
                 <Form onSubmit={this.handleSubmit.bind(this)} className="login-form">
                     <div className={style.content}>
                         <div className={style.inputBox}>
@@ -147,31 +165,23 @@ class Home extends React.Component {
                                     角色名称
                                 </span>
                                 {getFieldDecorator('email', {
-                                        rules: [{ required: true, message: '请填写你的角色名!' }],
-                                    })(
-                                        <Input size="large" placeholder="请输入你的角色名"/>)}
+                                    rules: [{required: true, message: '请填写你的角色名!'}],
+                                })(
+                                    <Input size="large" placeholder="请输入你的角色名"/>)}
                             </FormItem>
                         </div>
 
                     </div>
-                    <div className={style.tableBox}>
-                        <Table
-                            className="components-table-demo-nested"
-                            columns={columns}
-                            expandedRowRender={expandedRowRender}
-                            dataSource={data}
-                            rowSelection={rowSelection}
-                        />
-                    </div>
+
+                    <Table rowSelection={rowSelection} columns={columns} dataSource={data}/>
+
                     <div className={style.button}>
                         <Button type="primary" htmlType="submit" size={'large'}>完成</Button>
                     </div>
                 </Form>
+            </div>)
 
-            </div>
 
-
-        )
     }
 }
 

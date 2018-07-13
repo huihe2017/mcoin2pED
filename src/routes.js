@@ -21,11 +21,14 @@ import LogDetails from './containers/logDetails/'
 import Information from './containers/information/'
 import InformationType from './containers/informationType/'
 import AddType from './containers/addType/'
+import PIN from './containers/PIN/'
+import AddNotice from './containers/addNotice/'
 
 export default () => {
     return (
         <Router history={hashHistory}>
             <Route path="/login" component={Login}/>
+            <Route path="/pin" component={PIN}/>
             <Route path="/" component={Wrap}>
                 <Route path="/Account" component={Account}/>
 
@@ -48,6 +51,8 @@ export default () => {
                 <Route path="/information" component={Information}/>
                 <Route path="/informationType" component={InformationType}/>
                 <Route path="/addType" component={AddType}/>
+                <Route path="/addNotice" component={AddNotice}/>
+
             </Route>
 
         </Router>
