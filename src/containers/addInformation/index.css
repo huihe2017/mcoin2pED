@@ -39,6 +39,10 @@
     width: 300px;
     height: 95px;
 }
+:local(.uploadBox){
+    width: 300px;
+    height: auto;
+}
 :local(.editorBox){
     width: 600px;
     height: 466px;

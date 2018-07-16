@@ -32,6 +32,7 @@ const columns = [{
     title: 'Address',
     dataIndex: 'address',
 }];
+
 const data = [{
     key: 1,
     name: 'John Brown sr.',

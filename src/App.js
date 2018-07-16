@@ -4,6 +4,7 @@ import createRouter from './routes'
 import { Provider } from 'react-redux';
 import '../node_modules/antd/dist/antd.min.css';
 import './common.css';
+import '../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 
 const store = configureStore(window.__initState__)
 console.log(store.getState())

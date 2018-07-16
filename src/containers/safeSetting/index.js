@@ -24,7 +24,7 @@ class Home extends React.Component {
                     <span className={style.setBoxC}>
                         访问后台某些重要业务模块时需要用到的验证模式，请您尽快设置。
                     </span>
-                    <a href="javascript:void (0)"  className={style.setBoxA}>
+                    <a href="javascript:void (0)"  className={style.setBoxA} onClick={()=>hashHistory.push('/pinAmend')}>
                         前往设置 <i className={style.iconfont}> &#xe639;</i>
 
                     </a>
@@ -36,7 +36,7 @@ class Home extends React.Component {
                     <span className={style.setBoxC}>
                         修改您的后台密码，如果忘记密码，请联系管理员。
                     </span>
-                    <a href="javascript:void (0)"  className={style.setBoxA}>
+                    <a href="javascript:void (0)"  className={style.setBoxA} onClick={()=>hashHistory.push('/passwordAmend')}>
                         前往修改 <i className={style.iconfont}> &#xe639;</i>
 
                     </a>

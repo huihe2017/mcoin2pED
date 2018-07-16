@@ -39,10 +39,8 @@
     width: 300px;
     height: 95px;
 }
-:local(.editorBox){
-    width: 600px;
-    height: 466px;
-
+:local(.inputBox1){
+    width: 500px;
 }
 :local(.inputBBox){
     display: flex;
@@ -57,12 +55,6 @@
     width: 150px;
     display: flex;
     justify-content: space-between;
-}
-:local(.editorBox) .rdw-editor-main{
-    height: 300px!important;
-    border: 1px solid #f1f1f1;
-    padding: 0 10px;
-
 }
 
 

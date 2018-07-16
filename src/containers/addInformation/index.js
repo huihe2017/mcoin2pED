@@ -3,7 +3,7 @@ import style from './index.css'
 import {hashHistory} from 'react-router'
 import { Editor } from 'react-draft-wysiwyg';
 import { EditorState, convertToRaw, ContentState } from 'draft-js';
-import {Layout, Menu, Breadcrumb, Icon, Button, Table, Dropdown, notification, Steps, Input,Select,Form} from 'antd';
+import {Layout, Menu, Breadcrumb, Icon, Button, Table, Dropdown, notification, Steps, Input,Select,Form,Upload} from 'antd';
 
 
 const Option = Select.Option;
@@ -39,24 +39,71 @@ class Home extends React.Component {
         });
     };
 
+    normFile = (e) => {
+        console.log('Upload event:', e);
+        if (Array.isArray(e)) {
+            return e;
+        }
+        return e && e.fileList;
+    }
+
     render() {
         const { getFieldDecorator } = this.props.form;
         const { editorState } = this.state;
 
         return (
             <div className={style.wlop}>
-                <span className={style.title}>创建公告</span>
+                <span className={style.title}>创建资讯</span>
                 <Form onSubmit={this.handleSubmit.bind(this)} className="login-form">
                     <div className={style.content}>
                         <div className={style.inputBox}>
                             <FormItem>
                                  <span className={style.inputBoxT}>
-                                     标题
+                                     资讯内容
                                  </span>
                                 {getFieldDecorator('email', {
                                     rules: [{ required: true, message: '请填写你的邮箱!' }],
                                 })(
                                     <Input size="large" placeholder="使用P95公司邮箱"/>)}
+                            </FormItem>
+                        </div>
+
+                        <div className={style.uploadBox}>
+                            <FormItem>
+                                <span className={style.inputBoxT}>
+                                     资讯封面（可选）
+                                 </span>
+                                <div>
+                                    {getFieldDecorator('upload', {
+                                        valuePropName: 'fileList',
+                                        getValueFromEvent: this.normFile,
+                                    })(
+                                        <Upload name="logo" action="/upload.do" listType="picture">
+                                            <Button>
+                                                <Icon type="upload" /> Click to upload
+                                            </Button>
+                                        </Upload>
+                                    )}
+                                </div>
+
+                            </FormItem>
+                        </div>
+
+                        <div className={style.inputBox}>
+                            <FormItem>
+                            <span className={style.inputBoxT}>
+                                资讯类型
+                            </span>
+                                {getFieldDecorator('select', {
+                                    rules: [
+                                        { required: true, message: '请选择适用平台!' },
+                                    ],
+                                })(
+                                    <Select placeholder="请选择">
+                                        <Option value="china">移动端</Option>
+                                        <Option value="use">PC端</Option>
+                                    </Select>
+                                )}
                             </FormItem>
                         </div>
 
@@ -78,33 +125,8 @@ class Home extends React.Component {
                             </FormItem>
                         </div>
 
-                        <div className={style.inputBox}>
-                            <FormItem>
-                            <span className={style.inputBoxT}>
-                                适用平台
-                            </span>
-                                {getFieldDecorator('select', {
-                                    rules: [
-                                        { required: true, message: '请选择适用平台!' },
-                                    ],
-                                })(
-                                    <Select placeholder="请选择">
-                                        <Option value="china">移动端</Option>
-                                        <Option value="use">PC端</Option>
-                                    </Select>
-                                )}
-                            </FormItem>
-                        </div>
-                        <div className={style.inputBox}>
-                            <FormItem>
-                                <span className={style.inputBoxT}>
-                                    优先级
-                                </span>
-                                {getFieldDecorator('priority', {
-                                    rules: [{ required: true, message: '优先级不得为空!' }],
-                                })(
-                                    <Input size="large" placeholder=""/>)}</FormItem>
-                        </div>
+
+
 
                     </div>
 

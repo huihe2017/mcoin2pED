@@ -23,6 +23,8 @@ import InformationType from './containers/informationType/'
 import AddType from './containers/addType/'
 import PIN from './containers/PIN/'
 import AddNotice from './containers/addNotice/'
+import AddInformation from './containers/addInformation/'
+import AddFund from './containers/addFund/'
 
 export default () => {
     return (
@@ -31,7 +33,6 @@ export default () => {
             <Route path="/pin" component={PIN}/>
             <Route path="/" component={Wrap}>
                 <Route path="/Account" component={Account}/>
-
                 <Route path="/audit" component={Audit}/>
                 <Route path="/wallet" component={Wallet}/>
                 <Route path="/operation" component={Operation}/>
@@ -52,6 +53,8 @@ export default () => {
                 <Route path="/informationType" component={InformationType}/>
                 <Route path="/addType" component={AddType}/>
                 <Route path="/addNotice" component={AddNotice}/>
+                <Route path="/addInformation" component={AddInformation}/>
+                <Route path="/addFund" component={AddFund}/>
 
             </Route>
 
