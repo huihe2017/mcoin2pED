@@ -5,6 +5,7 @@ import {hashHistory} from 'react-router'
 import {Layout, Menu, Breadcrumb, Icon, Button, Table, Dropdown, notification, Steps, Input,Select,Form,Tag, Tooltip } from 'antd';
 
 const Option = Select.Option;
+const { TextArea } = Input;
 const {SubMenu} = Menu;
 const {Header, Content, Sider} = Layout;
 const Step = Steps.Step;
@@ -109,7 +110,7 @@ class Home extends React.Component {
                         <div className={style.inputBox1}>
                             <FormItem>
                                  <span className={style.inputBoxT}>
-                                     账号
+                                     标签
                                  </span>
                                 <div>
                                     {tags.map((tag, index) => {
@@ -140,52 +141,61 @@ class Home extends React.Component {
                         <div className={style.inputBox}>
                             <FormItem>
                             <span className={style.inputBoxT}>
-                                角色
+                                货币类型
                             </span>
-                                {getFieldDecorator('selectRole', {
+                                {getFieldDecorator('selectCoin', {
                                     rules: [
-                                        { required: true, message: '请选择你的角色!' },
+                                        { required: true, message: '请选择货币类型!' },
                                     ],
-                                })(<Select
-                                    mode="tags"
-                                    size={'large'}
-                                    placeholder="请选择"
-                                    // defaultValue={['a10', 'c12']}
-                                    onChange={this.handleChange()}
-                                    style={{ width: '100%' }}
-                                >
-                                    {children}
+                                })(<Select placeholder="请选择">
+                                    <Option value="china">China</Option>
+                                    <Option value="use">U.S.A</Option>
                                 </Select>)}
                             </FormItem>
                         </div>
                         <div className={style.inputBox}>
                             <FormItem>
                             <span className={style.inputBoxT}>
-                                角色
+                                风险类型
                             </span>
-                                {getFieldDecorator('selectRole', {
+                                {getFieldDecorator('selectRisk', {
                                     rules: [
-                                        { required: true, message: '请选择你的角色!' },
+                                        { required: true, message: '请选择风险类型!' },
                                     ],
-                                })(<Select
-                                    mode="tags"
-                                    size={'large'}
-                                    placeholder="请选择"
-                                    // defaultValue={['a10', 'c12']}
-                                    onChange={this.handleChange()}
-                                    style={{ width: '100%' }}
-                                >
-                                    {children}
+                                })(<Select placeholder="请选择">
+                                    <Option value="china">没风险</Option>
+                                    <Option value="use">有风险</Option>
                                 </Select>)}
+                            </FormItem>
+                        </div>
+                        <div className={style.inputBox2}>
+                            <FormItem>
+                                 <span className={style.inputBoxT}>
+                                     申购说明
+                                 </span>
+                                {getFieldDecorator('buyMean', {
+                                    rules: [{ required: true, message: '请填写申购说明!' }],
+                                })(
+                                    <TextArea rows={4} placeholder="请编辑申购说明"/>)}
+                            </FormItem>
+                        </div>
+                        <div className={style.inputBox2}>
+                            <FormItem>
+                                 <span className={style.inputBoxT}>
+                                     赎回说明
+                                 </span>
+                                {getFieldDecorator('redeemMean', {
+                                    rules: [{ required: true, message: '请填写赎回说明!' }],
+                                })(
+                                    <TextArea rows={4} placeholder="请编辑赎回说明"/>)}
                             </FormItem>
                         </div>
                     </div>
 
                     <div className={style.button}>
                         <FormItem>
-                            <Button type="primary" htmlType="submit" size={'large'}>提交</Button>
+                            <Button type="primary" htmlType="submit" size={'large'}>下一步</Button>
                         </FormItem>
-                        <Button size={'large'}>取消</Button>
                     </div>
 
                 </Form>

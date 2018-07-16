@@ -42,6 +42,9 @@
 :local(.inputBox1){
     width: 500px;
 }
+:local(.inputBox2){
+    width: 500px;
+}
 :local(.inputBBox){
     display: flex;
 }

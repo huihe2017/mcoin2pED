@@ -1,6 +1,9 @@
 import React from 'react'
 import style from './index.css'
+import {connect} from 'react-redux'
+import {bindActionCreators} from 'redux'
 import {hashHistory} from 'react-router'
+import {getPermisseList} from '../../actions/role'
 import {
     Layout,
     Menu,
@@ -23,16 +26,15 @@ const {Header, Content, Sider} = Layout;
 const Step = Steps.Step;
 const FormItem = Form.Item;
 const columns = [{
-    title: 'Name',
+    title: '权限名称',
     dataIndex: 'name',
 }, {
-    title: 'Age',
-    dataIndex: 'age',
+    title: '访问级别',
+    dataIndex: 'type',
 }, {
-    title: 'Address',
-    dataIndex: 'address',
+    title: '描述',
+    dataIndex: 'url',
 }];
-
 const data = [{
     key: 1,
     name: 'John Brown sr.',
@@ -88,7 +90,7 @@ class Home extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            selectedRowKeys: [1, 2, 11], // Check here to configure the default column
+            selectedRowKeys: [101, 201, 1101], // Check here to configure the default column
         };
     }
 
@@ -111,8 +113,68 @@ class Home extends React.Component {
         });
     }
 
+    componentDidMount() {
+
+        // this.props.editRoleMsg({
+        //
+        // })
+        this.props.getPermisseList({
+            parentId:0
+        })
+    }
+    changeTreeData = (data)=>{
+        debugger
+        let attributes = {
+            //id: 'id',
+            parentId: 'parent',
+            //name: 'name',
+            //type: 'type',
+            url: 'url',
+            rootId: '1'
+        };
+        let resData = data;
+        let tree = [];
+
+        for (let i = 0; i < resData.length; i++) {
+            if (resData[i].parent === (attributes.rootId-0)) {
+                let obj = {
+                    id: resData[i][attributes.id],
+                    title: resData[i][attributes.name],
+                    children: []
+                };
+                tree.push(obj);
+                resData.splice(i, 1);
+                i--;
+            }
+        }
+        run(tree);
+        function run(chiArr) {
+            if (resData.length !== 0) {
+                for (let i = 0; i < chiArr.length; i++) {
+                    for (let j = 0; j < resData.length; j++) {
+                        if (chiArr[i].id === resData[j][attributes.parentId]) {
+                            let obj = {
+                                id: resData[j][attributes.id],
+                                title: resData[j][attributes.name],
+                                children: []
+                            };
+                            chiArr[i].children.push(obj);
+                            resData.splice(j, 1);
+                            j--;
+                        }
+                    }
+                    run(chiArr[i].children);
+                }
+            }
+        }
+debugger
+        return tree;
+    }
     render() {
-        const { getFieldDecorator } = this.props.form;
+        if(!this.props.role.permisseList){
+            return null
+        }
+        const {getFieldDecorator} = this.props.form;
         const {selectedRowKeys} = this.state;
         const rowSelection = {
             selectedRowKeys,
@@ -166,15 +228,17 @@ class Home extends React.Component {
                                     角色名称
                                 </span>
                                 {getFieldDecorator('email', {
+                                    initialValue: this.state.name,
                                     rules: [{required: true, message: '请填写你的角色名!'}],
                                 })(
-                                    <Input size="large" placeholder="请输入你的角色名"/>)}
+                                    <Input size="large" onChange={(e)=>{this.setState({name:e.target.vaue})}} placeholder="请输入你的角色名"/>)}
                             </FormItem>
                         </div>
 
                     </div>
 
-                    <Table rowSelection={rowSelection} columns={columns} dataSource={data}/>
+                    <Table rowSelection={rowSelection} columns={columns} childrenColumnName={'childPermission'} dataSource={this.props.role.permisseList.list}/>
+                    {/*<Table rowSelection={rowSelection}  columns={columns} dataSource={data}/>*/}
 
                     <div className={style.button}>
                         <Button type="primary" htmlType="submit" size={'large'}>完成</Button>
@@ -185,6 +249,20 @@ class Home extends React.Component {
 
     }
 }
+
+function mapStateToProps(state, props) {
+    return {
+        role: state.role
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        getPermisseList: bindActionCreators(getPermisseList, dispatch)
+    }
+}
+
+Home = connect(mapStateToProps, mapDispatchToProps)(Home)
 
 const WrappedHome = Form.create()(Home);
 export default WrappedHome
