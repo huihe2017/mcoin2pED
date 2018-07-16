@@ -7,12 +7,13 @@ import user from './user'
 import auth from './auth'
 import menu from './menu'
 import account from './account'
-
+import role from './role'
 let states = {
     foreignExchange,
     user,
     menu,
-    account
+    account,
+    role
 
 
 }

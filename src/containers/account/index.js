@@ -1,6 +1,6 @@
 import React from 'react'
 import style from './index.css'
-import {hashHistory} from 'react-router'
+import {hashHistory,Link} from 'react-router'
 import Header1 from '../../components/header'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
@@ -37,7 +37,10 @@ class Home extends React.Component {
                 dataIndex: 'name'
             }, {
                 title: '角色',
-                dataIndex: 'roles'
+                dataIndex: 'roles',
+                render:(arr)=>{
+                    return arr[0].name
+                }
             }, {
                 title: '联系电话',
                 dataIndex: 'mobile'
@@ -53,12 +56,7 @@ class Home extends React.Component {
                    return (
                         <Dropdown trigger={['click']} overlay={<Menu>
                             <Menu.Item>
-                                <a target="_blank" rel="noopener noreferrer" href="javascript:void (0)" onClick={() => {
-                                    notification.open({
-                                        message: '提示',
-                                        description: '操作成功',
-                                    });
-                                }}>编辑</a>
+                                <Link to={'/addAccount/'+record.id}>编辑</Link>
                             </Menu.Item>
                             <Menu.Item>
                                 <a target="_blank" rel="noopener noreferrer" href="javascript:void (0)" onClick={() => {
@@ -109,10 +107,11 @@ class Home extends React.Component {
                     )
                 },
             }];
+        debugger
         return (
             <div className={style.wlop}>
                 <span className={style.title}>账号管理</span>
-                <Button type="primary" size='large' onClick={() => hashHistory.push('/addAccount')}>创建账号</Button>
+                <Button type="primary" size='large' onClick={() => hashHistory.push('/addAccount/null')}>创建账号</Button>
                 <div className={style.table}>
                     <Table columns={columns} dataSource={this.props.account.userList.list}/>
                 </div>

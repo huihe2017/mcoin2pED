@@ -40,12 +40,12 @@ export default () => {
                 <Route path="/home" component={Home}/>
                 <Route path="/fund" component={Fund}/>
                 <Route path="/notice" component={Notice}/>
-                <Route path="/addAccount" component={AddAccount}/>
+                <Route path="/addAccount/:id" component={AddAccount}/>
                 <Route path="/roleManage" component={RoleManage}/>
                 <Route path="/safeSetting" component={SafeSetting}/>
                 <Route path="/pinSetting" component={PinSetting}/>
                 <Route path="/pinAmend" component={PinAmend}/>
-                <Route path="/addRole" component={AddRole}/>
+                <Route path="/addRole/:id" component={AddRole}/>
                 <Route path="/passwordAmend" component={PasswordAmend}/>
                 <Route path="/operationLog" component={OperationLog}/>
                 <Route path="/logDetails" component={LogDetails}/>

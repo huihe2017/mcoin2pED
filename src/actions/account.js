@@ -59,3 +59,25 @@ export function setAccountStatus(data, callback) {
         })
     }
 }
+
+export function addAccount(data, callback) {
+    return dispatch => {
+        http({
+            type:'post',
+            data,
+            callback,
+            url:'adm/create',
+            success:(response)=>{
+
+            }
+
+        })
+    }
+}
+
+export function editAccountMsg(data, callback) {
+    return dispatch => {
+        dispatch({type: 'EDIT_ACCOUNT_MSG', data: data})
+
+    }
+}
