@@ -122,7 +122,7 @@ class Home extends React.Component {
                 <span className={style.title}>操作日志</span>
                 <Form onSubmit={this.handleSubmit.bind(this)} className="login-form">
                     <div className={style.contentT}>
-                        筛选日志列表
+                        基金名称12983812984
                     </div>
                     <div className={style.content}>
                         <div className={style.inputBox}>

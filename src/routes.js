@@ -25,6 +25,7 @@ import PIN from './containers/PIN/'
 import AddNotice from './containers/addNotice/'
 import AddInformation from './containers/addInformation/'
 import AddFund from './containers/addFund/'
+import EarningsSetting from './containers/earningsSetting/'
 
 export default () => {
     return (
@@ -55,6 +56,7 @@ export default () => {
                 <Route path="/addNotice" component={AddNotice}/>
                 <Route path="/addInformation" component={AddInformation}/>
                 <Route path="/addFund" component={AddFund}/>
+                <Route path="/earningsSetting" component={EarningsSetting}/>
 
             </Route>
 

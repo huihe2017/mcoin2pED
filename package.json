@@ -6,6 +6,7 @@
     "antd": "2.13.11",
     "antd-mobile": "^2.0.0",
     "axios": "^0.16.2",
+    "echarts": "^4.1.0",
     "react": "15.5.4",
     "react-dom": "15.5.0",
     "react-draft-wysiwyg": "^1.12.13",
