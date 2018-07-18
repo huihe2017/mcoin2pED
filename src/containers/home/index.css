@@ -11,12 +11,19 @@
 :local(.wlop) .ant-layout{
     height: 100%!important;
 }
-:local(.logo){
 
-}
 :local(.header){
     height: 64px;
     width: 100%;
+}
+:local(.title){
+    display: block;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+:local(.table){
+    margin-top: 20px;
 }
 
 
