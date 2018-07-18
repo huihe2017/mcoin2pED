@@ -8,12 +8,22 @@ import auth from './auth'
 import menu from './menu'
 import account from './account'
 import role from './role'
+import log from './log'
+import fund from './fund'
+import notice from './notice'
+import information from './information'
+import homePageCfg from './homePageCfg'
 let states = {
     foreignExchange,
     user,
     menu,
     account,
-    role
+    role,
+    log,
+    fund,
+    notice,
+    information,
+    homePageCfg
 
 
 }

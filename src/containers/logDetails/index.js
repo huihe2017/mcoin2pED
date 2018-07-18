@@ -1,48 +1,65 @@
 import React from 'react'
 import style from './index.css'
 import {hashHistory} from 'react-router'
-import { Button,} from 'antd';
+import {Button,} from 'antd';
+import {connect} from 'react-redux'
+import {bindActionCreators} from 'redux'
+import {getLogDetails} from "../../actions/log";
 
 class Home extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-        };
+        this.state = {};
+    }
+
+    componentDidMount() {
+        this.props.getLogDetails({id: this.props.params.id}, () => {
+
+        })
+
     }
 
     render() {
+        if (!this.props.log.logDetails) {
+            return null
+        }
+        debugger
         return (
             <div className={style.wlop}>
                 <span className={style.title}>日志详情</span>
                 <div className={style.contentT}>
-                    日志编号：20180601003123182983983
+                    日志编号：{this.props.log.logDetails.id}
                 </div>
                 <div className={style.content}>
                     <span className={style.contentC}>
-                        操作：创建基金-基金0001号
+                        操作：{this.props.log.logDetails.content}
                     </span>
                     <span className={style.contentC}>
-                        操作账号：zhangsan@p95.com
+                        操作账号：{this.props.log.logDetails.account}
                     </span>
                     <span className={style.contentC}>
-                        姓名：张三
+                        姓名：{this.props.log.logDetails.name}
                     </span>
                     <span className={style.contentC}>
-                        设备IP：192.168.0.1
+                        设备IP：{this.props.log.logDetails.ip}
                     </span>
                     <span className={style.contentC}>
-                        IP地区：广州
+                        IP地区：{this.props.log.logDetails.ipLocation}
                     </span>
                     <span className={style.contentC}>
-                        操作时间：2016-06-01 00:30:12
+                        操作时间：{this.props.log.logDetails.time}
                     </span>
                     <span className={style.contentC}>
-                        操作类型：新增
+                        操作类型：{this.props.log.logDetails.account}
                     </span>
                 </div>
                 <div className={style.button}>
 
-                    <Button type="primary" size={'large'}>下一条</Button>
+                    <Button onClick={() => {
+                        this.props.getLogDetails({id: ++this.props.params.id}, () => {
+
+                        })
+                    }} type="primary" size={'large'}>下一条</Button>
 
                     <Button size={'large'}>返回</Button>
                 </div>
@@ -51,4 +68,17 @@ class Home extends React.Component {
     }
 }
 
+function mapStateToProps(state, props) {
+    return {
+        log: state.log
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        getLogDetails: bindActionCreators(getLogDetails, dispatch)
+    }
+}
+
+Home = connect(mapStateToProps, mapDispatchToProps)(Home)
 export default Home

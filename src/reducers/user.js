@@ -12,6 +12,9 @@ export default function user(state = initialState, action = {}) {
             state.token = action.data.data.token
             sessionStorage.setItem('token', state.token)
             return Object.assign({}, state, {})
+        case 'SET_PIN_CODE':
+            state.userMsg.userInfo.pinCode = true
+            return Object.assign({}, state, {})
         default:
             return state
     }

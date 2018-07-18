@@ -1,8 +1,11 @@
 import React from 'react'
 import style from './index.css'
 import {hashHistory} from 'react-router'
-
+import {connect} from 'react-redux'
+import {bindActionCreators} from 'redux'
 import {Form, Button, Input} from 'antd';
+import {modifyPinCode} from "../../actions/user";
+import {notification} from "antd/lib/index";
 
 const FormItem = Form.Item;
 
@@ -17,7 +20,17 @@ class Home extends React.Component {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
-                console.log('Received values of form: ', values);
+                this.props.modifyPinCode({
+                    pinCode:this.state.pinCode,
+                    oldPinCode:this.state.oldPinCode,
+                    confirmCode:this.state.confirmCode,
+                },()=>{
+                    notification.open({
+                        message: '提示',
+                        description: '操作成功',
+                    });
+                    this.props.history.go(-1)
+                })
             }
         });
     }
@@ -40,7 +53,7 @@ class Home extends React.Component {
                                     {getFieldDecorator('oldPin', {
                                         rules: [{required: true, message: '请输入旧PIN码!'}],
                                     })(
-                                        <Input size="large" placeholder="请输入旧PIN码"/>
+                                        <Input onChange={(e)=>{this.setState({oldPinCode:e.target.value})}} size="large" placeholder="请输入旧PIN码"/>
                                     )}
                                 </FormItem>
                             </div>
@@ -56,7 +69,7 @@ class Home extends React.Component {
                                 {getFieldDecorator('newPin', {
                                     rules: [{required: true, message: '请输入新PIN码!'}],
                                 })(
-                                    <Input size="large" placeholder="长度必须6-8位"/>
+                                    <Input onChange={(e)=>{this.setState({pinCode:e.target.value})}} size="large" placeholder="长度必须6-8位"/>
                                 )}
                             </FormItem>
                         </div>
@@ -68,7 +81,7 @@ class Home extends React.Component {
                                 {getFieldDecorator('reNewPin', {
                                     rules: [{required: true, message: '请再次输入新PIN码!'}],
                                 })(
-                                    <Input size="large" placeholder="请再次确认新PIN码"/>
+                                    <Input onChange={(e)=>{this.setState({confirmCode:e.target.value})}} size="large" placeholder="请再次确认新PIN码"/>
                                 )}
                             </FormItem>
                         </div>
@@ -86,6 +99,19 @@ class Home extends React.Component {
         )
     }
 }
+
+
+function mapStateToProps(state, props) {
+    return {
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        modifyPinCode: bindActionCreators(modifyPinCode, dispatch)
+    }
+}
+Home = connect(mapStateToProps, mapDispatchToProps)(Home)
 
 const WrappedHome = Form.create()(Home);
 export default WrappedHome

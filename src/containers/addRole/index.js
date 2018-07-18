@@ -3,7 +3,7 @@ import style from './index.css'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 import {hashHistory} from 'react-router'
-import {getPermisseList} from '../../actions/role'
+import {getPermisseList,addRole} from '../../actions/role'
 import {
     Layout,
     Menu,
@@ -25,15 +25,50 @@ const {SubMenu} = Menu;
 const {Header, Content, Sider} = Layout;
 const Step = Steps.Step;
 const FormItem = Form.Item;
+
+function checkLevel(id, c) {
+
+    if (id === 0) {
+        return 1
+    } else if (c) {
+        return 2
+    } else {
+        return 3
+    }
+}
+
 const columns = [{
     title: '权限名称',
     dataIndex: 'name',
+    render: (text, record) => {
+        if (checkLevel(record.parent, record.childPermission) === 3) {
+            return ''
+        } else {
+            return text
+        }
+    }
 }, {
     title: '访问级别',
     dataIndex: 'type',
+    render: (text, record) => {
+        if (checkLevel(record.parent, record.childPermission) === 2) {
+            return record.childPermission.length + '个资源'
+        } else if (checkLevel(record.parent, record.childPermission) === 3) {
+            return record.name
+        } else {
+            return text
+        }
+    }
 }, {
     title: '描述',
-    dataIndex: 'url',
+    dataIndex: 'desc',
+    render: (text, record) => {
+        if (checkLevel(record.parent, record.childPermission) === 2) {
+            return ''
+        } else {
+            return text
+        }
+    }
 }];
 const data = [{
     key: 1,
@@ -108,7 +143,22 @@ class Home extends React.Component {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
-                console.log('Received values of form: ', values);
+                let param = {
+                    permissions: this.state.selectedRowKeys,
+                    name: this.state.name,
+                }
+                if (this.props.params.id !== 'null') {
+                    param.roleId = this.props.params.id
+
+                }
+                debugger
+                this.props.addRole(param,()=>{
+                    this.props.history.go(-1)
+                    notification.open({
+                        message: '提示',
+                        description: '操作成功',
+                    });
+                })
             }
         });
     }
@@ -119,10 +169,11 @@ class Home extends React.Component {
         //
         // })
         this.props.getPermisseList({
-            parentId:0
+            parentId: 0
         })
     }
-    changeTreeData = (data)=>{
+
+    changeTreeData = (data) => {
         debugger
         let attributes = {
             //id: 'id',
@@ -136,7 +187,7 @@ class Home extends React.Component {
         let tree = [];
 
         for (let i = 0; i < resData.length; i++) {
-            if (resData[i].parent === (attributes.rootId-0)) {
+            if (resData[i].parent === (attributes.rootId - 0)) {
                 let obj = {
                     id: resData[i][attributes.id],
                     title: resData[i][attributes.name],
@@ -148,6 +199,7 @@ class Home extends React.Component {
             }
         }
         run(tree);
+
         function run(chiArr) {
             if (resData.length !== 0) {
                 for (let i = 0; i < chiArr.length; i++) {
@@ -167,11 +219,13 @@ class Home extends React.Component {
                 }
             }
         }
-debugger
+
+        debugger
         return tree;
     }
+
     render() {
-        if(!this.props.role.permisseList){
+        if (!this.props.role.permisseList) {
             return null
         }
         const {getFieldDecorator} = this.props.form;
@@ -219,7 +273,7 @@ debugger
         };
         return (
             <div className={style.wlop}>
-                <span className={style.title}>创建账号</span>
+                <span className={style.title}>创建角色</span>
                 <Form onSubmit={this.handleSubmit.bind(this)} className="login-form">
                     <div className={style.content}>
                         <div className={style.inputBox}>
@@ -231,13 +285,16 @@ debugger
                                     initialValue: this.state.name,
                                     rules: [{required: true, message: '请填写你的角色名!'}],
                                 })(
-                                    <Input size="large" onChange={(e)=>{this.setState({name:e.target.vaue})}} placeholder="请输入你的角色名"/>)}
+                                    <Input size="large" onChange={(e) => {
+                                        this.setState({name: e.target.value})
+                                    }} placeholder="请输入你的角色名"/>)}
                             </FormItem>
                         </div>
 
                     </div>
 
-                    <Table rowSelection={rowSelection} columns={columns} childrenColumnName={'childPermission'} dataSource={this.props.role.permisseList.list}/>
+                    <Table rowSelection={rowSelection} columns={columns} childrenColumnName={'childPermission'}
+                           dataSource={this.props.role.permisseList.list}/>
                     {/*<Table rowSelection={rowSelection}  columns={columns} dataSource={data}/>*/}
 
                     <div className={style.button}>
@@ -258,7 +315,8 @@ function mapStateToProps(state, props) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        getPermisseList: bindActionCreators(getPermisseList, dispatch)
+        getPermisseList: bindActionCreators(getPermisseList, dispatch),
+        addRole: bindActionCreators(addRole, dispatch)
     }
 }
 

@@ -1,8 +1,12 @@
 import React from 'react'
 import style from './index.css'
 import {hashHistory} from 'react-router'
-
+import {connect} from 'react-redux'
+import {bindActionCreators} from 'redux'
 import {Form, Button, Input} from 'antd';
+import {setPinCode} from '../../actions/user';
+import {getUserList, resetPin, resetPwd, setAccountStatus} from "../../actions/account";
+import {notification} from "antd/lib/index";
 
 const FormItem = Form.Item;
 
@@ -17,7 +21,15 @@ class Home extends React.Component {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
-                console.log('Received values of form: ', values);
+                this.props.setPinCode({
+                    pinCode:this.state.pinCode
+                },()=>{
+                    notification.open({
+                        message: '提示',
+                        description: '操作成功',
+                    });
+                    this.props.history.go(-1)
+                })
             }
         });
     }
@@ -37,7 +49,7 @@ class Home extends React.Component {
                                 {getFieldDecorator('pin', {
                                     rules: [{required: true, message: '请输入PIN码!'}],
                                 })(
-                                    <Input size="large" placeholder="长度必须6-8位"/>
+                                    <Input size="large" onChange={(e)=>{this.setState({pinCode:e.target.value})}} placeholder="长度必须6-8位"/>
                                 )}
                             </FormItem>
                         </div>
@@ -54,6 +66,18 @@ class Home extends React.Component {
         )
     }
 }
+function mapStateToProps(state, props) {
+    return {
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        setPinCode: bindActionCreators(setPinCode, dispatch)
+    }
+}
+Home = connect(mapStateToProps, mapDispatchToProps)(Home)
+
 
 const WrappedHome = Form.create()(Home);
 export default WrappedHome

@@ -49,7 +49,7 @@ export default () => {
                 <Route path="/addRole/:id" component={AddRole}/>
                 <Route path="/passwordAmend" component={PasswordAmend}/>
                 <Route path="/operationLog" component={OperationLog}/>
-                <Route path="/logDetails" component={LogDetails}/>
+                <Route path="/logDetails/:id" component={LogDetails}/>
                 <Route path="/information" component={Information}/>
                 <Route path="/informationType" component={InformationType}/>
                 <Route path="/addType" component={AddType}/>

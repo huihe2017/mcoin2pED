@@ -61,5 +61,18 @@ export function getRoleMsg(data, callback) {
         })
     }
 }
+export function addRole(data, callback) {
+    return dispatch => {
+        http({
+            type:'post',
+            data,
+            callback,
+            url:'adm/role',
+            success:(response)=>{
+                //dispatch({type: 'GET_ROLE_MSG', data: response.data})
+            }
 
+        })
+    }
+}
 

@@ -45,4 +45,49 @@ export function login(data, callback) {
     }
 }
 
+export function setPinCode(data, callback) {
+    return dispatch => {
+        http({
+            type:'post',
+            data,
+            callback,
+            url:'adm/setpincode ',
+            success:(response)=>{
+                dispatch({type: 'SET_PIN_CODE'})
+            }
+
+        })
+    }
+}
+
+export function modifyPinCode(data, callback) {
+    return dispatch => {
+        http({
+            type:'post',
+            data,
+            callback,
+            url:'adm/updatepincode  ',
+            success:(response)=>{
+                //dispatch({type: 'MODIFY_PIN_CODE'})
+            }
+
+        })
+    }
+}
+export function modifyPwd(data, callback) {
+    return dispatch => {
+        http({
+            type:'post',
+            data,
+            callback,
+            url:'adm/updatepassword',
+            success:(response)=>{
+                //dispatch({type: 'MODIFY_PIN_CODE'})
+            }
+
+        })
+    }
+}
+
+
 

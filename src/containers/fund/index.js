@@ -4,49 +4,50 @@ import {hashHistory} from 'react-router'
 import Header1 from '../../components/header'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
-import {getUserList,resetPwd,resetPin,setAccountStatus} from '../../actions/account'
-import {Layout, Menu, Breadcrumb, Icon, Button, Table, Dropdown, notification,Modal,Input,DatePicker} from 'antd';
+import {getFundList, setRecommend, cancelRecommend, applyStop,applyUse} from '../../actions/fund'
+import {Layout, Menu, Breadcrumb, Icon, Button, Table, Dropdown, notification, Modal, Input, DatePicker} from 'antd';
 import {Form} from "antd/lib/index";
 
 const {SubMenu} = Menu;
 const {Header, Content, Sider} = Layout;
 const FormItem = Form.Item;
 
-const data=[
-        {
-            title:'基金名称aaa',
-            close:'3',
-            coin:'BTC',
-            year:'4.76%',
-            recommend:true,
-            priority:'99',
-            state:'启用',
-        },{
-            title:'基金名称aba',
-            close:'7',
-            coin:'BTC',
-            year:'4.76%',
-            recommend:true,
-            priority:'11',
-            state:'停用',
-        },{
-            title:'基金名称bba',
-            close:'130',
-            coin:'BTC',
-            year:'4.76%',
-            recommend:true,
-            priority:'9',
-            state:'停用',
-        },{
-            title:'基金名称abb',
-            close:'31',
-            coin:'BTC',
-            year:'4.76%',
-            recommend:true,
-            priority:'29',
-            state:'启用',
-        },
-    ]
+const data = [
+    {
+        title: '基金名称aaa',
+        close: '3',//period
+        coin: 'BTC',//currency
+        year: '4.76%',//yearProfitRate
+        recommend: true,//recommend
+        priority: '99',//showOrder
+        state: '启用',//status
+    }, {
+        title: '基金名称aba',
+        close: '7',
+        coin: 'BTC',
+        year: '4.76%',
+        recommend: true,
+        priority: '11',
+        state: '停用',
+    }, {
+        title: '基金名称bba',
+        close: '130',
+        coin: 'BTC',
+        year: '4.76%',
+        recommend: true,
+        priority: '9',
+        state: '停用',
+    }, {
+        title: '基金名称abb',
+        close: '31',
+        coin: 'BTC',
+        year: '4.76%',
+        recommend: true,
+        priority: '29',
+        state: '启用',
+    },
+]
+
 class Home extends React.Component {
     constructor(props) {
         super(props);
@@ -57,9 +58,9 @@ class Home extends React.Component {
 
 
     componentDidMount() {
-        // this.props.getUserList({
-        //     page: 1
-        // })
+        this.props.getFundList({
+            page: 1
+        })
     }
 
     showModal = () => {
@@ -71,11 +72,17 @@ class Home extends React.Component {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
-                console.log('Received values of form: ', values);
-                this.setState({
-                    visible: false,
-                });
-            }else {
+                this.props.setRecommend({
+                    id: this.state.currentEdit,
+                    showOrder: this.state.showOrder,
+                    endTime: this.state.endTime,
+                }, () => {
+                    this.setState({
+                        visible: false,
+                    });
+                })
+
+            } else {
                 console.log(1);
 
             }
@@ -90,41 +97,62 @@ class Home extends React.Component {
     }
 
 
-
     render() {
-
+        if (!this.props.fund.fundList) {
+            return null
+        }
         const columns = [
             {
                 title: '基金名称',
                 dataIndex: 'title'
-            },{
+            }, {
                 title: '封闭期',
-                dataIndex: 'close',
+                dataIndex: 'period',
                 render: (record) => {
-                    return (record+'天')
+                    return (record + '天')
                 }
-            },{
+            }, {
                 title: '货币类型',
-                dataIndex: 'coin'
-            },{
+                dataIndex: 'currency'
+            }, {
                 title: '昨日年化',
-                dataIndex: 'year'
-            },{
+                dataIndex: 'yearProfitRate'
+            }, {
                 title: '状态',
-                dataIndex: 'state'
-            },{
+                dataIndex: 'status',
+                render: (text, record) => {
+                    if (text === '0') {
+                        return '待审核'
+                    }
+                    if (text === '1') {
+                        return '上线'
+                    }
+                    if (text === '2') {
+                        return '暂停待审核'
+                    }
+                    if (text === '3') {
+                        return '已关闭购买入口'
+                    }
+                    if (text === '4') {
+                        return '下线'
+                    }
+                    if (text === '5') {
+                        return '移除'
+                    }
+                }
+            }, {
                 title: '是否推荐',
                 dataIndex: 'recommend',
                 render: (record) => {
-                    return (record?'是':'否')
+                    return (record ? '是' : '否')
                 }
-            },{
+            }, {
                 title: '优先级',
-                dataIndex: 'priority'
-            },{
+                dataIndex: 'showOrder'
+            }, {
                 title: '操作',
                 render: (text, record) => {
-                   return (
+                    return (
                         <Dropdown trigger={['click']} overlay={<Menu>
                             <Menu.Item>
                                 <a target="_blank" rel="noopener noreferrer" href="javascript:void (0)" onClick={() => {
@@ -135,38 +163,93 @@ class Home extends React.Component {
                                 }}>编辑</a>
                             </Menu.Item>
                             <Menu.Item>
-                                <a target="_blank" rel="noopener noreferrer" href="javascript:void (0)" onClick={()=>{
-                                        notification.open({
-                                            message: '提示',
-                                            description: '操作成功',
-                                        });
-                                    }
+                                <a target="_blank" rel="noopener noreferrer" href="javascript:void (0)" onClick={() => {
+                                    notification.open({
+                                        message: '提示',
+                                        description: '操作成功',
+                                    });
+                                }
 
                                 }>收益配置</a>
                             </Menu.Item>
                             <Menu.Item>
-                                <a target="_blank" rel="noopener noreferrer" href="javascript:void (0)" onClick={()=>this.showModal()}>设置推荐
-                                </a>
+                                {
+                                    record.recommend ?
+                                        <a target="_blank" rel="noopener noreferrer" href="javascript:void (0)"
+                                           onClick={() => {
+                                               this.props.cancelRecommend({
+                                                   id: record.id
+                                               }, () => {
+                                                   notification.open({
+                                                       message: '提示',
+                                                       description: '操作成功',
+                                                   });
+                                               })
+                                           }}>取消推荐
+                                        </a>
+
+                                        :
+                                        <a target="_blank" rel="noopener noreferrer" href="javascript:void (0)"
+                                           onClick={() => {
+                                               this.setState({currentEdit: record.id})
+                                               this.showModal()
+                                           }}>设置推荐
+                                        </a>
+                                }
+
+
                             </Menu.Item>
                             <Menu.Item>
-                                <a target="_blank" rel="noopener noreferrer" href="javascript:void (0)" onClick={()=>{
-                                        notification.open({
-                                            message: '提示',
-                                            description: '操作成功',
-                                        });
-                                    }
+                                {
+                                    record.status === '1' ?
+                                        <a target="_blank" rel="noopener noreferrer" href="javascript:void (0)"
+                                           onClick={() => {
+                                               this.props.applyStop({
+                                                   id: record.id
+                                               }, () => {
+                                                   notification.open({
+                                                       message: '提示',
+                                                       description: '操作成功',
+                                                   });
+                                               })
+                                           }
+                                           }>暂停</a> : ''
+                                }
+                                {
+                                    record.status === '4' ?
+                                        <a target="_blank" rel="noopener noreferrer" href="javascript:void (0)"
+                                           onClick={() => {
+                                               this.props.applyUse({
+                                                   id: record.id
+                                               }, () => {
+                                                   notification.open({
+                                                       message: '提示',
+                                                       description: '操作成功',
+                                                   });
+                                               })
+                                           }
+                                           }>启用</a> : ''
+                                }
+                                {
+                                    (record.status === '0'||record.status === '2'||record.status === '3') ?
+                                        <a target="_blank" rel="noopener noreferrer" href="javascript:void (0)"
+                                           onClick={() => {
+                                               this.props.removeFund({
+                                                   id: record.id
+                                               }, () => {
+                                                   notification.open({
+                                                       message: '提示',
+                                                       description: '操作成功',
+                                                   });
+                                               })
+                                           }
+                                           }>移除</a> : ''
+                                }
+                                {
+                                    (record.status === '5') ?
+                                        '' : ''
+                                }
 
-                                }>取消推荐</a>
-                            </Menu.Item>
-                            <Menu.Item>
-                                <a target="_blank" rel="noopener noreferrer" href="javascript:void (0)" onClick={()=>{
-                                        notification.open({
-                                            message: '提示',
-                                            description: '操作成功',
-                                        });
-                                    }
-
-                                }>暂停</a>
                             </Menu.Item>
                         </Menu>}>
                             <a className="ant-dropdown-link" href="#">
@@ -176,13 +259,13 @@ class Home extends React.Component {
                     )
                 },
             }];
-        const { getFieldDecorator } = this.props.form;
+        const {getFieldDecorator} = this.props.form;
         return (
             <div className={style.wlop}>
                 <span className={style.title}>基金管理</span>
-                <Button type="primary" size='large' onClick={() => hashHistory.push('/addAccount')}>创建基金</Button>
+                <Button type="primary" size='large' onClick={() => hashHistory.push('/addFund')}>创建基金</Button>
                 <div className={style.table}>
-                    <Table columns={columns} dataSource={data}/>
+                    <Table columns={columns} dataSource={this.props.fund.fundList.list}/>
                 </div>
                 <Modal
                     title="设置推荐参数"
@@ -197,8 +280,10 @@ class Home extends React.Component {
                                     结束日期
                                 </span>
                                 {getFieldDecorator('data', {
-                                    rules: [{ type: 'object', required: true, message: '请选择结束日期!' }],
-                                })(<DatePicker />)}
+                                    rules: [{type: 'object', required: true, message: '请选择结束日期!'}],
+                                })(<DatePicker onChange={(e) => {
+                                    this.setState({endTime: (new Date(e)).valueOf()})
+                                }}/>)}
                             </FormItem>
                         </div>
                         <div className={style.inputBox}>
@@ -207,8 +292,10 @@ class Home extends React.Component {
                                     优先级
                                 </span>
                                 {getFieldDecorator('priority', {
-                                    rules: [{ required: true, message: '请填写优先级!' }],
-                                })(<Input size="large" placeholder="请填写优先级"/>)}
+                                    rules: [{required: true, message: '请填写优先级!'}],
+                                })(<Input onChange={(e) => {
+                                    this.setState({showOrder: e.target.value})
+                                }} size="large" placeholder="请填写优先级"/>)}
                             </FormItem>
                         </div>
                     </Form>
@@ -222,16 +309,17 @@ class Home extends React.Component {
 
 function mapStateToProps(state, props) {
     return {
-        account: state.account
+        fund: state.fund
     }
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        getUserList: bindActionCreators(getUserList, dispatch),
-        resetPin: bindActionCreators(resetPin, dispatch),
-        setAccountStatus: bindActionCreators(setAccountStatus, dispatch),
-        resetPwd: bindActionCreators(resetPwd, dispatch)
+        getFundList: bindActionCreators(getFundList, dispatch),
+        setRecommend: bindActionCreators(setRecommend, dispatch),
+        cancelRecommend: bindActionCreators(cancelRecommend, dispatch),
+        applyStop: bindActionCreators(applyStop, dispatch),
+        applyUse: bindActionCreators(applyUse, dispatch)
     }
 }
 
