@@ -197,16 +197,16 @@ class Home extends React.Component {
     render() {
 
         const columns = [
-            { title: '账目', width: 100, dataIndex: 'name', key: 'name', fixed: 'left' },
-            { title: '本金', width: 100, dataIndex: 'age', key: 'age', fixed: 'left' },
-            { title: '当前收益率',  width: 150 ,dataIndex: 'address', key: '1', fixed: 'left'},
-            { title: '合计',  width: 150 ,dataIndex: 'address', key: '2', fixed: 'left'},
-            { title: 'Column 1', dataIndex: 'address', key: '4', width: 250 },
-            { title: 'Column 2', dataIndex: 'address', key: '5', width: 250 },
-            { title: 'Column 3', dataIndex: 'address', key: '6', width: 250 },
-            { title: 'Column 4', dataIndex: 'address', key: '7', width: 250 },
-            { title: 'Column 5', dataIndex: 'address', key: '8', width: 250 },
-            { title: 'Column 6', dataIndex: 'address', key: '9', width: 250 },
+            { title: '账目',  dataIndex: 'name', key: 'name',  },
+            { title: '本金',  dataIndex: 'age', key: 'age', },
+            { title: '当前收益率',  dataIndex: 'address', key: '1',},
+            { title: '合计',dataIndex: 'address', key: '2',},
+            { title: 'Column 1', dataIndex: 'address', key: '4',},
+            { title: 'Column 2', dataIndex: 'address', key: '5',  },
+            { title: 'Column 3', dataIndex: 'address', key: '6',  },
+            { title: 'Column 4', dataIndex: 'address', key: '7',  },
+            { title: 'Column 5', dataIndex: 'address', key: '8',  },
+            { title: 'Column 6', dataIndex: 'address', key: '9',  },
         ];
         const { getFieldDecorator } = this.props.form;
 
@@ -263,12 +263,13 @@ class Home extends React.Component {
                                     {getFieldDecorator('account', {
                                         rules: [],
                                     })(
-                                        <Select placeholder="Please select a country">
+                                        <Select placeholder="选择月份">
                                             <Option value="china">China</Option>
                                             <Option value="use">U.S.A</Option>
                                         </Select>)}
                                 </div>
                             </FormItem>
+                            <a className={style.contentTBA} href="javascript:void (0)">导出表格</a>
                         </div>
                         <Table columns={columns} dataSource={data1} scroll={{ x: 500 }} />
                     </div>

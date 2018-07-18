@@ -28,8 +28,14 @@
 :local(.contentTB){
     border-bottom: 1px solid #3B3D40;
     display: flex;
-
-
+    line-height: 46px;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+:local(.contentTB) .ant-form-item {
+    margin-left: 20px;
+    margin-top: 10px!important;
+    margin-bottom: 0!important;
 }
 :local(.wlop) {
     height: 100%;
@@ -64,7 +70,10 @@
     height: 95px;
 }
 :local(.inputBox1){
-    width: 300px;
+    width: 200px;
+}
+:local(.contentTBA){
+    margin-left: 20px;
 }
 :local(.button){
     width: 200px;
