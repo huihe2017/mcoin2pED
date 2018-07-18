@@ -116,7 +116,7 @@ class Home extends React.Component {
         return (
             <div className={style.wlop}>
                 <span className={style.title}>首页配置</span>
-                <Button type="primary" size='large' onClick={() => hashHistory.push('/addAccount/null')}>添加banner</Button>
+                <Button type="primary" size='large' onClick={() => hashHistory.push('/addHome')}>添加banner</Button>
                 <div className={style.table}>
                     <Table columns={columns} dataSource={data}/>
                 </div>

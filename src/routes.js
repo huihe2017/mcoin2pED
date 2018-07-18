@@ -27,6 +27,8 @@ import AddInformation from './containers/addInformation/'
 import AddFund from './containers/addFund/'
 import EarningsSetting from './containers/earningsSetting/'
 import AddHome from './containers/addHome/'
+import AddOperation from './containers/addOperation/'
+
 
 export default () => {
     return (
@@ -59,6 +61,7 @@ export default () => {
                 <Route path="/addFund" component={AddFund}/>
                 <Route path="/earningsSetting" component={EarningsSetting}/>
                 <Route path="/addHome" component={AddHome}/>
+                <Route path="/addOperation" component={AddOperation}/>
 
             </Route>
 
