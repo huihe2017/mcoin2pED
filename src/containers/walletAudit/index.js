@@ -5,15 +5,16 @@ import Header1 from '../../components/header'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 import {getUserList,resetPwd,resetPin,setAccountStatus} from '../../actions/account'
-import {Layout, Menu, Breadcrumb, Icon, Button, Table, Dropdown, notification} from 'antd';
+import { Table, Select} from 'antd';
 
-const {SubMenu} = Menu;
-const {Header, Content, Sider} = Layout;
+
+
+const Option = Select.Option;
 
 const data=[
     {
         time:'2018-01-01',
-        name:'活动1介绍图',
+        money:1.235,
         coinType:'BTC',
         data:7,
         purchase:'1.000000',
@@ -21,7 +22,7 @@ const data=[
         type:'创建',
     },{
         time:'2018-01-01',
-        name:'活动1介绍图',
+        money:1.235,
         coinType:'BTC',
         data:7,
         purchase:'1.000000',
@@ -29,7 +30,7 @@ const data=[
         type:'创建',
     },{
         time:'2018-01-01',
-        name:'活动1介绍图',
+        money:1.235,
         coinType:'BTC',
         data:7,
         purchase:'1.000000',
@@ -37,7 +38,7 @@ const data=[
         type:'创建',
     },{
         time:'2018-01-01',
-        name:'活动1介绍图',
+        money:1.235,
         coinType:'BTC',
         data:7,
         purchase:'1.000000',
@@ -45,7 +46,7 @@ const data=[
         type:'创建',
     },{
         time:'2018-01-01',
-        name:'活动1介绍图',
+        money:1.235,
         coinType:'BTC',
         data:7,
         purchase:'1.000000',
@@ -53,7 +54,7 @@ const data=[
         type:'创建',
     },{
         time:'2018-01-01',
-        name:'活动1介绍图',
+        money:1.235,
         coinType:'BTC',
         data:7,
         purchase:'1.000000',
@@ -61,7 +62,7 @@ const data=[
         type:'创建',
     },{
         time:'2018-01-01',
-        name:'活动1介绍图',
+        money:1.235,
         coinType:'BTC',
         data:7,
         purchase:'1.000000',
@@ -69,7 +70,7 @@ const data=[
         type:'创建',
     },{
         time:'2018-01-01',
-        name:'活动1介绍图',
+        money:1.235,
         coinType:'BTC',
         data:7,
         purchase:'1.000000',
@@ -77,7 +78,7 @@ const data=[
         type:'创建',
     },{
         time:'2018-01-01',
-        name:'活动1介绍图',
+        money:1.235,
         coinType:'BTC',
         data:7,
         purchase:'1.000000',
@@ -85,7 +86,7 @@ const data=[
         type:'创建',
     },{
         time:'2018-01-01',
-        name:'活动1介绍图',
+        money:1.235,
         coinType:'BTC',
         data:7,
         purchase:'1.000000',
@@ -115,27 +116,24 @@ class Home extends React.Component {
                 title: '日期',
                 dataIndex: 'time'
             },{
-                title: '基金名称',
-                dataIndex: 'name'
+                title: '转出金额',
+                dataIndex: 'money'
             },{
                 title: '货币类型',
                 dataIndex: 'coinType'
 
             },{
-                title: '封闭期（天）',
+                title: '转出类型',
                 dataIndex: 'data'
 
             },{
-                title: '起购价',
+                title: '钱包余额',
                 dataIndex: 'purchase'
 
             },{
                 title: '操作人',
                 dataIndex: 'operator'
 
-            },{
-                title: '类型',
-                dataIndex: 'type',
             },{
                 title: '操作',
                 render: (text, record) => {
@@ -150,7 +148,21 @@ class Home extends React.Component {
             }];
         return (
             <div className={style.wlop}>
-                <span className={style.title}>基金审核</span>
+                <span className={style.title}>钱包审核</span>
+                <div className={style.contentT}>
+                    筛选重置记录
+                </div>
+                <div className={style.content}>
+                    <span className={style.inputBoxT}>
+                        货币类型
+                    </span>
+                    <div className={style.inputBox}>
+                        <Select placeholder="请选择" defaultValue="all">
+                            <Option value="all">全部</Option>
+                            <Option value="btc">BTC</Option>
+                        </Select>
+                    </div>
+                </div>
                 <div className={style.table}>
                     <Table columns={columns} dataSource={data}/>
                 </div>

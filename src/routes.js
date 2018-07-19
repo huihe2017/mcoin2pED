@@ -28,6 +28,11 @@ import AddFund from './containers/addFund/'
 import EarningsSetting from './containers/earningsSetting/'
 import AddHome from './containers/addHome/'
 import AddOperation from './containers/addOperation/'
+import WalletAudit from './containers/walletAudit/'
+import WalletOutAudit from './containers/walletOutAudit/'
+import AuditFund from './containers/auditFund/'
+import ResetAduit from './containers/resetAduit/'
+import ResetAduitDetail from './containers/resetAduitDetail/'
 
 
 export default () => {
@@ -59,9 +64,14 @@ export default () => {
                 <Route path="/addNotice" component={AddNotice}/>
                 <Route path="/addInformation" component={AddInformation}/>
                 <Route path="/addFund" component={AddFund}/>
-                <Route path="/earningsSetting" component={EarningsSetting}/>
+                <Route path="/earningsSetting/:id" component={EarningsSetting}/>
                 <Route path="/addHome" component={AddHome}/>
                 <Route path="/addOperation" component={AddOperation}/>
+                <Route path="/walletAudit" component={WalletAudit}/>
+                <Route path="/walletOutAudit" component={WalletOutAudit}/>
+                <Route path="/auditFund" component={AuditFund}/>
+                <Route path="/resetAduit" component={ResetAduit}/>
+                <Route path="/resetAduitDetail" component={ResetAduitDetail}/>
 
             </Route>
 

@@ -62,9 +62,10 @@ class Home extends React.Component {
                 // this.props.addAccount(params, () => {
                 //     this.props.history.go(-1)
                 // })
+                console.log(1);
+            }else {
+                console.log(2);
             }
-
-
         });
     }
 
@@ -81,13 +82,20 @@ class Home extends React.Component {
     }
     reSet=(e)=>{
         // if(a==='buyMoney'){
-        //     this.setState({
-        //         buyMoney:e.target.buyMoney
-        //     },()=>{
-        //         console.log('buyMoney',this.state.buyMoney);
-        //     })
+        console.log(this.props.form);
+        this.props.form.setFieldsValue({
+            buyMoney1:1
+        })
+        this.props.form.setFieldsValue({
+            buyMoney1:1
+        })
+            this.setState({
+                buyMoney:!this.state.buyMoney
+            },()=>{
+                console.log('buyMoney',this.state.buyMoney);
+            })
         // }else if(a==='redeemMoney'){
-        //     this.setState({
+         //     this.setState({
         //         redeemMoney:e.target.redeemMoney
         //     },()=>{
         //         console.log(this.state.redeemMoney);
@@ -181,7 +189,7 @@ class Home extends React.Component {
                                                 disabled={this.state.account ? true : false}
                                                 onChange={(e) => {
                                                     this.setState({bannerName: e.target.value})
-                                                }} size="large" placeholder=""/>)}
+                                                }} size="large" placeholder="即2级申购返利本金上限"/>)}
                                     </FormItem>
                                 </div>
                                 <div className={style.inputBox}>
@@ -197,7 +205,7 @@ class Home extends React.Component {
                                                 <Input
                                                     onChange={(e) => {
                                                         this.setState({link: e.target.value})
-                                                    }} size="large" placeholder=""/>)}
+                                                    }} size="large" placeholder="上限"/>)}
                                         </Col>
                                         <Col span={2}>
         <span style={{ display: 'inline-block', width: '100%', textAlign: 'center' }}>
@@ -212,7 +220,7 @@ class Home extends React.Component {
                                                 <Input
                                                     onChange={(e) => {
                                                         this.setState({link: e.target.value})
-                                                    }} size="large" placeholder=""/>)}
+                                                    }} size="large" placeholder="下限"/>)}
                                         </Col>
 
                                     </FormItem>
@@ -230,7 +238,7 @@ class Home extends React.Component {
                                                 value={this.state.priority || ''}
                                                 onChange={(e) => {
                                                     this.setState({priority: e.target.value})
-                                                }} size="large" placeholder=""/>)}
+                                                }} size="large" placeholder="即2级申购返利本金下限"/>)}
                                     </FormItem>
                                 </div>
                                 <div className={style.inputBox}>
@@ -312,14 +320,14 @@ class Home extends React.Component {
                                              1级赎回返利本金
                                          </span>
                                         {getFieldDecorator('redeemMoney1', {
-                                            rules: [{required: this.state.redeemMoney, message: '请填写banner名称!'}],
+                                            rules: [{required: this.state.redeemMoney, message: '即1级赎回返利本金上限!'}],
                                             initialValue: this.state.account
                                         })(
                                             <Input
                                                 disabled={this.state.account ? true : false}
                                                 onChange={(e) => {
                                                     this.setState({bannerName: e.target.value})
-                                                }} size="large" placeholder=""/>)}
+                                                }} size="large" placeholder="即1级赎回返利本金上限"/>)}
                                     </FormItem>
                                 </div>
                                 <div className={style.inputBox}>
@@ -335,7 +343,7 @@ class Home extends React.Component {
                                                 <Input
                                                     onChange={(e) => {
                                                         this.setState({link: e.target.value})
-                                                    }} size="large" placeholder=""/>)}
+                                                    }} size="large" placeholder="上限"/>)}
                                         </Col>
                                         <Col span={2}>
         <span style={{ display: 'inline-block', width: '100%', textAlign: 'center' }}>
@@ -350,7 +358,7 @@ class Home extends React.Component {
                                                 <Input
                                                     onChange={(e) => {
                                                         this.setState({link: e.target.value})
-                                                    }} size="large" placeholder=""/>)}
+                                                    }} size="large" placeholder="下限"/>)}
                                         </Col>
 
                                     </FormItem>
@@ -368,7 +376,7 @@ class Home extends React.Component {
                                                 value={this.state.priority || ''}
                                                 onChange={(e) => {
                                                     this.setState({priority: e.target.value})
-                                                }} size="large" placeholder=""/>)}
+                                                }} size="large" placeholder="即2级赎回返利本金下限"/>)}
                                     </FormItem>
                                 </div>
                                 <div className={style.inputBox}>
