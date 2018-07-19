@@ -1,8 +1,10 @@
 import React from 'react'
 import style from './index.css'
 import {hashHistory} from 'react-router'
-
+import {connect} from 'react-redux'
+import {bindActionCreators} from 'redux'
 import {Layout, Menu, Breadcrumb, Icon, Button, Table, Dropdown, notification, Steps, Input,Select,Form,Tag, Tooltip,Upload} from 'antd';
+import {setFundEditData} from "../../../actions/fund";
 
 const Option = Select.Option;
 const { TextArea } = Input;
@@ -25,8 +27,16 @@ class Home extends React.Component {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
-                console.log('Received values of form: ', values);
-
+                // this.props.setFundEditData(
+                //     {
+                //         period: this.state.period,
+                //         limitLowAmount: this.state.limitLowAmount,
+                //         price: this.state.price,
+                //         limitHighAmount: this.state.limitHighAmount,
+                //         limitSoppingTimes: this.state.limitSoppingTimes
+                //     }
+                // )
+                this.props.handle(1)
             }
         });
     }
@@ -66,9 +76,12 @@ class Home extends React.Component {
                                      起购金额（如：0.00001）
                                  </span>
                                 {getFieldDecorator('minBuy', {
+                                    initialValue: this.props.fund.editFundData.limitLowAmount,
                                     rules: [{ required: true, message: '请填写起购金额!' }],
                                 })(
-                                    <Input size="large" placeholder="请填写起购金额"/>)}
+                                    <Input onChange={(e)=>{
+                                        this.props.setFundEditData({limitLowAmount:e.target.value})
+                                    }} size="large" placeholder="请填写起购金额"/>)}
                             </FormItem>
                         </div>
                         <div className={style.inputBox}>
@@ -77,9 +90,12 @@ class Home extends React.Component {
                                      最小递增单位（如：0.00001）
                                  </span>
                                 {getFieldDecorator('minAdd', {
+                                    initialValue: this.props.fund.editFundData.price,
                                     rules: [{ required: true, message: '请填写最小递增单位!' }],
                                 })(
-                                    <Input size="large" placeholder="请填写最小递增单位"/>)}
+                                    <Input  onChange={(e)=>{
+                                        this.props.setFundEditData({price:e.target.value})
+                                    }} size="large" placeholder="请填写最小递增单位"/>)}
                             </FormItem>
                         </div>
                         <div className={style.inputBox}>
@@ -88,9 +104,12 @@ class Home extends React.Component {
                                      最大起购金额（设置0则不限制购买金额）
                                  </span>
                                 {getFieldDecorator('maxBuy', {
+                                    initialValue: this.props.fund.editFundData.limitHighAmount,
                                     rules: [{ required: true, message: '请填写最大起购金额!' }],
                                 })(
-                                    <Input size="large" placeholder="请填写最大起购金额"/>)}
+                                    <Input onChange={(e)=>{
+                                        this.props.setFundEditData({limitHighAmount:e.target.value})
+                                    }} size="large" placeholder="请填写最大起购金额"/>)}
                             </FormItem>
                         </div>
                         <div className={style.inputBox}>
@@ -99,9 +118,12 @@ class Home extends React.Component {
                                      基金有效期/天（设置0则不限制购基金有效期）
                                  </span>
                                 {getFieldDecorator('indate', {
+                                    initialValue: this.props.fund.editFundData.period,
                                     rules: [{ required: true, message: '请填写基金有效期!' }],
                                 })(
-                                    <Input size="large" placeholder="请填写基金有效期"/>)}
+                                    <Input onChange={(e)=>{
+                                        this.props.setFundEditData({period:e.target.value})
+                                    }} size="large" placeholder="请填写基金有效期"/>)}
                             </FormItem>
                         </div>
                         <div className={style.inputBox}>
@@ -110,9 +132,12 @@ class Home extends React.Component {
                                      限购次数（设置0则不限制限购次数）
                                  </span>
                                 {getFieldDecorator('limit', {
+                                    initialValue: this.props.fund.editFundData.limitSoppingTimes,
                                     rules: [{ required: true, message: '请填写限购次数!' }],
                                 })(
-                                    <Input size="large" placeholder="请填写限购次数"/>)}
+                                    <Input onChange={(e)=>{
+                                        this.props.setFundEditData({limitSoppingTimes:e.target.value})
+                                    }} size="large" placeholder="请填写限购次数"/>)}
                             </FormItem>
                         </div>
                         <div className={style.inputBox}>
@@ -139,7 +164,7 @@ class Home extends React.Component {
                     </div>
 
                     <div className={style.button}>
-                        <Button type="primary" size={'large'}>上一步</Button>
+                        <Button onClick={()=>{this.props.handle(0)}} type="primary" size={'large'}>上一步</Button>
                         <FormItem>
                             <Button type="primary" htmlType="submit" size={'large'}>下一步</Button>
                         </FormItem>
@@ -152,6 +177,20 @@ class Home extends React.Component {
         )
     }
 }
+function mapStateToProps(state, props) {
+    return {
+        fund: state.fund
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        setFundEditData: bindActionCreators(setFundEditData, dispatch)
+    }
+}
+
+Home = connect(mapStateToProps, mapDispatchToProps)(Home)
+
 
 const WrappedHome = Form.create()(Home);
 export default WrappedHome

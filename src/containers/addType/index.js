@@ -1,8 +1,11 @@
 import React from 'react'
 import style from './index.css'
 import {hashHistory} from 'react-router'
-import {Input,Form,Button} from 'antd';
-
+import {Input, Form, Button} from 'antd';
+import {connect} from 'react-redux'
+import {bindActionCreators} from 'redux'
+import {createInfoType} from "../../actions/information";
+import {notification} from "antd/lib/index";
 
 const FormItem = Form.Item;
 
@@ -10,8 +13,7 @@ const FormItem = Form.Item;
 class Home extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-        };
+        this.state = {};
     }
 
     handleSubmit = (e) => {
@@ -21,21 +23,27 @@ class Home extends React.Component {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
-                console.log('Received values of form: ', values);
+                this.props.createInfoType({
+                    //id:id
+                    name: this.state.name
+                },()=>{
+                    this.props.history.go(-1)
+                    notification.open({
+                        message: '提示',
+                        description: '操作成功',
+                    });
+                })
             }
         });
     }
 
     render() {
-        const { getFieldDecorator } = this.props.form;
+        const {getFieldDecorator} = this.props.form;
 
         return (
             <div className={style.wlop}>
                 <span className={style.title}>操作日志</span>
                 <Form onSubmit={this.handleSubmit.bind(this)} className="login-form">
-                    <div className={style.contentT}>
-                        筛选日志列表
-                    </div>
                     <div className={style.content}>
 
                         <div className={style.inputBox}>
@@ -44,9 +52,11 @@ class Home extends React.Component {
                                     类型名称
                                 </span>
                                 {getFieldDecorator('name', {
-                                        rules: [{ required: true, message: '请填写你的类型名称!' }],
-                                    })(
-                                        <Input size="large" placeholder="请输入类型名称"/>)}
+                                    rules: [{required: true, message: '请填写你的类型名称!'}],
+                                })(
+                                    <Input onChange={(e) => {
+                                        this.setState({name:e.target.value})
+                                    }} size="large" placeholder="请输入类型名称"/>)}
                             </FormItem>
                         </div>
 
@@ -62,6 +72,20 @@ class Home extends React.Component {
         )
     }
 }
+
+function mapStateToProps(state, props) {
+    return {
+        info: state.information
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        createInfoType: bindActionCreators(createInfoType, dispatch)
+    }
+}
+
+Home = connect(mapStateToProps, mapDispatchToProps)(Home)
 
 const WrappedHome = Form.create()(Home);
 export default WrappedHome

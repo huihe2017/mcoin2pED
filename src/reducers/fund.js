@@ -46,6 +46,12 @@ export default function fund(state = initialState, action = {}) {
         case 'GET_INCOME_CFG_DATA':
             state.income = action.data.data
             return Object.assign({}, state, {})
+        case 'SET_FUND_EDIT_DATA':
+            state.editFundData =  Object.assign({}, state.editFundData, action.data)
+            return Object.assign({}, state, {})
+        case 'GET_PROFIT_LIST':
+            state.income.statList =  action.data.data.statList
+            return Object.assign({}, state, {})
         default:
             return state
     }

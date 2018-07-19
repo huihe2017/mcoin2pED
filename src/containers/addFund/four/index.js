@@ -1,8 +1,26 @@
 import React from 'react'
 import style from './index.css'
 import {hashHistory} from 'react-router'
-
-import {Layout, Menu, Breadcrumb, Icon, Button, Table, Dropdown, notification, Steps, Input,Select,Form,Tag, Tooltip,Upload} from 'antd';
+import {connect} from 'react-redux'
+import {bindActionCreators} from 'redux'
+import {setFundEditData, createFund} from "../../../actions/fund";
+import {
+    Layout,
+    Menu,
+    Breadcrumb,
+    Icon,
+    Button,
+    Table,
+    Dropdown,
+    notification,
+    Steps,
+    Input,
+    Select,
+    Form,
+    Tag,
+    Tooltip,
+    Upload
+} from 'antd';
 
 const Option = Select.Option;
 const FormItem = Form.Item;
@@ -10,9 +28,7 @@ const FormItem = Form.Item;
 class Home extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-
-        };
+        this.state = {};
     }
 
     handleSubmit = (e) => {
@@ -20,13 +36,21 @@ class Home extends React.Component {
         this.props.form.validateFields((err, values) => {
             if (!err) {
                 console.log('Received values of form: ', values);
-
+                this.props.createFund(this.props.fund.editFundData,()=>{
+                    console.log(this.props)
+                    // this.props.history.go(-1)
+                    hashHistory.push('/fund')
+                    notification.open({
+                        message: '提示',
+                        description: '操作成功',
+                    });
+                })
             }
         });
     }
 
     render() {
-        const { getFieldDecorator } = this.props.form;
+        const {getFieldDecorator} = this.props.form;
         return (
             <div className={style.wlop}>
                 <Form onSubmit={this.handleSubmit.bind(this)} className="login-form">
@@ -37,9 +61,12 @@ class Home extends React.Component {
                                      活动选择
                                  </span>
                                 {getFieldDecorator('activity', {
-                                    rules: [{ required: true, message: '请选择活动!' }],
+                                    initialValue: this.props.fund.editFundData.activityId,
+                                    rules: [{required: true, message: '请选择活动!'}],
                                 })(
-                                    <Select placeholder="请选择活动">
+                                    <Select onChange={(e) => {
+                                        this.props.setFundEditData({activityId: e})
+                                    }} placeholder="请选择活动">
                                         <Option value="china">China</Option>
                                         <Option value="use">U.S.A</Option>
                                     </Select>)}
@@ -50,7 +77,9 @@ class Home extends React.Component {
                     </div>
 
                     <div className={style.button}>
-                        <Button type="primary" size={'large'}>上一步</Button>
+                        <Button onClick={() => {
+                            this.props.handle(0)
+                        }} type="primary" size={'large'}>上一步</Button>
                         <FormItem>
                             <Button type="primary" htmlType="submit" size={'large'}>提交</Button>
                         </FormItem>
@@ -64,5 +93,20 @@ class Home extends React.Component {
     }
 }
 
+function mapStateToProps(state, props) {
+    return {
+        fund: state.fund
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        setFundEditData: bindActionCreators(setFundEditData, dispatch),
+        createFund: bindActionCreators(createFund, dispatch)
+
+    }
+}
+
+Home = connect(mapStateToProps, mapDispatchToProps)(Home)
 const WrappedHome = Form.create()(Home);
 export default WrappedHome

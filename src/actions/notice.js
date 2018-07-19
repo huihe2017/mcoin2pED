@@ -40,7 +40,7 @@ export function setNoticeStatus(data, callback) {
             callback,
             url:'notice/updatestatus',
             success:(response)=>{
-                dispatch({type: 'SET_NOTICE_STATUS', data: response.data})
+                dispatch({type: 'SET_NOTICE_STATUS', data: data})
             }
 
         })

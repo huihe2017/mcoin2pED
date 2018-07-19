@@ -1,6 +1,6 @@
 import React from 'react'
 import style from './index.css'
-import {hashHistory} from 'react-router'
+import {hashHistory,Link} from 'react-router'
 import Header1 from '../../components/header'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
@@ -163,14 +163,7 @@ class Home extends React.Component {
                                 }}>编辑</a>
                             </Menu.Item>
                             <Menu.Item>
-                                <a target="_blank" rel="noopener noreferrer" href="javascript:void (0)" onClick={() => {
-                                    notification.open({
-                                        message: '提示',
-                                        description: '操作成功',
-                                    });
-                                }
-
-                                }>收益配置</a>
+                                <Link to={'/earningsSetting/'+record.id}>收益配置</Link>
                             </Menu.Item>
                             <Menu.Item>
                                 {

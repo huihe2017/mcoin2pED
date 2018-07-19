@@ -1,9 +1,12 @@
 import React from 'react'
 import style from './index.css'
 import {hashHistory} from 'react-router'
-import { Editor } from 'react-draft-wysiwyg';
-import { EditorState, convertToRaw, ContentState } from 'draft-js';
-import {Layout, Menu, Breadcrumb, Icon, Button, Table, Dropdown, notification, Steps, Input,Select,Form} from 'antd';
+import {Editor} from 'react-draft-wysiwyg';
+import {connect} from 'react-redux'
+import {bindActionCreators} from 'redux'
+import {EditorState, convertToRaw, ContentState} from 'draft-js';
+import {createNotic, getNoticeList, setNoticeStatus} from '../../actions/notice';
+import {Layout, Menu, Breadcrumb, Icon, Button, Table, Dropdown, notification, Steps, Input, Select, Form} from 'antd';
 
 
 const Option = Select.Option;
@@ -28,20 +31,33 @@ class Home extends React.Component {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
-                console.log('Received values of form: ', values);
+                console.log(this.state.content)
+                this.props.createNotic({
+                    content: this.state.content,
+                    //id: this.state.id,
+                    type: this.state.type,
+                    showOrder: this.state.showOrder,
+                    title: this.state.title,
+                }, () => {
+                    this.props.history.go(-1)
+                    notification.open({
+                        message: '提示',
+                        description: '操作成功',
+                    });
+                })
             }
         });
     }
 
-    onEditorStateChange: Function = (editorState) => {
+    onEditorStateChange: Function = (content) => {
         this.setState({
-            editorState,
+            content:content.blocks[0].text,
         });
     };
 
     render() {
-        const { getFieldDecorator } = this.props.form;
-        const { editorState } = this.state;
+        const {getFieldDecorator} = this.props.form;
+
 
         return (
             <div className={style.wlop}>
@@ -54,9 +70,13 @@ class Home extends React.Component {
                                      标题
                                  </span>
                                 {getFieldDecorator('email', {
-                                    rules: [{ required: true, message: '请填写你的邮箱!' }],
+                                    rules: [{required: true, message: '请填写你的邮箱!'}],
                                 })(
-                                    <Input size="large" placeholder="使用P95公司邮箱"/>)}
+                                    <Input onChange={(e) => {
+                                        this.setState({
+                                            title:e.target.value
+                                        })
+                                    }} size="large" placeholder="使用P95公司邮箱"/>)}
                             </FormItem>
                         </div>
 
@@ -66,13 +86,13 @@ class Home extends React.Component {
                                     内容
                                 </span>
                                 {getFieldDecorator('content', {
-                                    rules: [{ required: true, message: '内容不得为空!' }],
-                                    })(
+                                    rules: [{required: true, message: '内容不得为空!'}],
+                                })(
                                     <Editor
-                                        editorState={editorState}
+                                        // editorState={editorState}
                                         wrapperClassName="demo-wrapper"
                                         editorClassName="demo-editor"
-                                        onEditorStateChange={this.onEditorStateChange}
+                                        onChange={this.onEditorStateChange}
                                     />)
                                 }
                             </FormItem>
@@ -85,12 +105,18 @@ class Home extends React.Component {
                             </span>
                                 {getFieldDecorator('select', {
                                     rules: [
-                                        { required: true, message: '请选择适用平台!' },
+                                        {required: true, message: '请选择适用平台!'},
                                     ],
                                 })(
-                                    <Select placeholder="请选择">
-                                        <Option value="china">移动端</Option>
-                                        <Option value="use">PC端</Option>
+                                    <Select onChange={(e) => {
+                                        this.setState({
+                                            type:e
+                                        })
+                                    }} placeholder="请选择">
+                                        <Option value={0}>PC端</Option>
+                                        <Option value={1}>安卓</Option>
+                                        <Option value={2}>ios</Option>
+                                        <Option value={3}>H5</Option>
                                     </Select>
                                 )}
                             </FormItem>
@@ -101,9 +127,13 @@ class Home extends React.Component {
                                     优先级
                                 </span>
                                 {getFieldDecorator('priority', {
-                                    rules: [{ required: true, message: '优先级不得为空!' }],
+                                    rules: [{required: true, message: '优先级不得为空!'}],
                                 })(
-                                    <Input size="large" placeholder=""/>)}</FormItem>
+                                    <Input onChange={(e) => {
+                                        this.setState({
+                                            showOrder:e.target.value
+                                        })
+                                    }} size="large" placeholder=""/>)}</FormItem>
                         </div>
 
                     </div>
@@ -122,6 +152,22 @@ class Home extends React.Component {
         )
     }
 }
+
+
+function mapStateToProps(state, props) {
+    return {
+        notice: state.notice
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        createNotic: bindActionCreators(createNotic, dispatch)
+    }
+}
+
+Home = connect(mapStateToProps, mapDispatchToProps)(Home)
+
 
 const WrappedHome = Form.create()(Home);
 export default WrappedHome

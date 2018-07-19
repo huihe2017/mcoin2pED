@@ -8,8 +8,8 @@ export default function log(state = initialState, action = {}) {
             return Object.assign({}, state, {})
         case 'SET_NOTICE_STATUS':
             state.noticeList.list.map((item,index)=>{
-                if(item.id===action.data.id){
-                    state.noticeList.list[index].status?0:1
+                if(item.id===(action.data.id-0)){
+                    state.noticeList.list[index].status=action.data.status
                 }
             })
             return Object.assign({}, state, {})

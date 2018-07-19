@@ -143,3 +143,23 @@ export function getProfitList(data, callback) {
         })
     }
 }
+
+export function setFundEditData(data, callback) {
+    return dispatch => {
+        dispatch({type: 'SET_FUND_EDIT_DATA', data:data})
+    }
+}
+
+export function exportProfit(data, callback) {
+    return dispatch => {
+        http({
+            type:'post',
+            data,
+            callback,
+            url:'fund/exportprofit',
+            success:(response)=>{
+                //dispatch({type: 'GET_PROFIT_LIST', data:response.data})
+            }
+        })
+    }
+}

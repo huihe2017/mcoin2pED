@@ -25,7 +25,7 @@ export function setInfoStatus(data, callback) {
             callback,
             url:'info/updatestatus',
             success:(response)=>{
-                dispatch({type: 'CREATE_INFO', data:data})
+                dispatch({type: 'SET_INFO_STATUS', data:data})
             }
 
         })
@@ -46,6 +46,20 @@ export function createInfoType(data, callback) {
         })
     }
 }
+export function createInfo(data, callback) {
+    return dispatch => {
+        http({
+            type:'post',
+            data,
+            callback,
+            url:'info/create',
+            success:(response)=>{
+                //dispatch({type: 'CREATE_INFO', data:data})
+            }
+
+        })
+    }
+}
 export function getInfoTypeList(data, callback) {
     return dispatch => {
         http({
@@ -54,7 +68,7 @@ export function getInfoTypeList(data, callback) {
             callback,
             url:'info/typelist',
             success:(response)=>{
-                dispatch({type: 'GET_INFO_TYPE_LIST', data:data})
+                dispatch({type: 'GET_INFO_TYPE_LIST', data:response.data})
             }
 
         })

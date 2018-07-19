@@ -107,7 +107,6 @@ class Home extends React.Component {
                     )
                 },
             }];
-        debugger
         return (
             <div className={style.wlop}>
                 <span className={style.title}>账号管理</span>
