@@ -20,7 +20,8 @@ import {
     Form,
     Upload,
     Tabs,
-    Checkbox
+    Checkbox,
+    Col
 } from 'antd';
 
 const Option = Select.Option;
@@ -33,7 +34,13 @@ const TabPane = Tabs.TabPane;
 class Home extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+            buyMoney:false,
+            redeemMoney:false,
+            pullRebate:false,
+            earnings:false,
+
+        };
     }
 
     handleChange = (value) => {
@@ -70,6 +77,34 @@ class Home extends React.Component {
     }
 
     componentDidMount() {
+
+    }
+    reSet=(e)=>{
+        // if(a==='buyMoney'){
+        //     this.setState({
+        //         buyMoney:e.target.buyMoney
+        //     },()=>{
+        //         console.log('buyMoney',this.state.buyMoney);
+        //     })
+        // }else if(a==='redeemMoney'){
+        //     this.setState({
+        //         redeemMoney:e.target.redeemMoney
+        //     },()=>{
+        //         console.log(this.state.redeemMoney);
+        //     })
+        // }else if(a==='pullRebate'){
+        //     this.setState({
+        //         pullRebate:e.target.pullRebate
+        //     },()=>{
+        //         console.log(this.state.pullRebate);
+        //     })
+        // }else if(a==='earnings'){
+        //     this.setState({
+        //         earnings:e.target.earnings
+        //     },()=>{
+        //         console.log(this.state.earnings);
+        //     })
+        // }
 
     }
 
@@ -127,10 +162,10 @@ class Home extends React.Component {
                         <TabPane tab="申购" key="1">
                             <div className={style.content1}>
                                 <FormItem  style={{ marginBottom: 8 }}>
-                                    {getFieldDecorator('agreement', {
-                                        valuePropName: 'checked',
+                                    {getFieldDecorator('buyMoney', {
+
                                     })(
-                                        <Checkbox>启用此奖励类型</Checkbox>
+                                        <Checkbox onChange={this.reSet.bind(this,'buyMoney')}>启用此奖励类型</Checkbox>
                                     )}
                                 </FormItem>
                                 <div className={style.inputBox}>
@@ -138,8 +173,8 @@ class Home extends React.Component {
                                          <span className={style.inputBoxT}>
                                              1级申购返利本金
                                          </span>
-                                        {getFieldDecorator('bannerName', {
-                                            rules: [{required: true, message: '请填写banner名称!'}],
+                                        {getFieldDecorator('buyMoney1', {
+                                            rules: [{required: this.state.buyMoney, message: '请填写banner名称!'}],
                                             initialValue: this.state.account
                                         })(
                                             <Input
@@ -151,17 +186,35 @@ class Home extends React.Component {
                                 </div>
                                 <div className={style.inputBox}>
                                     <FormItem>
-                                        <span className={style.inputBoxT}>
+                                        <span className={style.inputBoxT1}>
                                             2级申购返利本金
                                         </span>
-                                        {getFieldDecorator('link', {
-                                            rules: [{required: true, message: '请填写跳转链接!'}],
-                                            initialValue: this.state.name
-                                        })(
-                                            <Input
-                                                onChange={(e) => {
-                                                    this.setState({link: e.target.value})
-                                                }} size="large" placeholder=""/>)}
+                                        <Col span={11}>
+                                            {getFieldDecorator('buyMoney1', {
+                                                rules: [{required: this.state.buyMoney, message: '请填写跳转链接!'}],
+                                                initialValue: this.state.name
+                                            })(
+                                                <Input
+                                                    onChange={(e) => {
+                                                        this.setState({link: e.target.value})
+                                                    }} size="large" placeholder=""/>)}
+                                        </Col>
+                                        <Col span={2}>
+        <span style={{ display: 'inline-block', width: '100%', textAlign: 'center' }}>
+          -
+        </span>
+                                        </Col>
+                                        <Col span={11}>
+                                            {getFieldDecorator('buyMoney3', {
+                                                rules: [{required: true, message: '请填写跳转链接!'}],
+                                                initialValue: this.state.name
+                                            })(
+                                                <Input
+                                                    onChange={(e) => {
+                                                        this.setState({link: e.target.value})
+                                                    }} size="large" placeholder=""/>)}
+                                        </Col>
+
                                     </FormItem>
                                 </div>
                                 <div className={style.inputBox}>
@@ -169,8 +222,8 @@ class Home extends React.Component {
                                         <span className={style.inputBoxT}>
                                             3级申购返利本金
                                         </span>
-                                        {getFieldDecorator('priority', {
-                                            rules: [{required: true, message: '请填写优先级!'}],
+                                        {getFieldDecorator('buyMoney3', {
+                                            rules: [{required: this.state.buyMoney, message: '请填写优先级!'}],
                                             initialValue: this.state.mobile
                                         })(
                                             <Input
@@ -186,8 +239,8 @@ class Home extends React.Component {
                                              1级申购返利系数
                                          </span>
                                         <div className={style.inputBoxb}>
-                                        {getFieldDecorator('bannerName', {
-                                            rules: [{required: true, message: '请填写banner名称!'}],
+                                        {getFieldDecorator('buyRatio1', {
+                                            rules: [{required: this.state.buyMoney, message: '请填写banner名称!'}],
                                             initialValue: this.state.account
                                         })(
                                             <Input
@@ -207,8 +260,8 @@ class Home extends React.Component {
                                             2级申购返利系数
                                         </span>
                                         <div className={style.inputBoxb}>
-                                        {getFieldDecorator('link', {
-                                            rules: [{required: true, message: '请填写跳转链接!'}],
+                                        {getFieldDecorator('buyRatio2', {
+                                            rules: [{required: this.state.buyMoney, message: '请填写跳转链接!'}],
                                             initialValue: this.state.name
                                         })(
                                             <Input
@@ -227,8 +280,8 @@ class Home extends React.Component {
                                             3级申购返利系数
                                         </span>
                                         <div className={style.inputBoxb}>
-                                        {getFieldDecorator('priority', {
-                                            rules: [{required: true, message: '请填写优先级!'}],
+                                        {getFieldDecorator('buyRatio3', {
+                                            rules: [{required: this.state.buyMoney, message: '请填写优先级!'}],
                                             initialValue: this.state.mobile
                                         })(
                                             <Input
@@ -247,19 +300,19 @@ class Home extends React.Component {
                         <TabPane tab="赎回" key="2">
                             <div className={style.content1}>
                                 <FormItem  style={{ marginBottom: 8 }}>
-                                    {getFieldDecorator('agreement', {
-                                        valuePropName: 'checked',
+                                    {getFieldDecorator('redeemMoney', {
+
                                     })(
-                                        <Checkbox>启用此奖励类型</Checkbox>
+                                        <Checkbox onChange={this.reSet.bind(this,'redeemMoney')}>启用此奖励类型</Checkbox>
                                     )}
                                 </FormItem>
                                 <div className={style.inputBox}>
                                     <FormItem>
                                          <span className={style.inputBoxT}>
-                                             1级申购返利本金
+                                             1级赎回返利本金
                                          </span>
-                                        {getFieldDecorator('bannerName', {
-                                            rules: [{required: true, message: '请填写banner名称!'}],
+                                        {getFieldDecorator('redeemMoney1', {
+                                            rules: [{required: this.state.redeemMoney, message: '请填写banner名称!'}],
                                             initialValue: this.state.account
                                         })(
                                             <Input
@@ -271,26 +324,44 @@ class Home extends React.Component {
                                 </div>
                                 <div className={style.inputBox}>
                                     <FormItem>
-                                        <span className={style.inputBoxT}>
-                                            2级申购返利本金
+                                        <span className={style.inputBoxT1}>
+                                            2级赎回返利本金
                                         </span>
-                                        {getFieldDecorator('link', {
-                                            rules: [{required: true, message: '请填写跳转链接!'}],
-                                            initialValue: this.state.name
-                                        })(
-                                            <Input
-                                                onChange={(e) => {
-                                                    this.setState({link: e.target.value})
-                                                }} size="large" placeholder=""/>)}
+                                        <Col span={11}>
+                                            {getFieldDecorator('redeemMoney1', {
+                                                rules: [{required: this.state.redeemMoney, message: '请填写跳转链接!'}],
+                                                initialValue: this.state.name
+                                            })(
+                                                <Input
+                                                    onChange={(e) => {
+                                                        this.setState({link: e.target.value})
+                                                    }} size="large" placeholder=""/>)}
+                                        </Col>
+                                        <Col span={2}>
+        <span style={{ display: 'inline-block', width: '100%', textAlign: 'center' }}>
+          -
+        </span>
+                                        </Col>
+                                        <Col span={11}>
+                                            {getFieldDecorator('redeemMoney3', {
+                                                rules: [{required: true, message: '请填写跳转链接!'}],
+                                                initialValue: this.state.name
+                                            })(
+                                                <Input
+                                                    onChange={(e) => {
+                                                        this.setState({link: e.target.value})
+                                                    }} size="large" placeholder=""/>)}
+                                        </Col>
+
                                     </FormItem>
                                 </div>
                                 <div className={style.inputBox}>
                                     <FormItem>
                                         <span className={style.inputBoxT}>
-                                            3级申购返利本金
+                                            3级赎回返利本金
                                         </span>
-                                        {getFieldDecorator('priority', {
-                                            rules: [{required: true, message: '请填写优先级!'}],
+                                        {getFieldDecorator('redeemMoney3', {
+                                            rules: [{required: this.state.redeemMoney, message: '请填写优先级!'}],
                                             initialValue: this.state.mobile
                                         })(
                                             <Input
@@ -303,11 +374,11 @@ class Home extends React.Component {
                                 <div className={style.inputBox}>
                                     <FormItem>
                                          <span className={style.inputBoxT}>
-                                             1级申购返利系数
+                                             1级赎回返利系数
                                          </span>
                                         <div className={style.inputBoxb}>
-                                        {getFieldDecorator('bannerName', {
-                                            rules: [{required: true, message: '请填写banner名称!'}],
+                                        {getFieldDecorator('redeemRatio1', {
+                                            rules: [{required: this.state.redeemMoney, message: '请填写banner名称!'}],
                                             initialValue: this.state.account
                                         })(
                                             <Input
@@ -324,11 +395,11 @@ class Home extends React.Component {
                                 <div className={style.inputBox}>
                                     <FormItem>
                                         <span className={style.inputBoxT}>
-                                            2级申购返利系数
+                                            2级赎回返利系数
                                         </span>
                                         <div className={style.inputBoxb}>
-                                        {getFieldDecorator('link', {
-                                            rules: [{required: true, message: '请填写跳转链接!'}],
+                                        {getFieldDecorator('redeemRatio2', {
+                                            rules: [{required: this.state.redeemMoney, message: '请填写跳转链接!'}],
                                             initialValue: this.state.name
                                         })(
                                             <Input
@@ -344,11 +415,11 @@ class Home extends React.Component {
                                 <div className={style.inputBox}>
                                     <FormItem>
                                         <span className={style.inputBoxT}>
-                                            3级申购返利系数
+                                            3级赎回返利系数
                                         </span>
                                         <div className={style.inputBoxb}>
-                                        {getFieldDecorator('priority', {
-                                            rules: [{required: true, message: '请填写优先级!'}],
+                                        {getFieldDecorator('redeemRatio3', {
+                                            rules: [{required: this.state.redeemMoney, message: '请填写优先级!'}],
                                             initialValue: this.state.mobile
                                         })(
                                             <Input
@@ -367,10 +438,10 @@ class Home extends React.Component {
                         <TabPane tab="拉新返利" key="3">
                             <div className={style.content1}>
                                 <FormItem  style={{ marginBottom: 8 }}>
-                                    {getFieldDecorator('agreement', {
-                                        valuePropName: 'checked',
+                                    {getFieldDecorator('pullRebate', {
+
                                     })(
-                                        <Checkbox>启用此奖励类型</Checkbox>
+                                        <Checkbox onChange={this.reSet.bind(this,'pullRebate')}>启用此奖励类型</Checkbox>
                                     )}
                                 </FormItem>
                                 <div className={style.inputBox}>
@@ -378,8 +449,8 @@ class Home extends React.Component {
                                          <span className={style.inputBoxT}>
                                              基本奖金
                                          </span>
-                                        {getFieldDecorator('bannerName', {
-                                            rules: [{required: true, message: '请填写banner名称!'}],
+                                        {getFieldDecorator('basicBonus', {
+                                            rules: [{required: this.state.pullRebate, message: '请填写banner名称!'}],
                                             initialValue: this.state.account
                                         })(
                                             <Input
@@ -395,8 +466,8 @@ class Home extends React.Component {
                                             返利系数
                                         </span>
                                         <div className={style.inputBoxb}>
-                                            {getFieldDecorator('link', {
-                                                rules: [{required: true, message: '请填写跳转链接!'}],
+                                            {getFieldDecorator('rebateRatio', {
+                                                rules: [{required: this.state.pullRebate, message: '请填写跳转链接!'}],
                                                 initialValue: this.state.name
                                             })(
                                                 <Input
@@ -415,10 +486,10 @@ class Home extends React.Component {
                         <TabPane tab="收益率" key="4">
                             <div className={style.content1}>
                                 <FormItem  style={{ marginBottom: 8 }}>
-                                    {getFieldDecorator('agreement', {
-                                        valuePropName: 'checked',
+                                    {getFieldDecorator('earnings', {
+
                                     })(
-                                        <Checkbox>启用此奖励类型</Checkbox>
+                                        <Checkbox onChange={this.reSet.bind(this,'earnings')}>启用此奖励类型</Checkbox>
                                     )}
                                 </FormItem>
                                 <div className={style.inputBox}>
@@ -427,8 +498,8 @@ class Home extends React.Component {
                                              收益提高
                                          </span>
                                         <div className={style.inputBoxb}>
-                                            {getFieldDecorator('bannerName', {
-                                                rules: [{required: true, message: '请填写banner名称!'}],
+                                            {getFieldDecorator('earningsBoost', {
+                                                rules: [{required: this.state.earnings, message: '请填写banner名称!'}],
                                                 initialValue: this.state.account
                                             })(
                                                 <Input
