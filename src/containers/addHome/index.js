@@ -32,10 +32,10 @@ class Home extends React.Component {
                 // console.log(this.state.content)
                 //
                 // let param = {
-                //     content: this.state.content,
-                //     type: this.state.type,
-                //     showOrder: this.state.showOrder,
+                //     url: this.state.url,
                 //     title: this.state.title,
+                //     showOrder: this.state.showOrder,
+                //     photoUrl: this.state.photoUrl,
                 // }
                 // if(this.props.params.id!=='null'){
                 //     param.id = this.state.id
