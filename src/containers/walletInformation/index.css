@@ -1,0 +1,163 @@
+:local(.wlop) {
+
+}
+:local(.title){
+    display: block;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+:local(.content){
+
+}
+:local(.contentOne){
+
+}
+:local(.contentOneP){
+    display: flex;
+    margin-top: 20px;
+}
+:local(.contentOnePC1){
+    padding: 10px 0;
+    padding-right: 60px;
+    border-right: 1px solid #eee;
+    width: 200px;
+}
+:local(.contentOnePCBCT){
+    font-weight: bold;
+    margin-right: 20px;
+}
+:local(.contentOnePC2){
+    padding: 10px 0;
+    padding-left: 40px;
+    border-right: 1px solid #eee;
+    width: 400px;
+}
+:local(.contentOnePC3){
+    padding: 10px 0;
+    padding-left: 40px;
+    width: 300px;
+}
+:local(.contentOnePCT){
+    display: block;
+    font-size: 24px;
+    color: #3B3D40;
+    line-height: 50px;
+    font-weight: bold;
+}
+:local(.contentOnePCB){
+    display: block;
+    font-size: 18px;
+    line-height: 36px;
+    color: #5262ff;
+    margin-top: 20px;
+}
+:local(.contentOnePCB1){
+    display: block;
+    font-size: 18px;
+    color: #3B3D40;
+    line-height: 50px;
+}
+:local(.contentOnePCB2){
+    display: block;
+    font-size: 18px;
+    color: #3B3D40;
+    line-height: 36px;
+    margin-top: 20px;
+}
+:local(.contentOnePCTT){
+
+    font-size: 18px;
+    color: #f49193;
+
+}
+:local(.contentTwo){
+    border: 1px solid #eee;
+    margin-top: 30px;
+}
+:local(.contentTwoT){
+    padding: 10px;
+}
+:local(.contentTwoTT){
+    font-size: 20px;
+    font-weight: bold;
+}
+:local(.contentTwoTC){
+    display: flex;
+    margin-top: 10px;
+}
+:local(.contentTwoTCP){
+    font-size: 18px;
+    color: #3B3D40;
+    width: 33%;
+    border-right: 1px solid #eee;
+    padding-left: 40px;
+}
+:local(.contentTwoTCP):first-child{
+
+    padding-left: 0;
+}
+:local(.contentTwoTCP):last-child{
+
+    border-right: none;
+}
+:local(.contentTwoTCPT){
+    font-size: 20px;
+    color: #989898;
+}
+:local(.contentTwoTCPB){
+    display: flex;
+}
+:local(.contentTwoTCPBox){
+    margin-right: 120px;
+}
+:local(.contentTwoTCBP1){
+    display: block;
+    color: #989898;
+}
+
+:local(.contentTwoTCBP){
+    display: block;
+}
+:local(.contentTwoB){
+    border-top: 1px solid #eee;
+    line-height: 40px;
+    font-size: 18px;
+    padding: 0 10px ;
+    display: block;
+}
+:local(.contentThree){
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-between;
+}
+:local(.contentThreeBox){
+    width: 49%;
+    border: 1px solid #eee;
+    padding: 10px;
+}
+:local(.contentThreeBoxT){
+    font-size: 20px;
+    font-weight: bold;
+    color: #3B3D40;
+    display: block;
+    margin-bottom: 20px;
+}
+:local(.contentThreeBoxC){
+    font-size: 16px;
+    color: #3B3D40;
+    display: block;
+    line-height: 40px;
+}
+:local(.inputBox){
+    /*position: absolute;*/
+    margin-left: -43px;
+    height: 60px;
+    width: 114%;
+
+}
+:local(.inputBoxT){
+    font-size: 14px;
+    line-height: 36px;
+
+}

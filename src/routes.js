@@ -33,6 +33,7 @@ import WalletOutAudit from './containers/walletOutAudit/'
 import AuditFund from './containers/auditFund/'
 import ResetAduit from './containers/resetAduit/'
 import ResetAduitDetail from './containers/resetAduitDetail/'
+import WalletInformation from './containers/walletInformation/'
 
 
 export default () => {
@@ -72,6 +73,7 @@ export default () => {
                 <Route path="/auditFund" component={AuditFund}/>
                 <Route path="/resetAduit" component={ResetAduit}/>
                 <Route path="/resetAduitDetail" component={ResetAduitDetail}/>
+                <Route path="/walletInformation" component={WalletInformation}/>
 
             </Route>
 
