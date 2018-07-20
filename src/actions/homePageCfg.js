@@ -40,7 +40,7 @@ export function setBannerStatus(data, callback) {
             callback,
             url:'config/updatebannerstatus',
             success:(response)=>{
-                dispatch({type: 'SET_BANNER_STATUS', data: response.data})
+                dispatch({type: 'SET_BANNER_STATUS', data: data})
             }
 
         })

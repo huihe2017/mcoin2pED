@@ -1,10 +1,10 @@
 import React from 'react'
 import style from './index.css'
-import {hashHistory} from 'react-router'
+import {hashHistory,Link} from 'react-router'
 import Header1 from '../../components/header'
-import { Form, Icon, Input, Button, Checkbox } from 'antd'
+import { Form, Icon, Input, Button, notification } from 'antd'
 import config from '../../config'
-import {getUserMsg, login} from '../../actions/user'
+import {checkPin} from '../../actions/user'
 import {bindActionCreators} from 'redux'
 import {connect} from "react-redux";
 import {setMenu} from "../../actions/menu";
@@ -33,12 +33,15 @@ class Home extends React.Component {
         this.props.form.validateFields((err, values) => {
             console.log(this.state);
             if (!err) {
-                this.props.login({
-                    account	:this.state.userName,
-                    password:this.state.pwd,
-                    checkCode:this.state.code,
+                this.props.checkPin({
+                    pinCode:this.state.code
                 },()=>{
-                    hashHistory.push('/')
+                    notification.open({
+                        message: '提示',
+                        description: '操作成功',
+                    });
+
+                    this.props.history.go(-1)
                 })
             }
         });
@@ -57,13 +60,15 @@ class Home extends React.Component {
                             {getFieldDecorator('pin', {
                                 rules: [{ required: true, message: '请输入账号!' }],
                             })(
-                                <Input size={'large'} value={this.state.userName} onChange={(e)=>{this.setState({userName:e.target.value})}} prefix={<Icon type="info-circle-o" style={{ fontSize: 13 }} />} placeholder="输入PIN码" />
+                                <Input size={'large'}  onChange={(e)=>{this.setState({code:e.target.value})}} prefix={<Icon type="info-circle-o" style={{ fontSize: 13 }} />} placeholder="输入PIN码" />
                             )}
                         </FormItem>
                         <FormItem>
-                            <a className={style.forget} href="javascript:void (0)">忘记PIN码？</a>
+                            <Link className={style.forget} to={'/pinSetting'}>忘记PIN码？</Link>
                             <div className={style.button}>
-                                <Button type="primary" htmlType="submit" className={style.button}>
+                                <Button type="primary" htmlType="submit" onClick={()=>{
+
+                                }} className={style.button}>
                                     验证
                                 </Button>
                             </div>
@@ -88,7 +93,7 @@ function mapStateToProps(state, props) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        login: bindActionCreators(login, dispatch)
+        checkPin: bindActionCreators(checkPin, dispatch)
     }
 }
 

@@ -88,6 +88,21 @@ export function modifyPwd(data, callback) {
         })
     }
 }
+export function checkPin(data, callback) {
+    return dispatch => {
+        http({
+            type:'post',
+            data,
+            callback,
+            url:'adm/checkpin',
+            success:(response)=>{
+                dispatch({type: 'MODIFY_PIN_CODE'})
+            }
+
+        })
+    }
+}
+
 
 
 

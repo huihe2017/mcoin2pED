@@ -163,3 +163,18 @@ export function exportProfit(data, callback) {
         })
     }
 }
+
+export function getFundDetails(data, callback) {
+    return dispatch => {
+        http({
+            type:'post',
+            data,
+            callback,
+            url:'fund/funddetail',
+            success:(response)=>{
+                debugger
+                dispatch({type: 'SET_FUND_EDIT_DATA', data:response.data.data})
+            }
+        })
+    }
+}

@@ -32,7 +32,7 @@ class Home extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            tags: (this.props.fund.editFundData && this.props.fund.editFundData.tag) || [],
+            tags: (this.props.fund.editFundData && this.props.fund.editFundData.tag.split(',')) || [],
             inputVisible: false,
             inputValue: '',
         };

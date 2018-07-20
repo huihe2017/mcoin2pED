@@ -5,6 +5,7 @@ import {Input, Form, Button} from 'antd';
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 import {createInfoType} from "../../actions/information";
+import {filter} from '../../common/util'
 import {notification} from "antd/lib/index";
 
 const FormItem = Form.Item;
@@ -16,6 +17,16 @@ class Home extends React.Component {
         this.state = {};
     }
 
+    componentDidMount(){
+        if(this.props.params.id!=='null'){
+            let data = filter(this.props.info.infoTypeList.list,this.props.params.id)
+            this.setState({
+                id:data.id,
+                name: data.name
+            })
+        }
+    }
+
     handleSubmit = (e) => {
         this.setState({
             selectedRowKeys: [],
@@ -23,10 +34,16 @@ class Home extends React.Component {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
-                this.props.createInfoType({
-                    //id:id
+
+                let param = {
                     name: this.state.name
-                },()=>{
+
+                }
+                if(this.props.params.id!=='null'){
+                    param.id = this.state.id
+                }
+
+                this.props.createInfoType(param,()=>{
                     this.props.history.go(-1)
                     notification.open({
                         message: '提示',
@@ -42,7 +59,7 @@ class Home extends React.Component {
 
         return (
             <div className={style.wlop}>
-                <span className={style.title}>操作日志</span>
+                <span className={style.title}>{this.props.params.id!=='null'?'编辑类型':'创建类型'}</span>
                 <Form onSubmit={this.handleSubmit.bind(this)} className="login-form">
                     <div className={style.content}>
 
@@ -52,6 +69,7 @@ class Home extends React.Component {
                                     类型名称
                                 </span>
                                 {getFieldDecorator('name', {
+                                    initialValue: this.state.name,
                                     rules: [{required: true, message: '请填写你的类型名称!'}],
                                 })(
                                     <Input onChange={(e) => {

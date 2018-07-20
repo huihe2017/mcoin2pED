@@ -29,16 +29,25 @@ class Home extends React.Component {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
-                // let params = {
-                //     password: this.state.password,
-                //     account: this.state.account,
-                //     name: this.state.name,
-                //     mobile: this.state.mobile,
-                //     roles: this.state.roles,
+                // console.log(this.state.content)
+                //
+                // let param = {
+                //     content: this.state.content,
+                //     type: this.state.type,
+                //     showOrder: this.state.showOrder,
+                //     title: this.state.title,
+                // }
+                // if(this.props.params.id!=='null'){
+                //     param.id = this.state.id
                 // }
                 //
-                // this.props.addAccount(params, () => {
+                //
+                // this.props.createNotic(param, () => {
                 //     this.props.history.go(-1)
+                //     notification.open({
+                //         message: '提示',
+                //         description: '操作成功',
+                //     });
                 // })
             }
 
@@ -70,7 +79,7 @@ class Home extends React.Component {
 
         return (
             <div className={style.wlop}>
-                <span className={style.title}>{this.props.params.id ? '修改账号' : '创建账号'}</span>
+                <span className={style.title}>{this.props.params.id!=='null' ? '编辑banner' : '添加banner'}</span>
                 <Form onSubmit={this.handleSubmit.bind(this)} className="login-form">
                     <div className={style.content}>
                         <div className={style.inputBox}>

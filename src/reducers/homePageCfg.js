@@ -8,8 +8,9 @@ export default function log(state = initialState, action = {}) {
             return Object.assign({}, state, {})
         case 'SET_BANNER_STATUS':
             state.bannerList.list.map((item,index)=>{
+                debugger
                 if(item.id===action.data.id){
-                    state.bannerList.list[index].status?0:1
+                    state.bannerList.list[index].status = action.data.status
                 }
             })
             return Object.assign({}, state, {})

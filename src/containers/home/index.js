@@ -4,7 +4,7 @@ import {hashHistory,Link} from 'react-router'
 import Header1 from '../../components/header'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
-import {getUserList,resetPwd,resetPin,setAccountStatus} from '../../actions/account'
+import {getBannerList,setBannerStatus} from '../../actions/homePageCfg'
 import {Layout, Menu, Breadcrumb, Icon, Button, Table, Dropdown, notification} from 'antd';
 
 const {SubMenu} = Menu;
@@ -57,31 +57,31 @@ class Home extends React.Component {
     }
 
     componentDidMount() {
-        this.props.getUserList({
+        this.props.getBannerList({
             page: 1
         })
     }
 
     render() {
-        // if (!this.props.account.userList) {
-        //     return null
-        // }
+        if (!this.props.homePageCfg.bannerList) {
+            return null
+        }
         const columns = [
             {
                 title: '上传时间',
-                dataIndex: 'time'
+                dataIndex: 'createTime'
             },{
                 title: 'banner名称',
-                dataIndex: 'name'
+                dataIndex: 'title'
             },{
                 title: '状态',
                 dataIndex: 'status',
                 render: (text) => {
-                    return text === 1 ? '启用' : '禁用'
+                    return text === 1 ? '可用' : '停用'
                 }
             },{
                 title: '优先级',
-                dataIndex: 'priority'
+                dataIndex: 'showOrder'
 
             },{
                 title: '操作',
@@ -93,9 +93,10 @@ class Home extends React.Component {
                             </Menu.Item>
                             <Menu.Item>
                                 <a target="_blank" rel="noopener noreferrer" href="javascript:void (0)" onClick={() => {
-                                    this.props.setAccountStatus({
-                                        userId:record.id,
-                                        status:record.status
+                                    debugger
+                                    this.props.setBannerStatus({
+                                        id:record.id,
+                                        status:record.status===1?0:1
                                     },()=>{
                                         notification.open({
                                             message: '提示',
@@ -112,13 +113,13 @@ class Home extends React.Component {
                     )
                 },
             }];
-        debugger
+
         return (
             <div className={style.wlop}>
                 <span className={style.title}>首页配置</span>
-                <Button type="primary" size='large' onClick={() => hashHistory.push('/addHome')}>添加banner</Button>
+                <Button type="primary" size='large' onClick={() => hashHistory.push('/addHome/null')}>添加banner</Button>
                 <div className={style.table}>
-                    <Table columns={columns} dataSource={data}/>
+                    <Table columns={columns} dataSource={this.props.homePageCfg.bannerList.list}/>
                 </div>
             </div>
 
@@ -129,16 +130,14 @@ class Home extends React.Component {
 
 function mapStateToProps(state, props) {
     return {
-        account: state.account
+        homePageCfg: state.homePageCfg
     }
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        getUserList: bindActionCreators(getUserList, dispatch),
-        resetPin: bindActionCreators(resetPin, dispatch),
-        setAccountStatus: bindActionCreators(setAccountStatus, dispatch),
-        resetPwd: bindActionCreators(resetPwd, dispatch)
+        getBannerList: bindActionCreators(getBannerList, dispatch),
+        setBannerStatus: bindActionCreators(setBannerStatus, dispatch)
     }
 }
 

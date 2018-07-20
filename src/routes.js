@@ -60,12 +60,12 @@ export default () => {
                 <Route path="/logDetails/:id" component={LogDetails}/>
                 <Route path="/information" component={Information}/>
                 <Route path="/informationType" component={InformationType}/>
-                <Route path="/addType" component={AddType}/>
-                <Route path="/addNotice" component={AddNotice}/>
-                <Route path="/addInformation" component={AddInformation}/>
+                <Route path="/addType/:id" component={AddType}/>
+                <Route path="/addNotice/:id" component={AddNotice}/>
+                <Route path="/addInformation/:id" component={AddInformation}/>
                 <Route path="/addFund" component={AddFund}/>
                 <Route path="/earningsSetting/:id" component={EarningsSetting}/>
-                <Route path="/addHome" component={AddHome}/>
+                <Route path="/addHome/:id" component={AddHome}/>
                 <Route path="/addOperation" component={AddOperation}/>
                 <Route path="/walletAudit" component={WalletAudit}/>
                 <Route path="/walletOutAudit" component={WalletOutAudit}/>

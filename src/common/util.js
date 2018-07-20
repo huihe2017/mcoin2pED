@@ -58,7 +58,7 @@ export function http(option) {
         url = config.api_url + option.url
     }
     // let params = new URLSearchParams();
-    axios.defaults.headers.common['token'] = sessionStorage.token;
+    axios.defaults.headers.common['adminToken'] = sessionStorage.adminToken;
     axios({
         url,
         data: setUrlK(option.data),
@@ -78,6 +78,8 @@ export function http(option) {
 
             } else if (response.data.code === 501) {
                 hashHistory.push('/login')
+            } else if (response.data.code === 1009) {
+                hashHistory.push('/PIN')
             } else {
                 notification.open({
                     message: '提示',
@@ -114,4 +116,15 @@ export function toChartData(e) {
         obj1[arr1[i]] = dataArr[i]
     })
     return obj1
+}
+
+export function filter(list,id) {
+    let data
+    list.filter((item, index) => {
+        if(id-0 === item.id-0){
+            data = item
+        }
+    })
+    debugger
+    return data
 }

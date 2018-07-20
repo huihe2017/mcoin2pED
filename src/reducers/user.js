@@ -1,5 +1,5 @@
 let initialState = {
-    token: sessionStorage.token
+    adminToken: sessionStorage.adminToken
 }
 
 export default function user(state = initialState, action = {}) {
@@ -9,8 +9,8 @@ export default function user(state = initialState, action = {}) {
             state.userMsg = action.data.data
             return Object.assign({}, state, {})
         case 'LOGIN':
-            state.token = action.data.data.token
-            sessionStorage.setItem('token', state.token)
+            state.adminToken = action.data.data.adminToken
+            sessionStorage.setItem('adminToken', state.adminToken)
             return Object.assign({}, state, {})
         case 'SET_PIN_CODE':
             state.userMsg.userInfo.pinCode = true

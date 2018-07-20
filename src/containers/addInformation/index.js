@@ -2,6 +2,7 @@ import React from 'react'
 import style from './index.css'
 import {hashHistory} from 'react-router'
 import {Editor} from 'react-draft-wysiwyg';
+import {filter} from '../../common/util';
 import {EditorState, convertToRaw, ContentState} from 'draft-js';
 import {
     Layout,
@@ -41,20 +42,34 @@ class Home extends React.Component {
     }
 
     componentDidMount() {
-        this.props.getInfoTypeList()
+        this.props.getInfoTypeList({},()=>{
+            if(this.props.params.id!=='null'){
+                let data = filter(this.props.info.infoList.list,this.props.params.id)
+                this.setState({
+                    content: data.content,
+                    id: data.id,
+                    typeId: data.typeId,
+                    // coverUrl: this.state.coverUrl,
+                    title: data.title,
+                })
+            }
+        })
     }
-
     handleSubmit = (e) => {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
-                this.props.createInfo({
+
+                let param = {
                     content: this.state.content,
-                    //id: this.state.id,
                     typeId: this.state.typeId,
                     // coverUrl: this.state.coverUrl,
                     title: this.state.title,
-                }, () => {
+                }
+                if(this.props.params.id!=='null'){
+                    param.id = this.state.id
+                }
+                this.props.createInfo(param, () => {
                     this.props.history.go(-1)
                     notification.open({
                         message: '提示',
@@ -88,7 +103,7 @@ class Home extends React.Component {
 
         return (
             <div className={style.wlop}>
-                <span className={style.title}>创建资讯</span>
+                <span className={style.title}>{this.props.params.id!=='null'?'编辑资讯':'创建资讯'}</span>
                 <Form onSubmit={this.handleSubmit.bind(this)} className="login-form">
                     <div className={style.content}>
                         <div className={style.inputBox}>
@@ -97,6 +112,7 @@ class Home extends React.Component {
                                      资讯标题
                                  </span>
                                 {getFieldDecorator('email', {
+                                    initialValue: this.state.title,
                                     rules: [{required: true, message: '请填写你的邮箱!'}],
                                 })(
                                     <Input onChange={(e) => {
@@ -134,6 +150,7 @@ class Home extends React.Component {
                                 资讯类型
                             </span>
                                 {getFieldDecorator('select', {
+                                    initialValue: this.state.typeId,
                                     rules: [
                                         {required: true, message: '请选择适用平台!'},
                                     ],

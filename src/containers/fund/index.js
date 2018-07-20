@@ -4,49 +4,13 @@ import {hashHistory,Link} from 'react-router'
 import Header1 from '../../components/header'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
-import {getFundList, setRecommend, cancelRecommend, applyStop,applyUse} from '../../actions/fund'
+import {getFundList, setRecommend, cancelRecommend, applyStop,applyUse,removeFund,getFundDetails} from '../../actions/fund'
 import {Layout, Menu, Breadcrumb, Icon, Button, Table, Dropdown, notification, Modal, Input, DatePicker} from 'antd';
 import {Form} from "antd/lib/index";
 
 const {SubMenu} = Menu;
 const {Header, Content, Sider} = Layout;
 const FormItem = Form.Item;
-
-const data = [
-    {
-        title: '基金名称aaa',
-        close: '3',//period
-        coin: 'BTC',//currency
-        year: '4.76%',//yearProfitRate
-        recommend: true,//recommend
-        priority: '99',//showOrder
-        state: '启用',//status
-    }, {
-        title: '基金名称aba',
-        close: '7',
-        coin: 'BTC',
-        year: '4.76%',
-        recommend: true,
-        priority: '11',
-        state: '停用',
-    }, {
-        title: '基金名称bba',
-        close: '130',
-        coin: 'BTC',
-        year: '4.76%',
-        recommend: true,
-        priority: '9',
-        state: '停用',
-    }, {
-        title: '基金名称abb',
-        close: '31',
-        coin: 'BTC',
-        year: '4.76%',
-        recommend: true,
-        priority: '29',
-        state: '启用',
-    },
-]
 
 class Home extends React.Component {
     constructor(props) {
@@ -156,10 +120,12 @@ class Home extends React.Component {
                         <Dropdown trigger={['click']} overlay={<Menu>
                             <Menu.Item>
                                 <a target="_blank" rel="noopener noreferrer" href="javascript:void (0)" onClick={() => {
-                                    notification.open({
-                                        message: '提示',
-                                        description: '操作成功',
-                                    });
+                                   this.props.getFundDetails({
+                                       id:record.id
+                                   },()=>{
+
+                                       hashHistory.push('/addFund')
+                                   })
                                 }}>编辑</a>
                             </Menu.Item>
                             <Menu.Item>
@@ -311,7 +277,9 @@ function mapDispatchToProps(dispatch) {
         getFundList: bindActionCreators(getFundList, dispatch),
         setRecommend: bindActionCreators(setRecommend, dispatch),
         cancelRecommend: bindActionCreators(cancelRecommend, dispatch),
+        removeFund: bindActionCreators(removeFund, dispatch),
         applyStop: bindActionCreators(applyStop, dispatch),
+        getFundDetails: bindActionCreators(getFundDetails, dispatch),
         applyUse: bindActionCreators(applyUse, dispatch)
     }
 }

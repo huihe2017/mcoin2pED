@@ -1,6 +1,6 @@
 import React from 'react'
 import style from './index.css'
-import {hashHistory} from 'react-router'
+import {hashHistory,Link} from 'react-router'
 import Header1 from '../../components/header'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
@@ -50,19 +50,16 @@ class Home extends React.Component {
                 title: '操作',
                 render: (text, record) => {
                     return (
-                        <a target="_blank" rel="noopener noreferrer" href="javascript:void (0)" onClick={() => {
-                            notification.open({
-                                message: '提示',
-                                description: '操作成功',
-                            });
-                        }}>编辑</a>
+                        <Link to={'/addType/'+record.id} onClick={() => {
+
+                        }}>编辑</Link>
                     )
                 },
             }];
         return (
             <div className={style.wlop}>
                 <span className={style.title}>资讯类型</span>
-                <Button type="primary" size='large' onClick={() => hashHistory.push('/addType')}>创建类型</Button>
+                <Button type="primary" size='large' onClick={() => hashHistory.push('/addType/null')}>创建类型</Button>
                 <div className={style.table}>
                     <Table columns={columns} dataSource={this.props.info.infoTypeList.list}/>
                 </div>

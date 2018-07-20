@@ -3,7 +3,7 @@ import style from './index.css'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 import {hashHistory} from 'react-router'
-import {getPermisseList,addRole} from '../../actions/role'
+import {getPermisseList, addRole, getRoleMsg} from '../../actions/role'
 import {
     Layout,
     Menu,
@@ -36,6 +36,8 @@ function checkLevel(id, c) {
         return 3
     }
 }
+
+
 
 const columns = [{
     title: '权限名称',
@@ -125,7 +127,7 @@ class Home extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            selectedRowKeys: [101, 201, 1101], // Check here to configure the default column
+            selectedRowKeys: [112], // Check here to configure the default column
         };
     }
 
@@ -149,10 +151,17 @@ class Home extends React.Component {
                 }
                 if (this.props.params.id !== 'null') {
                     param.roleId = this.props.params.id
+                    if (!this.state.name) {
+                        let filterData = this.props.role.roleList.list.filter((item) => {
+                            if (item.id === this.props.params.id - 0) {
+                                return item
+                            }
+                        })
+                        param.name = filterData[0].name
+                    }
 
                 }
-                debugger
-                this.props.addRole(param,()=>{
+                this.props.addRole(param, () => {
                     this.props.history.go(-1)
                     notification.open({
                         message: '提示',
@@ -171,6 +180,13 @@ class Home extends React.Component {
         this.props.getPermisseList({
             parentId: 0
         })
+
+        if (this.props.params.id !== 'null') {
+            this.props.getRoleMsg({
+                roleId:this.props.params.id
+            })
+        }
+
     }
 
     changeTreeData = (data) => {
@@ -228,6 +244,11 @@ class Home extends React.Component {
         if (!this.props.role.permisseList) {
             return null
         }
+        if (this.props.params.id !== 'null') {
+            if(!this.props.role.editRoleMsg){
+                return null
+            }
+        }
         const {getFieldDecorator} = this.props.form;
         const {selectedRowKeys} = this.state;
         const rowSelection = {
@@ -273,7 +294,7 @@ class Home extends React.Component {
         };
         return (
             <div className={style.wlop}>
-                <span className={style.title}>创建角色</span>
+                <span className={style.title}>{this.props.params.id !== 'null' ? '编辑角色' : '创建角色'}</span>
                 <Form onSubmit={this.handleSubmit.bind(this)} className="login-form">
                     <div className={style.content}>
                         <div className={style.inputBox}>
@@ -282,7 +303,17 @@ class Home extends React.Component {
                                     角色名称
                                 </span>
                                 {getFieldDecorator('email', {
-                                    initialValue: this.state.name,
+                                    initialValue: (() => {
+                                        if (this.props.params.id === 'null') {
+                                            return ''
+                                        }
+                                        let filterData = this.props.role.roleList.list.filter((item) => {
+                                            if (item.id === this.props.params.id - 0) {
+                                                return item
+                                            }
+                                        })
+                                        return filterData[0].name
+                                    })(),
                                     rules: [{required: true, message: '请填写你的角色名!'}],
                                 })(
                                     <Input size="large" onChange={(e) => {
@@ -316,6 +347,7 @@ function mapStateToProps(state, props) {
 function mapDispatchToProps(dispatch) {
     return {
         getPermisseList: bindActionCreators(getPermisseList, dispatch),
+        getRoleMsg: bindActionCreators(getRoleMsg, dispatch),
         addRole: bindActionCreators(addRole, dispatch)
     }
 }

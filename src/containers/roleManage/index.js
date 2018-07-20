@@ -84,10 +84,7 @@ class Home extends React.Component {
                     <Dropdown trigger={['click']} overlay={<Menu>
                         <Menu.Item>
                             <Link to={'/addRole/'+record.id} onClick={() => {
-                                notification.open({
-                                    message: '提示',
-                                    description: '编辑成功',
-                                });
+
                             }}>编辑</Link>
                         </Menu.Item>
                         <Menu.Item>

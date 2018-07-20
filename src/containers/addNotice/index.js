@@ -6,6 +6,7 @@ import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 import {EditorState, convertToRaw, ContentState} from 'draft-js';
 import {createNotic, getNoticeList, setNoticeStatus} from '../../actions/notice';
+import {filter} from '../../common/util';
 import {Layout, Menu, Breadcrumb, Icon, Button, Table, Dropdown, notification, Steps, Input, Select, Form} from 'antd';
 
 
@@ -32,13 +33,19 @@ class Home extends React.Component {
         this.props.form.validateFields((err, values) => {
             if (!err) {
                 console.log(this.state.content)
-                this.props.createNotic({
+
+                let param = {
                     content: this.state.content,
-                    //id: this.state.id,
                     type: this.state.type,
                     showOrder: this.state.showOrder,
                     title: this.state.title,
-                }, () => {
+                }
+                if(this.props.params.id!=='null'){
+                    param.id = this.state.id
+                }
+
+
+                this.props.createNotic(param, () => {
                     this.props.history.go(-1)
                     notification.open({
                         message: '提示',
@@ -51,9 +58,23 @@ class Home extends React.Component {
 
     onEditorStateChange: Function = (content) => {
         this.setState({
-            content:content.blocks[0].text,
+            content: content.blocks[0].text,
         });
     };
+
+    componentDidMount() {
+        if (this.props.params.id !== 'null') {
+
+            let data = filter(this.props.notice.noticeList.list,this.props.params.id)
+            this.setState({
+                content: data.content,
+                id: data.id,
+                type: data.type,
+                showOrder: data.showOrder,
+                title: data.title,
+            })
+        }
+    }
 
     render() {
         const {getFieldDecorator} = this.props.form;
@@ -61,7 +82,7 @@ class Home extends React.Component {
 
         return (
             <div className={style.wlop}>
-                <span className={style.title}>创建公告</span>
+                <span className={style.title}>{this.props.params.id === 'null' ? '创建公告' : '编辑公告'}</span>
                 <Form onSubmit={this.handleSubmit.bind(this)} className="login-form">
                     <div className={style.content}>
                         <div className={style.inputBox}>
@@ -70,11 +91,12 @@ class Home extends React.Component {
                                      标题
                                  </span>
                                 {getFieldDecorator('email', {
-                                    rules: [{required: true, message: '请填写你的邮箱!'}],
+                                    initialValue: this.state.title,
+                                    rules: [{required: true, message: '请填写公告标题!'}],
                                 })(
                                     <Input onChange={(e) => {
                                         this.setState({
-                                            title:e.target.value
+                                            title: e.target.value
                                         })
                                     }} size="large" placeholder="使用P95公司邮箱"/>)}
                             </FormItem>
@@ -86,10 +108,10 @@ class Home extends React.Component {
                                     内容
                                 </span>
                                 {getFieldDecorator('content', {
+                                    initialValue: this.state.content,
                                     rules: [{required: true, message: '内容不得为空!'}],
                                 })(
                                     <Editor
-                                        // editorState={editorState}
                                         wrapperClassName="demo-wrapper"
                                         editorClassName="demo-editor"
                                         onChange={this.onEditorStateChange}
@@ -104,13 +126,14 @@ class Home extends React.Component {
                                 适用平台
                             </span>
                                 {getFieldDecorator('select', {
+                                    initialValue: this.state.type,
                                     rules: [
                                         {required: true, message: '请选择适用平台!'},
                                     ],
                                 })(
                                     <Select onChange={(e) => {
                                         this.setState({
-                                            type:e
+                                            type: e
                                         })
                                     }} placeholder="请选择">
                                         <Option value={0}>PC端</Option>
@@ -127,11 +150,12 @@ class Home extends React.Component {
                                     优先级
                                 </span>
                                 {getFieldDecorator('priority', {
+                                    initialValue: this.state.showOrder,
                                     rules: [{required: true, message: '优先级不得为空!'}],
                                 })(
                                     <Input onChange={(e) => {
                                         this.setState({
-                                            showOrder:e.target.value
+                                            showOrder: e.target.value
                                         })
                                     }} size="large" placeholder=""/>)}</FormItem>
                         </div>
