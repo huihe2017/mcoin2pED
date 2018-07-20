@@ -13,6 +13,7 @@ import fund from './fund'
 import notice from './notice'
 import information from './information'
 import homePageCfg from './homePageCfg'
+import activity from './activity'
 let states = {
     foreignExchange,
     user,
@@ -23,7 +24,9 @@ let states = {
     fund,
     notice,
     information,
-    homePageCfg
+    homePageCfg,
+    activity
+
 
 
 }

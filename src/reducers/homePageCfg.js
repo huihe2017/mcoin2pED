@@ -4,6 +4,7 @@ export default function log(state = initialState, action = {}) {
 
     switch (action.type) {
         case 'GET_BANNER_LIST':
+            debugger
             state.bannerList = action.data.data
             return Object.assign({}, state, {})
         case 'SET_BANNER_STATUS':
