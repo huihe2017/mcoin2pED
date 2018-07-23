@@ -89,7 +89,7 @@ class Home extends React.Component {
                    return (
                         <Dropdown trigger={['click']} overlay={<Menu>
                             <Menu.Item>
-                                <Link to={'/addHome'}>编辑</Link>
+                                <Link to={'/addHome/'+record.id}>编辑</Link>
                             </Menu.Item>
                             <Menu.Item>
                                 <a target="_blank" rel="noopener noreferrer" href="javascript:void (0)" onClick={() => {
@@ -119,7 +119,7 @@ class Home extends React.Component {
                 <span className={style.title}>首页配置</span>
                 <Button type="primary" size='large' onClick={() => hashHistory.push('/addHome/null')}>添加banner</Button>
                 <div className={style.table}>
-                    <Table columns={columns} dataSource={this.props.homePageCfg.bannerList.list}/>
+                    <Table pagination={false} columns={columns} dataSource={this.props.homePageCfg.bannerList.list}/>
                 </div>
             </div>
 

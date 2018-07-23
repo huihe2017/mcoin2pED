@@ -1,11 +1,12 @@
 import React from 'react'
 import style from './index.css'
 import {hashHistory} from 'react-router'
-import {addAccount, editAccountMsg} from '../../actions/account'
+import {createBanner} from '../../actions/homePageCfg'
 import {getRoleList} from '../../actions/role'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 import {Layout, Menu, Breadcrumb, Icon, Button, Table, Dropdown, notification, Steps, Input, Select, Form,Upload} from 'antd';
+import {filter} from "../../common/util";
 
 const Option = Select.Option;
 const {SubMenu} = Menu;
@@ -29,26 +30,27 @@ class Home extends React.Component {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
-                // console.log(this.state.content)
-                //
-                // let param = {
-                //     url: this.state.url,
-                //     title: this.state.title,
-                //     showOrder: this.state.showOrder,
-                //     photoUrl: this.state.photoUrl,
-                // }
-                // if(this.props.params.id!=='null'){
-                //     param.id = this.state.id
-                // }
-                //
-                //
-                // this.props.createNotic(param, () => {
-                //     this.props.history.go(-1)
-                //     notification.open({
-                //         message: '提示',
-                //         description: '操作成功',
-                //     });
-                // })
+                console.log(this.state.content)
+
+                let param = {
+                    type: this.state.type,
+                    url: this.state.url,
+                    title: this.state.title,
+                    showOrder: this.state.showOrder,
+                    photoUrl: this.state.photoUrl,
+                }
+                if(this.props.params.id!=='null'){
+                    param.id = this.state.id
+                }
+
+
+                this.props.createBanner(param, () => {
+                    this.props.history.go(-1)
+                    notification.open({
+                        message: '提示',
+                        description: '操作成功',
+                    });
+                })
             }
 
 
@@ -64,7 +66,17 @@ class Home extends React.Component {
     }
 
     componentDidMount() {
+        if (this.props.params.id !== 'null') {
 
+            let data = filter(this.props.homePageCfg.bannerList.list,this.props.params.id)
+            this.setState({
+                type: data.type,
+                url: data.url,
+                title: data.title,
+                showOrder: data.showOrder,
+                photoUrl: data.photoUrl
+            })
+        }
     }
 
     render() {
@@ -89,12 +101,12 @@ class Home extends React.Component {
                                  </span>
                                 {getFieldDecorator('bannerName', {
                                     rules: [{required: true, message: '请填写banner名称!'}],
-                                    initialValue: this.state.account
+                                    initialValue: this.state.title
                                 })(
                                     <Input
                                         disabled={this.state.account?true:false}
                                         onChange={(e) => {
-                                            this.setState({bannerName: e.target.value})
+                                            this.setState({title: e.target.value})
                                         }} size="large" placeholder="使用P95公司邮箱"/>)}
                             </FormItem>
                         </div>
@@ -122,11 +134,11 @@ class Home extends React.Component {
                                 </span>
                                 {getFieldDecorator('link', {
                                     rules: [{required: true, message: '请填写跳转链接!'}],
-                                    initialValue: this.state.name
+                                    initialValue: this.state.url
                                 })(
                                     <Input
                                         onChange={(e) => {
-                                            this.setState({link: e.target.value})
+                                            this.setState({url: e.target.value})
                                         }} size="large" placeholder=""/>)}
                             </FormItem>
                         </div>
@@ -144,6 +156,7 @@ class Home extends React.Component {
                                     //     })
                                     //     return arr
                                     // })(),
+                                    initialValue: this.state.type,
                                     rules: [
                                         {required: true, message: '请选择适用平台!'},
                                     ],
@@ -154,8 +167,10 @@ class Home extends React.Component {
                                     style={{width: '100%'}}
                                 >
                                     {/*{children}*/}
-                                    <Option value="china">China</Option>
-                                    <Option value="use">U.S.A</Option>
+                                    <Option value={0}>PC端</Option>
+                                    <Option value={1}>安卓</Option>
+                                    <Option value={2}>ios</Option>
+                                    <Option value={3}>H5</Option>
                                 </Select>)}
                             </FormItem>
                         </div>
@@ -166,12 +181,12 @@ class Home extends React.Component {
                                 </span>
                                 {getFieldDecorator('priority', {
                                     rules: [{required: true, message: '请填写优先级!'}],
-                                    initialValue: this.state.mobile
+                                    initialValue: this.state.showOrder
                                 })(
                                     <Input
                                         value={this.state.priority || ''}
                                         onChange={(e) => {
-                                            this.setState({priority: e.target.value})
+                                            this.setState({showOrder: e.target.value})
                                         }} size="large" placeholder=""/>)}
                             </FormItem>
                         </div>
@@ -196,16 +211,13 @@ class Home extends React.Component {
 
 function mapStateToProps(state, props) {
     return {
-        role: state.role,
-        account: state.account
+        homePageCfg: state.homePageCfg
     }
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        addAccount: bindActionCreators(addAccount, dispatch),
-        editAccountMsg: bindActionCreators(editAccountMsg, dispatch),
-        getRoleList: bindActionCreators(getRoleList, dispatch)
+        createBanner: bindActionCreators(createBanner, dispatch)
     }
 }
 

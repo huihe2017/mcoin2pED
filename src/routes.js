@@ -73,7 +73,7 @@ export default () => {
                 <Route path="/addFund" component={AddFund}/>
                 <Route path="/earningsSetting/:id" component={EarningsSetting}/>
                 <Route path="/addHome/:id" component={AddHome}/>
-                <Route path="/addOperation" component={AddOperation}/>
+                <Route path="/addOperation/:id" component={AddOperation}/>
                 <Route path="/walletAudit" component={WalletAudit}/>
                 <Route path="/walletOutAudit" component={WalletOutAudit}/>
                 <Route path="/auditFund" component={AuditFund}/>
