@@ -38,7 +38,24 @@ class Home extends React.Component {
                                 <span className={style.contentOnePCT}>
                                     比特币
                                 </span>
-                                <a href="javascript:void (0)" className={style.contentOnePCB}>
+                                <a href="javascript:void (0)" className={style.contentOnePCB}                               onClick={ ()=>
+                                    Modal.info({
+                                        iconType:'',
+                                        okText:'复制地址并关闭',
+                                        content: (
+                                            <div className={style.inputBox}>
+                                                     <span className={style.inputBoxT}>
+                                                         BTC转入地址
+                                                     </span>
+                                                <Input defaultValue={'1qw6e1qw3e156qwe516qw5e166'} disabled={ true } size="large" />
+
+                                            </div>
+                                        ),
+                                        onOk() {
+                                            console.log(1)
+                                        }
+                                    })
+                                }>
                                     立即转入
                                 </a>
                             </div>

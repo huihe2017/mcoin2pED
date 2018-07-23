@@ -1,0 +1,65 @@
+:local(.wrap){
+    display: flex;
+
+}
+:local(.headerBox){
+
+}
+:local(.wlop) {
+    height: 100%;
+}
+:local(.wlop) .ant-layout{
+    height: 100%!important;
+}
+
+:local(.header){
+    height: 64px;
+    width: 100%;
+}
+:local(.title){
+    display: block;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+:local(.table){
+    margin-top: 20px;
+}
+:local(.step){
+    width: 500px;
+}
+:local(.content){
+    margin-top: 20px;
+}
+:local(.inputBoxT){
+    font-size: 16px;
+    line-height: 30px;
+}
+:local(.inputBox){
+    width: 300px;
+    height: 95px;
+}
+:local(.inputBox1){
+    width: 500px;
+}
+:local(.inputBox2){
+    width: 500px;
+}
+:local(.inputBBox){
+    display: flex;
+}
+:local(.inputBBoxA){
+    margin-top: 46px;
+    margin-left: 10px;
+}
+
+:local(.button){
+    margin-top: 50px;
+    width: 150px;
+    display: flex;
+    justify-content: space-between;
+}
+
+
+
+

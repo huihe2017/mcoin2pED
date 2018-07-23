@@ -2,10 +2,10 @@ import React from 'react'
 import style from './index.css'
 import {hashHistory} from 'react-router'
 import {Steps, Button, Form} from 'antd';
-import One from './one'
-import Two from './two'
-import Three from './three'
-import Four from './four'
+import One from './components/one'
+import Two from './components/two'
+import Three from './components/three'
+import Four from './components/four'
 
 const FormItem = Form.Item;
 

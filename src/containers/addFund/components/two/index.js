@@ -4,7 +4,7 @@ import {hashHistory} from 'react-router'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 import {Layout, Menu, Breadcrumb, Icon, Button, Table, Dropdown, notification, Steps, Input,Select,Form,Tag, Tooltip,Upload} from 'antd';
-import {setFundEditData} from "../../../actions/fund";
+import {setFundEditData} from "../../../../actions/fund";
 
 const Option = Select.Option;
 const { TextArea } = Input;

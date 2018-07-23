@@ -19,7 +19,7 @@ import {
     Tag,
     Tooltip
 } from 'antd';
-import {setFundEditData} from "../../../actions/fund";
+import {setFundEditData} from "../../../../actions/fund";
 
 const Option = Select.Option;
 const {TextArea} = Input;

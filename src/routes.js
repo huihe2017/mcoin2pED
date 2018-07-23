@@ -34,6 +34,12 @@ import AuditFund from './containers/auditFund/'
 import ResetAduit from './containers/resetAduit/'
 import ResetAduitDetail from './containers/resetAduitDetail/'
 import WalletInformation from './containers/walletInformation/'
+import OutAddressManage from './containers/outAddressManage/'
+import AddOutAddress from './containers/addOutAddress/'
+import Out from './containers/out/'
+import BillRecord from './containers/billRecord/'
+import BillRecordDetails from './containers/billRecordDetails/'
+import ManageSetting from './containers/manageSetting/'
 
 
 export default () => {
@@ -75,8 +81,14 @@ export default () => {
                 <Route path="/resetAduitDetail" component={ResetAduitDetail}/>
                 <Route path="/walletInformation" component={WalletInformation}/>
 
-            </Route>
 
+            </Route>
+            <Route path="/outAddressManage" component={OutAddressManage}/>
+            <Route path="/addOutAddress" component={AddOutAddress}/>
+            <Route path="/out" component={Out}/>
+            <Route path="/billRecord" component={BillRecord}/>
+            <Route path="/billRecordDetails" component={BillRecordDetails}/>
+            <Route path="/manageSetting" component={ManageSetting}/>
         </Router>
     )
 }

@@ -3,7 +3,7 @@ import style from './index.css'
 import {hashHistory} from 'react-router'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
-import {setFundEditData, createFund} from "../../../actions/fund";
+import {setFundEditData, createFund} from "../../../../actions/fund";
 import {
     Layout,
     Menu,
