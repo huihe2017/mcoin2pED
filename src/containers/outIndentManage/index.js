@@ -20,7 +20,7 @@ import {
 } from 'antd';
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
-import {getOutOrderList} from "../../actions/wallet";
+import {getOutOrderList, outCoin, getConfirmOutMsg, returnFund} from "../../actions/wallet";
 
 const Option = Select.Option;
 const {SubMenu} = Menu;
@@ -29,57 +29,6 @@ const Step = Steps.Step;
 const FormItem = Form.Item;
 const RangePicker = DatePicker.RangePicker;
 
-const data = [
-    {
-        time: '2018-6-1',
-        type: '用户转出',
-        bills: '123549846514316465',
-        coinType: 'BTC',
-        outMoney: '0.123456',
-        state: '转出失败',
-        action: '回退金额',
-    }, {
-        time: '2018-4-1',
-        type: '资产转出',
-        bills: '123549846514316465',
-        coinType: 'BTC',
-        outMoney: '0.123456',
-        state: '转出失败',
-        action: '确认转出',
-    }, {
-        time: '2018-7-1',
-        type: '资产转出',
-        bills: '123549846514316465',
-        coinType: 'BTC',
-        outMoney: '0.123456',
-        state: '审核通过',
-        action: '确认转出',
-    }, {
-        time: '2018-6-4',
-        type: '用户转出',
-        bills: '123549846514316465',
-        coinType: 'BTC',
-        outMoney: '0.123456',
-        state: '转出失败',
-        action: '回退金额',
-    }, {
-        time: '2018-7-1',
-        type: '资产转出',
-        bills: '123549846514316465',
-        coinType: 'BTC',
-        outMoney: '0.123456',
-        state: '审核通过',
-        action: '确认转出',
-    }, {
-        time: '2018-6-4',
-        type: '用户转出',
-        bills: '123549846514316465',
-        coinType: 'BTC',
-        outMoney: '0.123456',
-        state: '转出失败',
-        action: '回退金额',
-    },
-]
 
 class Home extends React.Component {
     constructor(props) {
@@ -101,12 +50,11 @@ class Home extends React.Component {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
-                this.props.getLogList({
+                this.props.getOutOrderList({
                     page: 1,
-                    beginTime: this.state.beginTime,
-                    endTime: this.state.endTime,
-                    account: this.state.account,
-                    adminName: this.state.adminName
+                    beginDate: this.state.beginDate,
+                    endDate: this.state.endDate,
+                    currency: this.state.currency
                 }, () => {
 
                 })
@@ -121,9 +69,18 @@ class Home extends React.Component {
     }
     handleOk = (e) => {
         console.log(e);
-        this.setState({
-            visible: false,
-        });
+        this.props.outCoin({
+            id: this.state.currentId
+        }, () => {
+            this.setState({
+                visible: false,
+            });
+            notification.open({
+                message: '提示',
+                description: '操作成功',
+            });
+        })
+
     }
     handleCancel = (e) => {
         console.log(e);
@@ -152,7 +109,7 @@ class Home extends React.Component {
                 title: '单据',
                 dataIndex: 'id',
                 key: 'id',
-                render: (text, record) => (<Link to={'/logDetails/' + record.id}>{record.id}</Link>),
+                render: (text, record) => (<Link to={'/outIndentDetails/' + record.id}>{record.id}</Link>),
             },
             {title: '币种', dataIndex: 'currency', key: 'currency'},
             {title: '转出金额', dataIndex: 'amount', key: 'amount'},
@@ -165,11 +122,31 @@ class Home extends React.Component {
             //     }}>{record.action}</a>),
             // },
             {
-                title: '操作', key: 'action', render: (record) => {return (<a href='javascript:void (0)' onClick={() => {
-                    if (record.action === '确认转出') {
-                        this.showModal()
-                    }
-                }}>{record.action}</a>)},
+                title: '操作', key: 'action', render: (record) => {
+                    return record.status ? <a onClick={() => {
+                            this.props.getConfirmOutMsg({
+                                id: record.id
+                            }, () => {
+                                this.setState({currentId: record.id}, () => {
+                                    this.showModal()
+                                })
+
+                            })
+
+                        }
+                        } href='javascript:void (0)'>确认转出</a> :
+                        <a onClick={() => {
+                            this.props.returnFund({
+                                id: record.id
+                            }, () => {
+                                notification.open({
+                                    message: '提示',
+                                    description: '操作成功',
+                                });
+                            })
+                        }
+                        } href='javascript:void (0)'>回退金额</a>
+                },
             },
         ];
         const rangeConfig = {
@@ -197,8 +174,8 @@ class Home extends React.Component {
                                     }],
                                 })(
                                     <RangePicker onChange={(e) => {
-                                        this.setState({beginTime: new Date(e[0]._d).valueOf()})
-                                        this.setState({endTime: new Date(e[1]._d).valueOf()})
+                                        this.setState({beginDate: new Date(e[0]._d).valueOf()})
+                                        this.setState({endDate: new Date(e[1]._d).valueOf()})
                                     }}/>
                                 )}
                             </FormItem>
@@ -211,9 +188,11 @@ class Home extends React.Component {
                                 {getFieldDecorator('coin', {
                                     rules: [{required: true, message: '请填写你的角色名!'}],
                                 })(
-                                    <Select placeholder="请选择" defaultValue="all">
-                                        <Option value="all">全部</Option>
+                                    <Select onChange={(e)=>{
+                                        this.setState({currency:e})
+                                    }} placeholder="请选择" defaultValue="all">
                                         <Option value="btc">BTC</Option>
+                                        <Option value="eth">ETH</Option>
                                     </Select>)}
                             </FormItem>
                         </div>
@@ -241,25 +220,24 @@ class Home extends React.Component {
                         <span className={style.contentS}>
                             转出
                         </span>
-                        ：0.1234156 BTC
+                        ：{this.props.wallet.outCoinConfirmMsg && this.props.wallet.outCoinConfirmMsg.withdrawAmount}
                     </p>
                     <p className={style.contentP}>
                         <span className={style.contentS}>
                             钱包余额
                         </span>
-                        ：100.1234897BTC
+                        ：{this.props.wallet.outCoinConfirmMsg && this.props.wallet.outCoinConfirmMsg.walletBalance}
                     </p>
                     <p className={style.contentP}>
                         <span className={style.contentR}>
-                            已超出钱包余额的10% <br/>
-                            余额过低
+                        {this.props.wallet.outCoinConfirmMsg && this.props.wallet.outCoinConfirmMsg.warning}
                         </span>
-                        <span className={style.contentR}>
-                            余额过低
-                        </span>
-                        <span className={style.contentR}>
-                            余额不足
-                        </span>
+                        {/*<span className={style.contentR}>*/}
+                        {/*余额过低*/}
+                        {/*</span>*/}
+                        {/*<span className={style.contentR}>*/}
+                        {/*余额不足*/}
+                        {/*</span>*/}
                     </p>
                 </Modal>
             </div>
@@ -275,7 +253,11 @@ function mapStateToProps(state, props) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        getOutOrderList: bindActionCreators(getOutOrderList, dispatch)
+        getOutOrderList: bindActionCreators(getOutOrderList, dispatch),
+        outCoin: bindActionCreators(outCoin, dispatch),
+        returnFund: bindActionCreators(returnFund, dispatch),
+        getConfirmOutMsg: bindActionCreators(getConfirmOutMsg, dispatch)
+
     }
 }
 

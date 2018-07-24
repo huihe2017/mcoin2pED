@@ -92,9 +92,9 @@ export default () => {
                 <Route path="/billRecordDetails/:id" component={BillRecordDetails}/>
                 <Route path="/manageSetting" component={ManageSetting}/>
                 <Route path="/outIndentManage" component={OutIndentManage}/>
+                <Route path="/outIndentDetails/:id" component={OutIndentDetails}/>
 
             </Route>
-            <Route path="/outIndentDetails" component={OutIndentDetails}/>
             <Route path="/rechargeManage" component={RechargeManage}/>
             <Route path="/accountManage" component={AccountManage}/>
             <Route path="/rechargeRecordDetails" component={RechargeRecordDetails}/>
