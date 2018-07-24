@@ -1,6 +1,7 @@
 import React from 'react'
 import style from './index.css'
-import {hashHistory,Link} from 'react-router'
+import {hashHistory, Link} from 'react-router'
+import {filter} from "../../common/util";
 import {
     Layout,
     Menu,
@@ -19,7 +20,7 @@ import {
 } from 'antd';
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
-import {getLogList} from "../../actions/log";
+import {getBillList,getWalletBillList} from "../../actions/wallet";
 
 const Option = Select.Option;
 const {SubMenu} = Menu;
@@ -38,7 +39,7 @@ const data = [
         minersFee: 0,
         operator: '张三',
         receipts: '20181346841646',
-    },  {
+    }, {
         key: 2,
         time: '2018-6-1 00:30:12',
         type: '用户充值',
@@ -47,7 +48,7 @@ const data = [
         minersFee: 0,
         operator: '张三',
         receipts: '20181346841646',
-    },  {
+    }, {
         key: 3,
         time: '2018-6-1 00:30:12',
         type: '用户充值',
@@ -56,7 +57,7 @@ const data = [
         minersFee: 0,
         operator: '张三',
         receipts: '20181346841646',
-    },  {
+    }, {
         key: 4,
         time: '2018-6-1 00:30:12',
         type: '用户充值',
@@ -65,7 +66,7 @@ const data = [
         minersFee: 0,
         operator: '张三',
         receipts: '20181346841646',
-    },  {
+    }, {
         key: 5,
         time: '2018-6-1 00:30:12',
         type: '用户充值',
@@ -74,7 +75,7 @@ const data = [
         minersFee: 0,
         operator: '张三',
         receipts: '20181346841646',
-    },  {
+    }, {
         key: 6,
         time: '2018-6-1 00:30:12',
         type: '用户充值',
@@ -106,10 +107,10 @@ class Home extends React.Component {
             if (!err) {
                 this.props.getLogList({
                     page: 1,
-                    beginTime: this.state.beginTime,
-                    endTime: this.state.endTime,
-                    account: this.state.account,
-                    adminName: this.state.adminName
+                    currecy: this.state.currecy,
+                    type: this.state.type,
+                    beginDate: this.state.beginDate,
+                    endDate: this.state.endDate
                 }, () => {
 
                 })
@@ -119,29 +120,29 @@ class Home extends React.Component {
 
 
     componentDidMount() {
-        // this.props.getLogList({
-        //     page: 1
-        // }, () => {
-        //
-        // })
+        this.props.getWalletBillList({
+            page: 1
+        }, () => {
+
+        })
     }
 
     render() {
-        // if (!this.props.log.logList) {
-        //     return null
-        // }
+        if (!this.props.wallet.walletBillList) {
+            return null
+        }
         const {getFieldDecorator} = this.props.form;
 
         const columns = [
-            {title: '日期', dataIndex: 'time', key: 'time'},
+            {title: '日期', dataIndex: 'postTime', key: 'postTime'},
             {title: '类型', dataIndex: 'type', key: 'type'},
-            {title: '金额', dataIndex: 'money', key: 'money'},
-            {title: '货币类型', dataIndex: 'coinType', key: 'coinType'},
-            {title: '矿工费', dataIndex: 'minersFee', key: 'minersFee'},
-            {title: '操作人', dataIndex: 'operator', key: 'operator'},
+            {title: '金额', dataIndex: 'amount', key: 'amount'},
+            {title: '货币类型', dataIndex: 'currency', key: 'currency'},
+            {title: '矿工费', dataIndex: 'fee', key: 'fee'},
+            {title: '操作人', dataIndex: 'withdrawAdmin', key: 'withdrawAdmin'},
             {
                 title: '系统单据', key: 'receipts', render: (text, record) => (
-                    <Link to={'/logDetails/'+record.id}>{record.receipts}</Link>
+                    <Link to={'/billRecordDetails/' + record.id}>{record.id}</Link>
                 ),
             },
         ];
@@ -170,8 +171,8 @@ class Home extends React.Component {
                                     }],
                                 })(
                                     <RangePicker onChange={(e) => {
-                                        this.setState({beginTime:new Date(e[0]._d).valueOf()})
-                                        this.setState({endTime:new Date(e[1]._d).valueOf()})
+                                        this.setState({beginTime: new Date(e[0]._d).valueOf()})
+                                        this.setState({endTime: new Date(e[1]._d).valueOf()})
                                     }}/>
                                 )}
                             </FormItem>
@@ -185,8 +186,8 @@ class Home extends React.Component {
                                     rules: [{required: true, message: '请选择货币类型!'}],
                                 })(
                                     <Select placeholder="请选择货币类型">
-                                        <Option value="china">China</Option>
-                                        <Option value="use">U.S.A</Option>
+                                        <Option value="btc">BTC</Option>
+                                        <Option value="eth">ETH</Option>
                                     </Select>)}
                             </FormItem>
                         </div>
@@ -213,7 +214,7 @@ class Home extends React.Component {
                     <Table
                         className="components-table-demo-nested"
                         columns={columns}
-                        dataSource={data}
+                        dataSource={this.props.wallet.walletBillList.list}
                     />
                 </div>
             </div>
@@ -225,13 +226,13 @@ class Home extends React.Component {
 
 function mapStateToProps(state, props) {
     return {
-        log: state.log
+        wallet: state.wallet
     }
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        getLogList: bindActionCreators(getLogList, dispatch)
+        getWalletBillList: bindActionCreators(getWalletBillList, dispatch)
     }
 }
 

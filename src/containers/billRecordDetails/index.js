@@ -10,7 +10,7 @@ import MoneyOut from "./components/moneyOut";
 import UserIn from "./components/userIn";
 import UserOut from "./components/userOut";
 import UserRecharge from "./components/userRecharge";
-
+import {filter} from "../../common/util";
 class Home extends React.Component {
     constructor(props) {
         super(props);
@@ -25,7 +25,25 @@ class Home extends React.Component {
         // })
 
     }
-
+    renderType= ()=>{
+        let data = filter(this.props.wallet.walletBillList.list,this.props.params.id)
+        let type = data.type-0
+        if(type===0){
+            return <UserIn data={data} />
+        }
+        if(type===1){
+            return <UserRecharge data={data} />
+        }
+        if(type===2){
+            return <UserOut data={data} />
+        }
+        if(type===3){
+            return <MoneyIn data={data} />
+        }
+        if(type===4){
+            return <MoneyOut data={data} />
+        }
+    }
     render() {
         // if (!this.props.log.logDetails) {
         //     return null
@@ -35,13 +53,16 @@ class Home extends React.Component {
             <div className={style.wlop}>
                 <span className={style.title}>账单记录详情</span>
                 <div className={style.contentT}>
-                    系统单据：2018060102872087324
+                    系统单据：{this.props.params.id}
                 </div>
+                {
+                    this.renderType()
+                }
                 {/*<MoneyIn/>*/}
                 {/*<MoneyOut/>*/}
                 {/*<UserIn/>*/}
                 {/*<UserOut/>*/}
-                <UserRecharge/>
+                {/*<UserRecharge/>*/}
             </div>
         )
     }
@@ -49,13 +70,13 @@ class Home extends React.Component {
 
 function mapStateToProps(state, props) {
     return {
-        log: state.log
+        wallet: state.wallet
     }
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        getLogDetails: bindActionCreators(getLogDetails, dispatch)
+
     }
 }
 

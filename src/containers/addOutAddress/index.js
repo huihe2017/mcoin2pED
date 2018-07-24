@@ -3,8 +3,11 @@ import style from './index.css'
 import {hashHistory} from 'react-router'
 import { Button, Form,Input,
     Select,} from 'antd';
-
-
+import {connect} from 'react-redux'
+import {bindActionCreators} from 'redux'
+import {createOutAddress} from "../../actions/wallet";
+import {notification} from "antd/lib/index";
+import {filter} from "../../common/util";
 const FormItem = Form.Item;
 const Option = Select.Option;
 const {TextArea} = Input;
@@ -17,22 +20,41 @@ class Home extends React.Component {
         };
     }
 
+    componentDidMount(){
+        if (this.props.params.id !== 'null') {
+
+            let data = filter(this.props.wallet.outCoinAddressList.list,this.props.params.id)
+            this.setState({
+                currecy: data.currecy,
+                id: data.id,
+                address: data.address,
+                remark: data.remark
+            })
+        }
+    }
+
     handleSubmit = (e) => {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
-                // this.props.setFundEditData(
-                //     {
-                //         title: this.state.title,
-                //         tag: this.state.tags,
-                //         currency: this.state.currency,
-                //         riskType: this.state.riskType,
-                //         productDesc: this.state.productDesc,
-                //         redeemDesc: this.state.redeemDesc,
-                //     }
-                // )
-                this.props.handle(1)
 
+                let param = {
+                    currecy: this.state.currecy,
+                    address: this.state.address,
+                    remark: this.state.remark
+                }
+                if(this.props.params.id!=='null'){
+                    param.id = this.state.id
+                }
+
+
+                this.props.createOutAddress(param, () => {
+                    this.props.history.go(-1)
+                    notification.open({
+                        message: '提示',
+                        description: '操作成功',
+                    });
+                })
             }
         });
     }
@@ -52,11 +74,11 @@ class Home extends React.Component {
                                      转出地址
                                  </span>
                                     {getFieldDecorator('outAddress', {
-                                        initialValue: '',
+                                        initialValue: this.state.address,
                                         rules: [{required: true, message: '请填写转出地址!'}],
                                     })(
                                         <TextArea onChange={(e) => {
-                                            this.props.setFundEditData({redeemDesc: e.target.value})
+                                            this.setState({address: e.target.value})
                                         }} rows={4} placeholder="请填写转出地址"/>)}
                                 </FormItem>
                             </div>
@@ -66,11 +88,11 @@ class Home extends React.Component {
                                      备注
                                  </span>
                                     {getFieldDecorator('fundName', {
-                                        initialValue: '',
+                                        initialValue: this.state.remark,
                                         rules: [{required: true, message: '请填写备注!'}],
                                     })(
-                                        <Input onChange={(e) => {
-                                            this.props.setFundEditData({title: e.target.value})
+                                        <Input  onChange={(e) => {
+                                            this.setState({remark: e.target.value})
                                         }} size="large" placeholder="请填写备注"/>)}
                                 </FormItem>
                             </div>
@@ -80,15 +102,15 @@ class Home extends React.Component {
                                 转出货币类型
                             </span>
                                     {getFieldDecorator('selectCoin', {
-                                        initialValue: '',
+                                        initialValue: this.state.currecy,
                                         rules: [
                                             {required: true, message: '请选择货币类型!'},
                                         ],
-                                    })(<Select onChange={(e) => {
-                                        this.props.setFundEditData({currency: e})
+                                    })(<Select  onChange={(e) => {
+                                        this.setState({currecy: e})
                                     }} placeholder="请选择">
-                                        <Option value="china">China</Option>
-                                        <Option value="use">U.S.A</Option>
+                                        <Option value="btc">BTC</Option>
+                                        <Option value="eth">ETC</Option>
                                     </Select>)}
                                 </FormItem>
                             </div>
@@ -111,5 +133,21 @@ class Home extends React.Component {
         )
     }
 }
+
+function mapStateToProps(state, props) {
+    return {
+        wallet: state.wallet
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        createOutAddress: bindActionCreators(createOutAddress, dispatch)
+    }
+}
+
+Home = connect(mapStateToProps, mapDispatchToProps)(Home)
+
+
 const WrappedHome = Form.create()(Home);
 export default WrappedHome

@@ -14,6 +14,7 @@ import notice from './notice'
 import information from './information'
 import homePageCfg from './homePageCfg'
 import activity from './activity'
+import wallet from './wallet'
 let states = {
     foreignExchange,
     user,
@@ -25,7 +26,8 @@ let states = {
     notice,
     information,
     homePageCfg,
-    activity
+    activity,
+    wallet
 
 
 

@@ -32,19 +32,19 @@ class Home extends React.Component {
                     <span className={style.contentC}>
                         日期：
                         <span className={style.contentCC}>
-                            2018-6-1 16:00:00
+                            {this.props.data.postTime}
                         </span>
                     </span>
                     <span className={style.contentC}>
                         申请人：
                         <span className={style.contentCC}>
-                            张三
+                            {this.props.data.auditor}
                         </span>
                     </span>
                     <span className={style.contentC}>
                         区块链交易号：
                         <span className={style.contentCC}>
-                            16416356346160323416
+                            {this.props.data.txid}
                         </span>
                     </span>
                     <span className={style.contentC}>
@@ -56,67 +56,67 @@ class Home extends React.Component {
                     <span className={style.contentC}>
                         货币类型：
                         <span className={style.contentCC}>
-                            BTC
+                            {this.props.data.currency}
                         </span>
                     </span>
                     <span className={style.contentC}>
                         申请转出金额：
                         <span className={style.contentCC}>
-                            -100.00000
+                            {this.props.data.amount}
                         </span>
                     </span>
                     <span className={style.contentC}>
                         手续费：
                         <span className={style.contentCC}>
-                            0
+                            {this.props.data.fee}
                         </span>
                     </span>
                     <span className={style.contentC}>
                         矿工费：
                         <span className={style.contentCC}>
-                            0.0000001
+                            {this.props.data.minerFee}
                         </span>
                     </span>
                     <span className={style.contentC}>
                         钱包实际转出：
                         <span className={style.contentCC}>
-                            -100.0000000
+                            {this.props.data.realAmount}
                         </span>
                     </span>
                     <span className={style.contentC}>
                         转出后余额：
                         <span className={style.contentCC}>
-                            100.0000000
+                            {this.props.data.balance}
                         </span>
                     </span>
                     <span className={style.contentC}>
                         操作人：
                         <span className={style.contentCC}>
-                            张三
+                            {this.props.data.auditor}
                         </span>
                     </span>
                     <span className={style.contentC}>
                         备注：
                         <span className={style.contentCC}>
-                            转出xxx
+                            {this.props.data.remark}
                         </span>
                     </span>
                     <span className={style.contentC}>
                         转出地址：
                         <span className={style.contentCC}>
-                            12i3ug1i23i1y2f31u2y3fu123f1iu23fdfsdfsdf
+                            {this.props.data.toAddress}
                         </span>
                     </span>
                     <span className={style.contentC}>
                         审核人：
                         <span className={style.contentCC}>
-                            张三
+                            {this.props.data.auditor}
                         </span>
                     </span>
                     <span className={style.contentC}>
                         审核状态：
                         <span className={style.contentCC}>
-                            通过
+                            {this.props.data.auditStatus}
                         </span>
                     </span>
                 </div>

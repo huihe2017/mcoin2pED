@@ -2,8 +2,11 @@ import React from 'react'
 import style from './index.css'
 import {hashHistory} from 'react-router'
 import { Button, Form,Input,
-    Select,} from 'antd';
-
+    Select,notification} from 'antd';
+import {connect} from 'react-redux'
+import {bindActionCreators} from 'redux'
+import {getPlaBalance,adminOutCoin} from "../../actions/wallet";
+import {filter} from "../../common/util";
 
 const FormItem = Form.Item;
 const Option = Select.Option;
@@ -21,20 +24,42 @@ class Home extends React.Component {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
-                // this.props.setFundEditData(
-                //     {
-                //         title: this.state.title,
-                //         tag: this.state.tags,
-                //         currency: this.state.currency,
-                //         riskType: this.state.riskType,
-                //         productDesc: this.state.productDesc,
-                //         redeemDesc: this.state.redeemDesc,
-                //     }
-                // )
-                this.props.handle(1)
+                this.props.adminOutCoin(
+                    {
+                        addressId: this.props.params.id,
+                        amount: this.state.amount,
+                        remark: this.state.remark
+                    },()=>{
+                        notification.open({
+                            message: '提示',
+                            description: '操作成功',
+                        });
+
+                        this.props.history.go(-1)
+                    }
+                )
 
             }
         });
+    }
+
+    componentDidMount(){
+
+        if (this.props.params.id !== 'null') {
+
+            let data = filter(this.props.wallet.outCoinAddressList.list,this.props.params.id)
+            this.setState({
+                currency: data.currency,
+                id: data.id,
+                address: data.address,
+                remark: data.remark
+            })
+            this.props.getPlaBalance({
+                currency:data.currency
+            })
+
+
+        }
     }
 
     render() {
@@ -42,7 +67,7 @@ class Home extends React.Component {
 
         return (
             <div className={style.wlop}>
-                <span className={style.title}>创建地址地址</span>
+                <span className={style.title}>转出</span>
                 <div>
                     <Form onSubmit={this.handleSubmit.bind(this)} className="login-form">
                         <div className={style.content}>
@@ -52,10 +77,12 @@ class Home extends React.Component {
                                      转出地址
                                  </span>
                                     {getFieldDecorator('outAddress', {
-                                        initialValue: '',
+                                        initialValue: this.state.address,
                                         rules: [{required: true, message: '请填写转出地址!'}],
                                     })(
-                                        <TextArea onChange={(e) => {
+                                        <TextArea
+                                            disabled
+                                            onChange={(e) => {
                                             this.props.setFundEditData({redeemDesc: e.target.value})
                                         }} rows={4} placeholder="请填写转出地址"/>)}
                                 </FormItem>
@@ -66,10 +93,10 @@ class Home extends React.Component {
                                      钱包备注
                                  </span>
                                     {getFieldDecorator('balance', {
-                                        initialValue: '',
+                                        initialValue: this.state.remark,
                                         rules: [{required: true, message: '请填写备注!'}],
                                     })(
-                                        <Input onChange={(e) => {
+                                        <Input disabled onChange={(e) => {
                                             this.props.setFundEditData({title: e.target.value})
                                         }} size="large" placeholder="请填写备注"/>)}
                                 </FormItem>
@@ -80,15 +107,13 @@ class Home extends React.Component {
                                 转出货币类型
                             </span>
                                     {getFieldDecorator('selectCoin', {
-                                        initialValue: '',
+                                        initialValue: this.state.currency,
                                         rules: [
                                             {required: true, message: '请选择货币类型!'},
                                         ],
-                                    })(<Select onChange={(e) => {
-                                        this.props.setFundEditData({currency: e})
-                                    }} placeholder="请选择">
-                                        <Option value="china">China</Option>
-                                        <Option value="use">U.S.A</Option>
+                                    })(<Select disabled  placeholder="请选择">
+                                        <Option value="btc">BTC</Option>
+                                        <Option value="eth">ETH</Option>
                                     </Select>)}
                                 </FormItem>
                             </div>
@@ -98,10 +123,12 @@ class Home extends React.Component {
                                      钱包余额
                                  </span>
                                     {getFieldDecorator('walletBalance', {
-                                        initialValue: '',
+                                        initialValue: this.props.wallet.plaBalance,
                                         rules: [{required: true, message: '请填写钱包余额!'}],
                                     })(
-                                        <Input onChange={(e) => {
+                                        <Input
+                                            disabled
+                                            onChange={(e) => {
                                             this.props.setFundEditData({title: e.target.value})
                                         }} size="large" placeholder="请填写钱包余额"/>)}
                                 </FormItem>
@@ -116,7 +143,7 @@ class Home extends React.Component {
                                         rules: [{required: true, message: '请填写转出余额!'}],
                                     })(
                                         <Input onChange={(e) => {
-                                            this.props.setFundEditData({title: e.target.value})
+                                            this.setState({amount: e.target.value})
                                         }} size="large" placeholder="请填写转出余额"/>)}
                                 </FormItem>
                             </div>
@@ -125,12 +152,12 @@ class Home extends React.Component {
                                  <span className={style.inputBoxT}>
                                      转出备注
                                  </span>
-                                    {getFieldDecorator('outBalance', {
+                                    {getFieldDecorator('outBalance1', {
                                         initialValue: '',
                                         rules: [{required: true, message: '请填写转出备注!'}],
                                     })(
                                         <Input onChange={(e) => {
-                                            this.props.setFundEditData({title: e.target.value})
+                                            this.setState({remark: e.target.value})
                                         }} size="large" placeholder="请填写转出备注"/>)}
                                 </FormItem>
                             </div>
@@ -151,5 +178,23 @@ class Home extends React.Component {
         )
     }
 }
+
+function mapStateToProps(state, props) {
+    return {
+        wallet: state.wallet
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        getPlaBalance: bindActionCreators(getPlaBalance, dispatch),
+        adminOutCoin: bindActionCreators(adminOutCoin, dispatch)
+
+}
+}
+
+Home = connect(mapStateToProps, mapDispatchToProps)(Home)
+
+
 const WrappedHome = Form.create()(Home);
 export default WrappedHome

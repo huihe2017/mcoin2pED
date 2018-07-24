@@ -32,7 +32,7 @@ class Home extends React.Component {
                     <span className={style.contentC}>
                         日期：
                         <span className={style.contentCC}>
-                            2018-6-1 16:00:00
+                            {this.props.data.postTime}
                         </span>
                     </span>
                     <span className={style.contentC}>
@@ -44,37 +44,37 @@ class Home extends React.Component {
                     <span className={style.contentC}>
                         充值付款（元）：
                         <span className={style.contentCC}>
-                            100.00000
+                            {this.props.data.amount}
                         </span>
                     </span>
                     <span className={style.contentC}>
                         货币类型：
                         <span className={style.contentCC}>
-                            BTC
+                            {this.props.data.currency}
                         </span>
                     </span>
                     <span className={style.contentC}>
                         买入单价（元）：
                         <span className={style.contentCC}>
-                            34891.13
+                            {this.props.data.amount}
                         </span>
                     </span>
                     <span className={style.contentC}>
                         转入金额：
                         <span className={style.contentCC}>
-                            +2.168416315
+                            {this.props.data.amount}
                         </span>
                     </span>
                     <span className={style.contentC}>
                         操作人：
                         <span className={style.contentCC}>
-                            张三
+                            {this.props.data.withdrawAdmin}
                         </span>
                     </span>
                     <span className={style.contentC}>
                         备注：
                         <span className={style.contentCC}>
-                            转出xxx
+                            {this.props.data.remark}
                         </span>
                     </span>
 
