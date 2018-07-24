@@ -105,7 +105,7 @@ class Home extends React.Component {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
-                this.props.getLogList({
+                this.props.getWalletBillList({
                     page: 1,
                     currecy: this.state.currecy,
                     type: this.state.type,
@@ -171,8 +171,8 @@ class Home extends React.Component {
                                     }],
                                 })(
                                     <RangePicker onChange={(e) => {
-                                        this.setState({beginTime: new Date(e[0]._d).valueOf()})
-                                        this.setState({endTime: new Date(e[1]._d).valueOf()})
+                                        this.setState({beginDate: new Date(e[0]._d).valueOf()})
+                                        this.setState({endDate: new Date(e[1]._d).valueOf()})
                                     }}/>
                                 )}
                             </FormItem>
@@ -185,7 +185,9 @@ class Home extends React.Component {
                                 {getFieldDecorator('account', {
                                     rules: [{required: true, message: '请选择货币类型!'}],
                                 })(
-                                    <Select placeholder="请选择货币类型">
+                                    <Select onChange={(e)=>{
+                                        this.setState({currecy:e})
+                                    }} placeholder="请选择货币类型">
                                         <Option value="btc">BTC</Option>
                                         <Option value="eth">ETH</Option>
                                     </Select>)}
@@ -199,9 +201,14 @@ class Home extends React.Component {
                                 {getFieldDecorator('name', {
                                     rules: [{required: true, message: '请选择账单类型!'}],
                                 })(
-                                    <Select placeholder="请选择账单类型">
-                                        <Option value="china">China</Option>
-                                        <Option value="use">U.S.A</Option>
+                                    <Select onChange={(e)=>{
+                                        this.setState({type:e})
+                                    }} placeholder="请选择账单类型">
+                                        <Option value={0}>用户转入</Option>
+                                        <Option value={1}>用户充值</Option>
+                                        <Option value={2}>用户提币</Option>
+                                        <Option value={3}>管理员充值</Option>
+                                        <Option value={4}>管理员提币</Option>
                                     </Select>)}
                             </FormItem>
                         </div>

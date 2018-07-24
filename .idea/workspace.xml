@@ -2,19 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9eaf612a-ca36-4e75-a6b7-2f658dbec1a9" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/src/containers/addOutAddress/index.js" afterPath="$PROJECT_DIR$/src/containers/addOutAddress/index.js" />
       <change beforePath="$PROJECT_DIR$/src/containers/billRecord/index.js" afterPath="$PROJECT_DIR$/src/containers/billRecord/index.js" />
-      <change beforePath="$PROJECT_DIR$/src/containers/billRecordDetails/components/moneyIn/index.js" afterPath="$PROJECT_DIR$/src/containers/billRecordDetails/components/moneyIn/index.js" />
-      <change beforePath="$PROJECT_DIR$/src/containers/billRecordDetails/components/moneyOut/index.js" afterPath="$PROJECT_DIR$/src/containers/billRecordDetails/components/moneyOut/index.js" />
-      <change beforePath="$PROJECT_DIR$/src/containers/billRecordDetails/components/userIn/index.js" afterPath="$PROJECT_DIR$/src/containers/billRecordDetails/components/userIn/index.js" />
-      <change beforePath="$PROJECT_DIR$/src/containers/billRecordDetails/components/userOut/index.js" afterPath="$PROJECT_DIR$/src/containers/billRecordDetails/components/userOut/index.js" />
-      <change beforePath="$PROJECT_DIR$/src/containers/billRecordDetails/components/userRecharge/index.js" afterPath="$PROJECT_DIR$/src/containers/billRecordDetails/components/userRecharge/index.js" />
-      <change beforePath="$PROJECT_DIR$/src/containers/billRecordDetails/index.js" afterPath="$PROJECT_DIR$/src/containers/billRecordDetails/index.js" />
-      <change beforePath="$PROJECT_DIR$/src/containers/out/index.js" afterPath="$PROJECT_DIR$/src/containers/out/index.js" />
-      <change beforePath="$PROJECT_DIR$/src/containers/outAddressManage/index.js" afterPath="$PROJECT_DIR$/src/containers/outAddressManage/index.js" />
-      <change beforePath="$PROJECT_DIR$/src/reducers/index.js" afterPath="$PROJECT_DIR$/src/reducers/index.js" />
-      <change beforePath="$PROJECT_DIR$/src/routes.js" afterPath="$PROJECT_DIR$/src/routes.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -31,8 +19,8 @@
       <file leaf-file-name="index.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/containers/billRecord/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="314">
-              <caret line="190" column="47" lean-forward="true" selection-start-line="190" selection-start-column="47" selection-end-line="190" selection-end-column="47" />
+            <state relative-caret-position="343">
+              <caret line="116" column="13" lean-forward="true" selection-start-line="116" selection-start-column="13" selection-end-line="116" selection-end-column="13" />
               <folding>
                 <element signature="e#0#25#0" expanded="true" />
               </folding>
@@ -44,7 +32,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>isxxxxx</find>
       <find>isOpenRedeem</find>
       <find>isOpenBuy</find>
       <find>?1:0</find>
@@ -74,6 +61,7 @@
       <find>balancelist</find>
       <find>filter</find>
       <find>货币类型</find>
+      <find>range-picker</find>
     </findStrings>
     <replaceStrings>
       <replace>typeBuy</replace>
@@ -315,12 +303,12 @@
       <workItem from="1508381784546" duration="3256000" />
       <workItem from="1508392899342" duration="85369000" />
       <workItem from="1508812633767" duration="29150000" />
-      <workItem from="1531210819441" duration="192568000" />
+      <workItem from="1531210819441" duration="193327000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="420387000" />
+    <option name="totallyTimeSpent" value="421146000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="2038" y="43" width="1366" height="961" extended-state="0" />
@@ -817,8 +805,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/containers/billRecord/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="314">
-          <caret line="190" column="47" lean-forward="true" selection-start-line="190" selection-start-column="47" selection-end-line="190" selection-end-column="47" />
+        <state relative-caret-position="343">
+          <caret line="116" column="13" lean-forward="true" selection-start-line="116" selection-start-column="13" selection-end-line="116" selection-end-column="13" />
           <folding>
             <element signature="e#0#25#0" expanded="true" />
           </folding>
