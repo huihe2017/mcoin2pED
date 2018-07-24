@@ -3,11 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="9eaf612a-ca36-4e75-a6b7-2f658dbec1a9" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/src/actions/wallet.js" afterPath="$PROJECT_DIR$/src/actions/wallet.js" />
-      <change beforePath="$PROJECT_DIR$/src/containers/addAccount/index.js" afterPath="$PROJECT_DIR$/src/containers/addAccount/index.js" />
       <change beforePath="$PROJECT_DIR$/src/containers/outIndentManage/index.js" afterPath="$PROJECT_DIR$/src/containers/outIndentManage/index.js" />
-      <change beforePath="$PROJECT_DIR$/src/reducers/wallet.js" afterPath="$PROJECT_DIR$/src/reducers/wallet.js" />
-      <change beforePath="$PROJECT_DIR$/src/routes.js" afterPath="$PROJECT_DIR$/src/routes.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -21,68 +17,14 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/containers/billRecord/index.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="343">
-              <caret line="113" column="26" lean-forward="true" selection-start-line="113" selection-start-column="26" selection-end-line="113" selection-end-column="26" />
-              <folding>
-                <element signature="e#0#25#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="routes.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/routes.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="42" column="45" lean-forward="false" selection-start-line="42" selection-start-column="45" selection-end-line="42" selection-end-column="45" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="index.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/containers/outIndentManage/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="159" column="10" lean-forward="true" selection-start-line="159" selection-start-column="10" selection-end-line="159" selection-end-column="10" />
+            <state relative-caret-position="200">
+              <caret line="167" column="72" lean-forward="false" selection-start-line="167" selection-start-column="72" selection-end-line="167" selection-end-column="72" />
               <folding>
                 <element signature="e#0#25#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/containers/account/index.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="698">
-              <caret line="33" column="36" lean-forward="true" selection-start-line="33" selection-start-column="36" selection-end-line="33" selection-end-column="36" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/containers/addAccount/index.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="116">
-              <caret line="43" column="11" lean-forward="true" selection-start-line="43" selection-start-column="11" selection-end-line="43" selection-end-column="11" />
-              <folding>
-                <element signature="e#0#25#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="wallet.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/reducers/wallet.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="317">
-              <caret line="18" column="30" lean-forward="false" selection-start-line="18" selection-start-column="18" selection-end-line="18" selection-end-column="30" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -115,12 +57,12 @@
       <find>getOutOrderList</find>
       <find>GET_OUT_BILL_LIST</find>
       <find>getOutBillList</find>
-      <find>货币类型</find>
-      <find>debug</find>
       <find>addAccount</find>
       <find>item.id === this.props.params.id</find>
       <find>return</find>
       <find>this.props.params.id</find>
+      <find>货币类型</find>
+      <find>debug</find>
     </findStrings>
     <replaceStrings>
       <replace>typeBuy</replace>
@@ -184,8 +126,8 @@
         <option value="$PROJECT_DIR$/src/containers/billRecord/index.js" />
         <option value="$PROJECT_DIR$/src/routes.js" />
         <option value="$PROJECT_DIR$/src/reducers/wallet.js" />
-        <option value="$PROJECT_DIR$/src/containers/outIndentManage/index.js" />
         <option value="$PROJECT_DIR$/src/containers/addAccount/index.js" />
+        <option value="$PROJECT_DIR$/src/containers/outIndentManage/index.js" />
       </list>
     </option>
   </component>
@@ -342,12 +284,12 @@
       <workItem from="1508381784546" duration="3256000" />
       <workItem from="1508392899342" duration="85369000" />
       <workItem from="1508812633767" duration="29150000" />
-      <workItem from="1531210819441" duration="196261000" />
+      <workItem from="1531210819441" duration="196719000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="424080000" />
+    <option name="totallyTimeSpent" value="424538000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="2199" y="54" width="1366" height="961" extended-state="0" />
@@ -783,39 +725,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/routes.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="42" column="45" lean-forward="false" selection-start-line="42" selection-start-column="45" selection-end-line="42" selection-end-column="45" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/reducers/wallet.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="317">
           <caret line="18" column="30" lean-forward="false" selection-start-line="18" selection-start-column="18" selection-end-line="18" selection-end-column="30" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/containers/billRecord/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="343">
-          <caret line="113" column="26" lean-forward="true" selection-start-line="113" selection-start-column="26" selection-end-line="113" selection-end-column="26" />
-          <folding>
-            <element signature="e#0#25#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/containers/outIndentManage/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="159" column="10" lean-forward="true" selection-start-line="159" selection-start-column="10" selection-end-line="159" selection-end-column="10" />
-          <folding>
-            <element signature="e#0#25#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -829,8 +743,36 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/containers/addAccount/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="116">
-          <caret line="43" column="11" lean-forward="true" selection-start-line="43" selection-start-column="11" selection-end-line="43" selection-end-column="11" />
+        <state relative-caret-position="957">
+          <caret line="51" column="0" lean-forward="true" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/routes.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="42" column="45" lean-forward="false" selection-start-line="42" selection-start-column="45" selection-end-line="42" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/containers/billRecord/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="53">
+          <caret line="136" column="65" lean-forward="false" selection-start-line="136" selection-start-column="65" selection-end-line="136" selection-end-column="65" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/containers/outIndentManage/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="167" column="72" lean-forward="false" selection-start-line="167" selection-start-column="72" selection-end-line="167" selection-end-column="72" />
           <folding>
             <element signature="e#0#25#0" expanded="true" />
           </folding>

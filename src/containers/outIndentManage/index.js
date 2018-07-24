@@ -1,6 +1,6 @@
 import React from 'react'
 import style from './index.css'
-import {hashHistory,Link} from 'react-router'
+import {hashHistory, Link} from 'react-router'
 import {
     Layout,
     Menu,
@@ -38,7 +38,7 @@ const data = [
         outMoney: '0.123456',
         state: '转出失败',
         action: '回退金额',
-    },{
+    }, {
         time: '2018-4-1',
         type: '资产转出',
         bills: '123549846514316465',
@@ -46,7 +46,7 @@ const data = [
         outMoney: '0.123456',
         state: '转出失败',
         action: '确认转出',
-    },{
+    }, {
         time: '2018-7-1',
         type: '资产转出',
         bills: '123549846514316465',
@@ -54,7 +54,7 @@ const data = [
         outMoney: '0.123456',
         state: '审核通过',
         action: '确认转出',
-    },{
+    }, {
         time: '2018-6-4',
         type: '用户转出',
         bills: '123549846514316465',
@@ -62,7 +62,7 @@ const data = [
         outMoney: '0.123456',
         state: '转出失败',
         action: '回退金额',
-    },{
+    }, {
         time: '2018-7-1',
         type: '资产转出',
         bills: '123549846514316465',
@@ -70,7 +70,7 @@ const data = [
         outMoney: '0.123456',
         state: '审核通过',
         action: '确认转出',
-    },{
+    }, {
         time: '2018-6-4',
         type: '用户转出',
         bills: '123549846514316465',
@@ -148,15 +148,29 @@ class Home extends React.Component {
         const columns = [
             {title: '日期', dataIndex: 'postTime', key: 'postTime'},
             {title: '类型', dataIndex: 'type', key: 'type'},
-            {title: '单据', dataIndex: 'id',key: 'id', render: (text, record) => (<Link to={'/logDetails/'+record.id}>{record.id}</Link>),},
+            {
+                title: '单据',
+                dataIndex: 'id',
+                key: 'id',
+                render: (text, record) => (<Link to={'/logDetails/' + record.id}>{record.id}</Link>),
+            },
             {title: '币种', dataIndex: 'currency', key: 'currency'},
             {title: '转出金额', dataIndex: 'amount', key: 'amount'},
             {title: '状态', dataIndex: 'auditStatus', key: 'auditStatus'},
-            {title: '操作', key: 'action', render: (record) => (<a href='javascript:void (0)' onClick={()=>{
-                if(record.action==='确认转出'){
-                    this.showModal()
-                }
-                }}>{record.action}</a>),},
+            // {
+            //     title: '操作', key: 'action', render: (record) => (<a href='javascript:void (0)' onClick={() => {
+            //         if (record.action === '确认转出') {
+            //             this.showModal()
+            //         }
+            //     }}>{record.action}</a>),
+            // },
+            {
+                title: '操作', key: 'action', render: (record) => {return (<a href='javascript:void (0)' onClick={() => {
+                    if (record.action === '确认转出') {
+                        this.showModal()
+                    }
+                }}>{record.action}</a>)},
+            },
         ];
         const rangeConfig = {
             rules: [{type: 'array', required: true, message: 'Please select time!'}],
@@ -183,8 +197,8 @@ class Home extends React.Component {
                                     }],
                                 })(
                                     <RangePicker onChange={(e) => {
-                                        this.setState({beginTime:new Date(e[0]._d).valueOf()})
-                                        this.setState({endTime:new Date(e[1]._d).valueOf()})
+                                        this.setState({beginTime: new Date(e[0]._d).valueOf()})
+                                        this.setState({endTime: new Date(e[1]._d).valueOf()})
                                     }}/>
                                 )}
                             </FormItem>
