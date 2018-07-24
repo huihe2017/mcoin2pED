@@ -33,7 +33,7 @@ export function getBillList(data, callback) {
 }
 
 
-export function getOutBillList(data, callback) {
+export function getOutOrderList(data, callback) {
     return dispatch => {
         http({
             type:'post',
@@ -41,7 +41,7 @@ export function getOutBillList(data, callback) {
             callback,
             url:'wallet/withdrawlist  ',
             success:(response)=>{
-                dispatch({type: 'GET_OUT_BILL_LIST', data: response.data})
+                dispatch({type: 'GET_OUT_ORDER_LIST', data: response.data})
             }
 
         })

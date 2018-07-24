@@ -91,9 +91,9 @@ export default () => {
                 <Route path="/billRecord" component={BillRecord}/>
                 <Route path="/billRecordDetails/:id" component={BillRecordDetails}/>
                 <Route path="/manageSetting" component={ManageSetting}/>
+                <Route path="/outIndentManage" component={OutIndentManage}/>
 
             </Route>
-            <Route path="/outIndentManage" component={OutIndentManage}/>
             <Route path="/outIndentDetails" component={OutIndentDetails}/>
             <Route path="/rechargeManage" component={RechargeManage}/>
             <Route path="/accountManage" component={AccountManage}/>

@@ -20,7 +20,7 @@ import {
 } from 'antd';
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
-import {getLogList} from "../../actions/log";
+import {getOutOrderList} from "../../actions/wallet";
 
 const Option = Select.Option;
 const {SubMenu} = Menu;
@@ -133,7 +133,7 @@ class Home extends React.Component {
     }
 
     componentDidMount() {
-        this.props.getLogList({
+        this.props.getOutOrderList({
             page: 1
         }, () => {
 
@@ -141,19 +141,18 @@ class Home extends React.Component {
     }
 
     render() {
-        if (!this.props.log.logList) {
+        if (!this.props.wallet.outOrderList) {
             return null
         }
         const {getFieldDecorator} = this.props.form;
-
         const columns = [
-            {title: '日期', dataIndex: 'time', key: 'time'},
+            {title: '日期', dataIndex: 'postTime', key: 'postTime'},
             {title: '类型', dataIndex: 'type', key: 'type'},
-            {title: '单据', key: 'bills', render: (text, record) => (<Link to={'/logDetails/'+record.id}>{record.bills}</Link>),},
-            {title: '币种', dataIndex: 'coinType', key: 'coinType'},
-            {title: '转出金额', dataIndex: 'outMoney', key: 'outMoney'},
-            {title: '状态', dataIndex: 'state', key: 'state'},
-            {title: '操作', key: 'action', render: (text, record) => (<a href='javascript:void (0)' onClick={()=>{
+            {title: '单据', dataIndex: 'id',key: 'id', render: (text, record) => (<Link to={'/logDetails/'+record.id}>{record.id}</Link>),},
+            {title: '币种', dataIndex: 'currency', key: 'currency'},
+            {title: '转出金额', dataIndex: 'amount', key: 'amount'},
+            {title: '状态', dataIndex: 'auditStatus', key: 'auditStatus'},
+            {title: '操作', key: 'action', render: (record) => (<a href='javascript:void (0)' onClick={()=>{
                 if(record.action==='确认转出'){
                     this.showModal()
                 }
@@ -213,7 +212,7 @@ class Home extends React.Component {
                     <Table
                         className="components-table-demo-nested"
                         columns={columns}
-                        dataSource={data}
+                        dataSource={this.props.wallet.outOrderList.list}
                     />
                 </div>
                 <Modal
@@ -256,13 +255,13 @@ class Home extends React.Component {
 
 function mapStateToProps(state, props) {
     return {
-        log: state.log
+        wallet: state.wallet
     }
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        getLogList: bindActionCreators(getLogList, dispatch)
+        getOutOrderList: bindActionCreators(getOutOrderList, dispatch)
     }
 }
 

@@ -47,7 +47,7 @@ class Home extends React.Component {
     componentDidMount() {
         if (this.props.params.id) {
             let filterData = this.props.account.userList.list.filter((item) => {
-                return item.id === this.props.params.id
+                return item.id === (this.props.params.id-0)
             })
 
             this.setState(...filterData)

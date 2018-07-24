@@ -15,8 +15,8 @@ export default function wallet(state = initialState, action = {}) {
         case 'GET_IN_BILL_LIST':
             state.inCoinBilList = action.data.data
             return Object.assign({}, state, {})
-        case 'GET_OUT_BILL_LIST':
-            state.outCoinBillList = action.data.data
+        case 'GET_OUT_ORDER_LIST':
+            state.outOrderList = action.data.data
             return Object.assign({}, state, {})
         case 'GET_CONFIRM_OUT_MSG':
             state.outCoinConfirmMsg = action.data.data
