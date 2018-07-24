@@ -1,0 +1,55 @@
+:local(.wrap){
+    display: flex;
+
+}
+:local(.headerBox){
+
+}
+:local(.wlop) {
+    height: 100%;
+}
+:local(.wlop) .ant-layout{
+    height: 100%!important;
+}
+
+:local(.header){
+    height: 64px;
+    width: 100%;
+}
+:local(.title){
+    display: block;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+:local(.table){
+    margin-top: 20px;
+}
+:local(.contentT){
+    font-size: 16px;
+    line-height: 36px;
+    border-bottom: 1px solid #3B3D40;
+    margin-top: 10px;
+}
+:local(.inputBox){
+    width: 200px;
+}
+:local(.inputBox) .ant-select{
+    width: 100%;
+}
+:local(.inputBoxT){
+    font-size: 16px;
+    line-height: 30px;
+    display: block;
+    /*width: 60px;*/
+    margin-right: 20px;
+}
+:local(.content){
+    margin-top: 20px;
+    display: flex;
+    margin-bottom: 20px;
+    width: 300px;
+}
+
+
+

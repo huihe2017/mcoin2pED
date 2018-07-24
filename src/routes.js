@@ -40,6 +40,11 @@ import Out from './containers/out/'
 import BillRecord from './containers/billRecord/'
 import BillRecordDetails from './containers/billRecordDetails/'
 import ManageSetting from './containers/manageSetting/'
+import OutIndentManage from './containers/outIndentManage/'
+import OutIndentDetails from './containers/outIndentDetails/'
+import RechargeManage from './containers/rechargeManage/'
+import AccountManage from './containers/accountManage/'
+import RechargeRecordDetails from './containers/rechargeRecordDetails/'
 
 
 export default () => {
@@ -89,6 +94,11 @@ export default () => {
             <Route path="/billRecord" component={BillRecord}/>
             <Route path="/billRecordDetails" component={BillRecordDetails}/>
             <Route path="/manageSetting" component={ManageSetting}/>
+            <Route path="/outIndentManage" component={OutIndentManage}/>
+            <Route path="/outIndentDetails" component={OutIndentDetails}/>
+            <Route path="/rechargeManage" component={RechargeManage}/>
+            <Route path="/accountManage" component={AccountManage}/>
+            <Route path="/rechargeRecordDetails" component={RechargeRecordDetails}/>
         </Router>
     )
 }

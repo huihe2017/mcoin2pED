@@ -1,0 +1,77 @@
+:local(.wlop) {
+    /*min-height: 100%;*/
+}
+
+
+:local(.title){
+    display: block;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+:local(.table){
+    margin-top: 20px;
+}
+:local(.step){
+    width: 500px;
+}
+:local(.content){
+    margin-top: 20px;
+    display: flex;
+    margin-bottom: 20px;
+}
+:local(.inputBoxT){
+    font-size: 16px;
+    line-height: 30px;
+
+}
+:local(.inputBox){
+    width: 300px;
+    margin-right: 50px;
+    height: 95px;
+}
+:local(.inputBBox){
+    display: flex;
+}
+:local(.inputBBoxA){
+    margin-top: 46px;
+    margin-left: 10px;
+}
+
+:local(.button){
+    margin-top: 32px;
+    width: 150px;
+    display: flex;
+    justify-content: space-between;
+}
+:local(.contentT){
+    font-size: 16px;
+    line-height: 36px;
+    border-bottom: 1px solid #3B3D40;
+}
+:local(.wlop) .ant-layout{
+    height: auto!important;
+    overflow: auto;
+}
+:local(.wlop) .ant-layout-content{
+
+    min-height: auto!important;
+}
+:local(.contentP){
+
+    font-size: 16px;
+}
+:local(.contentS){
+
+    display: inline-block;
+    width: 100px;
+    text-align: left;
+    font-weight: bold;
+}
+:local(.contentR){
+
+    color: #f4333c;
+    display: block;
+}
+
+
