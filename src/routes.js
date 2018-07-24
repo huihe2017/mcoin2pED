@@ -85,15 +85,14 @@ export default () => {
                 <Route path="/resetAduit" component={ResetAduit}/>
                 <Route path="/resetAduitDetail" component={ResetAduitDetail}/>
                 <Route path="/walletInformation" component={WalletInformation}/>
-
+                <Route path="/outAddressManage" component={OutAddressManage}/>
+                <Route path="/addOutAddress/:id" component={AddOutAddress}/>
+                <Route path="/out/:id" component={Out}/>
+                <Route path="/billRecord" component={BillRecord}/>
+                <Route path="/billRecordDetails/:id" component={BillRecordDetails}/>
+                <Route path="/manageSetting" component={ManageSetting}/>
 
             </Route>
-            <Route path="/outAddressManage" component={OutAddressManage}/>
-            <Route path="/addOutAddress" component={AddOutAddress}/>
-            <Route path="/out" component={Out}/>
-            <Route path="/billRecord" component={BillRecord}/>
-            <Route path="/billRecordDetails" component={BillRecordDetails}/>
-            <Route path="/manageSetting" component={ManageSetting}/>
             <Route path="/outIndentManage" component={OutIndentManage}/>
             <Route path="/outIndentDetails" component={OutIndentDetails}/>
             <Route path="/rechargeManage" component={RechargeManage}/>
