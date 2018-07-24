@@ -71,7 +71,7 @@ class Home extends React.Component {
 
         return (
             <div className={style.wlop}>
-                <span className={style.title}>{this.props.params.id ? '修改账号' : '创建账号'}</span>
+                <span className={style.title}>{this.props.params.id !=='null'? '修改账号' : '创建账号'}</span>
                 <Form onSubmit={this.handleSubmit.bind(this)} className="login-form">
                     <div className={style.content}>
                         <div className={style.inputBox}>
