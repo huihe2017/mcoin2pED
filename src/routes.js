@@ -45,6 +45,7 @@ import OutIndentDetails from './containers/outIndentDetails/'
 import RechargeManage from './containers/rechargeManage/'
 import AccountManage from './containers/accountManage/'
 import RechargeRecordDetails from './containers/rechargeRecordDetails/'
+import CheckDetails from './containers/checkDetails/'
 
 
 export default () => {
@@ -98,6 +99,7 @@ export default () => {
             <Route path="/rechargeManage" component={RechargeManage}/>
             <Route path="/accountManage" component={AccountManage}/>
             <Route path="/rechargeRecordDetails" component={RechargeRecordDetails}/>
+            <Route path="/checkDetails" component={CheckDetails}/>
         </Router>
     )
 }
