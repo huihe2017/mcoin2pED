@@ -44,3 +44,6 @@ body,html{
 .ant-btn-background-ghost{
     background: transparent!important;
 }
+.ant-layout-content{
+    min-height: auto!important;
+}

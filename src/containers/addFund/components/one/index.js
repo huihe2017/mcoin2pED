@@ -129,7 +129,7 @@ class Home extends React.Component {
                                  </span>
                                 {getFieldDecorator('fundName', {
                                     initialValue: this.props.fund.editFundData.title,
-                                    rules: [{required: true, message: '请填写你的邮箱!'}],
+                                    rules: [{required: true, message: '请填写基金名称!'}],
                                 })(
                                     <Input onChange={(e) => {
                                         this.props.setFundEditData({title: e.target.value})
@@ -181,8 +181,8 @@ class Home extends React.Component {
                                 })(<Select onChange={(e) => {
                                     this.props.setFundEditData({currency: e})
                                 }} placeholder="请选择">
-                                    <Option value="china">China</Option>
-                                    <Option value="use">U.S.A</Option>
+                                    <Option value="BTC">BTC</Option>
+                                    <Option value="ETH">ETH</Option>
                                 </Select>)}
                             </FormItem>
                         </div>
@@ -199,8 +199,9 @@ class Home extends React.Component {
                                 })(<Select onChange={(e) => {
                                     this.props.setFundEditData({riskType: e})
                                 }} placeholder="请选择">
-                                    <Option value="china">没风险</Option>
-                                    <Option value="use">有风险</Option>
+                                    <Option value="0">进取型</Option>
+                                    <Option value="1">成长型</Option>
+                                    <Option value="2">保守型</Option>
                                 </Select>)}
                             </FormItem>
                         </div>

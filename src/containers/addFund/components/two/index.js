@@ -101,31 +101,31 @@ class Home extends React.Component {
                         <div className={style.inputBox}>
                             <FormItem>
                                  <span className={style.inputBoxT}>
-                                     最大起购金额（设置0则不限制购买金额）
+                                     最大限购金额（设置0则不限制购买金额）
                                  </span>
                                 {getFieldDecorator('maxBuy', {
                                     initialValue: this.props.fund.editFundData.limitHighAmount,
-                                    rules: [{ required: true, message: '请填写最大起购金额!' }],
+                                    rules: [{ required: true, message: '请填写最大限购金额!' }],
                                 })(
                                     <Input onChange={(e)=>{
                                         this.props.setFundEditData({limitHighAmount:e.target.value})
-                                    }} size="large" placeholder="请填写最大起购金额"/>)}
+                                    }} size="large" placeholder="请填写最大限购金额"/>)}
                             </FormItem>
                         </div>
-                        <div className={style.inputBox}>
-                            <FormItem>
-                                 <span className={style.inputBoxT}>
-                                     基金有效期/天（设置0则不限制购基金有效期）
-                                 </span>
-                                {getFieldDecorator('indate', {
-                                    initialValue: this.props.fund.editFundData.period,
-                                    rules: [{ required: true, message: '请填写基金有效期!' }],
-                                })(
-                                    <Input onChange={(e)=>{
-                                        this.props.setFundEditData({period:e.target.value})
-                                    }} size="large" placeholder="请填写基金有效期"/>)}
-                            </FormItem>
-                        </div>
+                        {/*<div className={style.inputBox}>*/}
+                            {/*<FormItem>*/}
+                                 {/*<span className={style.inputBoxT}>*/}
+                                     {/*基金有效期/天（设置0则不限制购基金有效期）*/}
+                                 {/*</span>*/}
+                                {/*{getFieldDecorator('indate', {*/}
+                                    {/*initialValue: this.props.fund.editFundData.period,*/}
+                                    {/*rules: [{ required: true, message: '请填写基金有效期!' }],*/}
+                                {/*})(*/}
+                                    {/*<Input onChange={(e)=>{*/}
+                                        {/*this.props.setFundEditData({period:e.target.value})*/}
+                                    {/*}} size="large" placeholder="请填写基金有效期"/>)}*/}
+                            {/*</FormItem>*/}
+                        {/*</div>*/}
                         <div className={style.inputBox}>
                             <FormItem>
                                  <span className={style.inputBoxT}>

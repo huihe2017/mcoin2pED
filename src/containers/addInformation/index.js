@@ -113,13 +113,13 @@ class Home extends React.Component {
                                  </span>
                                 {getFieldDecorator('email', {
                                     initialValue: this.state.title,
-                                    rules: [{required: true, message: '请填写你的邮箱!'}],
+                                    rules: [{required: true, message: '请填写资讯标题!'}],
                                 })(
                                     <Input onChange={(e) => {
                                         this.setState({
                                             title: e.target.value
                                         })
-                                    }} size="large" placeholder="使用P95公司邮箱"/>)}
+                                    }} size="large" placeholder="请填写资讯标题"/>)}
                             </FormItem>
                         </div>
 

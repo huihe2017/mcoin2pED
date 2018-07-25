@@ -90,7 +90,7 @@ class Home extends React.Component {
                                         }} size="large" placeholder="使用P95公司邮箱"/>)}
                             </FormItem>
                         </div>
-                        <div className={style.inputBBox}>
+                        <div className={style.inputBBox} hidden={this.props.params.id !=='null'}>
                             <div className={style.inputBox}>
                                 <FormItem>
                                     <span className={style.inputBoxT}>

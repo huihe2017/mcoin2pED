@@ -98,7 +98,7 @@ class Home extends React.Component {
                                         this.setState({
                                             title: e.target.value
                                         })
-                                    }} size="large" placeholder="使用P95公司邮箱"/>)}
+                                    }} size="large" placeholder="请填写公告标题"/>)}
                             </FormItem>
                         </div>
 
