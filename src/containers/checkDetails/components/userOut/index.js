@@ -1,7 +1,7 @@
 import React from 'react'
 import style from './index.css'
 import {hashHistory} from 'react-router'
-import {Button, Modal} from 'antd';
+import {Button, Modal,Popconfirm} from 'antd';
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 
@@ -34,8 +34,13 @@ class Home extends React.Component {
                     </span>
                 </span>
                 <div className={style.button}>
-                    <Button type="primary" size={'large'}>通过</Button>
-                    <Button size={'large'}>拒绝</Button>
+                    <Popconfirm placement="top" title={'确认通过该步骤？'} onConfirm={ this.props.handle.bind(this,true)} okText="Yes" cancelText="No">
+                        <Button type="primary" size={'large'}>通过</Button>
+                    </Popconfirm>
+                    <Popconfirm placement="top" title={'确认拒绝该步骤？'} onConfirm={ ()=>hashHistory.push('/fund')} okText="Yes" cancelText="No">
+                        <Button size={'large'}>拒绝</Button>
+                    </Popconfirm>
+
                 </div>
             </div>
 

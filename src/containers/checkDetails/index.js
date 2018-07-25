@@ -29,12 +29,12 @@ class Home extends React.Component {
     }
 
     handle = (flag) => {
-        console.log(flag);
-        if (flag === 0) {
-            this.setState({current: --this.state.current})
-        } else {
-            this.setState({current: ++this.state.current})
-        }
+        this.setState({current: ++this.state.current},()=>{
+            if(this.state.current>3){
+                hashHistory.push('/fund')
+            }
+        })
+
     }
     renderTab = () => {
         if (this.state.current === 0) {
@@ -86,12 +86,15 @@ class Home extends React.Component {
                 <div className={style.contentT}>
                     系统单据：{this.props.params.id}
                 </div>
-                <Steps current={this.state.current}>
-                    <Step title="基础信息"/>
-                    <Step title="基金参数"/>
-                    <Step title="手续费"/>
-                    <Step title="运营活动"/>
-                </Steps>
+                <div className={style.stepBox}>
+                    <Steps current={this.state.current}>
+                        <Step title="基础信息"/>
+                        <Step title="基金参数"/>
+                        <Step title="手续费"/>
+                        <Step title="运营活动"/>
+                    </Steps>
+                </div>
+
                 <div>
                     {this.renderTab()}
                 </div>

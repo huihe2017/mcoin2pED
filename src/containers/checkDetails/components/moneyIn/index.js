@@ -51,7 +51,7 @@ class Home extends React.Component {
                     <Popconfirm placement="top" title={'确认通过该步骤？'} onConfirm={ this.props.handle.bind(this,true)} okText="Yes" cancelText="No">
                         <Button type="primary" size={'large'}>通过</Button>
                     </Popconfirm>
-                    <Popconfirm placement="top" title={'确认拒绝该步骤？'} onConfirm={ this.props.handle.bind(this,true)} okText="Yes" cancelText="No">
+                    <Popconfirm placement="top" title={'确认拒绝该步骤？'} onConfirm={ ()=>hashHistory.push('/fund')} okText="Yes" cancelText="No">
                         <Button size={'large'}>拒绝</Button>
                     </Popconfirm>
 
