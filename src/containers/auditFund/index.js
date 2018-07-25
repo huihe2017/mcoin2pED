@@ -1,10 +1,99 @@
 import React from 'react'
 import style from './index.css'
-import {hashHistory} from 'react-router'
-import {Button,} from 'antd';
+import {hashHistory,Link} from 'react-router'
+import Header1 from '../../components/header'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
-import {getLogDetails} from "../../actions/log";
+import {getUserList,resetPwd,resetPin,setAccountStatus} from '../../actions/account'
+import {Layout, Menu, Breadcrumb, Icon, Button, Table, Dropdown, notification} from 'antd';
+
+const {SubMenu} = Menu;
+const {Header, Content, Sider} = Layout;
+
+const data=[
+    {
+        time:'2018-01-01',
+        name:'活动1介绍图',
+        coinType:'BTC',
+        data:7,
+        purchase:'1.000000',
+        operator:'张三',
+        type:'创建',
+    },{
+        time:'2018-01-01',
+        name:'活动1介绍图',
+        coinType:'BTC',
+        data:7,
+        purchase:'1.000000',
+        operator:'张三',
+        type:'创建',
+    },{
+        time:'2018-01-01',
+        name:'活动1介绍图',
+        coinType:'BTC',
+        data:7,
+        purchase:'1.000000',
+        operator:'张三',
+        type:'创建',
+    },{
+        time:'2018-01-01',
+        name:'活动1介绍图',
+        coinType:'BTC',
+        data:7,
+        purchase:'1.000000',
+        operator:'张三',
+        type:'创建',
+    },{
+        time:'2018-01-01',
+        name:'活动1介绍图',
+        coinType:'BTC',
+        data:7,
+        purchase:'1.000000',
+        operator:'张三',
+        type:'创建',
+    },{
+        time:'2018-01-01',
+        name:'活动1介绍图',
+        coinType:'BTC',
+        data:7,
+        purchase:'1.000000',
+        operator:'张三',
+        type:'创建',
+    },{
+        time:'2018-01-01',
+        name:'活动1介绍图',
+        coinType:'BTC',
+        data:7,
+        purchase:'1.000000',
+        operator:'张三',
+        type:'创建',
+    },{
+        time:'2018-01-01',
+        name:'活动1介绍图',
+        coinType:'BTC',
+        data:7,
+        purchase:'1.000000',
+        operator:'张三',
+        type:'创建',
+    },{
+        time:'2018-01-01',
+        name:'活动1介绍图',
+        coinType:'BTC',
+        data:7,
+        purchase:'1.000000',
+        operator:'张三',
+        type:'创建',
+    },{
+        time:'2018-01-01',
+        name:'活动1介绍图',
+        coinType:'BTC',
+        data:7,
+        purchase:'1.000000',
+        operator:'张三',
+        type:'创建',
+    },
+]
+
 
 class Home extends React.Component {
     constructor(props) {
@@ -13,65 +102,80 @@ class Home extends React.Component {
     }
 
     componentDidMount() {
-        // this.props.getLogDetails({id: this.props.params.id}, () => {
         //
-        // })
-
     }
 
+
     render() {
-        // if (!this.props.log.logDetails) {
+        // if (!this.props.account.userList) {
         //     return null
         // }
+        const columns = [
+            {
+                title: '日期',
+                dataIndex: 'time'
+            },{
+                title: '基金名称',
+                dataIndex: 'name'
+            },{
+                title: '货币类型',
+                dataIndex: 'coinType'
 
+            },{
+                title: '封闭期（天）',
+                dataIndex: 'data'
+
+            },{
+                title: '起购价',
+                dataIndex: 'purchase'
+
+            },{
+                title: '操作人',
+                dataIndex: 'operator'
+
+            },{
+                title: '类型',
+                dataIndex: 'type',
+            },{
+                title: '操作',
+                render: (text, record) => {
+                   return (
+
+                       <a className="ant-dropdown-link" href="#">
+                           查看
+                       </a>
+
+                    )
+                },
+            }];
         return (
             <div className={style.wlop}>
-                <div className={style.contentT}>
-                    审核：启动基金名称001
-                </div>
-                <div className={style.content}>
-                    <span className={style.contentC}>
-                        基金名称：
-                        <span className={style.contentCC}>
-                            基金名称001
-                        </span>
-                    </span>
-                    <span className={style.contentC}>
-                        基金经理：
-                        <span className={style.contentCC}>
-                            张三
-                        </span>
-                    </span>
-                    <span className={style.contentC}>
-                        类型：
-                        <span className={style.contentCC}>
-                            启动基金
-                        </span>
-                    </span>
-
-                </div>
-                <div className={style.button}>
-
-                    <Button onClick={() => {alert(1)}} type="primary" size={'large'}>通过</Button>
-
-                    <Button onClick={() => {alert(2)}}  size={'large'}>拒绝</Button>
+                <span className={style.title}>基金审核</span>
+                <div className={style.table}>
+                    <Table columns={columns} dataSource={data}/>
                 </div>
             </div>
+
+
         )
     }
 }
 
 function mapStateToProps(state, props) {
     return {
-        log: state.log
+        account: state.account
     }
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        getLogDetails: bindActionCreators(getLogDetails, dispatch)
+        getUserList: bindActionCreators(getUserList, dispatch),
+        resetPin: bindActionCreators(resetPin, dispatch),
+        setAccountStatus: bindActionCreators(setAccountStatus, dispatch),
+        resetPwd: bindActionCreators(resetPwd, dispatch)
     }
 }
 
 Home = connect(mapStateToProps, mapDispatchToProps)(Home)
+
 export default Home

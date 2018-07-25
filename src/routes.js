@@ -7,7 +7,7 @@ import Fund from './containers/fund/'
 import Home from './containers/home/'
 import Operation from './containers/operation/'
 import Wallet from './containers/wallet/'
-import Audit from './containers/audit/'
+import AuditFund from './containers/auditFund/'
 import Wrap from './containers/wrap/'
 import Login from './containers/login/'
 import RoleManage from './containers/roleManage/'
@@ -28,11 +28,12 @@ import AddFund from './containers/addFund/'
 import EarningsSetting from './containers/earningsSetting/'
 import AddHome from './containers/addHome/'
 import AddOperation from './containers/addOperation/'
-import WalletAudit from './containers/walletAudit/'
-import WalletOutAudit from './containers/walletOutAudit/'
-import AuditFund from './containers/auditFund/'
-import ResetAduit from './containers/resetAduit/'
-import ResetAduitDetail from './containers/resetAduitDetail/'
+import AuditWallet from './containers/auditWallet/'
+import AuditWalletOut from './containers/auditWalletOut/'
+
+import AuditFundDetails from './containers/auditFundDetails/'
+import AuditRecharge from './containers/auditRecharge/'
+import AuditRechargeDetail from './containers/auditRechargeDetail/'
 import WalletInformation from './containers/walletInformation/'
 import OutAddressManage from './containers/outAddressManage/'
 import AddOutAddress from './containers/addOutAddress/'
@@ -56,7 +57,7 @@ export default () => {
             <Route path="/pin" component={PIN}/>
             <Route path="/" component={Wrap}>
                 <Route path="/Account" component={Account}/>
-                <Route path="/audit" component={Audit}/>
+                <Route path="/auditFund" component={AuditFund}/>
                 <Route path="/wallet" component={Wallet}/>
                 <Route path="/operation" component={Operation}/>
                 <Route path="/wrap" component={Wrap}/>
@@ -81,11 +82,11 @@ export default () => {
                 <Route path="/earningsSetting/:id" component={EarningsSetting}/>
                 <Route path="/addHome/:id" component={AddHome}/>
                 <Route path="/addOperation/:id" component={AddOperation}/>
-                <Route path="/walletAudit" component={WalletAudit}/>
-                <Route path="/walletOutAudit" component={WalletOutAudit}/>
-                <Route path="/auditFund" component={AuditFund}/>
-                <Route path="/resetAduit" component={ResetAduit}/>
-                <Route path="/resetAduitDetail" component={ResetAduitDetail}/>
+                <Route path="/auditWallet" component={AuditWallet}/>
+                <Route path="/auditWalletOut" component={AuditWalletOut}/>
+                <Route path="/auditFundDetails" component={AuditFundDetails}/>
+                <Route path="/auditRecharge" component={AuditRecharge}/>
+                <Route path="/auditRechargeDetail" component={AuditRechargeDetail}/>
                 <Route path="/walletInformation" component={WalletInformation}/>
                 <Route path="/outAddressManage" component={OutAddressManage}/>
                 <Route path="/addOutAddress/:id" component={AddOutAddress}/>
