@@ -94,12 +94,13 @@ export default () => {
                 <Route path="/manageSetting" component={ManageSetting}/>
                 <Route path="/outIndentManage" component={OutIndentManage}/>
                 <Route path="/outIndentDetails/:id" component={OutIndentDetails}/>
+                <Route path="/rechargeManage" component={RechargeManage}/>
+                <Route path="/accountManage" component={AccountManage}/>
+                <Route path="/rechargeRecordDetails" component={RechargeRecordDetails}/>
+                <Route path="/checkDetails" component={CheckDetails}/>
 
             </Route>
-            <Route path="/rechargeManage" component={RechargeManage}/>
-            <Route path="/accountManage" component={AccountManage}/>
-            <Route path="/rechargeRecordDetails" component={RechargeRecordDetails}/>
-            <Route path="/checkDetails" component={CheckDetails}/>
+
         </Router>
     )
 }
