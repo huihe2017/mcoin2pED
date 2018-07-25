@@ -84,7 +84,7 @@ class Home extends React.Component {
                                     initialValue: this.state.account
                                 })(
                                     <Input
-                                        disabled={this.state.account?true:false}
+                                        disabled={this.props.params.id !=='null'?true:false}
                                         onChange={(e) => {
                                             this.setState({account: e.target.value})
                                         }} size="large" placeholder="使用P95公司邮箱"/>)}

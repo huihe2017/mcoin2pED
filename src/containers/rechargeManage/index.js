@@ -4,7 +4,7 @@ import {hashHistory,Link} from 'react-router'
 import Header1 from '../../components/header'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
-import {getUserList,resetPwd,resetPin,setAccountStatus} from '../../actions/account'
+import {getInList} from '../../actions/wallet'
 import { Table, Select,Button,Dropdown,Icon,Menu} from 'antd';
 import {notification} from "antd/lib/index";
 
@@ -78,37 +78,41 @@ class Home extends React.Component {
     }
 
     componentDidMount() {
-        //
+        this.props.getInList({
+            page:1,
+            currency:'btc'
+
+        })
     }
 
 
     render() {
-        // if (!this.props.account.userList) {
-        //     return null
-        // }
+        if (!this.props.wallet.walletInList) {
+            return null
+        }
         const columns = [
             {
                 title: '日期',
-                dataIndex: 'data'
+                dataIndex: 'createTime'
             },{
                 title: '用户账号',
-                dataIndex: 'account'
+                dataIndex: 'mobile'
             },{
                 title: '付款金额（元）',
-                dataIndex: 'money'
+                price: 'money'
             },{
                 title: '货币类型',
-                dataIndex: 'coinType'
+                dataIndex: 'currency'
 
             },{
                 title: '转入金额',
-                dataIndex: 'inMoney'
+                dataIndex: 'realMoney'
             },{
                 title: '操作人',
                 dataIndex: 'operator'
             },{
                 title: '状态',
-                dataIndex: 'state'
+                dataIndex: 'status'
             },{
                 title: '操作',
                 render: (text, record) => {
@@ -132,14 +136,14 @@ class Home extends React.Component {
                         货币类型
                     </span>
                     <div className={style.inputBox}>
-                        <Select placeholder="请选择" defaultValue="all">
-                            <Option value="all">全部</Option>
+                        <Select value={'btc'} placeholder="请选择" defaultValue="all">
                             <Option value="btc">BTC</Option>
+                            <Option value="eth">ETH</Option>
                         </Select>
                     </div>
                 </div>
                 <div className={style.table}>
-                    <Table columns={columns} dataSource={data}/>
+                    <Table columns={columns} dataSource={this.props.wallet.walletInList.list}/>
                 </div>
             </div>
 
@@ -150,16 +154,13 @@ class Home extends React.Component {
 
 function mapStateToProps(state, props) {
     return {
-        account: state.account
+        wallet: state.wallet
     }
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        getUserList: bindActionCreators(getUserList, dispatch),
-        resetPin: bindActionCreators(resetPin, dispatch),
-        setAccountStatus: bindActionCreators(setAccountStatus, dispatch),
-        resetPwd: bindActionCreators(resetPwd, dispatch)
+        getInList: bindActionCreators(getInList, dispatch)
     }
 }
 

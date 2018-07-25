@@ -52,6 +52,7 @@ class Home extends React.Component {
                 message: '提示',
                 description: '操作成功',
             });
+            this.props.history.go(-1)
         })
 
     }

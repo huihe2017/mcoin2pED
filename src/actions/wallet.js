@@ -262,9 +262,9 @@ export function getInList(data, callback) {
             type:'post',
             data,
             callback,
-            url:'wallet/withdrawapply',
+            url:'wallet/userchargelist',
             success:(response)=>{
-                dispatch({type: 'GET_OUT_DETAILS', data: response.data})
+                dispatch({type: 'GET_WALLET_IN_LIST', data: response.data})
             }
 
         })

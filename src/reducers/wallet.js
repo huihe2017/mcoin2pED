@@ -36,6 +36,9 @@ export default function wallet(state = initialState, action = {}) {
         case 'GET_WALLET_BILL_LIST':
             state.walletBillList = action.data.data
             return Object.assign({}, state, {})
+        case 'GET_WALLET_IN_LIST':
+            state.walletInList = action.data.data
+            return Object.assign({}, state, {})
         default:
             return state
     }
