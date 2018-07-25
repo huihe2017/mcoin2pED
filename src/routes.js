@@ -47,7 +47,6 @@ import RechargeManage from './containers/rechargeManage/'
 import UserRecharge from './containers/userRecharge/'
 import RechargeRecordDetails from './containers/rechargeRecordDetails/'
 import CheckDetails from './containers/checkDetails/'
-import CheckFundDetails from './containers/checkFundDetails/'
 
 
 export default () => {
@@ -100,7 +99,6 @@ export default () => {
                 <Route path="/userRecharge" component={UserRecharge}/>
                 <Route path="/rechargeRecordDetails" component={RechargeRecordDetails}/>
                 <Route path="/checkDetails" component={CheckDetails}/>
-                <Route path="/checkFundDetails" component={CheckFundDetails}/>
 
             </Route>
 
