@@ -43,7 +43,7 @@ import ManageSetting from './containers/manageSetting/'
 import OutIndentManage from './containers/outIndentManage/'
 import OutIndentDetails from './containers/outIndentDetails/'
 import RechargeManage from './containers/rechargeManage/'
-import AccountManage from './containers/accountManage/'
+import UserRecharge from './containers/userRecharge/'
 import RechargeRecordDetails from './containers/rechargeRecordDetails/'
 import CheckDetails from './containers/checkDetails/'
 
@@ -95,7 +95,7 @@ export default () => {
                 <Route path="/outIndentManage" component={OutIndentManage}/>
                 <Route path="/outIndentDetails/:id" component={OutIndentDetails}/>
                 <Route path="/rechargeManage" component={RechargeManage}/>
-                <Route path="/accountManage" component={AccountManage}/>
+                <Route path="/userRecharge" component={UserRecharge}/>
                 <Route path="/rechargeRecordDetails" component={RechargeRecordDetails}/>
                 <Route path="/checkDetails" component={CheckDetails}/>
 
