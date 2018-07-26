@@ -117,10 +117,9 @@ class Home extends React.Component {
                 title: '操作',
                 render: (text, record) => {
                    return (
-                           <Link to={'/outIndentDetails'}>
+                           <Link to={'/rechargeRecordDetails/'+record.id}>
                                查看
                            </Link>
-
                     )
                 },
             }];
@@ -136,7 +135,13 @@ class Home extends React.Component {
                         货币类型
                     </span>
                     <div className={style.inputBox}>
-                        <Select value={'btc'} placeholder="请选择" defaultValue="all">
+                        <Select onChange={(e)=>{
+                            this.props.getInList({
+                                page:1,
+                                currency:e
+
+                            })
+                        }} value={'btc'} placeholder="请选择" defaultValue="all">
                             <Option value="btc">BTC</Option>
                             <Option value="eth">ETH</Option>
                         </Select>

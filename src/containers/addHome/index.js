@@ -7,6 +7,7 @@ import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 import {Layout, Menu, Breadcrumb, Icon, Button, Table, Dropdown, notification, Steps, Input, Select, Form,Upload} from 'antd';
 import {filter} from "../../common/util";
+import upLoad from '../../components/upLoad';
 
 const Option = Select.Option;
 const {SubMenu} = Menu;
@@ -66,6 +67,9 @@ class Home extends React.Component {
     }
 
     componentDidMount() {
+        upLoad('img',(value)=>{
+            this.setState({photoUrl:value})
+        })
         if (this.props.params.id !== 'null') {
 
             let data = filter(this.props.homePageCfg.bannerList.list,this.props.params.id)
@@ -99,7 +103,7 @@ class Home extends React.Component {
                                  <span className={style.inputBoxT}>
                                      banner名称
                                  </span>
-                                {getFieldDecorator('title', {
+                                {getFieldDecorator('bannerName', {
                                     rules: [{required: true, message: '请填写banner名称!'}],
                                     initialValue: this.state.title
                                 })(
@@ -115,16 +119,13 @@ class Home extends React.Component {
                                 <span className={style.inputBoxT1}>
                                     banner上传
                                 </span>
-                                    {getFieldDecorator('bannerImg', {
-                                        rules: [{required: true, message: 'banner图片不可为空!'}],
-                                        // initialValue: this.state.password,
-                                        getValueFromEvent: this.normFile,
-                                    })(
-                                        <Upload name="logo" action="/upload.do" listType="picture">
-                                            <Button>
-                                                <Icon type="upload" /> Click to upload
-                                            </Button>
-                                        </Upload>)}
+                                <div id="ossfile"></div>
+                                <div id="container">
+                                    <a id="selectfiles" href="javascript:void(0);" class='btn'>选择文件</a>
+                                    <a id="postfiles" href="javascript:void(0);" class='btn'>开始上传</a>
+                                </div>
+
+                                <pre id="console"></pre>
                             </FormItem>
                         </div>
                         <div className={style.inputBox}>
@@ -163,7 +164,9 @@ class Home extends React.Component {
                                 })(<Select
                                     size={'large'}
                                     placeholder="请选择"
-                                    onChange={this.handleChange}
+                                    onChange={(e)=>{
+                                        this.setState({type:e})
+                                    }}
                                     style={{width: '100%'}}
                                 >
                                     {/*{children}*/}
@@ -187,8 +190,7 @@ class Home extends React.Component {
                                         value={this.state.priority || ''}
                                         onChange={(e) => {
                                             this.setState({showOrder: e.target.value})
-                                        }} size="large" placeholder=""/>
-                                )}
+                                        }} size="large" placeholder=""/>)}
                             </FormItem>
                         </div>
                     </div>

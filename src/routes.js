@@ -82,10 +82,10 @@ export default () => {
                 <Route path="/addHome/:id" component={AddHome}/>
                 <Route path="/addOperation/:id" component={AddOperation}/>
                 <Route path="/auditWallet" component={AuditWallet}/>
-                <Route path="/auditWalletOut" component={AuditWalletOut}/>
-                <Route path="/auditFundDetails" component={AuditFundDetails}/>
+                <Route path="/auditWalletOut/:id" component={AuditWalletOut}/>
+                <Route path="/auditFundDetails/:id" component={AuditFundDetails}/>
                 <Route path="/auditRecharge" component={AuditRecharge}/>
-                <Route path="/auditRechargeDetail" component={AuditRechargeDetail}/>
+                <Route path="/auditRechargeDetail/:id" component={AuditRechargeDetail}/>
                 <Route path="/walletInformation" component={WalletInformation}/>
                 <Route path="/outAddressManage" component={OutAddressManage}/>
                 <Route path="/addOutAddress/:id" component={AddOutAddress}/>
@@ -97,8 +97,8 @@ export default () => {
                 <Route path="/outIndentDetails/:id" component={OutIndentDetails}/>
                 <Route path="/rechargeManage" component={RechargeManage}/>
                 <Route path="/userRecharge" component={UserRecharge}/>
-                <Route path="/rechargeRecordDetails" component={RechargeRecordDetails}/>
-                <Route path="/checkDetails" component={CheckDetails}/>
+                <Route path="/rechargeRecordDetails/:id" component={RechargeRecordDetails}/>
+                <Route path="/checkDetails/:id" component={CheckDetails}/>
 
             </Route>
 

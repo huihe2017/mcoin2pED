@@ -3,6 +3,7 @@ import style from './index.css'
 import {hashHistory} from 'react-router'
 import {Editor} from 'react-draft-wysiwyg';
 import {filter} from '../../common/util';
+import upLoad from '../../components/upLoad';
 import {EditorState, convertToRaw, ContentState} from 'draft-js';
 import {
     Layout,
@@ -43,27 +44,65 @@ class Home extends React.Component {
 
     componentDidMount() {
         this.props.getInfoTypeList({},()=>{
+            upLoad('img',(value)=>{
+                this.setState({coverUrl:value})
+            })
             if(this.props.params.id!=='null'){
                 let data = filter(this.props.info.infoList.list,this.props.params.id)
                 this.setState({
                     content: data.content,
                     id: data.id,
                     typeId: data.typeId,
-                    // coverUrl: this.state.coverUrl,
+                    coverUrl: data.coverUrl,
                     title: data.title,
                 })
             }
         })
+
+        // document.getElementById('file').addEventListener('change', function (e) {
+        //     let file = e.target.files[0];
+        //     let storeAs = 'upload-file';
+        //     console.log(file.name + ' => ' + storeAs);
+        //     OSS.urllib.request("http://your_sts_server/",
+        //         {method: 'GET'},
+        //         function (err, response) {
+        //             if (err) {
+        //                 return alert(err);
+        //             }
+        //             try {
+        //                 result = JSON.parse(response);
+        //             } catch (e) {
+        //                 return alert('parse sts response info error: ' + e.message);
+        //             }
+        //             let client = new OSS({
+        //                 accessKeyId: result.AccessKeyId,
+        //                 accessKeySecret: result.AccessKeySecret,
+        //                 stsToken: result.SecurityToken,
+        //                 endpoint: '<oss endpoint>',
+        //                 bucket: '<Your bucket name>'
+        //             });
+        //             //storeAs表示上传的object name , file表示上传的文件
+        //             client.multipartUpload(storeAs, file).then(function (result) {
+        //                 console.log(result);
+        //             }).catch(function (err) {
+        //                 console.log(err);
+        //             });
+        //         });
+        // });
+
+
+
+
+
     }
     handleSubmit = (e) => {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
-
                 let param = {
                     content: this.state.content,
                     typeId: this.state.typeId,
-                    // coverUrl: this.state.coverUrl,
+                    coverUrl: this.state.coverUrl,
                     title: this.state.title,
                 }
                 if(this.props.params.id!=='null'){
@@ -129,16 +168,24 @@ class Home extends React.Component {
                                      资讯封面（可选）
                                  </span>
                                 <div>
-                                    {getFieldDecorator('upload', {
-                                        valuePropName: 'fileList',
-                                        getValueFromEvent: this.normFile,
-                                    })(
-                                        <Upload name="logo" action="/upload.do" listType="picture">
-                                            <Button>
-                                                <Icon type="upload"/> Click to upload
-                                            </Button>
-                                        </Upload>
-                                    )}
+                                    {/*{getFieldDecorator('upload', {*/}
+                                        {/*valuePropName: 'fileList',*/}
+                                        {/*getValueFromEvent: this.normFile,*/}
+                                    {/*})(*/}
+                                        {/*<Upload name="logo" action="/upload.do" listType="picture">*/}
+                                            {/*<Button>*/}
+                                                {/*<Icon type="upload"/> Click to upload*/}
+                                            {/*</Button>*/}
+                                        {/*</Upload>*/}
+                                    {/*)}*/}
+                                    {/*<input type="file" id="file" />*/}
+                                    <div id="ossfile"></div>
+                                    <div id="container">
+                                        <a id="selectfiles" href="javascript:void(0);" class='btn'>选择文件</a>
+                                        <a id="postfiles" href="javascript:void(0);" class='btn'>开始上传</a>
+                                    </div>
+
+                                    <pre id="console"></pre>
                                 </div>
 
                             </FormItem>

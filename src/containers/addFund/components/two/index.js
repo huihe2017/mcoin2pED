@@ -5,6 +5,7 @@ import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 import {Layout, Menu, Breadcrumb, Icon, Button, Table, Dropdown, notification, Steps, Input,Select,Form,Tag, Tooltip,Upload} from 'antd';
 import {setFundEditData} from "../../../../actions/fund";
+import upLoad from "../../../../components/upLoad";
 
 const Option = Select.Option;
 const { TextArea } = Input;
@@ -49,7 +50,11 @@ class Home extends React.Component {
         return e && e.fileList;
     }
 
-
+    componentDidMount() {
+        upLoad('file', (value) => {
+            this.props.setFundEditData({file:value})
+        })
+    }
     render() {
         const { getFieldDecorator } = this.props.form;
 
@@ -145,15 +150,13 @@ class Home extends React.Component {
                                  <span className={style.inputBoxT}>
                                      年化图表（最少七天）
                                  </span>
-                                {getFieldDecorator('dragger', {
-                                    valuePropName: 'fileList',
-                                    getValueFromEvent: this.normFile,
-                                    rules: [{ required: true, message: '请上传年化图表!' }],
-                                })(
-                                    <Upload.Dragger name="files" action="/upload.do">
-                                        <p className="ant-upload-text">点击上传</p>
-                                    </Upload.Dragger>
-                                )}
+                                <div id="ossfile"></div>
+                                <div id="container">
+                                    <a id="selectfiles" href="javascript:void(0);" class='btn'>选择文件</a>
+                                    <a id="postfiles" href="javascript:void(0);" class='btn'>开始上传</a>
+                                </div>
+
+                                <pre id="console"></pre>
                                 <span className={style.inputBoxTT}>
                                      *年化图表模板：<a href="javascript:void (0)">点击下载</a>
                                  </span>

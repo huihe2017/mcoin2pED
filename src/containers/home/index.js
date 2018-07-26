@@ -93,7 +93,6 @@ class Home extends React.Component {
                             </Menu.Item>
                             <Menu.Item>
                                 <a target="_blank" rel="noopener noreferrer" href="javascript:void (0)" onClick={() => {
-                                    debugger
                                     this.props.setBannerStatus({
                                         id:record.id,
                                         status:record.status===1?0:1
