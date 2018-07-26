@@ -5,11 +5,11 @@ import {setMenu} from './menu'
 export function getWalletMsg(data, callback) {
     return dispatch => {
         http({
-            type:'post',
+            type: 'post',
             data,
             callback,
-            url:'wallet/info',
-            success:(response)=>{
+            url: 'wallet/info',
+            success: (response) => {
                 dispatch({type: 'GET_WALLET_MSG', data: response.data})
             }
 
@@ -20,11 +20,11 @@ export function getWalletMsg(data, callback) {
 export function getBillList(data, callback) {
     return dispatch => {
         http({
-            type:'post',
+            type: 'post',
             data,
             callback,
-            url:'wallet/info',
-            success:(response)=>{
+            url: 'wallet/info',
+            success: (response) => {
                 dispatch({type: 'GET_BILL_LIST', data: response.data})
             }
 
@@ -36,11 +36,11 @@ export function getBillList(data, callback) {
 export function getOutOrderList(data, callback) {
     return dispatch => {
         http({
-            type:'post',
+            type: 'post',
             data,
             callback,
-            url:'wallet/withdrawlist  ',
-            success:(response)=>{
+            url: 'wallet/withdrawlist  ',
+            success: (response) => {
                 dispatch({type: 'GET_OUT_ORDER_LIST', data: response.data})
             }
 
@@ -51,25 +51,26 @@ export function getOutOrderList(data, callback) {
 export function getInBillList(data, callback) {
     return dispatch => {
         http({
-            type:'post',
+            type: 'post',
             data,
             callback,
-            url:'wallet/userchargelist',
-            success:(response)=>{
+            url: 'wallet/userchargelist',
+            success: (response) => {
                 dispatch({type: 'GET_IN_BILL_LIST', data: response.data})
             }
 
         })
     }
 }
+
 export function getInAddress(data, callback) {
     return dispatch => {
         http({
-            type:'post',
+            type: 'post',
             data,
             callback,
-            url:'wallet/chargeaddress    ',
-            success:(response)=>{
+            url: 'wallet/chargeaddress    ',
+            success: (response) => {
                 dispatch({type: 'GET_IN_ADDRESS', data: response.data})
             }
 
@@ -80,11 +81,11 @@ export function getInAddress(data, callback) {
 export function getOutAddressList(data, callback) {
     return dispatch => {
         http({
-            type:'post',
+            type: 'post',
             data,
             callback,
-            url:'wallet/addresslist',
-            success:(response)=>{
+            url: 'wallet/addresslist',
+            success: (response) => {
                 dispatch({type: 'GET_OUT_ADDRESS_LIST', data: response.data})
             }
 
@@ -95,11 +96,11 @@ export function getOutAddressList(data, callback) {
 export function createOutAddress(data, callback) {
     return dispatch => {
         http({
-            type:'post',
+            type: 'post',
             data,
             callback,
-            url:'wallet/address',
-            success:(response)=>{
+            url: 'wallet/address',
+            success: (response) => {
                 dispatch({type: 'CREATE_OUT_ADDRESS', data: response.data})
             }
 
@@ -110,11 +111,11 @@ export function createOutAddress(data, callback) {
 export function getConfirmOutMsg(data, callback) {
     return dispatch => {
         http({
-            type:'post',
+            type: 'post',
             data,
             callback,
-            url:'wallet/prewithdraw',
-            success:(response)=>{
+            url: 'wallet/prewithdraw',
+            success: (response) => {
                 dispatch({type: 'GET_CONFIRM_OUT_MSG', data: response.data})
             }
 
@@ -125,25 +126,26 @@ export function getConfirmOutMsg(data, callback) {
 export function outCoin(data, callback) {
     return dispatch => {
         http({
-            type:'post',
+            type: 'post',
             data,
             callback,
-            url:'wallet/withdraw',
-            success:(response)=>{
+            url: 'wallet/withdraw',
+            success: (response) => {
                 dispatch({type: 'OUT_COIN', data: response.data})
             }
 
         })
     }
 }
+
 export function InCoin(data, callback) {
     return dispatch => {
         http({
-            type:'post',
+            type: 'post',
             data,
             callback,
-            url:'wallet/usercharge',
-            success:(response)=>{
+            url: 'wallet/usercharge',
+            success: (response) => {
                 dispatch({type: 'IN_COIN', data: response.data})
             }
 
@@ -154,11 +156,11 @@ export function InCoin(data, callback) {
 export function getBillDetails(data, callback) {
     return dispatch => {
         http({
-            type:'post',
+            type: 'post',
             data,
             callback,
-            url:'wallet/balancedetail',
-            success:(response)=>{
+            url: 'wallet/balancedetail',
+            success: (response) => {
                 dispatch({type: 'GET_BILL_DETAILS', data: response.data})
             }
 
@@ -169,11 +171,11 @@ export function getBillDetails(data, callback) {
 export function getWalletSetData(data, callback) {
     return dispatch => {
         http({
-            type:'post',
+            type: 'post',
             data,
             callback,
-            url:'wallet/getsetting',
-            success:(response)=>{
+            url: 'wallet/getsetting',
+            success: (response) => {
                 dispatch({type: 'GET_WALLET_SET_DATA', data: response.data})
             }
 
@@ -184,11 +186,11 @@ export function getWalletSetData(data, callback) {
 export function setWallet(data, callback) {
     return dispatch => {
         http({
-            type:'post',
+            type: 'post',
             data,
             callback,
-            url:'wallet/setting',
-            success:(response)=>{
+            url: 'wallet/setting',
+            success: (response) => {
                 dispatch({type: 'SET_WALLET', data: response.data})
             }
 
@@ -199,11 +201,11 @@ export function setWallet(data, callback) {
 export function returnFund(data, callback) {
     return dispatch => {
         http({
-            type:'post',
+            type: 'post',
             data,
             callback,
-            url:'wallet/refund',
-            success:(response)=>{
+            url: 'wallet/refund',
+            success: (response) => {
                 dispatch({type: 'RETURN_FUND', data: response.data})
             }
 
@@ -214,11 +216,11 @@ export function returnFund(data, callback) {
 export function adminOutCoin(data, callback) {
     return dispatch => {
         http({
-            type:'post',
+            type: 'post',
             data,
             callback,
-            url:'wallet/withdrawapply',
-            success:(response)=>{
+            url: 'wallet/withdrawapply',
+            success: (response) => {
                 dispatch({type: 'ADMIN_OUT_COIN', data: response.data})
             }
 
@@ -229,11 +231,11 @@ export function adminOutCoin(data, callback) {
 export function getOutDetails(data, callback) {
     return dispatch => {
         http({
-            type:'post',
+            type: 'post',
             data,
             callback,
-            url:'wallet/withdrawapply',
-            success:(response)=>{
+            url: 'wallet/withdrawapply',
+            success: (response) => {
                 dispatch({type: 'GET_OUT_DETAILS', data: response.data})
             }
 
@@ -244,11 +246,11 @@ export function getOutDetails(data, callback) {
 export function getInDetails(data, callback) {
     return dispatch => {
         http({
-            type:'post',
+            type: 'post',
             data,
             callback,
-            url:'wallet/userchargedetail',
-            success:(response)=>{
+            url: 'wallet/userchargedetail',
+            success: (response) => {
                 dispatch({type: 'GET_IN_DETAILS', data: response.data})
             }
 
@@ -259,11 +261,11 @@ export function getInDetails(data, callback) {
 export function getInList(data, callback) {
     return dispatch => {
         http({
-            type:'post',
+            type: 'post',
             data,
             callback,
-            url:'wallet/userchargelist',
-            success:(response)=>{
+            url: 'wallet/userchargelist',
+            success: (response) => {
                 dispatch({type: 'GET_WALLET_IN_LIST', data: response.data})
             }
 
@@ -274,11 +276,11 @@ export function getInList(data, callback) {
 export function getPlaBalance(data, callback) {
     return dispatch => {
         http({
-            type:'post',
+            type: 'post',
             data,
             callback,
-            url:'wallet/balance',
-            success:(response)=>{
+            url: 'wallet/balance',
+            success: (response) => {
                 dispatch({type: 'GET_PLA_BALANCE', data: response.data})
             }
 
@@ -289,12 +291,70 @@ export function getPlaBalance(data, callback) {
 export function getWalletBillList(data, callback) {
     return dispatch => {
         http({
-            type:'post',
+            type: 'post',
             data,
             callback,
-            url:'wallet/balancelist',
-            success:(response)=>{
+            url: 'wallet/balancelist',
+            success: (response) => {
                 dispatch({type: 'GET_WALLET_BILL_LIST', data: response.data})
+            }
+
+        })
+    }
+}
+
+export function getWalletAuditList(data, callback) {
+    return dispatch => {
+        http({
+            type: 'post',
+            data,
+            callback,
+            url: 'audit/wallet/withdrawlist',
+            success: (response) => {
+                dispatch({type: 'GET_WALLET_AUDIT_LIST', data: response.data})
+            }
+
+        })
+    }
+}
+
+export function auditWallet(data, callback) {
+    return dispatch => {
+        http({
+            type: 'post',
+            data,
+            callback,
+            url: 'audit/wallet/withdraw',
+            success: (response) => {
+            }
+
+        })
+    }
+}
+
+export function getRechargeAuditList(data, callback) {
+    return dispatch => {
+        http({
+            type: 'post',
+            data,
+            callback,
+            url: 'audit/wallet/chargelist',
+            success: (response) => {
+                dispatch({type: 'GET_RECHARGE_AUDIT_LIST', data: response.data})
+            }
+
+        })
+    }
+}
+
+export function auditRecharge(data, callback) {
+    return dispatch => {
+        http({
+            type: 'post',
+            data,
+            callback,
+            url: 'audit/wallet/charge',
+            success: (response) => {
             }
 
         })

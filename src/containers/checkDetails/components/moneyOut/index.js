@@ -4,6 +4,8 @@ import {hashHistory} from 'react-router'
 import {Button,Modal,Popconfirm} from 'antd';
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
+import {notification} from "antd/lib/index";
+import {auditCreateFund} from '../../../../actions/fund'
 
 
 class Home extends React.Component {
@@ -32,37 +34,37 @@ class Home extends React.Component {
                     <span className={style.contentC}>
                         封闭期：
                         <span className={style.contentCC}>
-                            30天
+                            {this.props.data.period}
                         </span>
                     </span>
                     <span className={style.contentC}>
                         起购币额：
                         <span className={style.contentCC}>
-                            1 BTC
+                            {this.props.data.limitLowAmount} {this.props.data.currency}
                         </span>
                     </span>
                     <span className={style.contentC}>
                         最小递增单位：
                         <span className={style.contentCC}>
-                            0.000001 BTC
+                            {this.props.data.price} {this.props.data.currency}
                         </span>
                     </span>
                     <span className={style.contentC}>
                         最大购买金额：
                         <span className={style.contentCC}>
-                            2 BTC
+                            {this.props.data.limitHighAmount} {this.props.data.currency}
                         </span>
                     </span>
                     <span className={style.contentC}>
                         基金有效期：
                         <span className={style.contentCC}>
-                            0
+                            {this.props.data.period}
                         </span>
                     </span>
                     <span className={style.contentC}>
                         限购次数：
                         <span className={style.contentCC}>
-                            0
+                            {this.props.data.limitSoppingTimes}
                         </span>
                     </span>
                     <span className={style.contentC}>
@@ -75,7 +77,18 @@ class Home extends React.Component {
                     <Popconfirm placement="top" title={'确认通过该步骤？'} onConfirm={ this.props.handle.bind(this,true)} okText="Yes" cancelText="No">
                         <Button type="primary" size={'large'}>通过</Button>
                     </Popconfirm>
-                    <Popconfirm placement="top" title={'确认拒绝该步骤？'} onConfirm={ ()=>hashHistory.push('/fund')} okText="Yes" cancelText="No">
+                    <Popconfirm placement="top" title={'确认拒绝该步骤？'} onConfirm={() => {
+                        this.props.auditCreateFund({
+                            id:this.props.data.id,
+                            pass:0
+                        },()=>{
+                            hashHistory.push('/auditFund')
+                            notification.open({
+                                message: '提示',
+                                description: '操作成功',
+                            });
+                        })
+                    }} okText="Yes" cancelText="No">
                         <Button size={'large'}>拒绝</Button>
                     </Popconfirm>
 
@@ -94,7 +107,7 @@ function mapStateToProps(state, props) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        // getLogDetails: bindActionCreators(getLogDetails, dispatch)
+        auditCreateFund: bindActionCreators(auditCreateFund, dispatch)
     }
 }
 

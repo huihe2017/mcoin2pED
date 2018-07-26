@@ -25,7 +25,7 @@ export default function wallet(state = initialState, action = {}) {
             state.billDetails = action.data.data
             return Object.assign({}, state, {})
         case 'GET_WALLET_SET_DATA':
-            state.walletSetData = action.data.data
+            state.walletSetData = action.data.data.setting
             return Object.assign({}, state, {})
         case 'GET_IN_DETAILS':
             state.inCoinDetails = action.data.data
@@ -38,6 +38,12 @@ export default function wallet(state = initialState, action = {}) {
             return Object.assign({}, state, {})
         case 'GET_WALLET_IN_LIST':
             state.walletInList = action.data.data
+            return Object.assign({}, state, {})
+        case 'GET_WALLET_AUDIT_LIST':
+            state.auditList = action.data.data
+            return Object.assign({}, state, {})
+        case 'GET_RECHARGE_AUDIT_LIST':
+            state.auditRechargeList = action.data.data
             return Object.assign({}, state, {})
         default:
             return state

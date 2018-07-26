@@ -4,7 +4,7 @@ import {hashHistory,Link} from 'react-router'
 import Header1 from '../../components/header'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
-import {getUserList,resetPwd,resetPin,setAccountStatus} from '../../actions/account'
+import {getRechargeAuditList} from '../../actions/wallet'
 import { Table, Select} from 'antd';
 
 
@@ -103,49 +103,47 @@ class Home extends React.Component {
     }
 
     componentDidMount() {
-        //
+       this.props.getRechargeAuditList({
+           page:1
+       })
     }
 
 
     render() {
-        // if (!this.props.account.userList) {
-        //     return null
-        // }
+        if (!this.props.wallet.auditRechargeList) {
+            return null
+        }
         const columns = [
             {
                 title: '日期',
-                dataIndex: 'time'
+                dataIndex: 'createTime'
             },{
                 title: '用户账号',
-                dataIndex: 'account'
+                dataIndex: 'mobile'
             },{
                 title: '付款金额（元）',
-                dataIndex: 'payment'
+                dataIndex: 'realMoney'
 
             },{
                 title: '转出类型',
-                dataIndex: 'coinType'
-
-            },{
-                title: '钱包余额',
-                dataIndex: 'money'
+                dataIndex: 'remark'
 
             },{
                 title: '操作人',
-                dataIndex: 'operator'
+                dataIndex: 'adminName'
 
             },{
                 title: '状态',
-                dataIndex: 'state'
+                dataIndex: 'status'
 
             },{
                 title: '操作',
                 render: (text, record) => {
                    return (
 
-                       <a className="ant-dropdown-link" href="#">
+                       <Link to={'/auditRechargeDetail/'+record.id} className="ant-dropdown-link" href="#">
                            查看
-                       </a>
+                       </Link>
 
                     )
                 },
@@ -161,14 +159,19 @@ class Home extends React.Component {
                         货币类型
                     </span>
                     <div className={style.inputBox}>
-                        <Select placeholder="请选择" defaultValue="all">
-                            <Option value="all">全部</Option>
+                        <Select onChange={(e)=>{
+                            this.props.getRechargeAuditList({
+                                page:1,
+                                currency:e
+                            })
+                        }} placeholder="请选择" defaultValue="all">
                             <Option value="btc">BTC</Option>
+                            <Option value="eth">ETH</Option>
                         </Select>
                     </div>
                 </div>
                 <div className={style.table}>
-                    <Table columns={columns} dataSource={data}/>
+                    <Table columns={columns} dataSource={this.props.wallet.auditRechargeList.list}/>
                 </div>
             </div>
 
@@ -179,16 +182,13 @@ class Home extends React.Component {
 
 function mapStateToProps(state, props) {
     return {
-        account: state.account
+        wallet: state.wallet
     }
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        getUserList: bindActionCreators(getUserList, dispatch),
-        resetPin: bindActionCreators(resetPin, dispatch),
-        setAccountStatus: bindActionCreators(setAccountStatus, dispatch),
-        resetPwd: bindActionCreators(resetPwd, dispatch)
+        getRechargeAuditList: bindActionCreators(getRechargeAuditList, dispatch)
     }
 }
 

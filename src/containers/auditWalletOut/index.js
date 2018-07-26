@@ -1,11 +1,11 @@
 import React from 'react'
 import style from './index.css'
 import {hashHistory} from 'react-router'
-import {Button,Modal} from 'antd';
+import {Button,Modal,notification} from 'antd';
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
-import {getLogDetails} from "../../actions/log";
-
+import {auditWallet} from "../../actions/wallet";
+import {filter} from "../../common/util";
 class Home extends React.Component {
     constructor(props) {
         super(props);
@@ -15,10 +15,18 @@ class Home extends React.Component {
     }
 
     componentDidMount() {
-        // this.props.getLogDetails({id: this.props.params.id}, () => {
-        //
-        // })
-
+            let data = filter(this.props.wallet.auditList.list,this.props.params.id)
+            this.setState({
+                toAddress: data.toAddress,
+                remark: data.remark,
+                postTime: data.postTime,
+                fee: data.fee,
+                currency: data.currency,
+                auditStatus: data.auditStatus,
+                auditor: data.auditor,
+                applyUserName: data.applyUserName,
+                amount: data.amount
+            })
     }
     showModal = () => {
         this.setState({
@@ -26,10 +34,16 @@ class Home extends React.Component {
         });
     }
     handleOk = (e) => {
-        alert(1)
-        this.setState({
-            visible: false,
-        });
+        this.props.auditWallet({
+            id:this.props.params.id,
+            pass:1
+        },()=>{
+            this.props.history.go(-1)
+            notification.open({
+                message: '提示',
+                description: '操作成功',
+            });
+        })
     }
     handleCancel = (e) => {
 
@@ -47,19 +61,19 @@ class Home extends React.Component {
             <div className={style.wlop}>
                 <span className={style.title}>钱包转出审核</span>
                 <div className={style.contentT}>
-                    系统单据：2018060102872087324
+                    系统单据：{this.props.params.id}
                 </div>
                 <div className={style.content}>
                     <span className={style.contentC}>
                         日期：
                         <span className={style.contentCC}>
-                            2018-6-1 16:00:00
+                            {this.state.postTime}
                         </span>
                     </span>
                     <span className={style.contentC}>
                         申请人：
                         <span className={style.contentCC}>
-                            张三
+                            {this.state.auditor}
                         </span>
                     </span>
                     <span className={style.contentC}>
@@ -71,31 +85,31 @@ class Home extends React.Component {
                     <span className={style.contentC}>
                         货币类型：
                         <span className={style.contentCC}>
-                            BTC
+                            {this.state.currency}
                         </span>
                     </span>
                     <span className={style.contentC}>
                         申请转出金额：
                         <span className={style.contentCC}>
-                            -100.00000
+                            {this.state.amount}
                         </span>
                     </span>
                     <span className={style.contentC}>
                         手续费：
                         <span className={style.contentCC}>
-                            0
+                            {this.state.fee}
                         </span>
                     </span>
                     <span className={style.contentC}>
                         备注：
                         <span className={style.contentCC}>
-                            转出xxx
+                            {this.state.remark}
                         </span>
                     </span>
                     <span className={style.contentC}>
                         转出地址：
                         <span className={style.contentCC}>
-                            asdbasjdbkasjdbkjbasd123b123i1v23uljgyc4i1;
+                            {this.state.toAddress}
                         </span>
                     </span>
                 </div>
@@ -103,7 +117,18 @@ class Home extends React.Component {
 
                     <Button onClick={this.showModal} type="primary" size={'large'}>通过</Button>
 
-                    <Button onClick={() => {alert(2)}}  size={'large'}>拒绝</Button>
+                    <Button onClick={()=>{
+                        this.props.auditWallet({
+                            id:this.props.params.id,
+                            pass:0
+                        },()=>{
+                            this.props.history.go(-1)
+                            notification.open({
+                                message: '提示',
+                                description: '操作成功',
+                            });
+                        })
+                    }}  size={'large'}>拒绝</Button>
                 </div>
                 <Modal
                     title="确认通过"
@@ -116,13 +141,13 @@ class Home extends React.Component {
                      <span className={style.contentC1}>
                         申请人：
                         <span className={style.contentCC1}>
-                            张三
+                            {this.state.auditor}
                         </span>
                     </span>
                     <span className={style.contentC1}>
                         转出金额：
                         <span className={style.contentCC1}>
-                            -100.00000
+                            {this.state.amount}
                         </span>
                     </span>
                     <span className={style.contentC1}>
@@ -136,13 +161,13 @@ class Home extends React.Component {
 
 function mapStateToProps(state, props) {
     return {
-        log: state.log
+        wallet: state.wallet
     }
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        getLogDetails: bindActionCreators(getLogDetails, dispatch)
+        auditWallet: bindActionCreators(auditWallet, dispatch)
     }
 }
 

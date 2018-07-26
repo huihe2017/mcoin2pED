@@ -4,7 +4,7 @@ import {hashHistory,Link} from 'react-router'
 import Header1 from '../../components/header'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
-import {getUserList,resetPwd,resetPin,setAccountStatus} from '../../actions/account'
+import {getAuditFundList} from '../../actions/fund'
 import {Layout, Menu, Breadcrumb, Icon, Button, Table, Dropdown, notification} from 'antd';
 
 const {SubMenu} = Menu;
@@ -102,57 +102,73 @@ class Home extends React.Component {
     }
 
     componentDidMount() {
-        //
+        this.props.getAuditFundList({
+
+        })
     }
 
 
     render() {
-        // if (!this.props.account.userList) {
-        //     return null
-        // }
+        if (!this.props.fund.auditList) {
+            return null
+        }
         const columns = [
             {
                 title: '日期',
-                dataIndex: 'time'
+                dataIndex: 'modifyTime'
             },{
                 title: '基金名称',
                 dataIndex: 'name'
             },{
                 title: '货币类型',
-                dataIndex: 'coinType'
+                dataIndex: 'currency'
 
             },{
                 title: '封闭期（天）',
-                dataIndex: 'data'
+                dataIndex: 'period'
 
             },{
                 title: '起购价',
-                dataIndex: 'purchase'
+                dataIndex: 'limitLowAmount'
 
             },{
                 title: '操作人',
-                dataIndex: 'operator'
+                dataIndex: 'adminName'
 
             },{
                 title: '类型',
-                dataIndex: 'type',
+                dataIndex: 'status',
             },{
                 title: '操作',
                 render: (text, record) => {
-                   return (
 
-                       <a className="ant-dropdown-link" href="#">
-                           查看
-                       </a>
+                    if(record.status==='1'){
+                        return (
 
-                    )
+                            <Link to={'/auditFundDetails/'+record.id} className="ant-dropdown-link" href="#">
+                                查看
+                            </Link>
+
+                        )
+                    }
+                    if(record.status==='4'){
+                        return (
+
+                            <Link to={'/checkDetails/'+record.id} className="ant-dropdown-link" href="#">
+                                查看
+                            </Link>
+
+                        )
+                    }
+
+
                 },
             }];
         return (
             <div className={style.wlop}>
                 <span className={style.title}>基金审核</span>
                 <div className={style.table}>
-                    <Table columns={columns} dataSource={data}/>
+                    <Table columns={columns} dataSource={this.props.fund.auditList.list}/>
                 </div>
             </div>
 
@@ -163,16 +179,13 @@ class Home extends React.Component {
 
 function mapStateToProps(state, props) {
     return {
-        account: state.account
+        fund: state.fund
     }
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        getUserList: bindActionCreators(getUserList, dispatch),
-        resetPin: bindActionCreators(resetPin, dispatch),
-        setAccountStatus: bindActionCreators(setAccountStatus, dispatch),
-        resetPwd: bindActionCreators(resetPwd, dispatch)
+        getAuditFundList: bindActionCreators(getAuditFundList, dispatch)
     }
 }
 

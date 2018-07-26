@@ -103,6 +103,21 @@ export function checkPin(data, callback) {
     }
 }
 
+export function getAllUser(data, callback) {
+    return dispatch => {
+        http({
+            type:'post',
+            data,
+            callback,
+            url:'adm/alluser',
+            success:(response)=>{
+                dispatch({type: 'GET_ALL_USER', data: response.data})
+            }
+
+        })
+    }
+}
+
 
 
 

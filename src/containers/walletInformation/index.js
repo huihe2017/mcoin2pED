@@ -1,10 +1,10 @@
 import React from 'react'
 import style from './index.css'
-import {hashHistory} from 'react-router'
+import {hashHistory,Link} from 'react-router'
 import {Button,Modal,Input} from 'antd';
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
-import {getLogDetails} from "../../actions/log";
+import {getWalletMsg} from "../../actions/wallet";
 
 class Home extends React.Component {
     constructor(props) {
@@ -15,18 +15,18 @@ class Home extends React.Component {
     }
 
     componentDidMount() {
-        // this.props.getLogDetails({id: this.props.params.id}, () => {
-        //
-        // })
+        this.props.getWalletMsg({}, () => {
+
+        })
 
 
     }
 
 
     render() {
-        // if (!this.props.log.logDetails) {
-        //     return null
-        // }
+        if (!this.props.wallet.walletMsg) {
+            return null
+        }
 
         return (
             <div className={style.wlop}>
@@ -61,23 +61,23 @@ class Home extends React.Component {
                             </div>
                             <div className={style.contentOnePC2}>
                                 <span className={style.contentOnePCT}>
-                                    钱包余额    <span className={style.contentOnePCTT}>余额不足</span>
+                                    钱包余额    {this.props.wallet.walletMsg.list[0].notEnough===0?<span className={style.contentOnePCTT}>余额不足</span>:''}
                                 </span>
                                 <span className={style.contentOnePCB2}>
-                                    100.12345678
+                                    {this.props.wallet.walletMsg.list[0].balance}
                                 </span>
                             </div>
                             <div className={style.contentOnePC3}>
                                 <span className={style.contentOnePCB1}>
                                     <span className={style.contentOnePCBCT}>今日转入</span>
                                     <span className={style.contentOnePCBC} style={{color:'#f49193'}}>
-                                        +0.12345678
+                                        {this.props.wallet.walletMsg.list[0].todayCharge}
                                     </span>
                                 </span>
                                 <span className={style.contentOnePCB1}>
                                     <span className={style.contentOnePCBCT}>今日转出</span>
                                     <span className={style.contentOnePCBC} style={{color:'#7fd5ac'}}>
-                                        -100.12345678
+                                        {this.props.wallet.walletMsg.list[0].todayWithdraw}
                                     </span>
                                 </span>
                             </div>
@@ -85,7 +85,7 @@ class Home extends React.Component {
                         <div className={style.contentOneP}>
                             <div className={style.contentOnePC1}>
                                 <span className={style.contentOnePCT}>
-                                    比特币
+                                    以太坊
                                 </span>
                                 <a href="javascript:void (0)"
                                    onClick={ ()=>
@@ -95,7 +95,7 @@ class Home extends React.Component {
                                             content: (
                                                 <div className={style.inputBox}>
                                                      <span className={style.inputBoxT}>
-                                                         BTC转入地址
+                                                         ETH转入地址
                                                      </span>
                                                     <Input defaultValue={'1qw6e1qw3e156qwe516qw5e166'} disabled={ true } size="large" />
 
@@ -112,23 +112,23 @@ class Home extends React.Component {
                             </div>
                             <div className={style.contentOnePC2}>
                                 <span className={style.contentOnePCT}>
-                                    钱包余额    <span className={style.contentOnePCTT}>余额不足</span>
+                                    钱包余额    {this.props.wallet.walletMsg.list[1].notEnough===0?<span className={style.contentOnePCTT}>余额不足</span>:''}
                                 </span>
                                 <span className={style.contentOnePCB2}>
-                                    100.12345678
+                                    {this.props.wallet.walletMsg.list[1].balance}
                                 </span>
                             </div>
                             <div className={style.contentOnePC3}>
                                 <span className={style.contentOnePCB1}>
                                     <span className={style.contentOnePCBCT}>今日转入</span>
                                     <span className={style.contentOnePCBC} style={{color:'#f49193'}}>
-                                        +0.12345678
+                                        {this.props.wallet.walletMsg.list[1].todayCharge}
                                     </span>
                                 </span>
                                 <span className={style.contentOnePCB1}>
                                     <span className={style.contentOnePCBCT}>今日转出</span>
                                     <span className={style.contentOnePCBC} style={{color:'#7fd5ac'}}>
-                                        -100.12345678
+                                        {this.props.wallet.walletMsg.list[1].todayWithdraw}
                                     </span>
                                 </span>
                             </div>
@@ -150,7 +150,7 @@ class Home extends React.Component {
                                                 昨日转入
                                             </span>
                                             <span className={style.contentTwoTCBP}>
-                                                23.56846
+                                                {this.props.wallet.walletMsg.list[0].yesterdayCharge}
                                             </span>
                                         </div>
                                         <div className={style.contentTwoTCPBox}>
@@ -158,14 +158,14 @@ class Home extends React.Component {
                                                 昨日转入
                                             </span>
                                             <span className={style.contentTwoTCBP}>
-                                                23.56846
+                                                {this.props.wallet.walletMsg.list[0].yesterdayWithdraw}
                                             </span>
                                         </div>
                                     </div>
                                 </div>
                                 <div className={style.contentTwoTCP}>
                                     <div className={style.contentTwoTCPT}>
-                                        BTC
+                                        ETH
                                     </div>
                                     <div className={style.contentTwoTCPB}>
                                         <div className={style.contentTwoTCPBox}>
@@ -173,7 +173,7 @@ class Home extends React.Component {
                                                 昨日转入
                                             </span>
                                             <span className={style.contentTwoTCBP}>
-                                                23.56846
+                                                {this.props.wallet.walletMsg.list[1].yesterdayCharge}
                                             </span>
                                         </div>
                                         <div className={style.contentTwoTCPBox}>
@@ -181,27 +181,27 @@ class Home extends React.Component {
                                                 昨日转入
                                             </span>
                                             <span className={style.contentTwoTCBP}>
-                                                23.56846
+                                                {this.props.wallet.walletMsg.list[1].yesterdayWithdraw}
                                             </span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <a href="javascript:void (0)" className={style.contentTwoB}>
+                        <Link to={'/billRecord'} className={style.contentTwoB}>
                             → 转到钱包账单
-                        </a>
+                        </Link>
                     </div>
                     <div className={style.contentThree}>
                         <div className={style.contentThreeBox}>
                             <span className={style.contentThreeBoxT}>
-                                今日ETH申请转出
+                                今日BTC申请转出
                             </span>
                             <span className={style.contentThreeBoxC}>
-                                申请数：30
+                                申请数：{this.props.wallet.walletMsg.list[0].todayApplyCount}
                             </span>
                             <span className={style.contentThreeBoxC}>
-                                转出金额：100.12345678
+                                转出金额：{this.props.wallet.walletMsg.list[0].todayApply}
                             </span>
                         </div>
                         <div className={style.contentThreeBox}>
@@ -209,10 +209,10 @@ class Home extends React.Component {
                                 今日ETH申请转出
                             </span>
                             <span className={style.contentThreeBoxC}>
-                                申请数：30
+                                申请数：{this.props.wallet.walletMsg.list[1].todayApplyCount}
                             </span>
                             <span className={style.contentThreeBoxC}>
-                                转出金额：100.12345678
+                                转出金额：{this.props.wallet.walletMsg.list[1].todayApply}
                             </span>
                         </div>
                     </div>
@@ -224,13 +224,13 @@ class Home extends React.Component {
 
 function mapStateToProps(state, props) {
     return {
-        log: state.log
+        wallet: state.wallet
     }
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        getLogDetails: bindActionCreators(getLogDetails, dispatch)
+        getWalletMsg: bindActionCreators(getWalletMsg, dispatch)
     }
 }
 

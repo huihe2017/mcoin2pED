@@ -10,6 +10,7 @@ import UserIn from "./components/userIn";
 import UserOut from "./components/userOut";
 
 import {Steps} from "antd/lib/index";
+import {filter} from "../../common/util";
 
 const Step = Steps.Step;
 
@@ -22,9 +23,7 @@ class Home extends React.Component {
     }
 
     componentDidMount() {
-        // this.props.getLogDetails({id: this.props.params.id}, () => {
-        //
-        // })
+
 
     }
 
@@ -37,21 +36,22 @@ class Home extends React.Component {
 
     }
     renderTab = () => {
+        let data = filter(this.props.fund.auditList.list, this.props.params.id)
         if (this.state.current === 0) {
-            return <MoneyIn handle={this.handle.bind(this)}/>
+            return <MoneyIn data={data} handle={this.handle.bind(this)}/>
         }
         if (this.state.current === 1) {
-            return <MoneyOut  handle={(flag)=>{
+            return <MoneyOut data={data} handle={(flag)=>{
                 this.handle(flag)}
             } />
         }
         if (this.state.current === 2) {
-            return <UserIn  handle={(flag)=>{
+            return <UserIn data={data} handle={(flag)=>{
                 this.handle(flag)}
             } />
         }
         if (this.state.current === 3) {
-            return <UserOut  handle={(flag)=>{
+            return <UserOut data={data} handle={(flag)=>{
                 this.handle(flag)}
             } />
         }
@@ -106,7 +106,7 @@ class Home extends React.Component {
 
 function mapStateToProps(state, props) {
     return {
-        wallet: state.wallet
+        fund: state.fund
     }
 }
 

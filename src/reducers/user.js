@@ -15,6 +15,9 @@ export default function user(state = initialState, action = {}) {
         case 'SET_PIN_CODE':
             state.userMsg.userInfo.pinCode = true
             return Object.assign({}, state, {})
+        case 'GET_ALL_USER':
+            state.allUser = action.data.data
+            return Object.assign({}, state, {})
         default:
             return state
     }

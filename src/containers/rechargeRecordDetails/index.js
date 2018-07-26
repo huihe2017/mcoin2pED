@@ -4,8 +4,7 @@ import {hashHistory} from 'react-router'
 import {Button,Modal} from 'antd';
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
-import {getLogDetails} from "../../actions/log";
-
+import {filter} from "../../common/util";
 class Home extends React.Component {
     constructor(props) {
         super(props);
@@ -15,9 +14,22 @@ class Home extends React.Component {
     }
 
     componentDidMount() {
-        // this.props.getLogDetails({id: this.props.params.id}, () => {
-        //
-        // })
+        if (this.props.params.id !== 'null') {
+
+            let data = filter(this.props.wallet.walletInList.list,this.props.params.id)
+            this.setState({
+                mobile: data.mobile,
+                currency: data.currency,
+                realMoney: data.realMoney,
+                price: data.price,
+                remark: data.remark,
+                createTime: data.createTime,
+                chargeTime: data.chargeTime,
+                adminName: data.adminName,
+                auditorName: data.auditorName,
+                status: data.status
+            })
+        }
 
     }
 
@@ -30,19 +42,19 @@ class Home extends React.Component {
             <div className={style.wlop}>
                 <span className={style.title}>充值记录详情</span>
                 <div className={style.contentT}>
-                    系统单据：2018060102872087324
+                    系统单据：{this.props.params.id}
                 </div>
                 <div className={style.content}>
                     <span className={style.contentC}>
                         日期：
                         <span className={style.contentCC}>
-                            2018-6-1 16:00:00
+                            {this.state.createTime}
                         </span>
                     </span>
                     <span className={style.contentC}>
                         用户账号：
                         <span className={style.contentCC}>
-                            16416356346160323416
+                            {this.state.mobile}
                         </span>
                     </span>
                     <span className={style.contentC}>
@@ -54,43 +66,43 @@ class Home extends React.Component {
                     <span className={style.contentC}>
                         充值付款（元）：
                         <span className={style.contentCC}>
-                            10000.00
+                            {this.state.currency}
                         </span>
                     </span>
                     <span className={style.contentC}>
                         货币类型：
                         <span className={style.contentCC}>
-                            BTC
+                            {this.state.currency}
                         </span>
                     </span>
                     <span className={style.contentC}>
                         买入单价（元）：
                         <span className={style.contentCC}>
-                            37134135.12
+                            {this.state.price}
                         </span>
                     </span>
                     <span className={style.contentC}>
                         转入金额：
                         <span className={style.contentCC}>
-                            +2.007654600
+                            {this.state.price}
                         </span>
                     </span>
                     <span className={style.contentC}>
                         操作人：
                         <span className={style.contentCC}>
-                            张三
+                            {this.state.adminName}
                         </span>
                     </span>
                     <span className={style.contentC}>
                         备注：
                         <span className={style.contentCC}>
-                            转出xxx
+                            {this.state.remark}
                         </span>
                     </span>
                     <span className={style.contentC}>
                         审核人：
                         <span className={style.contentCC}>
-                            李四
+                            {this.state.auditorName}
                         </span>
                     </span>
                 </div>
@@ -101,13 +113,13 @@ class Home extends React.Component {
 
 function mapStateToProps(state, props) {
     return {
-        log: state.log
+        wallet: state.wallet
     }
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        getLogDetails: bindActionCreators(getLogDetails, dispatch)
+
     }
 }
 

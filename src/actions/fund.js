@@ -172,8 +172,50 @@ export function getFundDetails(data, callback) {
             callback,
             url:'fund/funddetail',
             success:(response)=>{
-                debugger
                 dispatch({type: 'SET_FUND_EDIT_DATA', data:response.data.data})
+            }
+        })
+    }
+}
+
+export function getAuditFundList(data, callback) {
+    return dispatch => {
+        http({
+            type:'post',
+            data,
+            callback,
+            url:'audit/fund/checklist',
+            success:(response)=>{
+
+                dispatch({type: 'GET_AUDIT_FUND_LIST', data:response.data})
+            }
+        })
+    }
+}
+
+export function auditReuseFund(data, callback) {
+    return dispatch => {
+        http({
+            type:'post',
+            data,
+            callback,
+            url:'audit/fund/checkreuse',
+            success:(response)=>{
+
+            }
+        })
+    }
+}
+
+export function auditCreateFund(data, callback) {
+    return dispatch => {
+        http({
+            type:'post',
+            data,
+            callback,
+            url:'audit/fund/checkcreate',
+            success:(response)=>{
+
             }
         })
     }

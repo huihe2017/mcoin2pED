@@ -4,7 +4,7 @@ import {hashHistory,Link} from 'react-router'
 import Header1 from '../../components/header'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
-import {getUserList,resetPwd,resetPin,setAccountStatus} from '../../actions/account'
+import {getWalletAuditList} from '../../actions/wallet'
 import { Table, Select} from 'antd';
 
 
@@ -103,45 +103,43 @@ class Home extends React.Component {
     }
 
     componentDidMount() {
-        //
+        this.props.getWalletAuditList({
+            page:1
+        })
     }
 
 
     render() {
-        // if (!this.props.account.userList) {
-        //     return null
-        // }
+        if (!this.props.wallet.auditList) {
+            return null
+        }
         const columns = [
             {
                 title: '日期',
-                dataIndex: 'time'
+                dataIndex: 'postTime'
             },{
                 title: '转出金额',
-                dataIndex: 'money'
+                dataIndex: 'amount'
             },{
                 title: '货币类型',
-                dataIndex: 'coinType'
+                dataIndex: 'currency'
 
             },{
                 title: '转出类型',
-                dataIndex: 'data'
-
-            },{
-                title: '钱包余额',
-                dataIndex: 'purchase'
+                dataIndex: 'type'
 
             },{
                 title: '操作人',
-                dataIndex: 'operator'
+                dataIndex: 'auditor'
 
             },{
                 title: '操作',
                 render: (text, record) => {
                    return (
 
-                       <a className="ant-dropdown-link" href="#">
+                       <Link to={'/auditWalletOut/'+record.id} className="ant-dropdown-link" href="#">
                            查看
-                       </a>
+                       </Link>
 
                     )
                 },
@@ -157,14 +155,19 @@ class Home extends React.Component {
                         货币类型
                     </span>
                     <div className={style.inputBox}>
-                        <Select placeholder="请选择" defaultValue="all">
-                            <Option value="all">全部</Option>
+                        <Select onChange={(e)=>{
+                            this.props.getWalletAuditList({
+                                page:1,
+                                currency:e
+                            })
+                        }} placeholder="请选择" defaultValue="all">
                             <Option value="btc">BTC</Option>
+                            <Option value="eth">ETH</Option>
                         </Select>
                     </div>
                 </div>
                 <div className={style.table}>
-                    <Table columns={columns} dataSource={data}/>
+                    <Table columns={columns} dataSource={this.props.wallet.auditList.list}/>
                 </div>
             </div>
 
@@ -175,16 +178,13 @@ class Home extends React.Component {
 
 function mapStateToProps(state, props) {
     return {
-        account: state.account
+        wallet: state.wallet
     }
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        getUserList: bindActionCreators(getUserList, dispatch),
-        resetPin: bindActionCreators(resetPin, dispatch),
-        setAccountStatus: bindActionCreators(setAccountStatus, dispatch),
-        resetPwd: bindActionCreators(resetPwd, dispatch)
+        getWalletAuditList: bindActionCreators(getWalletAuditList, dispatch)
     }
 }
 

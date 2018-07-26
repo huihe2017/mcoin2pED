@@ -2,7 +2,13 @@ import React from 'react'
 import style from './index.css'
 import {hashHistory} from 'react-router'
 import {Steps, Button, Form} from 'antd';
-import {Input, Layout, Menu, notification, Select,Tag,Tooltip,Checkbox} from "antd/lib/index";
+import {Input, Layout, Menu, notification, Select, Tag, Tooltip, Checkbox} from "antd/lib/index";
+import {setWallet, getWalletSetData} from '../../actions/wallet';
+import {getAllUser} from '../../actions/user';
+import {getUserList, resetPin, resetPwd, setAccountStatus} from "../../actions/account";
+import {bindActionCreators} from "redux";
+import {connect} from "react-redux";
+import {filter} from "../../common/util";
 
 const Option = Select.Option;
 const {TextArea} = Input;
@@ -15,8 +21,8 @@ class Home extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            tags:  [],
-            tags1:  [],
+            tags: [2531],
+            tags1: [2532],
             inputVisible: false,
             inputVisible1: false,
             inputValue: '',
@@ -28,18 +34,26 @@ class Home extends React.Component {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
-                // this.props.setFundEditData(
-                //     {
-                //         title: this.state.title,
-                //         tag: this.state.tags,
-                //         currency: this.state.currency,
-                //         riskType: this.state.riskType,
-                //         productDesc: this.state.productDesc,
-                //         redeemDesc: this.state.redeemDesc,
-                //     }
-                // )
-                this.props.handle(1)
 
+                let param = {
+                    withdrawAlarm: this.state.withdrawAlarm,
+                    balanceBtc: this.state.balanceBtc,
+                    balanceETH: this.state.balanceETH,
+                    withdrawNotice: this.state.withdrawNotice,
+                    balanceNotice: this.state.balanceNotice,
+                    billNotice: this.state.billNotice,
+                    smsNoticeAdminList: this.state.tags,
+                    mailNoticeAdminList: this.state.tags1
+
+                }
+
+                this.props.setWallet(param, () => {
+                    // this.props.history.go(-1)
+                    notification.open({
+                        message: '提示',
+                        description: '操作成功',
+                    });
+                })
             }
         });
     }
@@ -124,9 +138,18 @@ class Home extends React.Component {
 
     saveInputRef = input => this.input = input
 
+    componentDidMount() {
+        this.props.getWalletSetData({})
+        this.props.getAllUser({})
+    }
+
     render() {
+        debugger
+        if (!this.props.wallet.walletSetData) {
+            return null
+        }
         const {getFieldDecorator} = this.props.form;
-        const {tags,tags1, inputVisible, inputValue,inputVisible1} = this.state;
+        const {tags, tags1, inputVisible, inputValue, inputVisible1} = this.state;
         return (
             <div className={style.wlop}>
                 <span className={style.title}>管理设置</span>
@@ -144,11 +167,11 @@ class Home extends React.Component {
 
                                     </span>
                                     {getFieldDecorator('fundName', {
-                                        initialValue: '',
+                                        initialValue: this.props.wallet.walletSetData.withdrawAlarm,
                                         rules: [{required: true, message: '请填写转出阈值!'}],
                                     })(
                                         <Input onChange={(e) => {
-                                            this.props.setFundEditData({title: e.target.value})
+                                            this.setState({withdrawAlarm: e.target.value})
                                         }} suffix={'%'} size="large" placeholder="请填写转出阈值"/>)}
                                 </FormItem>
                             </div>
@@ -165,12 +188,12 @@ class Home extends React.Component {
                                             BTC
                                         </span>
                                         {getFieldDecorator('BTC', {
-                                            initialValue: '',
+                                            initialValue: this.props.wallet.walletSetData.balanceBtc,
                                             rules: [{required: true, message: '请填写警报额度!'}],
                                         })(
                                             <Input onChange={(e) => {
-                                                this.props.setFundEditData({title: e.target.value})
-                                            }}  size="large" placeholder="请填写警报额度"/>)}
+                                                this.setState({balanceBtc: e.target.value})
+                                            }} size="large" placeholder="请填写警报额度"/>)}
                                     </div>
                                 </FormItem>
                                 <FormItem>
@@ -179,54 +202,60 @@ class Home extends React.Component {
                                             ETC
                                         </span>
                                         {getFieldDecorator('ETC', {
-                                            initialValue: '',
+                                            initialValue: this.props.wallet.walletSetData.balanceETH,
                                             rules: [{required: true, message: '请填写警报额度!'}],
                                         })(
                                             <Input onChange={(e) => {
-                                                this.props.setFundEditData({title: e.target.value})
-                                            }}  size="large" placeholder="请填写警报额度"/>)}
+                                                this.setState({balanceETH: e.target.value})
+                                            }} size="large" placeholder="请填写警报额度"/>)}
                                     </div>
                                 </FormItem>
-                                <FormItem>
-                                    <div className={style.inputBoxB}>
-                                        <span className={style.inputBoxBT}>
-                                            AAA
-                                        </span>
-                                        {getFieldDecorator('AAA', {
-                                            initialValue: '',
-                                            rules: [{required: true, message: '请填写警报额度!'}],
-                                        })(
-                                            <Input onChange={(e) => {
-                                                this.props.setFundEditData({title: e.target.value})
-                                            }}  size="large" placeholder="请填写警报额度"/>)}
-                                    </div>
-                                </FormItem>
+                                {/*<FormItem>*/}
+                                {/*<div className={style.inputBoxB}>*/}
+                                {/*<span className={style.inputBoxBT}>*/}
+                                {/*AAA*/}
+                                {/*</span>*/}
+                                {/*{getFieldDecorator('AAA', {*/}
+                                {/*initialValue: '',*/}
+                                {/*rules: [{required: true, message: '请填写警报额度!'}],*/}
+                                {/*})(*/}
+                                {/*<Input onChange={(e) => {*/}
+                                {/*this.props.setFundEditData({title: e.target.value})*/}
+                                {/*}}  size="large" placeholder="请填写警报额度"/>)}*/}
+                                {/*</div>*/}
+                                {/*</FormItem>*/}
                             </div>
                             <div className={style.inputBox2}>
                                 <FormItem>
                                     <span className={style.inputBoxT}>
                                      消息通知设置
                                     </span>
-                                    <div style={{margin:'10px,0'}}>
+                                    <div style={{margin: '10px,0'}}>
                                         {getFieldDecorator('outMessage', {
                                             valuePropName: 'checked',
-                                            initialValue: false,
+                                            initialValue: this.props.wallet.walletSetData.withdrawNotice,
                                         })(
-                                            <Checkbox>转出超出阈值短信通知</Checkbox>)}
+                                            <Checkbox onChange={(e) => {
+                                                this.setState({withdrawNotice: e})
+                                            }}>转出超出阈值短信通知</Checkbox>)}
                                     </div>
-                                    <div style={{margin:'10px,0'}}>
+                                    <div style={{margin: '10px,0'}}>
                                         {getFieldDecorator('walletMassage', {
                                             valuePropName: 'checked',
-                                            initialValue: false,
+                                            initialValue: this.props.wallet.walletSetData.balanceNotice,
                                         })(
-                                            <Checkbox>平台钱包余额过低短信通知</Checkbox>)}
+                                            <Checkbox onChange={(e) => {
+                                                this.setState({balanceNotice: e})
+                                            }}>平台钱包余额过低短信通知</Checkbox>)}
                                     </div>
-                                    <div style={{margin:'10px,0'}}>
+                                    <div style={{margin: '10px,0'}}>
                                         {getFieldDecorator('dailyMessage', {
                                             valuePropName: 'checked',
-                                            initialValue: false,
+                                            initialValue: this.props.wallet.walletSetData.billNotice,
                                         })(
-                                            <Checkbox>每日平台账单邮件通知</Checkbox>)}
+                                            <Checkbox onChange={(e) => {
+                                                this.setState({billNotice: e})
+                                            }}>每日平台账单邮件通知</Checkbox>)}
                                     </div>
 
                                 </FormItem>
@@ -238,13 +267,16 @@ class Home extends React.Component {
                                  </span>
                                     <div>
                                         {tags.map((tag, index) => {
+                                            let data = this.props.user.allUser && filter(this.props.user.allUser.list, tag)
+                                            tag = data.name
                                             const isLongTag = tag.length > 3;
                                             const tagElem = (
                                                 <Tag key={tag} closable={true} afterClose={() => this.handleClose(tag)}>
                                                     {isLongTag ? `${tag.slice(0, 3)}...` : tag}
                                                 </Tag>
                                             );
-                                            return isLongTag ? <Tooltip title={tag} key={tag}>{tagElem}</Tooltip> : tagElem;
+                                            return isLongTag ?
+                                                <Tooltip title={tag} key={tag}>{tagElem}</Tooltip> : tagElem;
                                         })}
                                         {inputVisible && (
                                             <Select
@@ -253,13 +285,14 @@ class Home extends React.Component {
                                                 style={{width: 78}}
                                                 onChange={(e) => {
 
-                                                this.setState({massage: e},()=>this.handleInputConfirm())
-                                            }} placeholder="请选择">
-                                                <Option value="china">China</Option>
-                                                <Option value="usa4">U.S.A</Option>
-                                                <Option value="usa1">U.S.B</Option>
-                                                <Option value="usa2">U.S.C</Option>
-                                                <Option value="usa3">U.S.D</Option>
+                                                    this.setState({massage: e}, () => this.handleInputConfirm())
+                                                }} placeholder="请选择">
+                                                {
+                                                    this.props.user.allUser && this.props.user.allUser.list.map((obj) => {
+                                                        return <Option value={obj.id}>{obj.name}</Option>
+                                                    })
+
+                                                }
                                             </Select>
                                         )}
                                         {!inputVisible &&
@@ -274,13 +307,16 @@ class Home extends React.Component {
                                  </span>
                                     <div>
                                         {tags1.map((tag, index) => {
+                                            let data = this.props.user.allUser && filter(this.props.user.allUser.list, tag)
+                                            tag = data.name
                                             const isLongTag = tag.length > 3;
                                             const tagElem = (
-                                                <Tag key={tag} closable={true} afterClose={() => this.handleClose1(tag)}>
+                                                <Tag key={tag} closable={true} afterClose={() => this.handleClose(tag)}>
                                                     {isLongTag ? `${tag.slice(0, 3)}...` : tag}
                                                 </Tag>
                                             );
-                                            return isLongTag ? <Tooltip title={tag} key={tag}>{tagElem}</Tooltip> : tagElem;
+                                            return isLongTag ?
+                                                <Tooltip title={tag} key={tag}>{tagElem}</Tooltip> : tagElem;
                                         })}
                                         {inputVisible1 && (
                                             <Select
@@ -289,13 +325,14 @@ class Home extends React.Component {
                                                 style={{width: 78}}
                                                 onChange={(e) => {
 
-                                                this.setState({email: e},()=>this.handleInputConfirm1())
-                                            }} placeholder="请选择">
-                                                <Option value="china">China</Option>
-                                                <Option value="usa4">U.S.A</Option>
-                                                <Option value="usa1">U.S.B</Option>
-                                                <Option value="usa2">U.S.C</Option>
-                                                <Option value="usa3">U.S.D</Option>
+                                                    this.setState({email: e}, () => this.handleInputConfirm1())
+                                                }} placeholder="请选择">
+                                                {
+                                                    this.props.user.allUser && this.props.user.allUser.list.map((obj) => {
+                                                        return <Option value={obj.id}>{obj.name}</Option>
+                                                    })
+
+                                                }
                                             </Select>
                                         )}
                                         {!inputVisible1 &&
@@ -319,5 +356,24 @@ class Home extends React.Component {
         )
     }
 }
+
+function mapStateToProps(state, props) {
+    return {
+        wallet: state.wallet,
+        user: state.user
+
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        setWallet: bindActionCreators(setWallet, dispatch),
+        getWalletSetData: bindActionCreators(getWalletSetData, dispatch),
+        getAllUser: bindActionCreators(getAllUser, dispatch)
+    }
+}
+
+Home = connect(mapStateToProps, mapDispatchToProps)(Home)
+
 const WrappedHome = Form.create()(Home);
 export default WrappedHome

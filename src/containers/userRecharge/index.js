@@ -1,7 +1,7 @@
 import React from 'react'
 import style from './index.css'
 import {hashHistory} from 'react-router'
-import {addAccount, editAccountMsg} from '../../actions/account'
+import {InCoin} from '../../actions/wallet'
 import {getRoleList} from '../../actions/role'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
@@ -30,39 +30,31 @@ class Home extends React.Component {
 
 
                 let params = {
-                    password: this.state.password,
-                    account: this.state.account,
-                    name: this.state.name,
                     mobile: this.state.mobile,
-                    roles: this.state.roles,
+                    currency: this.state.currency,
+                    realMoney: this.state.realMoney,
+                    price: this.state.price,
+                    amount: this.state.amount,
+                    remark: this.state.remark
                 }
 
-                this.props.addAccount(params, () => {
+                this.props.InCoin(params, () => {
                     this.props.history.go(-1)
+                    notification.open({
+                        message: '提示',
+                        description: '操作成功',
+                    });
                 })
             }
         });
     }
 
     componentDidMount() {
-        if (this.props.params.id) {
-            let filterData = this.props.account.userList.list.filter((item) => {
-                return item.id === this.props.params.id
-            })
 
-            this.setState(...filterData)
-            //this.props.editAccountMsg(filterData)
-        }
-
-        this.props.getRoleList({
-            status: 2
-        })
     }
 
     render() {
-        if (!this.props.role.roleList) {
-            return null
-        }
+
         const {getFieldDecorator} = this.props.form;
 
         return (
@@ -77,12 +69,10 @@ class Home extends React.Component {
                                  </span>
                                 {getFieldDecorator('account', {
                                     rules: [{required: true, message: '请填写用户的手机号码!'}],
-                                    initialValue: this.state.account
                                 })(
                                     <Input
-                                        disabled={this.state.account?true:false}
                                         onChange={(e) => {
-                                            this.setState({account: e.target.value})
+                                            this.setState({mobile: e.target.value})
                                         }} size="large" placeholder="请填写用户的手机号码"/>)}
                             </FormItem>
                         </div>
@@ -101,12 +91,13 @@ class Home extends React.Component {
                                     placeholder="请选择"
 
 
-                                    onChange={this.handleChange}
+                                    onChange={(e)=>{
+                                        this.setState({currency:e})
+                                    }}
                                     style={{width: '100%'}}
                                 >
-                                    <Option key={'btc'}>BTC</Option>
-                                    <Option key={'etc'}>ETC</Option>
-                                    <Option key={'utc'}>UTC</Option>
+                                    <Option value={'btc'}>BTC</Option>
+                                    <Option value={'etc'}>ETC</Option>
                                 </Select>)}
                             </FormItem>
                         </div>
@@ -117,11 +108,10 @@ class Home extends React.Component {
                                 </span>
                                 {getFieldDecorator('payMoney', {
                                     rules: [{required: true, message: '请填写付款金额!'}],
-                                    initialValue: this.state.name
                                 })(
                                     <Input
                                         onChange={(e) => {
-                                            this.setState({payMoney: e.target.value})
+                                            this.setState({realMoney: e.target.value})
                                         }} size="large" placeholder=""/>)}
                             </FormItem>
                         </div>
@@ -133,16 +123,21 @@ class Home extends React.Component {
                                     </span>
                                     {getFieldDecorator('buyMoney', {
                                         rules: [{required: true, message: '请填入买入单价!'}],
-                                        initialValue: this.state.password
                                     })(
                                         <Input
-                                            onChange={(e) => {
-                                                this.setState({buyMoney: e.target.value},()=>{
-                                                    this.setState({
-                                                        inMoney:this.state.payMoney/this.state.buyMoney
-                                                    })
-                                                })
-                                            }} size="large" placeholder=""/>)}
+
+                                            onChange={(e)=>{
+                                                this.setState({price:e.target.value})
+                                            }}
+
+                                            // onChange={(e) => {
+                                            //     this.setState({buyMoney: e.target.value},()=>{
+                                            //         this.setState({
+                                            //             inMoney:this.state.payMoney/this.state.buyMoney
+                                            //         })
+                                            //     })
+                                            // }}
+                                        size="large" placeholder=""/>)}
                                 </FormItem>
                             </div>
                             <a className={style.inputBBoxA} href="javascript:void (0)">
@@ -156,9 +151,10 @@ class Home extends React.Component {
                                 </span>
                                 {getFieldDecorator('inMoney', {
                                     rules: [{required: true, message: '请填写转入金额!'}],
-                                    initialValue: this.state.inMoney
                                 })(
-                                    <Input disabled={true} size="large" placeholder=""/>)}
+                                    <Input onChange={(e)=>{
+                                        this.setState({amount:e.target.value})
+                                    }}  size="large" placeholder=""/>)}
                             </FormItem>
                         </div>
                         <div className={style.inputBox}>
@@ -167,12 +163,11 @@ class Home extends React.Component {
                                     备注
                                 </span>
                                 {getFieldDecorator('remark', {
-                                    initialValue: this.state.mobile
                                 })(
                                     <Input
                                         value={this.state.mobile || ''}
                                         onChange={(e) => {
-                                            this.setState({mobile: e.target.value})
+                                            this.setState({remark: e.target.value})
                                         }} size="large" placeholder=""/>)}
                             </FormItem>
                         </div>
@@ -205,9 +200,7 @@ function mapStateToProps(state, props) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        addAccount: bindActionCreators(addAccount, dispatch),
-        editAccountMsg: bindActionCreators(editAccountMsg, dispatch),
-        getRoleList: bindActionCreators(getRoleList, dispatch)
+        InCoin: bindActionCreators(InCoin, dispatch)
     }
 }
 

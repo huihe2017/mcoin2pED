@@ -1,10 +1,11 @@
 import React from 'react'
 import style from './index.css'
 import {hashHistory} from 'react-router'
-import {Button,} from 'antd';
+import {Button,notification} from 'antd';
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
-import {getLogDetails} from "../../actions/log";
+import {auditReuseFund} from "../../actions/fund";
+import {filter} from "../../common/util";
 
 class Home extends React.Component {
     constructor(props) {
@@ -13,10 +14,12 @@ class Home extends React.Component {
     }
 
     componentDidMount() {
-        // this.props.getLogDetails({id: this.props.params.id}, () => {
-        //
-        // })
-
+        let data = filter(this.props.fund.auditList.list, this.props.params.id)
+        this.setState({
+            title: data.title,
+            adminName: data.adminName,
+            status: data.status
+        })
     }
 
     render() {
@@ -33,13 +36,13 @@ class Home extends React.Component {
                     <span className={style.contentC}>
                         基金名称：
                         <span className={style.contentCC}>
-                            基金名称001
+                            {this.state.title}
                         </span>
                     </span>
                     <span className={style.contentC}>
                         基金经理：
                         <span className={style.contentCC}>
-                            张三
+                            {this.state.adminName}
                         </span>
                     </span>
                     <span className={style.contentC}>
@@ -52,9 +55,31 @@ class Home extends React.Component {
                 </div>
                 <div className={style.button}>
 
-                    <Button onClick={() => {alert(1)}} type="primary" size={'large'}>通过</Button>
+                    <Button onClick={() => {
+                        this.props.auditReuseFund({
+                            id:this.props.params.id,
+                            pass:1
+                        },()=>{
+                            notification.open({
+                                message: '提示',
+                                description: '操作成功',
+                            });
+                            this.props.history.go(-1)
+                        })
+                    }} type="primary" size={'large'}>通过</Button>
 
-                    <Button onClick={() => {alert(2)}}  size={'large'}>拒绝</Button>
+                    <Button onClick={() => {
+                        this.props.auditReuseFund({
+                            id:this.props.params.id,
+                            pass:0
+                        },()=>{
+                            notification.open({
+                                message: '提示',
+                                description: '操作成功',
+                            });
+                            this.props.history.go(-1)
+                        })
+                    }} size={'large'}>拒绝</Button>
                 </div>
             </div>
         )
@@ -63,13 +88,13 @@ class Home extends React.Component {
 
 function mapStateToProps(state, props) {
     return {
-        log: state.log
+        fund: state.fund
     }
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        getLogDetails: bindActionCreators(getLogDetails, dispatch)
+        auditReuseFund: bindActionCreators(auditReuseFund, dispatch)
     }
 }
 
