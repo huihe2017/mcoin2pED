@@ -101,6 +101,7 @@ class Home extends React.Component {
                                         initialValue: this.state.password
                                     })(
                                         <Input
+                                            type="password"
                                             onChange={(e) => {
                                                 this.setState({password: e.target.value})
                                             }} size="large" placeholder="至少6位，数字+字母"/>)}

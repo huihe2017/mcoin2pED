@@ -53,7 +53,7 @@ class Home extends React.Component {
                                     {getFieldDecorator('oldPassword', {
                                         rules: [{required: true, message: '密码错误!'}],
                                     })(
-                                        <Input onChange={(e)=>{this.setState({oldPassword:e.target.value})}} size="large" placeholder="请输入旧密码"/>
+                                        <Input type="password" onChange={(e)=>{this.setState({oldPassword:e.target.value})}} size="large" placeholder="请输入旧密码"/>
                                     )}
                                 </FormItem>
                             </div>
@@ -70,7 +70,7 @@ class Home extends React.Component {
                                     {getFieldDecorator('newPassword', {
                                         rules: [{required: true, message: '密码格式错误!'}],
                                     })(
-                                        <Input onChange={(e)=>{this.setState({password:e.target.value})}} size="large" placeholder="长度必须6-8位"/>
+                                        <Input type="password" onChange={(e)=>{this.setState({password:e.target.value})}} size="large" placeholder="长度必须6-8位"/>
                                     )}
                                 </FormItem>
                             </div>
@@ -96,7 +96,7 @@ class Home extends React.Component {
                                 {getFieldDecorator('reNewPassword', {
                                     rules: [{required: true, message: '两次密码不一致!'}],
                                 })(
-                                    <Input onChange={(e)=>{this.setState({confirmPassword:e.target.value})}} size="large" placeholder="请再次确认新密码"/>
+                                    <Input type="password" onChange={(e)=>{this.setState({confirmPassword:e.target.value})}} size="large" placeholder="请再次确认新密码"/>
                                 )}
                             </FormItem>
                         </div>

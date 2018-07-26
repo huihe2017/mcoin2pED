@@ -85,22 +85,22 @@ class Home extends React.Component {
                 title: '状态',
                 dataIndex: 'status',
                 render: (text, record) => {
-                    if (text === '0') {
+                    if (text ==0) {
                         return '待审核'
                     }
-                    if (text === '1') {
+                    if (text ==1) {
                         return '上线'
                     }
-                    if (text === '2') {
+                    if (text ==2) {
                         return '暂停待审核'
                     }
-                    if (text === '3') {
+                    if (text ==3) {
                         return '已关闭购买入口'
                     }
-                    if (text === '4') {
+                    if (text ==4) {
                         return '下线'
                     }
-                    if (text === '5') {
+                    if (text ==5) {
                         return '移除'
                     }
                 }
@@ -160,7 +160,7 @@ class Home extends React.Component {
                             </Menu.Item>
                             <Menu.Item>
                                 {
-                                    record.status === '1' ?
+                                    record.status ==1 ?
                                         <a target="_blank" rel="noopener noreferrer" href="javascript:void (0)"
                                            onClick={() => {
                                                this.props.applyStop({
@@ -175,7 +175,7 @@ class Home extends React.Component {
                                            }>暂停</a> : ''
                                 }
                                 {
-                                    record.status === '4' ?
+                                    record.status ==4 ?
                                         <a target="_blank" rel="noopener noreferrer" href="javascript:void (0)"
                                            onClick={() => {
                                                this.props.applyUse({
@@ -190,7 +190,7 @@ class Home extends React.Component {
                                            }>启用</a> : ''
                                 }
                                 {
-                                    (record.status === '0'||record.status === '2'||record.status === '3') ?
+                                    (record.status ==0||record.status ==2||record.status ==3) ?
                                         <a target="_blank" rel="noopener noreferrer" href="javascript:void (0)"
                                            onClick={() => {
                                                this.props.removeFund({
@@ -205,7 +205,7 @@ class Home extends React.Component {
                                            }>移除</a> : ''
                                 }
                                 {
-                                    (record.status === '5') ?
+                                    (record.status ==5) ?
                                         '' : ''
                                 }
 

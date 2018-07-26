@@ -38,10 +38,10 @@ class Home extends React.Component {
                 title: '状态',
                 dataIndex: 'status',
                 render: (text, record) => {
-                    if (text === '0') {
+                    if (text ==0) {
                         return '下线'
                     }
-                    if (text === '1') {
+                    if (text ==1) {
                         return '上线'
                     }
                 }
@@ -60,7 +60,7 @@ class Home extends React.Component {
                                 <a target="_blank" rel="noopener noreferrer" href="javascript:void (0)" onClick={() => {
                                     this.props.setInfoStatus({
                                         id:record.id,
-                                        status:record.status === '1'?'0':'1'
+                                        status:record.status ==1?0:1
                                     }, () => {
                                         notification.open({
                                             message: '提示',
@@ -69,7 +69,7 @@ class Home extends React.Component {
                                     })
                                 }
 
-                                }>{record.status === '1' ? '停用' : '启用'}</a>
+                                }>{record.status ==1 ? '停用' : '启用'}</a>
                             </Menu.Item>
                         </Menu>}>
                             <a className="ant-dropdown-link" href="#">

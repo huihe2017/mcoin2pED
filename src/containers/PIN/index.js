@@ -60,7 +60,7 @@ class Home extends React.Component {
                             {getFieldDecorator('pin', {
                                 rules: [{ required: true, message: '请输入账号!' }],
                             })(
-                                <Input size={'large'}  onChange={(e)=>{this.setState({code:e.target.value})}} prefix={<Icon type="info-circle-o" style={{ fontSize: 13 }} />} placeholder="输入PIN码" />
+                                <Input size={'large'} type="password" onChange={(e)=>{this.setState({code:e.target.value})}} prefix={<Icon type="info-circle-o" style={{ fontSize: 13 }} />} placeholder="输入PIN码" />
                             )}
                         </FormItem>
                         <FormItem>

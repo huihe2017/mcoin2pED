@@ -53,7 +53,7 @@ class Home extends React.Component {
                                     {getFieldDecorator('oldPin', {
                                         rules: [{required: true, message: '请输入旧PIN码!'}],
                                     })(
-                                        <Input onChange={(e)=>{this.setState({oldPinCode:e.target.value})}} size="large" placeholder="请输入旧PIN码"/>
+                                        <Input type="password" onChange={(e)=>{this.setState({oldPinCode:e.target.value})}} size="large" placeholder="请输入旧PIN码"/>
                                     )}
                                 </FormItem>
                             </div>
@@ -69,7 +69,7 @@ class Home extends React.Component {
                                 {getFieldDecorator('newPin', {
                                     rules: [{required: true, message: '请输入新PIN码!'}],
                                 })(
-                                    <Input onChange={(e)=>{this.setState({pinCode:e.target.value})}} size="large" placeholder="长度必须6-8位"/>
+                                    <Input type="password" onChange={(e)=>{this.setState({pinCode:e.target.value})}} size="large" placeholder="长度必须6-8位"/>
                                 )}
                             </FormItem>
                         </div>
@@ -81,7 +81,7 @@ class Home extends React.Component {
                                 {getFieldDecorator('reNewPin', {
                                     rules: [{required: true, message: '请再次输入新PIN码!'}],
                                 })(
-                                    <Input onChange={(e)=>{this.setState({confirmCode:e.target.value})}} size="large" placeholder="请再次确认新PIN码"/>
+                                    <Input type="password" onChange={(e)=>{this.setState({confirmCode:e.target.value})}} size="large" placeholder="请再次确认新PIN码"/>
                                 )}
                             </FormItem>
                         </div>

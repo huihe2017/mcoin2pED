@@ -77,7 +77,7 @@ class Home extends React.Component {
                 title: '状态',
                 dataIndex: 'status',
                 render: (text) => {
-                    return text === 1 ? '可用' : '停用'
+                    return text === 1 ? '启用' : '停用'
                 }
             },{
                 title: '优先级',

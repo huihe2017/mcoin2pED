@@ -49,7 +49,7 @@ class Home extends React.Component {
                                 {getFieldDecorator('pin', {
                                     rules: [{required: true, message: '请输入PIN码!'}],
                                 })(
-                                    <Input size="large" onChange={(e)=>{this.setState({pinCode:e.target.value})}} placeholder="长度必须6-8位"/>
+                                    <Input size="large" type="password" onChange={(e)=>{this.setState({pinCode:e.target.value})}} placeholder="长度必须6-8位"/>
                                 )}
                             </FormItem>
                         </div>
