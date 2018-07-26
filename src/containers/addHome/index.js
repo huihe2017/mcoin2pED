@@ -99,7 +99,7 @@ class Home extends React.Component {
                                  <span className={style.inputBoxT}>
                                      banner名称
                                  </span>
-                                {getFieldDecorator('bannerName', {
+                                {getFieldDecorator('title', {
                                     rules: [{required: true, message: '请填写banner名称!'}],
                                     initialValue: this.state.title
                                 })(
@@ -107,7 +107,7 @@ class Home extends React.Component {
                                         disabled={this.state.account?true:false}
                                         onChange={(e) => {
                                             this.setState({title: e.target.value})
-                                        }} size="large" placeholder="使用P95公司邮箱"/>)}
+                                        }} size="large" placeholder="请填写banner名称"/>)}
                             </FormItem>
                         </div>
                         <div className={style.inputBox1}>
@@ -187,7 +187,8 @@ class Home extends React.Component {
                                         value={this.state.priority || ''}
                                         onChange={(e) => {
                                             this.setState({showOrder: e.target.value})
-                                        }} size="large" placeholder=""/>)}
+                                        }} size="large" placeholder=""/>
+                                )}
                             </FormItem>
                         </div>
                     </div>

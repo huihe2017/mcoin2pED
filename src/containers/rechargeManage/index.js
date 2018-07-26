@@ -127,7 +127,7 @@ class Home extends React.Component {
         return (
             <div className={style.wlop}>
                 <span className={style.title}>充值管理</span>
-                <Button type="primary" size='large' onClick={() => hashHistory.push('/addFund')}>用户充值</Button>
+                <Button type="primary" size='large' onClick={() => hashHistory.push('/userRecharge')}>用户充值</Button>
                 <div className={style.contentT}>
                     筛选充值记录
                 </div>

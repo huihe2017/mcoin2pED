@@ -133,7 +133,7 @@ class Home extends React.Component {
                                 })(
                                     <Input onChange={(e) => {
                                         this.props.setFundEditData({title: e.target.value})
-                                    }} size="large" placeholder="使用P95公司邮箱"/>)}
+                                    }} size="large" placeholder="请填写基金名称"/>)}
                             </FormItem>
                         </div>
                         <div className={style.inputBox1}>

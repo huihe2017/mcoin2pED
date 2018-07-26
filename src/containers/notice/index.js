@@ -57,10 +57,10 @@ class Home extends React.Component {
                 title: '状态',
                 dataIndex: 'status',
                 render: (text, record) => {
-                    if (text === '1') {
+                    if (text ==1) {
                         return '展示'
                     }
-                    if (text === '0') {
+                    if (text ==0) {
                         return '停用'
                     }
                 }
@@ -76,7 +76,7 @@ class Home extends React.Component {
                             </Menu.Item>
                             <Menu.Item>
                                 {
-                                    record.status === '1' ?
+                                    record.status ==1 ?
                                         <a target="_blank" rel="noopener noreferrer" href="javascript:void (0)"
                                            onClick={() => {
                                                this.props.setNoticeStatus({
