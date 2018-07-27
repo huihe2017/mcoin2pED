@@ -121,8 +121,8 @@ class Home extends React.Component {
                                 </span>
                                 <div id="ossfile"></div>
                                 <div id="container">
-                                    <a id="selectfiles" href="javascript:void(0);" class='btn'>选择文件</a>
-                                    <a id="postfiles" href="javascript:void(0);" class='btn'>开始上传</a>
+                                    <a id="selectfiles" href="javascript:void(0);" className={style.btn}>选择文件</a>
+                                    <a id="postfiles" href="javascript:void(0);" className={style.btn}>开始上传</a>
                                 </div>
 
                                 <pre id="console"></pre>
