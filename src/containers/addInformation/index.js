@@ -226,7 +226,6 @@ class Home extends React.Component {
                                     rules: [{required: true, message: '内容不得为空!'}],
                                 })(
                                     <Editor
-                                        // editorState={editorState}
                                         wrapperClassName="demo-wrapper"
                                         editorClassName="demo-editor"
                                         onChange={this.onEditorStateChange}

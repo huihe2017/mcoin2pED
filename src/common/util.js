@@ -35,15 +35,15 @@ export function changeJson(json, label, value) {
 export function setUrlK(ojson) {
     var s = '', name, key;
     for (var p in ojson) {
-        if (!ojson[p] && ojson[p] !== 0 && ojson[p] !== '') {
-            return null;
+        if (ojson[p] !== undefined) {
+            if (ojson.hasOwnProperty(p)) {
+                name = p
+            }
+            ;
+            key = ojson[p];
+            s += "&" + name + "=" + encodeURIComponent(key);
         }
-        if (ojson.hasOwnProperty(p)) {
-            name = p
-        }
-        ;
-        key = ojson[p];
-        s += "&" + name + "=" + encodeURIComponent(key);
+
     }
     ;
     return s.substring(1, s.length);
@@ -118,10 +118,10 @@ export function toChartData(e) {
     return obj1
 }
 
-export function filter(list,id) {
+export function filter(list, id) {
     let data
     list.filter((item, index) => {
-        if(id-0 === item.id-0){
+        if (id - 0 === item.id - 0) {
             data = item
         }
     })
