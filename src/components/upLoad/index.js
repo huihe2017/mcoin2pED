@@ -38,8 +38,10 @@ function send_request() {
     }
 
     if (xmlhttp != null) {
+
         let serverUrl = config.api_url + 'oss/getpolicy'
         xmlhttp.open("post", serverUrl, false);
+        xmlhttp.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
         if(type==='img'){
             xmlhttp.send("type=0");
         }

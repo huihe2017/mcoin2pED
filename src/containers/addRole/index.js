@@ -38,7 +38,6 @@ function checkLevel(id, c) {
 }
 
 
-
 const columns = [{
     title: '权限名称',
     dataIndex: 'name',
@@ -183,7 +182,7 @@ class Home extends React.Component {
 
         if (this.props.params.id !== 'null') {
             this.props.getRoleMsg({
-                roleId:this.props.params.id
+                roleId: this.props.params.id
             })
         }
 
@@ -236,16 +235,32 @@ class Home extends React.Component {
             }
         }
 
-        debugger
         return tree;
     }
+
+    addKey = (arr) => {
+
+        function addKeyIn(arr){
+            arr.map((obj) => {
+                obj.key = obj.id
+                if (obj.childPermission && obj.childPermission.length !== 0) {
+                    addKeyIn(obj.childPermission)
+                }
+
+            })
+        }
+        addKeyIn(arr)
+        return arr
+
+    }
+
 
     render() {
         if (!this.props.role.permisseList) {
             return null
         }
         if (this.props.params.id !== 'null') {
-            if(!this.props.role.editRoleMsg){
+            if (!this.props.role.editRoleMsg) {
                 return null
             }
         }
@@ -325,7 +340,7 @@ class Home extends React.Component {
                     </div>
 
                     <Table rowSelection={rowSelection} columns={columns} childrenColumnName={'childPermission'}
-                           dataSource={this.props.role.permisseList.list}/>
+                           dataSource={this.addKey(this.props.role.permisseList.list)}/>
                     {/*<Table rowSelection={rowSelection}  columns={columns} dataSource={data}/>*/}
 
                     <div className={style.button}>

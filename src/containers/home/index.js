@@ -58,7 +58,8 @@ class Home extends React.Component {
 
     componentDidMount() {
         this.props.getBannerList({
-            page: 1
+            page: 1,
+            status:''
         })
     }
 

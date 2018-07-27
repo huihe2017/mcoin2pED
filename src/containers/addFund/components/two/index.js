@@ -6,6 +6,7 @@ import {bindActionCreators} from 'redux'
 import {Layout, Menu, Breadcrumb, Icon, Button, Table, Dropdown, notification, Steps, Input,Select,Form,Tag, Tooltip,Upload} from 'antd';
 import {setFundEditData} from "../../../../actions/fund";
 import upLoad from "../../../../components/upLoad";
+import config from "../../../../config";
 
 const Option = Select.Option;
 const { TextArea } = Input;
@@ -52,7 +53,7 @@ class Home extends React.Component {
 
     componentDidMount() {
         upLoad('file', (value) => {
-            this.props.setFundEditData({file:value})
+            this.props.setFundEditData({fileUrl:value})
         })
     }
     render() {
@@ -158,7 +159,7 @@ class Home extends React.Component {
 
                                 <pre id="console"></pre>
                                 <span className={style.inputBoxTT}>
-                                     *年化图表模板：<a href="javascript:void (0)">点击下载</a>
+                                     *年化图表模板：<a href={config.api_url+'fund/ratetemplet'}>点击下载</a>
                                  </span>
                             </FormItem>
                         </div>
