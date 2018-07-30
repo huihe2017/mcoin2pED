@@ -119,7 +119,12 @@ class Home extends React.Component {
                 <span className={style.title}>首页配置</span>
                 <Button type="primary" size='large' onClick={() => hashHistory.push('/addHome/null')}>添加banner</Button>
                 <div className={style.table}>
-                    <Table pagination={false} columns={columns} dataSource={this.props.homePageCfg.bannerList.list}/>
+                    <Table onChange={(pagination) => {
+                        this.props.getBannerList({
+                            page: pagination.current,
+                            status:''
+                        })
+                    }} pagination={false} columns={columns} dataSource={this.props.homePageCfg.bannerList.list}/>
                 </div>
             </div>
 

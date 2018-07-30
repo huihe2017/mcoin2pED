@@ -62,7 +62,7 @@ export function http(option) {
     axios({
         url,
         data: setUrlK(option.data),
-        method: 'post'
+        method: option.type
     })
         .then(function (response) {
             if (response.data.code === 0) {

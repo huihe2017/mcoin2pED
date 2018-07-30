@@ -61,7 +61,7 @@ class Home extends React.Component {
                 <span className={style.title}>资讯类型</span>
                 <Button type="primary" size='large' onClick={() => hashHistory.push('/addType/null')}>创建类型</Button>
                 <div className={style.table}>
-                    <Table columns={columns} dataSource={this.props.info.infoTypeList.list}/>
+                    <Table  columns={columns} dataSource={this.props.info.infoTypeList.list}/>
                 </div>
             </div>
 

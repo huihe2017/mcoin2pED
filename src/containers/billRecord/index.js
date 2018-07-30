@@ -222,6 +222,17 @@ class Home extends React.Component {
                         className="components-table-demo-nested"
                         columns={columns}
                         dataSource={this.props.wallet.walletBillList.list}
+                        onChange={(pagination) => {
+                            this.props.getWalletBillList({
+                                page: pagination.current,
+                                currecy: this.state.currecy,
+                                type: this.state.type,
+                                beginDate: this.state.beginDate,
+                                endDate: this.state.endDate
+                            }, () => {
+
+                            })
+                        }}
                     />
                 </div>
             </div>

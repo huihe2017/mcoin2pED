@@ -161,7 +161,6 @@ class Home extends React.Component {
 
                 }
                 this.props.addRole(param, () => {
-                    this.props.history.go(-1)
                     notification.open({
                         message: '提示',
                         description: '操作成功',

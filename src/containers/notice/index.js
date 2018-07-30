@@ -1,10 +1,10 @@
 import React from 'react'
 import style from './index.css'
-import {hashHistory,Link} from 'react-router'
+import {hashHistory, Link} from 'react-router'
 import Header1 from '../../components/header'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
-import {getNoticeList,setNoticeStatus} from '../../actions/notice'
+import {getNoticeList, setNoticeStatus} from '../../actions/notice'
 import {Layout, Menu, Breadcrumb, Icon, Button, Table, Dropdown, notification} from 'antd';
 
 const {SubMenu} = Menu;
@@ -57,10 +57,10 @@ class Home extends React.Component {
                 title: '状态',
                 dataIndex: 'status',
                 render: (text, record) => {
-                    if (text ==1) {
+                    if (text == 1) {
                         return '展示'
                     }
-                    if (text ==0) {
+                    if (text == 0) {
                         return '停用'
                     }
                 }
@@ -70,19 +70,19 @@ class Home extends React.Component {
                     return (
                         <Dropdown trigger={['click']} overlay={<Menu>
                             <Menu.Item>
-                                <Link to={'/addNotice/'+record.id} onClick={() => {
+                                <Link to={'/addNotice/' + record.id} onClick={() => {
 
                                 }}>编辑</Link>
                             </Menu.Item>
                             <Menu.Item>
                                 {
-                                    record.status ==1 ?
+                                    record.status == 1 ?
                                         <a target="_blank" rel="noopener noreferrer" href="javascript:void (0)"
                                            onClick={() => {
                                                this.props.setNoticeStatus({
-                                                   id:record.id,
-                                                   status:'0'
-                                               },()=>{
+                                                   id: record.id,
+                                                   status: '0'
+                                               }, () => {
                                                    notification.open({
                                                        message: '提示',
                                                        description: '操作成功',
@@ -95,9 +95,9 @@ class Home extends React.Component {
                                         <a target="_blank" rel="noopener noreferrer" href="javascript:void (0)"
                                            onClick={() => {
                                                this.props.setNoticeStatus({
-                                                   id:record.id,
-                                                   status:'1'
-                                               },()=>{
+                                                   id: record.id,
+                                                   status: '1'
+                                               }, () => {
                                                    notification.open({
                                                        message: '提示',
                                                        description: '操作成功',
@@ -122,7 +122,11 @@ class Home extends React.Component {
                 <span className={style.title}>公告</span>
                 <Button type="primary" size='large' onClick={() => hashHistory.push('/addNotice/null')}>创建公告</Button>
                 <div className={style.table}>
-                    <Table columns={columns} dataSource={this.props.notice.noticeList.list}/>
+                    <Table onChange={(pagination) => {
+                        this.props.getNoticeList({
+                            page: pagination.current
+                        })
+                    }} columns={columns} dataSource={this.props.notice.noticeList.list}/>
                 </div>
             </div>
 

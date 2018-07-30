@@ -224,7 +224,11 @@ class Home extends React.Component {
                 <span className={style.title}>基金管理</span>
                 <Button type="primary" size='large' onClick={() => hashHistory.push('/addFund')}>创建基金</Button>
                 <div className={style.table}>
-                    <Table columns={columns} dataSource={this.props.fund.fundList.list}/>
+                    <Table onChange={(pagination) => {
+                        this.props.getFundList({
+                            page: pagination.current
+                        })
+                    }} columns={columns} dataSource={this.props.fund.fundList.list}/>
                 </div>
                 <Modal
                     title="设置推荐参数"

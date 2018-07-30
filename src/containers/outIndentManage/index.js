@@ -206,6 +206,16 @@ class Home extends React.Component {
                         className="components-table-demo-nested"
                         columns={columns}
                         dataSource={this.props.wallet.outOrderList.list}
+                        onChange={(pagination) => {
+                            this.props.getOutOrderList({
+                                page: pagination.current,
+                                beginDate: this.state.beginDate,
+                                endDate: this.state.endDate,
+                                currency: this.state.currency
+                            }, () => {
+
+                            })
+                        }}
                     />
                 </div>
                 <Modal

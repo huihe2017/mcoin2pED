@@ -164,6 +164,7 @@ class Home extends React.Component {
                                 page:1,
                                 currency:e
                             })
+                            this.setState({currency:e})
                         }} placeholder="请选择" defaultValue="all">
                             <Option value="btc">BTC</Option>
                             <Option value="eth">ETH</Option>
@@ -171,7 +172,12 @@ class Home extends React.Component {
                     </div>
                 </div>
                 <div className={style.table}>
-                    <Table columns={columns} dataSource={this.props.wallet.auditRechargeList.list}/>
+                    <Table onChange={(pagination) => {
+                        this.props.getRechargeAuditList({
+                            page:pagination.current,
+                            currency:this.state.currency
+                        })
+                    }} columns={columns} dataSource={this.props.wallet.auditRechargeList.list}/>
                 </div>
             </div>
 

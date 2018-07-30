@@ -40,7 +40,7 @@ class Home extends React.Component {
 
                 }
                 if(this.props.params.id!=='null'){
-                    param.id = this.state.id
+                    param.id = this.props.params.id
                 }
 
                 this.props.createInfoType(param,()=>{

@@ -44,7 +44,7 @@ class Home extends React.Component {
                     remark: this.state.remark
                 }
                 if(this.props.params.id!=='null'){
-                    param.id = this.state.id
+                    param.id = this.props.params.id
                 }
 
 

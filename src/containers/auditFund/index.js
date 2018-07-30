@@ -168,7 +168,7 @@ class Home extends React.Component {
             <div className={style.wlop}>
                 <span className={style.title}>基金审核</span>
                 <div className={style.table}>
-                    <Table columns={columns} dataSource={this.props.fund.auditList.list}/>
+                    <Table pagination={false} columns={columns} dataSource={this.props.fund.auditList.list}/>
                 </div>
             </div>
 

@@ -115,7 +115,12 @@ class Home extends React.Component {
                 <span className={style.title}>运营活动</span>
                 <Button type="primary" size='large' onClick={() => hashHistory.push('/addOperation/null')}>创建活动</Button>
                 <div className={style.table}>
-                    <Table columns={columns} dataSource={this.props.activity.activityList.list}/>
+                    <Table onChange={(pagination) => {
+                        this.props.getActivityList({
+                            status:2,
+                            page: pagination.current
+                        })
+                    }} columns={columns} dataSource={this.props.activity.activityList.list}/>
                 </div>
             </div>
 

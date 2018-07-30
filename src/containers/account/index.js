@@ -1,10 +1,10 @@
 import React from 'react'
 import style from './index.css'
-import {hashHistory,Link} from 'react-router'
+import {hashHistory, Link} from 'react-router'
 import Header1 from '../../components/header'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
-import {getUserList,resetPwd,resetPin,setAccountStatus} from '../../actions/account'
+import {getUserList, resetPwd, resetPin, setAccountStatus} from '../../actions/account'
 import {Layout, Menu, Breadcrumb, Icon, Button, Table, Dropdown, notification} from 'antd';
 
 const {SubMenu} = Menu;
@@ -38,7 +38,7 @@ class Home extends React.Component {
             }, {
                 title: '角色',
                 dataIndex: 'roles',
-                render:(arr)=>{
+                render: (arr) => {
                     return arr[0].name
                 }
             }, {
@@ -53,16 +53,16 @@ class Home extends React.Component {
             }, {
                 title: '操作',
                 render: (text, record) => {
-                   return (
+                    return (
                         <Dropdown trigger={['click']} overlay={<Menu>
                             <Menu.Item>
-                                <Link to={'/addAccount/'+record.id}>编辑</Link>
+                                <Link to={'/addAccount/' + record.id}>编辑</Link>
                             </Menu.Item>
                             <Menu.Item>
                                 <a target="_blank" rel="noopener noreferrer" href="javascript:void (0)" onClick={() => {
                                     this.props.resetPwd({
-                                        userId:record.id
-                                    },()=>{
+                                        userId: record.id
+                                    }, () => {
                                         notification.open({
                                             message: '提示',
                                             description: '操作成功',
@@ -75,8 +75,8 @@ class Home extends React.Component {
                                 <a target="_blank" rel="noopener noreferrer" href="javascript:void (0)" onClick={() => {
 
                                     this.props.resetPin({
-                                        userId:record.id
-                                    },()=>{
+                                        userId: record.id
+                                    }, () => {
                                         notification.open({
                                             message: '提示',
                                             description: '操作成功',
@@ -89,15 +89,15 @@ class Home extends React.Component {
                             <Menu.Item>
                                 <a target="_blank" rel="noopener noreferrer" href="javascript:void (0)" onClick={() => {
                                     this.props.setAccountStatus({
-                                        userId:record.id,
-                                        status:record.status
-                                    },()=>{
+                                        userId: record.id,
+                                        status: record.status
+                                    }, () => {
                                         notification.open({
                                             message: '提示',
                                             description: '操作成功',
                                         });
                                     })
-                                }}>{record.status===0?'启用':'停用'}</a>
+                                }}>{record.status === 0 ? '启用' : '停用'}</a>
                             </Menu.Item>
                         </Menu>}>
                             <a className="ant-dropdown-link" href="#">
@@ -112,7 +112,11 @@ class Home extends React.Component {
                 <span className={style.title}>账号管理</span>
                 <Button type="primary" size='large' onClick={() => hashHistory.push('/addAccount/null')}>创建账号</Button>
                 <div className={style.table}>
-                    <Table columns={columns} dataSource={this.props.account.userList.list}/>
+                    <Table columns={columns} onChange={(pagination) => {
+                        this.props.getUserList({
+                            page: pagination.current
+                        })
+                    }} dataSource={this.props.account.userList.list}/>
                 </div>
             </div>
 

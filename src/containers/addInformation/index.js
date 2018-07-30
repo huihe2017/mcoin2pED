@@ -106,7 +106,7 @@ class Home extends React.Component {
                     title: this.state.title,
                 }
                 if(this.props.params.id!=='null'){
-                    param.id = this.state.id
+                    param.id = this.props.params.id
                 }
                 this.props.createInfo(param, () => {
                     this.props.history.go(-1)

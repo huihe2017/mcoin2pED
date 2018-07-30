@@ -218,6 +218,15 @@ class Home extends React.Component {
                         className="components-table-demo-nested"
                         columns={columns}
                         dataSource={this.props.log.logList.list}
+                        onChange={(pagination) => {
+                            this.props.getLogList({
+                                page: pagination.current,
+                                beginTime: this.state.beginTime,
+                                endTime: this.state.endTime,
+                                account: this.state.account,
+                                adminName: this.state.adminName
+                            })
+                        }}
                     />
                 </div>
             </div>
