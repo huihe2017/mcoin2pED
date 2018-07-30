@@ -225,6 +225,7 @@ function renderOk(typeParam, callback) {
             },
 
             FileUploaded: function (up, file, info) {
+                debugger
                 callback(get_uploaded_object_name(file.name))
                 if (info.status == 200) {
                     document.getElementById(file.id).getElementsByTagName('b')[0].innerHTML = 'upload to oss success, object name:' + get_uploaded_object_name(file.name);

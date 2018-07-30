@@ -13,6 +13,9 @@ export default function log(state = initialState, action = {}) {
                 }
             })
             return Object.assign({}, state, {})
+        case 'GET_All_ACTIVITY_LIST':
+            state.allActivityList = action.data.data
+            return Object.assign({}, state, {})
         default:
             return state
     }

@@ -126,7 +126,7 @@ class Home extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            selectedRowKeys: [112], // Check here to configure the default column
+            selectedRowKeys: [212], // Check here to configure the default column
         };
     }
 
@@ -166,6 +166,7 @@ class Home extends React.Component {
                         message: '提示',
                         description: '操作成功',
                     });
+                    this.props.history.go(-1)
                 })
             }
         });
@@ -183,6 +184,10 @@ class Home extends React.Component {
         if (this.props.params.id !== 'null') {
             this.props.getRoleMsg({
                 roleId: this.props.params.id
+            }, () => {
+                this.setState({
+                    selectedRowKeys:this.props.role.editRoleMsg.rolePermissions
+                })
             })
         }
 
@@ -240,7 +245,7 @@ class Home extends React.Component {
 
     addKey = (arr) => {
 
-        function addKeyIn(arr){
+        function addKeyIn(arr) {
             arr.map((obj) => {
                 obj.key = obj.id
                 if (obj.childPermission && obj.childPermission.length !== 0) {
@@ -249,6 +254,7 @@ class Home extends React.Component {
 
             })
         }
+
         addKeyIn(arr)
         return arr
 
@@ -270,41 +276,6 @@ class Home extends React.Component {
             selectedRowKeys,
             onChange: this.onSelectChange,
             hideDefaultSelections: true,
-            selections: [{
-                key: 'all-data',
-                text: 'Select All Data',
-                onSelect: () => {
-                    this.setState({
-                        selectedRowKeys: [...Array(46).keys()], // 0...45
-                    });
-                },
-            }, {
-                key: 'odd',
-                text: 'Select Odd Row',
-                onSelect: (changableRowKeys) => {
-                    let newSelectedRowKeys = [];
-                    newSelectedRowKeys = changableRowKeys.filter((key, index) => {
-                        if (index % 2 !== 0) {
-                            return false;
-                        }
-                        return true;
-                    });
-                    this.setState({selectedRowKeys: newSelectedRowKeys});
-                },
-            }, {
-                key: 'even',
-                text: 'Select Even Row',
-                onSelect: (changableRowKeys) => {
-                    let newSelectedRowKeys = [];
-                    newSelectedRowKeys = changableRowKeys.filter((key, index) => {
-                        if (index % 2 !== 0) {
-                            return true;
-                        }
-                        return false;
-                    });
-                    this.setState({selectedRowKeys: newSelectedRowKeys});
-                },
-            }],
             onSelection: this.onSelection,
         };
         return (

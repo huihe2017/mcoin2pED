@@ -4,6 +4,7 @@ import {hashHistory} from 'react-router'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 import {setFundEditData, createFund} from "../../../../actions/fund";
+import {getAllActivityList} from "../../../../actions/activity";
 import {
     Layout,
     Menu,
@@ -36,7 +37,7 @@ class Home extends React.Component {
         this.props.form.validateFields((err, values) => {
             if (!err) {
                 console.log('Received values of form: ', values);
-                this.props.createFund(this.props.fund.editFundData,()=>{
+                this.props.createFund(this.props.fund.editFundData, () => {
                     console.log(this.props)
                     // this.props.history.go(-1)
                     hashHistory.push('/fund')
@@ -47,6 +48,10 @@ class Home extends React.Component {
                 })
             }
         });
+    }
+
+    componentDidMount() {
+        this.props.getAllActivityList({})
     }
 
     render() {
@@ -67,8 +72,13 @@ class Home extends React.Component {
                                     <Select onChange={(e) => {
                                         this.props.setFundEditData({activityId: e})
                                     }} placeholder="请选择活动">
-                                        <Option value="china">China</Option>
-                                        <Option value="use">U.S.A</Option>
+
+                                        {
+                                            this.props.activity.allActivityList && this.props.activity.allActivityList.list.map((obj) => {
+                                                return <Option value={obj.id}>{obj.name}</Option>
+                                            })
+                                        }
+
                                     </Select>)}
                             </FormItem>
                         </div>
@@ -95,15 +105,16 @@ class Home extends React.Component {
 
 function mapStateToProps(state, props) {
     return {
-        fund: state.fund
+        fund: state.fund,
+        activity: state.activity
     }
 }
 
 function mapDispatchToProps(dispatch) {
     return {
         setFundEditData: bindActionCreators(setFundEditData, dispatch),
+        getAllActivityList: bindActionCreators(getAllActivityList, dispatch),
         createFund: bindActionCreators(createFund, dispatch)
-
     }
 }
 

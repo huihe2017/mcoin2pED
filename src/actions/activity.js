@@ -47,3 +47,17 @@ export function setActivityStatus(data, callback) {
     }
 }
 
+export function getAllActivityList(data, callback) {
+    return dispatch => {
+        http({
+            type:'post',
+            data,
+            callback,
+            url:'activity/all',
+            success:(response)=>{
+                dispatch({type: 'GET_All_ACTIVITY_LIST', data: response.data})
+            }
+
+        })
+    }
+}

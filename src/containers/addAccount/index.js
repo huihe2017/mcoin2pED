@@ -151,7 +151,7 @@ class Home extends React.Component {
                                     initialValue: (() => {
                                         let arr = [];
                                         this.state.roles && this.state.roles.map((obj) => {
-                                            arr.push(obj.id)
+                                            arr.push(obj.name)
                                         })
                                         return arr
                                     })(),
