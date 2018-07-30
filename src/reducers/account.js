@@ -4,6 +4,7 @@ export default function account(state = initialState, action = {}) {
 
     switch (action.type) {
         case 'GET_USER_LIST':
+            debugger
             state.userList = action.data.data
             return Object.assign({}, state, {})
         case 'SET_ACCOUNT_STATUS':

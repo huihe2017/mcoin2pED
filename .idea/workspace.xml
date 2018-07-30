@@ -2,30 +2,22 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9eaf612a-ca36-4e75-a6b7-2f658dbec1a9" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/src/common/util.js" afterPath="$PROJECT_DIR$/src/common/util.js" />
       <change beforePath="$PROJECT_DIR$/src/config/index.js" afterPath="$PROJECT_DIR$/src/config/index.js" />
       <change beforePath="$PROJECT_DIR$/src/containers/account/index.js" afterPath="$PROJECT_DIR$/src/containers/account/index.js" />
-      <change beforePath="$PROJECT_DIR$/src/containers/addHome/index.js" afterPath="$PROJECT_DIR$/src/containers/addHome/index.js" />
-      <change beforePath="$PROJECT_DIR$/src/containers/addInformation/index.js" afterPath="$PROJECT_DIR$/src/containers/addInformation/index.js" />
-      <change beforePath="$PROJECT_DIR$/src/containers/addNotice/index.js" afterPath="$PROJECT_DIR$/src/containers/addNotice/index.js" />
-      <change beforePath="$PROJECT_DIR$/src/containers/addOutAddress/index.js" afterPath="$PROJECT_DIR$/src/containers/addOutAddress/index.js" />
-      <change beforePath="$PROJECT_DIR$/src/containers/addRole/index.js" afterPath="$PROJECT_DIR$/src/containers/addRole/index.js" />
-      <change beforePath="$PROJECT_DIR$/src/containers/addType/index.js" afterPath="$PROJECT_DIR$/src/containers/addType/index.js" />
-      <change beforePath="$PROJECT_DIR$/src/containers/auditFund/index.js" afterPath="$PROJECT_DIR$/src/containers/auditFund/index.js" />
+      <change beforePath="$PROJECT_DIR$/src/containers/addFund/components/two/index.js" afterPath="$PROJECT_DIR$/src/containers/addFund/components/two/index.js" />
       <change beforePath="$PROJECT_DIR$/src/containers/auditRecharge/index.js" afterPath="$PROJECT_DIR$/src/containers/auditRecharge/index.js" />
       <change beforePath="$PROJECT_DIR$/src/containers/auditWallet/index.js" afterPath="$PROJECT_DIR$/src/containers/auditWallet/index.js" />
       <change beforePath="$PROJECT_DIR$/src/containers/billRecord/index.js" afterPath="$PROJECT_DIR$/src/containers/billRecord/index.js" />
       <change beforePath="$PROJECT_DIR$/src/containers/fund/index.js" afterPath="$PROJECT_DIR$/src/containers/fund/index.js" />
       <change beforePath="$PROJECT_DIR$/src/containers/home/index.js" afterPath="$PROJECT_DIR$/src/containers/home/index.js" />
       <change beforePath="$PROJECT_DIR$/src/containers/information/index.js" afterPath="$PROJECT_DIR$/src/containers/information/index.js" />
-      <change beforePath="$PROJECT_DIR$/src/containers/informationType/index.js" afterPath="$PROJECT_DIR$/src/containers/informationType/index.js" />
       <change beforePath="$PROJECT_DIR$/src/containers/notice/index.js" afterPath="$PROJECT_DIR$/src/containers/notice/index.js" />
       <change beforePath="$PROJECT_DIR$/src/containers/operation/index.js" afterPath="$PROJECT_DIR$/src/containers/operation/index.js" />
       <change beforePath="$PROJECT_DIR$/src/containers/operationLog/index.js" afterPath="$PROJECT_DIR$/src/containers/operationLog/index.js" />
       <change beforePath="$PROJECT_DIR$/src/containers/outAddressManage/index.js" afterPath="$PROJECT_DIR$/src/containers/outAddressManage/index.js" />
       <change beforePath="$PROJECT_DIR$/src/containers/outIndentManage/index.js" afterPath="$PROJECT_DIR$/src/containers/outIndentManage/index.js" />
       <change beforePath="$PROJECT_DIR$/src/containers/rechargeManage/index.js" afterPath="$PROJECT_DIR$/src/containers/rechargeManage/index.js" />
+      <change beforePath="$PROJECT_DIR$/src/reducers/account.js" afterPath="$PROJECT_DIR$/src/reducers/account.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -40,30 +32,30 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/containers/addHome/index.js">
+        <entry file="file://$PROJECT_DIR$/src/containers/account/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="941">
-              <caret line="43" column="0" lean-forward="false" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/config/index.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="145">
-              <caret line="5" column="27" lean-forward="true" selection-start-line="5" selection-start-column="27" selection-end-line="6" selection-end-column="30" />
+            <state relative-caret-position="263">
+              <caret line="117" column="26" lean-forward="false" selection-start-line="117" selection-start-column="26" selection-end-line="117" selection-end-column="26" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/containers/addInformation/index.js">
+        <entry file="file://$PROJECT_DIR$/src/containers/outIndentManage/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="261">
-              <caret line="106" column="17" lean-forward="true" selection-start-line="106" selection-start-column="17" selection-end-line="106" selection-end-column="17" />
+            <state relative-caret-position="420">
+              <caret line="215" column="32" lean-forward="false" selection-start-line="215" selection-start-column="32" selection-end-line="215" selection-end-column="32" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/containers/manageSetting/index.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="372">
+              <caret line="277" column="48" lean-forward="false" selection-start-line="277" selection-start-column="48" selection-end-line="277" selection-end-column="48" />
               <folding />
             </state>
           </provider>
@@ -73,9 +65,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>get_signature</find>
-      <find>set_upload_param</find>
-      <find>type</find>
       <find>buy1UpLimit</find>
       <find>createDate</find>
       <find>年化图表模板</find>
@@ -99,10 +88,13 @@
       <find>selectedRowKeys</find>
       <find>table</find>
       <find>currecy</find>
-      <find>ratetemplet</find>
       <find>this.props.params.id !== 'null'</find>
       <find>let param = {</find>
       <find>param.id = this.state.id</find>
+      <find>ratetemplet</find>
+      <find>pagination.current</find>
+      <find>tag = data.name</find>
+      <find>1009</find>
     </findStrings>
     <replaceStrings>
       <replace>typeBuy</replace>
@@ -117,7 +109,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/containers/billRecordDetails/components/moneyIn/index.js" />
         <option value="$PROJECT_DIR$/src/containers/billRecordDetails/components/moneyOut/index.js" />
         <option value="$PROJECT_DIR$/src/containers/outIndentDetails/index.js" />
         <option value="$PROJECT_DIR$/src/containers/rechargeRecordDetails/index.js" />
@@ -146,10 +137,8 @@
         <option value="$PROJECT_DIR$/src/reducers/activity.js" />
         <option value="$PROJECT_DIR$/src/containers/addFund/components/four/index.js" />
         <option value="$PROJECT_DIR$/src/components/upLoad/index.js" />
-        <option value="$PROJECT_DIR$/src/containers/addFund/components/two/index.js" />
         <option value="$PROJECT_DIR$/src/containers/addAccount/index.js" />
         <option value="$PROJECT_DIR$/src/containers/addRole/index.js" />
-        <option value="$PROJECT_DIR$/src/containers/account/index.js" />
         <option value="$PROJECT_DIR$/src/containers/operationLog/index.js" />
         <option value="$PROJECT_DIR$/src/containers/notice/index.js" />
         <option value="$PROJECT_DIR$/src/containers/information/index.js" />
@@ -159,7 +148,6 @@
         <option value="$PROJECT_DIR$/src/containers/operation/index.js" />
         <option value="$PROJECT_DIR$/src/containers/outAddressManage/index.js" />
         <option value="$PROJECT_DIR$/src/containers/billRecord/index.js" />
-        <option value="$PROJECT_DIR$/src/containers/outIndentManage/index.js" />
         <option value="$PROJECT_DIR$/src/containers/rechargeManage/index.js" />
         <option value="$PROJECT_DIR$/src/containers/auditFund/index.js" />
         <option value="$PROJECT_DIR$/src/containers/auditWallet/index.js" />
@@ -168,6 +156,10 @@
         <option value="$PROJECT_DIR$/src/containers/addHome/index.js" />
         <option value="$PROJECT_DIR$/src/containers/addInformation/index.js" />
         <option value="$PROJECT_DIR$/src/config/index.js" />
+        <option value="$PROJECT_DIR$/src/reducers/account.js" />
+        <option value="$PROJECT_DIR$/src/containers/addFund/components/two/index.js" />
+        <option value="$PROJECT_DIR$/src/containers/account/index.js" />
+        <option value="$PROJECT_DIR$/src/containers/outIndentManage/index.js" />
       </list>
     </option>
   </component>
@@ -190,8 +182,8 @@
     <handled-path value="$PROJECT_DIR$/node_modules" />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="2353" />
-    <option name="y" value="128" />
+    <option name="x" value="2086" />
+    <option name="y" value="49" />
     <option name="width" value="1366" />
     <option name="height" value="961" />
   </component>
@@ -226,53 +218,6 @@
               <item name="mcoin2pED" type="b2602c69:ProjectViewProjectNode" />
               <item name="mcoin2pED" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="mcoin2pED" type="b2602c69:ProjectViewProjectNode" />
-              <item name="mcoin2pED" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="config" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="mcoin2pED" type="b2602c69:ProjectViewProjectNode" />
-              <item name="mcoin2pED" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="containers" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="mcoin2pED" type="b2602c69:ProjectViewProjectNode" />
-              <item name="mcoin2pED" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="containers" type="462c0819:PsiDirectoryNode" />
-              <item name="addHome" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="mcoin2pED" type="b2602c69:ProjectViewProjectNode" />
-              <item name="mcoin2pED" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="containers" type="462c0819:PsiDirectoryNode" />
-              <item name="auditRecharge" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="mcoin2pED" type="b2602c69:ProjectViewProjectNode" />
-              <item name="mcoin2pED" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="containers" type="462c0819:PsiDirectoryNode" />
-              <item name="auditWallet" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="mcoin2pED" type="b2602c69:ProjectViewProjectNode" />
-              <item name="mcoin2pED" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="containers" type="462c0819:PsiDirectoryNode" />
-              <item name="outIndentManage" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="mcoin2pED" type="b2602c69:ProjectViewProjectNode" />
-              <item name="mcoin2pED" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="containers" type="462c0819:PsiDirectoryNode" />
-              <item name="rechargeManage" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="mcoin2pED" type="b2602c69:ProjectViewProjectNode" />
@@ -339,15 +284,15 @@
       <workItem from="1508381784546" duration="3256000" />
       <workItem from="1508392899342" duration="85369000" />
       <workItem from="1508812633767" duration="29150000" />
-      <workItem from="1531210819441" duration="272246000" />
+      <workItem from="1531210819441" duration="275895000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="500065000" />
+    <option name="totallyTimeSpent" value="503714000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="2353" y="128" width="1366" height="961" extended-state="0" />
+    <frame x="2086" y="49" width="1366" height="961" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -384,22 +329,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/containers/rechargeRecordDetails/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="406">
-          <caret line="20" column="36" lean-forward="true" selection-start-line="20" selection-start-column="36" selection-end-line="20" selection-end-column="36" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/actions/wallet.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="349" column="29" lean-forward="false" selection-start-line="349" selection-start-column="16" selection-end-line="349" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/containers/auditRechargeDetail/index.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="198">
@@ -553,7 +482,7 @@
         <state relative-caret-position="323">
           <caret line="76" column="52" lean-forward="true" selection-start-line="76" selection-start-column="52" selection-end-line="76" selection-end-column="52" />
           <folding>
-            <element signature="e#0#25#0" expanded="true" />
+            <element signature="e#0#25#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -563,7 +492,7 @@
         <state relative-caret-position="203">
           <caret line="70" column="56" lean-forward="true" selection-start-line="70" selection-start-column="56" selection-end-line="70" selection-end-column="56" />
           <folding>
-            <element signature="e#0#25#0" expanded="true" />
+            <element signature="e#0#25#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -581,7 +510,7 @@
         <state relative-caret-position="82">
           <caret line="226" column="30" lean-forward="false" selection-start-line="226" selection-start-column="30" selection-end-line="226" selection-end-column="30" />
           <folding>
-            <element signature="e#0#32#0" expanded="true" />
+            <element signature="e#0#32#0" expanded="false" />
             <element signature="e#5651#6046#0" expanded="false" />
             <element signature="e#6254#6683#0" expanded="false" />
             <element signature="e#7262#8018#0" expanded="false" />
@@ -635,7 +564,7 @@
         <state relative-caret-position="372">
           <caret line="39" column="29" lean-forward="false" selection-start-line="39" selection-start-column="29" selection-end-line="39" selection-end-column="29" />
           <folding>
-            <element signature="e#0#37#0" expanded="true" />
+            <element signature="e#0#37#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -656,20 +585,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/containers/account/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="321">
-          <caret line="116" column="52" lean-forward="false" selection-start-line="116" selection-start-column="45" selection-end-line="116" selection-end-column="52" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/containers/operationLog/index.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="250">
           <caret line="222" column="57" lean-forward="true" selection-start-line="222" selection-start-column="38" selection-end-line="222" selection-end-column="57" />
           <folding>
-            <element signature="e#0#25#0" expanded="true" />
+            <element signature="e#0#25#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -678,9 +599,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="203">
           <caret line="88" column="52" lean-forward="false" selection-start-line="88" selection-start-column="52" selection-end-line="88" selection-end-column="52" />
-          <folding>
-            <element signature="e#0#25#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -689,7 +608,7 @@
         <state relative-caret-position="366">
           <caret line="63" column="27" lean-forward="true" selection-start-line="63" selection-start-column="27" selection-end-line="63" selection-end-column="27" />
           <folding>
-            <element signature="e#0#25#0" expanded="true" />
+            <element signature="e#0#25#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -698,9 +617,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="227">
           <caret line="227" column="46" lean-forward="false" selection-start-line="227" selection-start-column="46" selection-end-line="227" selection-end-column="46" />
-          <folding>
-            <element signature="e#0#25#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -708,9 +625,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="217">
           <caret line="126" column="52" lean-forward="true" selection-start-line="126" selection-start-column="34" selection-end-line="126" selection-end-column="52" />
-          <folding>
-            <element signature="e#0#25#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -726,9 +641,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="261">
           <caret line="120" column="52" lean-forward="true" selection-start-line="120" selection-start-column="34" selection-end-line="120" selection-end-column="52" />
-          <folding>
-            <element signature="e#0#25#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -737,7 +650,7 @@
         <state relative-caret-position="227">
           <caret line="140" column="52" lean-forward="false" selection-start-line="140" selection-start-column="34" selection-end-line="140" selection-end-column="52" />
           <folding>
-            <element signature="e#0#25#0" expanded="true" />
+            <element signature="e#0#25#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -747,17 +660,7 @@
         <state relative-caret-position="192">
           <caret line="226" column="57" lean-forward="true" selection-start-line="226" selection-start-column="38" selection-end-line="226" selection-end-column="57" />
           <folding>
-            <element signature="e#0#25#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/containers/outIndentManage/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="163">
-          <caret line="210" column="57" lean-forward="true" selection-start-line="210" selection-start-column="38" selection-end-line="210" selection-end-column="57" />
-          <folding>
-            <element signature="e#0#25#0" expanded="true" />
+            <element signature="e#0#25#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -775,7 +678,7 @@
         <state relative-caret-position="232">
           <caret line="143" column="28" lean-forward="true" selection-start-line="143" selection-start-column="28" selection-end-line="143" selection-end-column="55" />
           <folding>
-            <element signature="e#0#25#0" expanded="true" />
+            <element signature="e#0#25#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -796,14 +699,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/containers/addFund/components/two/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="130">
-          <caret line="181" column="38" lean-forward="true" selection-start-line="181" selection-start-column="38" selection-end-line="181" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/common/util.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="275">
@@ -812,18 +707,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/containers/addInformation/index.js">
+    <entry file="file://$PROJECT_DIR$/src/containers/addHome/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="261">
-          <caret line="106" column="17" lean-forward="true" selection-start-line="106" selection-start-column="17" selection-end-line="106" selection-end-column="17" />
+        <state relative-caret-position="-451">
+          <caret line="43" column="0" lean-forward="false" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/containers/addHome/index.js">
+    <entry file="file://$PROJECT_DIR$/src/containers/addInformation/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="941">
-          <caret line="43" column="0" lean-forward="false" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
+        <state relative-caret-position="-3102">
+          <caret line="106" column="17" lean-forward="true" selection-start-line="106" selection-start-column="17" selection-end-line="106" selection-end-column="17" />
           <folding />
         </state>
       </provider>
@@ -831,7 +726,47 @@
     <entry file="file://$PROJECT_DIR$/src/config/index.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="145">
-          <caret line="5" column="27" lean-forward="true" selection-start-line="5" selection-start-column="27" selection-end-line="6" selection-end-column="30" />
+          <caret line="5" column="26" lean-forward="true" selection-start-line="5" selection-start-column="26" selection-end-line="6" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/reducers/account.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="87">
+          <caret line="6" column="20" lean-forward="false" selection-start-line="6" selection-start-column="20" selection-end-line="6" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/containers/addFund/components/two/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="333">
+          <caret line="188" column="35" lean-forward="false" selection-start-line="188" selection-start-column="35" selection-end-line="188" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/containers/account/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="263">
+          <caret line="117" column="26" lean-forward="false" selection-start-line="117" selection-start-column="26" selection-end-line="117" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/containers/outIndentManage/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="215" column="32" lean-forward="false" selection-start-line="215" selection-start-column="32" selection-end-line="215" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/containers/manageSetting/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="372">
+          <caret line="277" column="48" lean-forward="false" selection-start-line="277" selection-start-column="48" selection-end-line="277" selection-end-column="48" />
           <folding />
         </state>
       </provider>

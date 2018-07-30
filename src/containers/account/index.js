@@ -27,7 +27,7 @@ class Home extends React.Component {
         if (!this.props.account.userList) {
             return null
         }
-
+        console.log(55552222,this.props.account.userList.list)
         const columns = [
             {
                 title: '账号',
@@ -112,7 +112,7 @@ class Home extends React.Component {
                 <span className={style.title}>账号管理</span>
                 <Button type="primary" size='large' onClick={() => hashHistory.push('/addAccount/null')}>创建账号</Button>
                 <div className={style.table}>
-                    <Table columns={columns} onChange={(pagination) => {
+                    <Table pagination={{total:this.props.account.userList.pager.total}} columns={columns} onChange={(pagination) => {
                         this.props.getUserList({
                             page: pagination.current
                         })

@@ -122,7 +122,7 @@ class Home extends React.Component {
                 <span className={style.title}>公告</span>
                 <Button type="primary" size='large' onClick={() => hashHistory.push('/addNotice/null')}>创建公告</Button>
                 <div className={style.table}>
-                    <Table onChange={(pagination) => {
+                    <Table pagination={{total:this.props.notice.noticeList.pager.total}} onChange={(pagination) => {
                         this.props.getNoticeList({
                             page: pagination.current
                         })

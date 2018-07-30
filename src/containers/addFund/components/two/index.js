@@ -178,7 +178,7 @@ class Home extends React.Component {
 
                                 <pre id="console"></pre>
                                 <span className={style.inputBoxTT}>
-                                     *年化图表模板：<a href="javascript:void(0);" onClick={() => {
+                                     *年化图表模板：<a href="javascript:void(0);" target={'_blank'} onClick={() => {
                                     http({
                                         type:'get',
                                         url:'fund/ratetemplet',

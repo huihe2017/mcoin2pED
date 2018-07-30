@@ -119,7 +119,7 @@ class Home extends React.Component {
                 <span className={style.title}>首页配置</span>
                 <Button type="primary" size='large' onClick={() => hashHistory.push('/addHome/null')}>添加banner</Button>
                 <div className={style.table}>
-                    <Table onChange={(pagination) => {
+                    <Table pagination={{total:this.props.homePageCfg.bannerList.pager.total}} onChange={(pagination) => {
                         this.props.getBannerList({
                             page: pagination.current,
                             status:''
