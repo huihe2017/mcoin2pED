@@ -55,6 +55,9 @@ class Home extends React.Component {
                                     return <Menu.Item onChange={()=>{alert(11)}} key={obj.id}>{obj.name}</Menu.Item>
                                 })}
                             </Menu>
+                            <div className={style.out} onClick={()=>{hashHistory.push('/login')}}>
+                                退出
+                            </div>
                         </Header>
                     </div>
 
