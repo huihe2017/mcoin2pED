@@ -140,6 +140,7 @@ class Home extends React.Component {
                                         <Option value={1}>安卓</Option>
                                         <Option value={2}>ios</Option>
                                         <Option value={3}>H5</Option>
+                                        <Option value={4}>通用</Option>
                                     </Select>
                                 )}
                             </FormItem>
@@ -159,14 +160,15 @@ class Home extends React.Component {
                                         })
                                     }} size="large" placeholder=""/>)}</FormItem>
                         </div>
-
                     </div>
 
                     <div className={style.button}>
                         <FormItem>
-                            <Button type="primary" htmlType="submit" size={'large'}>创建</Button>
+                            <Button type="primary" htmlType="submit" size={'large'}>
+                                {this.props.params.id === 'null' ? '创建' : '保存'}
+                            </Button>
                         </FormItem>
-                        <Button size={'large'}>取消</Button>
+                        <Button size={'large'} onClick={()=>hashHistory.push('/notice')}>取消</Button>
                     </div>
 
                 </Form>

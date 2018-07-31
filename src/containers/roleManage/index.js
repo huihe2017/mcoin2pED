@@ -59,7 +59,7 @@ class Home extends React.Component {
 
     componentDidMount() {
         this.props.getRoleList({
-            status:2
+            status:1
         })
     }
 
@@ -76,6 +76,12 @@ class Home extends React.Component {
                 dataIndex: 'permissionCount',
                 render:(text)=>{
                     return '包含'+text+'个权限'
+                }
+            },{
+                title: '状态',
+                dataIndex: 'status',
+                render:(text)=>{
+                    return text===1?'启用':'停用'
                 }
             }, {
                 title: '操作',
@@ -99,7 +105,7 @@ class Home extends React.Component {
                                     });
                                 })
 
-                            }}>{record.status===0?'停用':'启用'}</a>
+                            }}>{record.status===1?'停用':'启用'}</a>
                         </Menu.Item>
 
                     </Menu>}>
