@@ -21,8 +21,8 @@ class Home extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            tags: [2531],
-            tags1: [2532],
+            tags: [],
+            tags1: [],
             inputVisible: false,
             inputVisible1: false,
             inputValue: '',
@@ -139,7 +139,11 @@ class Home extends React.Component {
     saveInputRef = input => this.input = input
 
     componentDidMount() {
-        this.props.getWalletSetData({})
+        this.props.getWalletSetData({},()=>{
+            this.setState({tag:this.props.wallet.walletSetData.setting.smsNoticeAdmin})
+            this.setState({tag1:this.props.wallet.walletSetData.setting.mailNoticeAdmin})
+
+        })
         this.props.getAllUser({})
     }
 

@@ -2,15 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9eaf612a-ca36-4e75-a6b7-2f658dbec1a9" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/src/actions/user.js" afterPath="$PROJECT_DIR$/src/actions/user.js" />
-      <change beforePath="$PROJECT_DIR$/src/containers/addAccount/index.js" afterPath="$PROJECT_DIR$/src/containers/addAccount/index.js" />
-      <change beforePath="$PROJECT_DIR$/src/containers/addFund/components/one/index.js" afterPath="$PROJECT_DIR$/src/containers/addFund/components/one/index.js" />
+      <change beforePath="$PROJECT_DIR$/src/config/index.js" afterPath="$PROJECT_DIR$/src/config/index.js" />
       <change beforePath="$PROJECT_DIR$/src/containers/addFund/components/two/index.js" afterPath="$PROJECT_DIR$/src/containers/addFund/components/two/index.js" />
-      <change beforePath="$PROJECT_DIR$/src/containers/earningsSetting/index.js" afterPath="$PROJECT_DIR$/src/containers/earningsSetting/index.js" />
-      <change beforePath="$PROJECT_DIR$/src/containers/safeSetting/index.js" afterPath="$PROJECT_DIR$/src/containers/safeSetting/index.js" />
-      <change beforePath="$PROJECT_DIR$/src/containers/wrap/index.js" afterPath="$PROJECT_DIR$/src/containers/wrap/index.js" />
-      <change beforePath="$PROJECT_DIR$/src/reducers/user.js" afterPath="$PROJECT_DIR$/src/reducers/user.js" />
+      <change beforePath="$PROJECT_DIR$/src/containers/manageSetting/index.js" afterPath="$PROJECT_DIR$/src/containers/manageSetting/index.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -39,8 +33,8 @@
       <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/containers/addFund/components/two/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="435">
-              <caret line="73" column="5" lean-forward="true" selection-start-line="73" selection-start-column="5" selection-end-line="73" selection-end-column="5" />
+            <state relative-caret-position="313">
+              <caret line="189" column="43" lean-forward="true" selection-start-line="189" selection-start-column="43" selection-end-line="189" selection-end-column="43" />
               <folding />
             </state>
           </provider>
@@ -60,7 +54,17 @@
         <entry file="file://$PROJECT_DIR$/src/config/index.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="145">
-              <caret line="5" column="36" lean-forward="true" selection-start-line="5" selection-start-column="36" selection-end-line="6" selection-end-column="40" />
+              <caret line="5" column="45" lean-forward="false" selection-start-line="5" selection-start-column="45" selection-end-line="6" selection-end-column="48" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/containers/manageSetting/index.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="145">
+              <caret line="15" column="11" lean-forward="false" selection-start-line="15" selection-start-column="11" selection-end-line="15" selection-end-column="11" />
               <folding />
             </state>
           </provider>
@@ -70,13 +74,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>roles</find>
-      <find>jpg</find>
-      <find>png</find>
-      <find>ratete</find>
-      <find>get_uploaded_object_name</find>
-      <find>rolePermissions</find>
-      <find>getRoleMsg</find>
       <find>rowSelection</find>
       <find>this.state.selectedRowKeys</find>
       <find>未设置</find>
@@ -88,7 +85,6 @@
       <find>this.props.params.id !== 'null'</find>
       <find>let param = {</find>
       <find>param.id = this.state.id</find>
-      <find>ratetemplet</find>
       <find>pagination.current</find>
       <find>1009</find>
       <find>tag = data.name</find>
@@ -100,6 +96,14 @@
       <find>this.props.fund.income.statList[0]</find>
       <find>封闭期/天</find>
       <find>标签</find>
+      <find>2531</find>
+      <find>tags</find>
+      <find>smsNoticeAdminList</find>
+      <find>smsNoticeAdmin</find>
+      <find>tags1</find>
+      <find>ratetemplet</find>
+      <find>mailNoticeAdmin</find>
+      <find>adminToken</find>
     </findStrings>
     <replaceStrings>
       <replace>typeBuy</replace>
@@ -116,7 +120,6 @@
       <list>
         <option value="$PROJECT_DIR$/src/containers/rechargeRecordDetails/index.js" />
         <option value="$PROJECT_DIR$/src/containers/userRecharge/index.js" />
-        <option value="$PROJECT_DIR$/src/containers/manageSetting/index.js" />
         <option value="$PROJECT_DIR$/src/reducers/fund.js" />
         <option value="$PROJECT_DIR$/src/reducers/wallet.js" />
         <option value="$PROJECT_DIR$/src/containers/auditWalletOut/index.js" />
@@ -162,8 +165,9 @@
         <option value="$PROJECT_DIR$/src/reducers/user.js" />
         <option value="$PROJECT_DIR$/src/containers/safeSetting/index.js" />
         <option value="$PROJECT_DIR$/src/containers/addAccount/index.js" />
-        <option value="$PROJECT_DIR$/src/containers/addFund/components/two/index.js" />
         <option value="$PROJECT_DIR$/src/containers/addFund/components/one/index.js" />
+        <option value="$PROJECT_DIR$/src/containers/manageSetting/index.js" />
+        <option value="$PROJECT_DIR$/src/containers/addFund/components/two/index.js" />
         <option value="$PROJECT_DIR$/src/config/index.js" />
       </list>
     </option>
@@ -187,8 +191,8 @@
     <handled-path value="$PROJECT_DIR$/node_modules" />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="2378" />
-    <option name="y" value="123" />
+    <option name="x" value="2043" />
+    <option name="y" value="90" />
     <option name="width" value="1366" />
     <option name="height" value="961" />
   </component>
@@ -342,15 +346,15 @@
       <workItem from="1508381784546" duration="3256000" />
       <workItem from="1508392899342" duration="85369000" />
       <workItem from="1508812633767" duration="29150000" />
-      <workItem from="1531210819441" duration="282016000" />
+      <workItem from="1531210819441" duration="285039000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="509835000" />
+    <option name="totallyTimeSpent" value="512858000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="2378" y="123" width="1366" height="961" extended-state="0" />
+    <frame x="2043" y="90" width="1366" height="961" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -729,14 +733,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/containers/manageSetting/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="294" column="44" lean-forward="false" selection-start-line="294" selection-start-column="44" selection-end-line="294" selection-end-column="44" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/containers/wrap/index.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="145">
@@ -805,10 +801,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/containers/manageSetting/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="145">
+          <caret line="15" column="11" lean-forward="false" selection-start-line="15" selection-start-column="11" selection-end-line="15" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/containers/addFund/components/two/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
-          <caret line="73" column="5" lean-forward="true" selection-start-line="73" selection-start-column="5" selection-end-line="73" selection-end-column="5" />
+        <state relative-caret-position="313">
+          <caret line="189" column="43" lean-forward="true" selection-start-line="189" selection-start-column="43" selection-end-line="189" selection-end-column="43" />
           <folding />
         </state>
       </provider>
@@ -824,7 +828,7 @@
     <entry file="file://$PROJECT_DIR$/src/config/index.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="145">
-          <caret line="5" column="36" lean-forward="true" selection-start-line="5" selection-start-column="36" selection-end-line="6" selection-end-column="40" />
+          <caret line="5" column="45" lean-forward="false" selection-start-line="5" selection-start-column="45" selection-end-line="6" selection-end-column="48" />
           <folding />
         </state>
       </provider>
