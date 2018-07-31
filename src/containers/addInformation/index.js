@@ -22,6 +22,7 @@ import {
 } from 'antd';
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
+import draftToHtml from 'draftjs-to-html';
 import {createInfo, getInfoTypeList} from "../../actions/information";
 
 const Option = Select.Option;
@@ -95,12 +96,13 @@ class Home extends React.Component {
 
 
     }
+
     handleSubmit = (e) => {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
                 let param = {
-                    content: this.state.content,
+                    content: draftToHtml(convertToRaw(this.state.editorState.getCurrentContent())),
                     typeId: this.state.typeId,
                     coverUrl: this.state.coverUrl,
                     title: this.state.title,
@@ -119,9 +121,9 @@ class Home extends React.Component {
         });
     }
 
-    onEditorStateChange: Function = (content) => {
+    onEditorStateChange: Function = (editorState) => {
         this.setState({
-            content: content.blocks[0].text,
+            editorState,
         });
     };
 
@@ -138,7 +140,7 @@ class Home extends React.Component {
             return null
         }
         const {getFieldDecorator} = this.props.form;
-        const {editorState} = this.state;
+
 
         return (
             <div className={style.wlop}>
@@ -226,9 +228,10 @@ class Home extends React.Component {
                                     rules: [{required: true, message: '内容不得为空!'}],
                                 })(
                                     <Editor
+                                        editorState={this.state.editorState}
                                         wrapperClassName="demo-wrapper"
                                         editorClassName="demo-editor"
-                                        onChange={this.onEditorStateChange}
+                                        onEditorStateChange={this.onEditorStateChange}
                                     />)
                                 }
                             </FormItem>

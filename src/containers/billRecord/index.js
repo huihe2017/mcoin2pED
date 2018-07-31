@@ -166,8 +166,8 @@ class Home extends React.Component {
                                 {getFieldDecorator('range-picker', {
                                     rules: [{
                                         type: 'array',
-                                        required: true,
-                                        message: '请选择时间范围!'
+                                        // required: true,
+                                        // message: '请选择时间范围!'
                                     }],
                                 })(
                                     <RangePicker onChange={(e) => {
@@ -183,7 +183,7 @@ class Home extends React.Component {
                                     货币类型
                                 </span>
                                 {getFieldDecorator('account', {
-                                    rules: [{required: true, message: '请选择货币类型!'}],
+                                    // rules: [{required: true, message: '请选择货币类型!'}],
                                 })(
                                     <Select onChange={(e)=>{
                                         this.setState({currecy:e})
@@ -199,7 +199,7 @@ class Home extends React.Component {
                                     账单类型
                                 </span>
                                 {getFieldDecorator('name', {
-                                    rules: [{required: true, message: '请选择账单类型!'}],
+                                    // rules: [{required: true, message: '请选择账单类型!'}],
                                 })(
                                     <Select onChange={(e)=>{
                                         this.setState({type:e})

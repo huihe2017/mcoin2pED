@@ -234,7 +234,9 @@ class Home extends React.Component {
 
                     <div className={style.button}>
                         <FormItem>
-                            <Button type="primary" htmlType="submit" size={'large'}>提交</Button>
+                            <Button type="primary" htmlType="submit" size={'large'}>
+                                {this.props.params.id !== 'null' ? '保存' : '创建'}
+                            </Button>
                         </FormItem>
                         <Button onClick={() => {
                             this.props.history.go(-1)

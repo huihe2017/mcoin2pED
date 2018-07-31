@@ -169,8 +169,7 @@ class Home extends React.Component {
                                 {getFieldDecorator('range-picker', {
                                     rules: [{
                                         type: 'array',
-                                        required: true,
-                                        message: '请选择时间范围!'
+
                                     }],
                                 })(
                                     <RangePicker onChange={(e) => {
@@ -186,7 +185,7 @@ class Home extends React.Component {
                                     货币类型
                                 </span>
                                 {getFieldDecorator('coin', {
-                                    rules: [{required: true, message: '请填写你的角色名!'}],
+
                                 })(
                                     <Select onChange={(e)=>{
                                         this.setState({currency:e})

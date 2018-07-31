@@ -171,8 +171,8 @@ class Home extends React.Component {
                                 {getFieldDecorator('range-picker', {
                                     rules: [{
                                         type: 'array',
-                                        required: true,
-                                        message: '请选择时间范围!'
+                                        // required: true,
+                                        // message: '请选择时间范围!'
                                     }],
                                 })(
                                     <RangePicker onChange={(e) => {
@@ -188,7 +188,7 @@ class Home extends React.Component {
                                     操作账号
                                 </span>
                                 {getFieldDecorator('account', {
-                                    rules: [{required: true, message: '请填写你的角色名!'}],
+                                    // rules: [{required: true, message: '请填写你的角色名!'}],
                                 })(
                                     <Input onChange={(e) => {
                                         this.setState({account: e.target.value})
@@ -201,7 +201,7 @@ class Home extends React.Component {
                                     姓名
                                 </span>
                                 {getFieldDecorator('name', {
-                                    rules: [{required: true, message: '请填写你的角色名!'}],
+                                    // rules: [{required: true, message: '请填写你的角色名!'}],
                                 })(
                                     <Input onChange={(e) => {
                                         this.setState({adminName: e.target.value})
