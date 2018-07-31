@@ -118,6 +118,33 @@ export function getAllUser(data, callback) {
     }
 }
 
+export function logout(data, callback) {
+    return dispatch => {
+        http({
+            type:'post',
+            data,
+            callback,
+            url:'adm/logout',
+            success:(response)=>{
 
+            }
 
+        })
+    }
+}
+
+export function checkExistsPincode(data, callback) {
+    return dispatch => {
+        http({
+            type:'post',
+            data,
+            callback,
+            url:'adm/isexists',
+            success:(response)=>{
+                dispatch({type: 'CHECK_EXISTS_PINCODE', data: response.data})
+            }
+
+        })
+    }
+}
 

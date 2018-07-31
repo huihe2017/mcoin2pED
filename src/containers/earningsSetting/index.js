@@ -247,7 +247,7 @@ class Home extends React.Component {
             {title: '合计', dataIndex: 'totalProfit', key: '2',}
         ];
 
-        this.props.fund.income.statList[0].profitDateList.map((a, b) => {
+        this.props.fund.income.statList[0]&&this.props.fund.income.statList[0].profitDateList.map((a, b) => {
             let c = b
             ++c
             columns.push({title: c, dataIndex: 'profitDateList[' + b + '].profit'})

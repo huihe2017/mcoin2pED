@@ -18,6 +18,9 @@ export default function user(state = initialState, action = {}) {
         case 'GET_ALL_USER':
             state.allUser = action.data.data
             return Object.assign({}, state, {})
+        case 'CHECK_EXISTS_PINCODE':
+            state.userMsg.userInfo.isExistsPincode = action.data.data.isExists
+            return Object.assign({}, state, {})
         default:
             return state
     }

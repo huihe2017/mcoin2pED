@@ -6,7 +6,7 @@ import {Layout, Menu, Breadcrumb, Icon, Button, Table, Dropdown, notification} f
 import {connect} from 'react-redux'
 import {Link} from 'react-router'
 import {bindActionCreators} from 'redux'
-import {getUserMsg} from '../../actions/user'
+import {getUserMsg,logout} from '../../actions/user'
 import {setMenu} from '../../actions/menu'
 
 const {SubMenu} = Menu;
@@ -41,21 +41,29 @@ class Home extends React.Component {
                                 mode="horizontal"
                                 defaultSelectedKeys={['1']}
                                 style={{lineHeight: '64px'}}
-                                onClick={(a,b)=>{
+                                onClick={(a, b) => {
                                     console.log(this.props);
                                     this.props.setMenu({
-                                        list:this.props.user.userMsg.permissionList,
-                                        id:a.key
+                                        list: this.props.user.userMsg.permissionList,
+                                        id: a.key
                                     })
                                     console.log(a.key);
                                 }}
                             >
 
                                 {this.props.menu.level1.map((obj, index) => {
-                                    return <Menu.Item onChange={()=>{alert(11)}} key={obj.id}>{obj.name}</Menu.Item>
+                                    return <Menu.Item onChange={() => {
+                                        alert(11)
+                                    }} key={obj.id}>{obj.name}</Menu.Item>
                                 })}
                             </Menu>
-                            <div className={style.out} onClick={()=>{hashHistory.push('/login')}}>
+                            <div className={style.out} onClick={() => {
+                                this.props.logout({},()=>{
+                                    sessionStorage.removeItem('adminToken')
+                                    hashHistory.push('/login')
+                                })
+
+                            }}>
                                 退出
                             </div>
                         </Header>
@@ -72,7 +80,7 @@ class Home extends React.Component {
 
                                 {this.props.menu.level2.map((obj, index) => {
                                     return <Menu.Item key={index}>
-                                        <Link to={obj.url} >{obj.name}</Link>
+                                        <Link to={obj.url}>{obj.name}</Link>
                                     </Menu.Item>
                                 })}
 
@@ -107,6 +115,7 @@ function mapStateToProps(state, props) {
 function mapDispatchToProps(dispatch) {
     return {
         getUserMsg: bindActionCreators(getUserMsg, dispatch),
+        logout: bindActionCreators(logout, dispatch),
         setMenu: bindActionCreators(setMenu, dispatch)
     }
 }

@@ -90,9 +90,12 @@ class Home extends React.Component {
                                      封闭期/天
                                  </span>
                                 {getFieldDecorator('close', {
+                                    initialValue: this.props.fund.editFundData.period,
                                     rules: [{required: true, message: '请填写封闭期!'}],
                                 })(
-                                    <Input size="large" placeholder="请填写封闭期"/>)}
+                                    <Input onChange={(e) => {
+                                        this.props.setFundEditData({period: e.target.value})
+                                    }} size="large" placeholder="请填写封闭期"/>)}
                             </FormItem>
                         </div>
                         <div className={style.inputBox}>

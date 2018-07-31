@@ -97,7 +97,8 @@ class Home extends React.Component {
             return
 
         }
-        console.log(tags);
+        this.props.setFundEditData({tag: tags})
+
         this.setState({
             tags,
             inputVisible: false,
