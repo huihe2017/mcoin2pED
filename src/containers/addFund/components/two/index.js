@@ -24,6 +24,8 @@ import {setFundEditData} from "../../../../actions/fund";
 import upLoad from "../../../../components/upLoad";
 import config from "../../../../config";
 import {http} from '../../../../common/util'
+import axios from "../../../../common/axiosConf";
+
 const Option = Select.Option;
 const {TextArea} = Input;
 const {SubMenu} = Menu;
@@ -181,16 +183,27 @@ class Home extends React.Component {
 
                                 <pre id="console"></pre>
                                 <span className={style.inputBoxTT}>
-                                     *年化图表模板：<a href={config.api_url+'fund/ratetemplet?token='+sessionStorage.getItem('adminToken')}  onClick={() => {
-                                    // http({
-                                    //     type:'get',
-                                    //     url:'fund/ratetemplet',
-                                    //     success:(response)=>{
-                                    //
-                                    //     }
-                                    //
-                                    // })
-                                }} >点击下载</a>
+                                     *年化图表模板：<a
+                                    // href={config.api_url + 'fund/ratetemplet?adminToken=' + sessionStorage.getItem('adminToken')}
+                                    onClick={() => {
+                                        // http({
+                                        //     type:'get',
+                                        //     url:'fund/ratetemplet',
+                                        //     success:(response)=>{
+                                        //
+                                        //     }
+                                        //
+                                        // })
+                                        axios.defaults.headers.common['adminToken'] = sessionStorage.adminToken;
+                                        axios.get('http://issuecdn.baidupcs.com/issue/netdisk/yunguanjia/BaiduNetdisk_6.2.0.exe', {
+                                            responseType: 'blob'
+                                        }).then(function (response) {
+                                        }).catch(function (error) {
+
+                                        });
+
+
+                                    }}>点击下载</a>
                                  </span>
                             </FormItem>
                         </div>

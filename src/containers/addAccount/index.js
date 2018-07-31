@@ -37,6 +37,10 @@ class Home extends React.Component {
                     roles: this.state.roles,
                 }
 
+                if (this.props.params.id!=='null') {
+                    params.id = this.props.params.id
+                }
+
                 this.props.addAccount(params, () => {
                     this.props.history.go(-1)
                 })
@@ -45,7 +49,7 @@ class Home extends React.Component {
     }
 
     componentDidMount() {
-        if (this.props.params.id) {
+        if (this.props.params.id!=='null') {
             let filterData = this.props.account.userList.list.filter((item) => {
                 return item.id === (this.props.params.id - 0)
             })
@@ -90,77 +94,82 @@ class Home extends React.Component {
                                         }} size="large" placeholder="使用P95公司邮箱"/>)}
                             </FormItem>
                         </div>
-                        <div className={style.inputBBox} hidden={this.props.params.id !== 'null'}>
-                            <div className={style.inputBox}>
-                                <FormItem>
+
+                        {
+                            this.props.params.id !== 'null'?'':<div className={style.inputBBox}>
+                                <div className={style.inputBox}>
+                                    <FormItem>
                                     <span className={style.inputBoxT}>
                                         初始密码
                                     </span>
-                                    {getFieldDecorator('password', {
-                                        rules: [{required: true, message: '密码不得为空!'}],
-                                        initialValue: this.state.password
-                                    })(
-                                        <Input
-                                            // value={this.state.password}
-                                            // type="password"
-                                            onChange={(e) => {
-                                                this.setState({password: e.target.value})
-                                            }} size="large" placeholder="至少6位，数字+字母"/>)}
-                                </FormItem>
+                                        {getFieldDecorator('password', {
+                                            rules: [{required: true, message: '密码不得为空!'}],
+                                            initialValue: this.state.password
+                                        })(
+                                            <Input
+                                                // value={this.state.password}
+                                                // type="password"
+                                                onChange={(e) => {
+                                                    this.setState({password: e.target.value})
+                                                }} size="large" placeholder="至少6位，数字+字母"/>)}
+                                    </FormItem>
+                                </div>
+                                <a className={style.inputBBoxA} onClick={() => {
+                                    function shuffle(arr) {
+                                        arr = arr.split('')
+                                        var length = arr.length,
+                                            randomIndex,
+                                            temp;
+                                        while (length) {
+                                            randomIndex = Math.floor(Math.random() * (length--));
+                                            temp = arr[randomIndex];
+                                            arr[randomIndex] = arr[length];
+                                            arr[length] = temp
+                                        }
+                                        arr = arr.join('')
+                                        return arr;
+                                    }
+                                    function randomPassword(size) {
+                                        let up = new Array('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z');
+                                        let down = new Array('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'm', 'n', 'p', 'Q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z');
+                                        let num = new Array('0', '1', '2', '3', '4', '5', '6', '7', '8', '9');
+                                        let special = new Array('-', '.', '~', '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '_', ':', '<', '>', '?');
+                                        let uplength = up.length;//数组长度
+                                        var createPassword = '';
+                                        for (let i = 0; i < size; i++) {
+                                            let j = Math.floor(Math.random() * uplength);
+                                            createPassword += up[j];
+                                        }
+                                        var createPassword = '';
+                                        let downlength = down.length;//数组长度
+
+                                        for (let i = 0; i < size; i++) {
+                                            let j = Math.floor(Math.random() * downlength);
+                                            createPassword += down[j];
+                                        }
+                                        let numlength = num.length;//数组长度
+                                        for (let i = 0; i < size; i++) {
+                                            let j = Math.floor(Math.random() * numlength);
+                                            createPassword += num[j];
+                                        }
+
+                                        let speciallength = special.length;//数组长度
+                                        for (let i = 0; i < size; i++) {
+                                            let j = Math.floor(Math.random() * speciallength);
+                                            createPassword += special[j];
+                                        }
+                                        return createPassword;
+                                    }
+
+                                    let pwd = shuffle(randomPassword(4))
+                                    this.setState({password: pwd})
+                                }} href="javascript:void (0)">
+                                    随机生成
+                                </a>
                             </div>
-                            <a className={style.inputBBoxA} onClick={() => {
-                                function shuffle(arr) {
-                                    arr = arr.split('')
-                                    var length = arr.length,
-                                        randomIndex,
-                                        temp;
-                                    while (length) {
-                                        randomIndex = Math.floor(Math.random() * (length--));
-                                        temp = arr[randomIndex];
-                                        arr[randomIndex] = arr[length];
-                                        arr[length] = temp
-                                    }
-                                    arr = arr.join('')
-                                    return arr;
-                                }
-                                function randomPassword(size) {
-                                    let up = new Array('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z');
-                                    let down = new Array('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'm', 'n', 'p', 'Q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z');
-                                    let num = new Array('0', '1', '2', '3', '4', '5', '6', '7', '8', '9');
-                                    let special = new Array('-', '.', '~', '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '_', ':', '<', '>', '?');
-                                    let uplength = up.length;//数组长度
-                                    var createPassword = '';
-                                    for (let i = 0; i < size; i++) {
-                                        let j = Math.floor(Math.random() * uplength);
-                                        createPassword += up[j];
-                                    }
-                                    var createPassword = '';
-                                    let downlength = down.length;//数组长度
+                        }
 
-                                    for (let i = 0; i < size; i++) {
-                                        let j = Math.floor(Math.random() * downlength);
-                                        createPassword += down[j];
-                                    }
-                                    let numlength = num.length;//数组长度
-                                    for (let i = 0; i < size; i++) {
-                                        let j = Math.floor(Math.random() * numlength);
-                                        createPassword += num[j];
-                                    }
 
-                                    let speciallength = special.length;//数组长度
-                                    for (let i = 0; i < size; i++) {
-                                        let j = Math.floor(Math.random() * speciallength);
-                                        createPassword += special[j];
-                                    }
-                                    return createPassword;
-                                }
-
-                                let pwd = shuffle(randomPassword(4))
-                                this.setState({password: pwd})
-                            }} href="javascript:void (0)">
-                                随机生成
-                            </a>
-                        </div>
                         <div className={style.inputBox}>
                             <FormItem>
                                 <span className={style.inputBoxT}>

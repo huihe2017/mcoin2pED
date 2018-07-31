@@ -9,6 +9,7 @@
     "echarts": "^4.1.0",
     "plupload": "^2.3.6",
     "react": "15.5.4",
+    "react-copy-to-clipboard": "^5.0.1",
     "react-dom": "15.5.0",
     "react-draft-wysiwyg": "^1.12.13",
     "react-redux": "^5.0.6",

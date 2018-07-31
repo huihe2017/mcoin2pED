@@ -1,17 +1,16 @@
 import React from 'react'
 import style from './index.css'
-import {hashHistory,Link} from 'react-router'
-import {Button,Modal,Input} from 'antd';
+import {hashHistory, Link} from 'react-router'
+import {Button, Modal, Input} from 'antd';
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
-import {getWalletMsg} from "../../actions/wallet";
+import {getWalletMsg, getInAddress} from "../../actions/wallet";
+import {CopyToClipboard} from 'react-copy-to-clipboard';
 
 class Home extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-
-        };
+        this.state = {};
     }
 
     componentDidMount() {
@@ -38,30 +37,43 @@ class Home extends React.Component {
                                 <span className={style.contentOnePCT}>
                                     比特币
                                 </span>
-                                <a href="javascript:void (0)" className={style.contentOnePCB}                               onClick={ ()=>
-                                    Modal.info({
-                                        iconType:'',
-                                        okText:'复制地址并关闭',
-                                        content: (
-                                            <div className={style.inputBox}>
+                                <a href="javascript:void (0)" className={style.contentOnePCB} onClick={() =>
+
+                                    this.props.getInAddress({
+                                        currecy:'BTC'
+                                    },()=>{
+                                        Modal.info({
+                                            iconType: '',
+                                            okText: <CopyToClipboard text={this.props.wallet.inCoinAddress}
+                                            >
+                                                <button style={{width: 209, height: 32}}>复制地址并关闭
+                                                </button>
+                                            </CopyToClipboard>,
+                                            content: (
+                                                <div className={style.inputBox}>
                                                      <span className={style.inputBoxT}>
                                                          BTC转入地址
                                                      </span>
-                                                <Input defaultValue={'1qw6e1qw3e156qwe516qw5e166'} disabled={ true } size="large" />
+                                                    <Input defaultValue={this.props.wallet.inCoinAddress} disabled={true}
+                                                           size="large"/>
 
-                                            </div>
-                                        ),
-                                        onOk() {
-                                            console.log(1)
-                                        }
+                                                </div>
+                                            ),
+                                            onOk() {
+                                                console.log(1)
+                                            }
+                                        })
                                     })
+
+
                                 }>
                                     立即转入
                                 </a>
                             </div>
                             <div className={style.contentOnePC2}>
                                 <span className={style.contentOnePCT}>
-                                    钱包余额    {this.props.wallet.walletMsg.list[0].notEnough===0?<span className={style.contentOnePCTT}>余额不足</span>:''}
+                                    钱包余额 {this.props.wallet.walletMsg.list[0].notEnough === 0 ?
+                                    <span className={style.contentOnePCTT}>余额不足</span> : ''}
                                 </span>
                                 <span className={style.contentOnePCB2}>
                                     {this.props.wallet.walletMsg.list[0].balance}
@@ -70,13 +82,13 @@ class Home extends React.Component {
                             <div className={style.contentOnePC3}>
                                 <span className={style.contentOnePCB1}>
                                     <span className={style.contentOnePCBCT}>今日转入</span>
-                                    <span className={style.contentOnePCBC} style={{color:'#f49193'}}>
+                                    <span className={style.contentOnePCBC} style={{color: '#f49193'}}>
                                         {this.props.wallet.walletMsg.list[0].todayCharge}
                                     </span>
                                 </span>
                                 <span className={style.contentOnePCB1}>
                                     <span className={style.contentOnePCBCT}>今日转出</span>
-                                    <span className={style.contentOnePCBC} style={{color:'#7fd5ac'}}>
+                                    <span className={style.contentOnePCBC} style={{color: '#7fd5ac'}}>
                                         {this.props.wallet.walletMsg.list[0].todayWithdraw}
                                     </span>
                                 </span>
@@ -87,17 +99,25 @@ class Home extends React.Component {
                                 <span className={style.contentOnePCT}>
                                     以太坊
                                 </span>
-                                <a href="javascript:void (0)"
-                                   onClick={ ()=>
+                                <a href="javascript:void (0)" className={style.contentOnePCB} onClick={() =>
+
+                                    this.props.getInAddress({
+                                        currecy:'ETH'
+                                    },()=>{
                                         Modal.info({
-                                            iconType:'',
-                                            okText:'复制地址并关闭',
+                                            iconType: '',
+                                            okText: <CopyToClipboard text={this.props.wallet.inCoinAddress}
+                                            >
+                                                <button style={{width: 209, height: 32}}>复制地址并关闭
+                                                </button>
+                                            </CopyToClipboard>,
                                             content: (
                                                 <div className={style.inputBox}>
                                                      <span className={style.inputBoxT}>
                                                          ETH转入地址
                                                      </span>
-                                                    <Input defaultValue={'1qw6e1qw3e156qwe516qw5e166'} disabled={ true } size="large" />
+                                                    <Input defaultValue={this.props.wallet.inCoinAddress} disabled={true}
+                                                           size="large"/>
 
                                                 </div>
                                             ),
@@ -105,14 +125,17 @@ class Home extends React.Component {
                                                 console.log(1)
                                             }
                                         })
-                                    }
-                                className={style.contentOnePCB}>
+                                    })
+
+
+                                }>
                                     立即转入
                                 </a>
                             </div>
                             <div className={style.contentOnePC2}>
                                 <span className={style.contentOnePCT}>
-                                    钱包余额    {this.props.wallet.walletMsg.list[1].notEnough===0?<span className={style.contentOnePCTT}>余额不足</span>:''}
+                                    钱包余额 {this.props.wallet.walletMsg.list[1].notEnough === 0 ?
+                                    <span className={style.contentOnePCTT}>余额不足</span> : ''}
                                 </span>
                                 <span className={style.contentOnePCB2}>
                                     {this.props.wallet.walletMsg.list[1].balance}
@@ -121,13 +144,13 @@ class Home extends React.Component {
                             <div className={style.contentOnePC3}>
                                 <span className={style.contentOnePCB1}>
                                     <span className={style.contentOnePCBCT}>今日转入</span>
-                                    <span className={style.contentOnePCBC} style={{color:'#f49193'}}>
+                                    <span className={style.contentOnePCBC} style={{color: '#f49193'}}>
                                         {this.props.wallet.walletMsg.list[1].todayCharge}
                                     </span>
                                 </span>
                                 <span className={style.contentOnePCB1}>
                                     <span className={style.contentOnePCBCT}>今日转出</span>
-                                    <span className={style.contentOnePCBC} style={{color:'#7fd5ac'}}>
+                                    <span className={style.contentOnePCBC} style={{color: '#7fd5ac'}}>
                                         {this.props.wallet.walletMsg.list[1].todayWithdraw}
                                     </span>
                                 </span>
@@ -230,7 +253,8 @@ function mapStateToProps(state, props) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        getWalletMsg: bindActionCreators(getWalletMsg, dispatch)
+        getWalletMsg: bindActionCreators(getWalletMsg, dispatch),
+        getInAddress: bindActionCreators(getInAddress, dispatch)
     }
 }
 
