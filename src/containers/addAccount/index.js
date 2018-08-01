@@ -69,7 +69,7 @@ class Home extends React.Component {
         }
 
         this.props.getRoleList({
-            status: 2
+            status: 1
         },()=>{
 
         })

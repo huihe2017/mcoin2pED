@@ -59,7 +59,7 @@ class Home extends React.Component {
 
     componentDidMount() {
         this.props.getRoleList({
-            status:1
+            status:2
         })
     }
 

@@ -47,3 +47,9 @@ body,html{
 .ant-layout-content{
     min-height: auto!important;
 }
+.ant-notification{
+    right: 50%!important;
+    margin-right: -168px;
+    top: 50%!important;
+    margin-top: -30px!important;
+}

@@ -47,6 +47,12 @@ class Home extends React.Component {
 
                 this.props.createNotic(param, () => {
                     this.props.history.go(-1)
+
+                    // notification.config({
+                    //     placement: 'bottomRight',
+                    //     bottom: 50,
+                    //     duration: 3,
+                    // });
                     notification.open({
                         message: '提示',
                         description: '操作成功',
