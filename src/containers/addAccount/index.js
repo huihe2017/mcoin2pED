@@ -20,6 +20,7 @@ class Home extends React.Component {
     }
 
     handleChange = (value) => {
+        console.log(value)
         this.setState({roles: value})
     }
 
@@ -55,11 +56,22 @@ class Home extends React.Component {
             })
 
             this.setState(...filterData)
+            this.setState({
+                roles: (() => {
+                    let arr = [];
+                    filterData[0].roles && filterData[0].roles.map((obj) => {
+                        arr.push(obj.id+"")
+                    })
+                    return arr
+                })(),
+            })
             //this.props.editAccountMsg(filterData)
         }
 
         this.props.getRoleList({
             status: 2
+        },()=>{
+
         })
     }
 
@@ -140,7 +152,6 @@ class Home extends React.Component {
                                             let j = Math.floor(Math.random() * uplength);
                                             createPassword += up[j];
                                         }
-                                        var createPassword = '';
                                         let downlength = down.length;//数组长度
 
                                         for (let i = 0; i < size; i++) {
@@ -207,13 +218,7 @@ class Home extends React.Component {
                                 角色
                             </span>
                                 {getFieldDecorator('selectRole', {
-                                    initialValue: (() => {
-                                        let arr = [];
-                                        this.state.roles && this.state.roles.map((obj) => {
-                                            arr.push(obj.name)
-                                        })
-                                        return arr
-                                    })(),
+                                    initialValue: this.state.roles,
                                     rules: [
                                         {required: true, message: '请选择你的角色!'},
                                     ],
