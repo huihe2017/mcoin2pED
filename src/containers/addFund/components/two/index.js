@@ -162,11 +162,11 @@ class Home extends React.Component {
                                      限购次数（设置0则不限制限购次数）
                                  </span>
                                 {getFieldDecorator('limit', {
-                                    initialValue: this.props.fund.editFundData.limitSoppingTimes,
+                                    initialValue: this.props.fund.editFundData.limitShoppingTimes,
                                     rules: [{required: true, message: '请填写限购次数!'}],
                                 })(
                                     <Input onChange={(e) => {
-                                        this.props.setFundEditData({limitSoppingTimes: e.target.value})
+                                        this.props.setFundEditData({limitShoppingTimes: e.target.value})
                                     }} size="large" placeholder="请填写限购次数"/>)}
                             </FormItem>
                         </div>
@@ -195,8 +195,11 @@ class Home extends React.Component {
                                         //
                                         // })
                                         axios.defaults.headers.common['adminToken'] = sessionStorage.adminToken;
-                                        axios.get(config.api_url + 'fund/ratetemplet?adminToken=' + sessionStorage.getItem('adminToken'), {
-                                            responseType: 'blob'
+                                        axios.get(config.api_url + 'fund/ratetemplet', {
+                                            responseType: 'blob',
+                                            headers: {
+                                                responseType: 'blob'
+                                            }
                                         }).then(function (response) {
                                         }).catch(function (error) {
 

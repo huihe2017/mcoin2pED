@@ -64,7 +64,7 @@ class Home extends React.Component {
                     <span className={style.contentC}>
                         限购次数：
                         <span className={style.contentCC}>
-                            {this.props.data.limitSoppingTimes}
+                            {this.props.data.limitShoppingTimes}
                         </span>
                     </span>
                     <span className={style.contentC}>
