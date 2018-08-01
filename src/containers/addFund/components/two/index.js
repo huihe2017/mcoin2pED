@@ -195,7 +195,7 @@ class Home extends React.Component {
                                         //
                                         // })
                                         axios.defaults.headers.common['adminToken'] = sessionStorage.adminToken;
-                                        axios.get('http://issuecdn.baidupcs.com/issue/netdisk/yunguanjia/BaiduNetdisk_6.2.0.exe', {
+                                        axios.get(config.api_url + 'fund/ratetemplet?adminToken=' + sessionStorage.getItem('adminToken'), {
                                             responseType: 'blob'
                                         }).then(function (response) {
                                         }).catch(function (error) {
