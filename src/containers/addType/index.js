@@ -81,7 +81,7 @@ class Home extends React.Component {
                     </div>
                     <div className={style.button}>
                         <Button type="primary" htmlType="submit" size={'large'}>创建</Button>
-                        <Button size={'large'}>取消</Button>
+                        <Button size={'large'} onClick={()=>hashHistory.push('/informationType')}>取消</Button>
                     </div>
                 </Form>
             </div>
