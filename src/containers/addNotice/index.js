@@ -6,6 +6,7 @@ import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 import {EditorState, convertToRaw, ContentState} from 'draft-js';
 import {createNotic, getNoticeList, setNoticeStatus} from '../../actions/notice';
+import draftToHtml from 'draftjs-to-html';
 import {filter} from '../../common/util';
 import {Layout, Menu, Breadcrumb, Icon, Button, Table, Dropdown, notification, Steps, Input, Select, Form} from 'antd';
 
@@ -35,7 +36,7 @@ class Home extends React.Component {
                 console.log(this.state.content)
 
                 let param = {
-                    content: this.state.content,
+                    content: draftToHtml(convertToRaw(this.state.editorState.getCurrentContent())),
                     type: this.state.type,
                     showOrder: this.state.showOrder,
                     title: this.state.title,
@@ -62,9 +63,9 @@ class Home extends React.Component {
         });
     }
 
-    onEditorStateChange: Function = (content) => {
+    onEditorStateChange: Function = (editorState) => {
         this.setState({
-            content: content.blocks[0].text,
+            editorState,
         });
     };
 
@@ -118,9 +119,10 @@ class Home extends React.Component {
                                     rules: [{required: true, message: '内容不得为空!'}],
                                 })(
                                     <Editor
+                                        editorState={this.state.editorState}
                                         wrapperClassName="demo-wrapper"
                                         editorClassName="demo-editor"
-                                        onChange={this.onEditorStateChange}
+                                        onEditorStateChange={this.onEditorStateChange}
                                     />)
                                 }
                             </FormItem>
