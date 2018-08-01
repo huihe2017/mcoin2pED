@@ -80,7 +80,7 @@ class Home extends React.Component {
     componentDidMount() {
         this.props.getInList({
             page:1,
-            currency:'btc'
+            currency:'BTC'
 
         })
     }
@@ -142,9 +142,9 @@ class Home extends React.Component {
 
                             })
                             this.setState({currency:e})
-                        }} value={'btc'} placeholder="请选择" defaultValue="all">
-                            <Option value="btc">BTC</Option>
-                            <Option value="eth">ETH</Option>
+                        }} value={'BTC'} placeholder="请选择" defaultValue="all">
+                            <Option value="BTC">BTC</Option>
+                            <Option value="ETH">ETH</Option>
                         </Select>
                     </div>
                 </div>
