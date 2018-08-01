@@ -107,7 +107,7 @@ class Home extends React.Component {
             if (!err) {
                 this.props.getWalletBillList({
                     page: 1,
-                    currecy: this.state.currecy,
+                    currency: this.state.currency,
                     type: this.state.type,
                     beginDate: this.state.beginDate,
                     endDate: this.state.endDate
@@ -186,7 +186,7 @@ class Home extends React.Component {
                                     // rules: [{required: true, message: '请选择货币类型!'}],
                                 })(
                                     <Select onChange={(e)=>{
-                                        this.setState({currecy:e})
+                                        this.setState({currency:e})
                                     }} placeholder="请选择货币类型">
                                         <Option value="btc">BTC</Option>
                                         <Option value="eth">ETH</Option>
@@ -225,7 +225,7 @@ class Home extends React.Component {
                         onChange={(pagination) => {
                             this.props.getWalletBillList({
                                 page: pagination.current,
-                                currecy: this.state.currecy,
+                                currency: this.state.currency,
                                 type: this.state.type,
                                 beginDate: this.state.beginDate,
                                 endDate: this.state.endDate

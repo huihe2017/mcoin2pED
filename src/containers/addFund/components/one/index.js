@@ -193,7 +193,7 @@ class Home extends React.Component {
                                 风险类型
                             </span>
                                 {getFieldDecorator('selectRisk', {
-                                    initialValue: this.props.fund.editFundData.riskType,
+                                    initialValue: this.props.fund.editFundData.riskType+'',
                                     rules: [
                                         {required: true, message: '请选择风险类型!'},
                                     ],

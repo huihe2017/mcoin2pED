@@ -40,7 +40,7 @@ class Home extends React.Component {
                                 <a href="javascript:void (0)" className={style.contentOnePCB} onClick={() =>
 
                                     this.props.getInAddress({
-                                        currecy:'BTC'
+                                        currency:'BTC'
                                     },()=>{
                                         Modal.info({
                                             iconType: '',
@@ -102,7 +102,7 @@ class Home extends React.Component {
                                 <a href="javascript:void (0)" className={style.contentOnePCB} onClick={() =>
 
                                     this.props.getInAddress({
-                                        currecy:'ETH'
+                                        currency:'ETH'
                                     },()=>{
                                         Modal.info({
                                             iconType: '',

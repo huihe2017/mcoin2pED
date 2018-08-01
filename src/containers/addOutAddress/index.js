@@ -25,7 +25,7 @@ class Home extends React.Component {
 
             let data = filter(this.props.wallet.outCoinAddressList.list,this.props.params.id)
             this.setState({
-                currecy: data.currecy,
+                currency: data.currency,
                 id: data.id,
                 address: data.address,
                 remark: data.remark
@@ -39,7 +39,7 @@ class Home extends React.Component {
             if (!err) {
 
                 let param = {
-                    currecy: this.state.currecy,
+                    currency: this.state.currency,
                     address: this.state.address,
                     remark: this.state.remark
                 }
@@ -102,12 +102,12 @@ class Home extends React.Component {
                                 转出货币类型
                             </span>
                                     {getFieldDecorator('selectCoin', {
-                                        initialValue: this.state.currecy,
+                                        initialValue: this.state.currency,
                                         rules: [
                                             {required: true, message: '请选择货币类型!'},
                                         ],
                                     })(<Select  onChange={(e) => {
-                                        this.setState({currecy: e})
+                                        this.setState({currency: e})
                                     }} placeholder="请选择">
                                         <Option value="btc">BTC</Option>
                                         <Option value="eth">ETC</Option>

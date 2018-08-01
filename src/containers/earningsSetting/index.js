@@ -329,8 +329,18 @@ class Home extends React.Component {
                                                 this.setState({month:e})
                                             })
                                         }} placeholder="选择月份">
-                                            <Option value="6">6月</Option>
-                                            <Option value="7">7月</Option>
+                                            <Option value="2018.01">1月</Option>
+                                            <Option value="2018.02">2月</Option>
+                                            <Option value="2018.03">3月</Option>
+                                            <Option value="2018.04">4月</Option>
+                                            <Option value="2018.05">5月</Option>
+                                            <Option value="2018.06">6月</Option>
+                                            <Option value="2018.07">7月</Option>
+                                            <Option value="2018.08">8月</Option>
+                                            <Option value="2018.09">9月</Option>
+                                            <Option value="2018.10">10月</Option>
+                                            <Option value="2018.11">11月</Option>
+                                            <Option value="2018.12">12月</Option>
                                         </Select>)}
                                 </div>
                             </FormItem>
