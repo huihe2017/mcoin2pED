@@ -37,7 +37,7 @@ class Home extends React.Component {
 
                 let param = {
                     withdrawAlarm: this.state.withdrawAlarm,
-                    balanceBtc: this.state.balanceBtc,
+                    balanceBTC: this.state.balanceBTC,
                     balanceETH: this.state.balanceETH,
                     withdrawNotice: this.state.withdrawNotice,
                     balanceNotice: this.state.balanceNotice,
@@ -192,11 +192,11 @@ class Home extends React.Component {
                                             BTC
                                         </span>
                                         {getFieldDecorator('BTC', {
-                                            initialValue: this.props.wallet.walletSetData.balanceBtc,
+                                            initialValue: this.props.wallet.walletSetData.balanceBTC,
                                             rules: [{required: true, message: '请填写警报额度!'}],
                                         })(
                                             <Input onChange={(e) => {
-                                                this.setState({balanceBtc: e.target.value})
+                                                this.setState({balanceBTC: e.target.value})
                                             }} size="large" placeholder="请填写警报额度"/>)}
                                     </div>
                                 </FormItem>
@@ -240,7 +240,7 @@ class Home extends React.Component {
                                             initialValue: this.props.wallet.walletSetData.withdrawNotice,
                                         })(
                                             <Checkbox onChange={(e) => {
-                                                this.setState({withdrawNotice: e})
+                                                this.setState({withdrawNotice: e.target.checked?1:0})
                                             }}>转出超出阈值短信通知</Checkbox>)}
                                     </div>
                                     <div style={{margin: '10px,0'}}>
@@ -249,7 +249,7 @@ class Home extends React.Component {
                                             initialValue: this.props.wallet.walletSetData.balanceNotice,
                                         })(
                                             <Checkbox onChange={(e) => {
-                                                this.setState({balanceNotice: e})
+                                                this.setState({balanceNotice: e.target.checked?1:0})
                                             }}>平台钱包余额过低短信通知</Checkbox>)}
                                     </div>
                                     <div style={{margin: '10px,0'}}>
@@ -258,7 +258,7 @@ class Home extends React.Component {
                                             initialValue: this.props.wallet.walletSetData.billNotice,
                                         })(
                                             <Checkbox onChange={(e) => {
-                                                this.setState({billNotice: e})
+                                                this.setState({billNotice: e.target.checked?1:0})
                                             }}>每日平台账单邮件通知</Checkbox>)}
                                     </div>
 

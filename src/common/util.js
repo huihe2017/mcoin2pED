@@ -35,7 +35,7 @@ export function changeJson(json, label, value) {
 export function setUrlK(ojson) {
     var s = '', name, key;
     for (var p in ojson) {
-        if (ojson[p] !== undefined) {
+        if (ojson[p] !== undefined && ojson[p] !== null) {
             if (ojson.hasOwnProperty(p)) {
                 name = p
             }

@@ -196,14 +196,14 @@ class Home extends React.Component {
                                         // })
                                         axios.defaults.headers.common['adminToken'] = sessionStorage.adminToken;
                                         axios.get(config.api_url + 'fund/ratetemplet', {
-                                            responseType: 'blob',
+                                            responseType: 'arraybuffer',
                                             headers: {
-                                                responseType: 'blob'
+                                                responseType: 'arraybuffer'
                                             }
                                         }).then(function (response) {
 
                                             //这里res.data是返回的blob对象
-                                            var blob = new Blob([response], {type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8'}); //application/vnd.openxmlformats-officedocument.spreadsheetml.sheet这里表示xlsx类型
+                                            var blob = new Blob([response.data], {type: 'application/x-xls'}); //application/vnd.openxmlformats-officedocument.spreadsheetml.sheet这里表示xlsx类型
                                             var downloadElement = document.createElement('a');
                                             var href = window.URL.createObjectURL(blob); //创建下载的链接
                                             downloadElement.href = href;
