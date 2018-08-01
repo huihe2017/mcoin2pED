@@ -46,7 +46,7 @@ class Home extends React.Component {
                                             iconType: '',
                                             okText: <CopyToClipboard text={this.props.wallet.inCoinAddress}
                                             >
-                                                <button style={{width: 209, height: 32}}>复制地址并关闭
+                                                <button className={style.but} >复制地址并关闭
                                                 </button>
                                             </CopyToClipboard>,
                                             content: (
@@ -108,7 +108,7 @@ class Home extends React.Component {
                                             iconType: '',
                                             okText: <CopyToClipboard text={this.props.wallet.inCoinAddress}
                                             >
-                                                <button style={{width: 209, height: 32}}>复制地址并关闭
+                                                <button className={style.but}>复制地址并关闭
                                                 </button>
                                             </CopyToClipboard>,
                                             content: (
