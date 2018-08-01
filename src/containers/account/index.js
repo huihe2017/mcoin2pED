@@ -90,7 +90,7 @@ class Home extends React.Component {
                                 <a target="_blank" rel="noopener noreferrer" href="javascript:void (0)" onClick={() => {
                                     this.props.setAccountStatus({
                                         userId: record.id,
-                                        status: record.status
+                                        status: record.status===1?0:1
                                     }, () => {
                                         notification.open({
                                             message: '提示',
