@@ -69,7 +69,7 @@ class Home extends React.Component {
     componentDidMount() {
         this.props.getOutAddressList({
             page: 1,
-            currency: 'BTC'
+            currency: ''
         })
     }
 
@@ -130,8 +130,8 @@ class Home extends React.Component {
                              this.setState({currency: e})
                         }} placeholder="请选择" defaultValue="all">
                             <Option value="all">全部</Option>
-                            <Option value="btc">BTC</Option>
-                            <Option value="eth">ETH</Option>
+                            <Option value="BTC">BTC</Option>
+                            <Option value="ETH">ETH</Option>
                         </Select>
                     </div>
                 </div>

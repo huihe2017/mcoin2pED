@@ -45,6 +45,9 @@ export default function wallet(state = initialState, action = {}) {
         case 'GET_RECHARGE_AUDIT_LIST':
             state.auditRechargeList = action.data.data
             return Object.assign({}, state, {})
+        case 'GET_CURRENCY_PRICE':
+            state[action.currency+'Price'] = action.data.data.price
+            return Object.assign({}, state, {})
         default:
             return state
     }

@@ -2,7 +2,7 @@ import React from 'react'
 import style from './index.css'
 import {hashHistory} from 'react-router'
 import {InCoin} from '../../actions/wallet'
-import {getRoleList} from '../../actions/role'
+import {getCurrencyPrice} from '../../actions/wallet'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 import {Layout, Menu, Breadcrumb, Icon, Button, Table, Dropdown, notification, Steps, Input, Select, Form} from 'antd';
@@ -122,6 +122,7 @@ class Home extends React.Component {
                                         买入单价（元）
                                     </span>
                                     {getFieldDecorator('buyMoney', {
+                                        initialValue: this.state.buyMoney,
                                         rules: [{required: true, message: '请填入买入单价!'}],
                                     })(
                                         <Input
@@ -140,7 +141,21 @@ class Home extends React.Component {
                                         size="large" placeholder=""/>)}
                                 </FormItem>
                             </div>
-                            <a className={style.inputBBoxA} href="javascript:void (0)">
+                            <a onClick={()=>{
+                                if(!this.state.currency){
+                                    notification.open({
+                                        message: '提示',
+                                        description: '请选择币种',
+                                    });
+                                }else {
+                                    this.props.getCurrencyPrice({
+                                        currency:this.state.currency
+                                    },()=>{
+                                        console.log(this.props.wallet)
+                                        this.setState({buyMoney:this.props.wallet[this.state.currency+'Price']})
+                                    })
+                                }
+                            }} className={style.inputBBoxA} href="javascript:void (0)">
                                 查询最新单价
                             </a>
                         </div>
@@ -193,14 +208,14 @@ class Home extends React.Component {
 
 function mapStateToProps(state, props) {
     return {
-        role: state.role,
+        wallet: state.wallet,
         account: state.account
     }
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        InCoin: bindActionCreators(InCoin, dispatch)
+        getCurrencyPrice: bindActionCreators(getCurrencyPrice, dispatch)
     }
 }
 

@@ -97,7 +97,7 @@ class Home extends React.Component {
                             <a target="_blank" rel="noopener noreferrer" href="javascript:void (0)" onClick={() => {
                                 this.props.setRoleStatus({
                                     roleId:record.id,
-                                    status:record.status
+                                    status:record.status===1?0:1
                                 },()=>{
                                     notification.open({
                                         message: '提示',
@@ -118,7 +118,7 @@ class Home extends React.Component {
         return (
             <div className={style.wlop}>
                 <span className={style.title}>角色管理</span>
-                <Button type="primary" size='large' onClick={() => hashHistory.push('/addRole')}><Link to={'/addRole/null'} >创建角色</Link></Button>
+                <Button type="primary" size='large'><Link to={'/addRole/null'} >创建角色</Link></Button>
                 <div className={style.table}>
                     <Table columns={columns} pagination={false} dataSource={this.props.role.roleList.list}/>
                 </div>

@@ -122,7 +122,7 @@ class Home extends React.Component {
                                                 // value={this.state.password}
                                                 // type="password"
                                                 onChange={(e) => {
-                                                    this.setState({password: e.target.value})
+                                                     this.setState({password: e.target.value})
                                                 }} size="large" placeholder="至少6位，数字+字母"/>)}
                                     </FormItem>
                                 </div>
@@ -148,10 +148,10 @@ class Home extends React.Component {
                                         let special = new Array('-', '.', '~', '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '_', ':', '<', '>', '?');
                                         let uplength = up.length;//数组长度
                                         var createPassword = '';
-                                        for (let i = 0; i < size; i++) {
-                                            let j = Math.floor(Math.random() * uplength);
-                                            createPassword += up[j];
-                                        }
+                                        // for (let i = 0; i < size; i++) {
+                                        //     let j = Math.floor(Math.random() * uplength);
+                                        //     createPassword += up[j];
+                                        // }
                                         let downlength = down.length;//数组长度
 
                                         for (let i = 0; i < size; i++) {
@@ -165,10 +165,10 @@ class Home extends React.Component {
                                         }
 
                                         let speciallength = special.length;//数组长度
-                                        for (let i = 0; i < size; i++) {
-                                            let j = Math.floor(Math.random() * speciallength);
-                                            createPassword += special[j];
-                                        }
+                                        // for (let i = 0; i < size; i++) {
+                                        //     let j = Math.floor(Math.random() * speciallength);
+                                        //     createPassword += special[j];
+                                        // }
                                         return createPassword;
                                     }
 

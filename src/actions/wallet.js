@@ -360,3 +360,18 @@ export function auditRecharge(data, callback) {
         })
     }
 }
+
+export function getCurrencyPrice(data, callback) {
+    return dispatch => {
+        http({
+            type: 'post',
+            data,
+            callback,
+            url: 'wallet/queryprice',
+            success: (response) => {
+                dispatch({type: 'GET_CURRENCY_PRICE', data: response.data,currency:data.currency})
+            }
+
+        })
+    }
+}
