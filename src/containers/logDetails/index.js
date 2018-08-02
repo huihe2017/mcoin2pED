@@ -23,7 +23,7 @@ class Home extends React.Component {
         if (!this.props.log.logDetails) {
             return null
         }
-        debugger
+
         return (
             <div className={style.wlop}>
                 <span className={style.title}>日志详情</span>

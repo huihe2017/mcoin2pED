@@ -73,7 +73,7 @@ class Home extends React.Component {
 
         return (
             <div className={style.wlop}>
-                <span className={style.title}>创建基金</span>
+                <span className={style.title}>{this.props.params.id!=='null'?'编辑基金':'创建基金'}</span>
                 <Steps current={this.state.current}>
                     <Step title="基础信息"/>
                     <Step title="基金参数"/>

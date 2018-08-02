@@ -59,8 +59,10 @@ class Home extends React.Component {
     }
 
     handleClose = (removedTag) => {
+        console.log(3333,this.state.tags)
+        console.log(3333,removedTag)
         const tags = this.state.tags.filter(tag => tag !== removedTag);
-        console.log(tags);
+        console.log(33334,tags)
         this.setState({tags});
     }
 
@@ -148,7 +150,6 @@ class Home extends React.Component {
     }
 
     render() {
-        debugger
         if (!this.props.wallet.walletSetData) {
             return null
         }
@@ -273,9 +274,10 @@ class Home extends React.Component {
                                         {tags.map((tag, index) => {
                                             let data = this.props.user.allUser && filter(this.props.user.allUser.list, tag)
                                             tag = data.name
+                                            let id = data.id
                                             const isLongTag = tag.length > 3;
                                             const tagElem = (
-                                                <Tag key={tag} closable={true} afterClose={() => this.handleClose(tag)}>
+                                                <Tag key={tag} closable={true} afterClose={() => this.handleClose(id)}>
                                                     {isLongTag ? `${tag.slice(0, 3)}...` : tag}
                                                 </Tag>
                                             );
@@ -313,9 +315,10 @@ class Home extends React.Component {
                                         {tags1.map((tag, index) => {
                                             let data = this.props.user.allUser && filter(this.props.user.allUser.list, tag)
                                             tag = data.name
+                                            let id = data.id
                                             const isLongTag = tag.length > 3;
                                             const tagElem = (
-                                                <Tag key={tag} closable={true} afterClose={() => this.handleClose(tag)}>
+                                                <Tag key={tag} closable={true} afterClose={() => this.handleClose1(id)}>
                                                     {isLongTag ? `${tag.slice(0, 3)}...` : tag}
                                                 </Tag>
                                             );

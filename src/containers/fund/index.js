@@ -1,10 +1,19 @@
 import React from 'react'
 import style from './index.css'
-import {hashHistory,Link} from 'react-router'
+import {hashHistory, Link} from 'react-router'
 import Header1 from '../../components/header'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
-import {getFundList, setRecommend, cancelRecommend, applyStop,applyUse,removeFund,getFundDetails} from '../../actions/fund'
+import {
+    getFundList,
+    setRecommend,
+    cancelRecommend,
+    applyStop,
+    applyUse,
+    removeFund,
+    getFundDetails,
+    clearEditFundData
+} from '../../actions/fund'
 import {Layout, Menu, Breadcrumb, Icon, Button, Table, Dropdown, notification, Modal, Input, DatePicker} from 'antd';
 import {Form} from "antd/lib/index";
 
@@ -85,22 +94,22 @@ class Home extends React.Component {
                 title: '状态',
                 dataIndex: 'status',
                 render: (text, record) => {
-                    if (text ==0) {
+                    if (text == 0) {
                         return '待审核'
                     }
-                    if (text ==1) {
+                    if (text == 1) {
                         return '上线'
                     }
-                    if (text ==2) {
+                    if (text == 2) {
                         return '暂停待审核'
                     }
-                    if (text ==3) {
+                    if (text == 3) {
                         return '已关闭购买入口'
                     }
-                    if (text ==4) {
+                    if (text == 4) {
                         return '下线'
                     }
-                    if (text ==5) {
+                    if (text == 5) {
                         return '移除'
                     }
                 }
@@ -120,16 +129,16 @@ class Home extends React.Component {
                         <Dropdown trigger={['click']} overlay={<Menu>
                             <Menu.Item>
                                 <a target="_blank" rel="noopener noreferrer" href="javascript:void (0)" onClick={() => {
-                                   this.props.getFundDetails({
-                                       id:record.id
-                                   },()=>{
+                                    this.props.getFundDetails({
+                                        id: record.id
+                                    }, () => {
 
-                                       hashHistory.push('/addFund')
-                                   })
+                                        hashHistory.push('/addFund/' + record.id)
+                                    })
                                 }}>编辑</a>
                             </Menu.Item>
                             <Menu.Item>
-                                <Link to={'/earningsSetting/'+record.id}>收益配置</Link>
+                                <Link to={'/earningsSetting/' + record.id}>收益配置</Link>
                             </Menu.Item>
                             <Menu.Item>
                                 {
@@ -160,7 +169,7 @@ class Home extends React.Component {
                             </Menu.Item>
                             <Menu.Item>
                                 {
-                                    record.status ==1 ?
+                                    record.status == 1 ?
                                         <a target="_blank" rel="noopener noreferrer" href="javascript:void (0)"
                                            onClick={() => {
                                                this.props.applyStop({
@@ -175,7 +184,7 @@ class Home extends React.Component {
                                            }>暂停</a> : ''
                                 }
                                 {
-                                    record.status ==4 ?
+                                    record.status == 4 ?
                                         <a target="_blank" rel="noopener noreferrer" href="javascript:void (0)"
                                            onClick={() => {
                                                this.props.applyUse({
@@ -190,7 +199,7 @@ class Home extends React.Component {
                                            }>启用</a> : ''
                                 }
                                 {
-                                    (record.status ==0||record.status ==2||record.status ==3) ?
+                                    (record.status == 0 || record.status == 2 || record.status == 3) ?
                                         <a target="_blank" rel="noopener noreferrer" href="javascript:void (0)"
                                            onClick={() => {
                                                this.props.removeFund({
@@ -205,7 +214,7 @@ class Home extends React.Component {
                                            }>移除</a> : ''
                                 }
                                 {
-                                    (record.status ==5) ?
+                                    (record.status == 5) ?
                                         '' : ''
                                 }
 
@@ -222,9 +231,13 @@ class Home extends React.Component {
         return (
             <div className={style.wlop}>
                 <span className={style.title}>基金管理</span>
-                <Button type="primary" size='large' onClick={() => hashHistory.push('/addFund')}>创建基金</Button>
+                <Button type="primary" size='large' onClick={() => {
+
+                    this.props.clearEditFundData()
+                    hashHistory.push('/addFund/null')
+                }}>创建基金</Button>
                 <div className={style.table}>
-                    <Table  pagination={{total:this.props.fund.fundList.pager.total}} onChange={(pagination) => {
+                    <Table pagination={{total: this.props.fund.fundList.pager.total}} onChange={(pagination) => {
                         this.props.getFundList({
                             page: pagination.current
                         })
@@ -279,6 +292,7 @@ function mapStateToProps(state, props) {
 function mapDispatchToProps(dispatch) {
     return {
         getFundList: bindActionCreators(getFundList, dispatch),
+        clearEditFundData: bindActionCreators(clearEditFundData, dispatch),
         setRecommend: bindActionCreators(setRecommend, dispatch),
         cancelRecommend: bindActionCreators(cancelRecommend, dispatch),
         removeFund: bindActionCreators(removeFund, dispatch),

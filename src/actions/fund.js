@@ -3,26 +3,27 @@ import {http} from '../common/util'
 export function getFundList(data, callback) {
     return dispatch => {
         http({
-            type:'post',
+            type: 'post',
             data,
             callback,
-            url:'fund/fundlist',
-            success:(response)=>{
+            url: 'fund/fundlist',
+            success: (response) => {
                 dispatch({type: 'GET_FUND_LIST', data: response.data})
             }
 
         })
     }
 }
+
 export function setRecommend(data, callback) {
     return dispatch => {
         http({
-            type:'post',
+            type: 'post',
             data,
             callback,
-            url:'fund/recommend',
-            success:(response)=>{
-                dispatch({type: 'SET_RECOMMEND', data:data})
+            url: 'fund/recommend',
+            success: (response) => {
+                dispatch({type: 'SET_RECOMMEND', data: data})
             }
 
         })
@@ -32,12 +33,12 @@ export function setRecommend(data, callback) {
 export function cancelRecommend(data, callback) {
     return dispatch => {
         http({
-            type:'post',
+            type: 'post',
             data,
             callback,
-            url:'fund/cancelrecommend  ',
-            success:(response)=>{
-                dispatch({type: 'CANCEL_RECOMMEND', data:data})
+            url: 'fund/cancelrecommend  ',
+            success: (response) => {
+                dispatch({type: 'CANCEL_RECOMMEND', data: data})
             }
 
         })
@@ -47,12 +48,12 @@ export function cancelRecommend(data, callback) {
 export function applyStop(data, callback) {
     return dispatch => {
         http({
-            type:'post',
+            type: 'post',
             data,
             callback,
-            url:'fund/applystop  ',
-            success:(response)=>{
-                dispatch({type: 'APPLY_STOP', data:data})
+            url: 'fund/applystop  ',
+            success: (response) => {
+                dispatch({type: 'APPLY_STOP', data: data})
             }
 
         })
@@ -62,12 +63,12 @@ export function applyStop(data, callback) {
 export function applyUse(data, callback) {
     return dispatch => {
         http({
-            type:'post',
+            type: 'post',
             data,
             callback,
-            url:'fund/applyuse  ',
-            success:(response)=>{
-                dispatch({type: 'APPLY_USE', data:data})
+            url: 'fund/applyuse  ',
+            success: (response) => {
+                dispatch({type: 'APPLY_USE', data: data})
             }
 
         })
@@ -77,25 +78,26 @@ export function applyUse(data, callback) {
 export function removeFund(data, callback) {
     return dispatch => {
         http({
-            type:'post',
+            type: 'post',
             data,
             callback,
-            url:'fund/remove',
-            success:(response)=>{
-                dispatch({type: 'REMOVE_FUND', data:data})
+            url: 'fund/remove',
+            success: (response) => {
+                dispatch({type: 'REMOVE_FUND', data: data})
             }
 
         })
     }
 }
+
 export function createFund(data, callback) {
     return dispatch => {
         http({
-            type:'post',
+            type: 'post',
             data,
             callback,
-            url:'fund/createfund',
-            success:(response)=>{
+            url: 'fund/createfund',
+            success: (response) => {
             }
 
         })
@@ -105,12 +107,12 @@ export function createFund(data, callback) {
 export function getIncomeCfgData(data, callback) {
     return dispatch => {
         http({
-            type:'post',
+            type: 'post',
             data,
             callback,
-            url:'fund/profit',
-            success:(response)=>{
-                dispatch({type: 'GET_INCOME_CFG_DATA', data:response.data})
+            url: 'fund/profit',
+            success: (response) => {
+                dispatch({type: 'GET_INCOME_CFG_DATA', data: response.data})
             }
         })
     }
@@ -119,11 +121,11 @@ export function getIncomeCfgData(data, callback) {
 export function setProfit(data, callback) {
     return dispatch => {
         http({
-            type:'post',
+            type: 'post',
             data,
             callback,
-            url:'fund/setprofit',
-            success:(response)=>{
+            url: 'fund/setprofit',
+            success: (response) => {
                 //dispatch({type: 'SET_PROFIT', data:data})
             }
         })
@@ -133,12 +135,12 @@ export function setProfit(data, callback) {
 export function getProfitList(data, callback) {
     return dispatch => {
         http({
-            type:'post',
+            type: 'post',
             data,
             callback,
-            url:'fund/profitstatlist',
-            success:(response)=>{
-                dispatch({type: 'GET_PROFIT_LIST', data:response.data})
+            url: 'fund/profitstatlist',
+            success: (response) => {
+                dispatch({type: 'GET_PROFIT_LIST', data: response.data})
             }
         })
     }
@@ -146,18 +148,18 @@ export function getProfitList(data, callback) {
 
 export function setFundEditData(data, callback) {
     return dispatch => {
-        dispatch({type: 'SET_FUND_EDIT_DATA', data:data})
+        dispatch({type: 'SET_FUND_EDIT_DATA', data: data})
     }
 }
 
 export function exportProfit(data, callback) {
     return dispatch => {
         http({
-            type:'post',
+            type: 'post',
             data,
             callback,
-            url:'fund/exportprofit',
-            success:(response)=>{
+            url: 'fund/exportprofit',
+            success: (response) => {
                 //dispatch({type: 'GET_PROFIT_LIST', data:response.data})
             }
         })
@@ -167,12 +169,12 @@ export function exportProfit(data, callback) {
 export function getFundDetails(data, callback) {
     return dispatch => {
         http({
-            type:'post',
+            type: 'post',
             data,
             callback,
-            url:'fund/funddetail',
-            success:(response)=>{
-                dispatch({type: 'SET_FUND_EDIT_DATA', data:response.data.data})
+            url: 'fund/funddetail',
+            success: (response) => {
+                dispatch({type: 'SET_FUND_EDIT_DATA', data: response.data.data})
             }
         })
     }
@@ -181,13 +183,13 @@ export function getFundDetails(data, callback) {
 export function getAuditFundList(data, callback) {
     return dispatch => {
         http({
-            type:'post',
+            type: 'post',
             data,
             callback,
-            url:'audit/fund/checklist',
-            success:(response)=>{
+            url: 'audit/fund/checklist',
+            success: (response) => {
 
-                dispatch({type: 'GET_AUDIT_FUND_LIST', data:response.data})
+                dispatch({type: 'GET_AUDIT_FUND_LIST', data: response.data})
             }
         })
     }
@@ -196,11 +198,11 @@ export function getAuditFundList(data, callback) {
 export function auditReuseFund(data, callback) {
     return dispatch => {
         http({
-            type:'post',
+            type: 'post',
             data,
             callback,
-            url:'audit/fund/checkreuse',
-            success:(response)=>{
+            url: 'audit/fund/checkreuse',
+            success: (response) => {
 
             }
         })
@@ -210,13 +212,20 @@ export function auditReuseFund(data, callback) {
 export function auditCreateFund(data, callback) {
     return dispatch => {
         http({
-            type:'post',
+            type: 'post',
             data,
             callback,
-            url:'audit/fund/checkcreate',
-            success:(response)=>{
+            url: 'audit/fund/checkcreate',
+            success: (response) => {
 
             }
         })
+    }
+}
+
+export function clearEditFundData(data, callback) {
+    return dispatch => {
+        dispatch({type: 'CLEAR_EDIT_FUND_DATA'})
+
     }
 }

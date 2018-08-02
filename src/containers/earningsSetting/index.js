@@ -4,7 +4,7 @@ import {hashHistory} from 'react-router'
 import Header1 from '../../components/header'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
-import {getIncomeCfgData, getProfitList, setProfit,exportProfit} from '../../actions/fund'
+import {getIncomeCfgData, getProfitList, setProfit, exportProfit} from '../../actions/fund'
 import {toChartData} from "../../common/util";
 import {
     Layout,
@@ -23,6 +23,8 @@ import {
 import {Form} from "antd/lib/index";
 import echarts from 'echarts/lib/echarts';
 import 'echarts/lib/chart/line';
+import config from "../../config";
+import axios from "../../common/axiosConf";
 
 const {SubMenu} = Menu;
 const {Header, Content, Sider} = Layout;
@@ -108,7 +110,7 @@ class Home extends React.Component {
         }, () => {
             // 基于准备好的dom，初始化echarts实例
             var myChart = echarts.init(document.getElementById('main'));
-            debugger
+
             myChart.setOption({
                 tooltip: {
                     trigger: 'axis',
@@ -226,10 +228,10 @@ class Home extends React.Component {
     renderRateMsg = (profit) => {
         if (profit) {
 
-            if(profit-this.props.fund.income.rate>1){
-                return <span style={{color: 'red', marginLeft: 10}}>涨幅：{profit-this.props.fund.income.rate}%</span>
+            if (profit - this.props.fund.income.rate > 1) {
+                return <span style={{color: 'red', marginLeft: 10}}>涨幅：{profit - this.props.fund.income.rate}%</span>
             }
-            return <span style={{ marginLeft: 10}}>涨幅：{profit-this.props.fund.income.rate}%</span>
+            return <span style={{marginLeft: 10}}>涨幅：{profit - this.props.fund.income.rate}%</span>
         } else {
             return null
         }
@@ -247,7 +249,7 @@ class Home extends React.Component {
             {title: '合计', dataIndex: 'totalProfit', key: '2',}
         ];
 
-        this.props.fund.income.statList[0]&&this.props.fund.income.statList[0].profitDateList.map((a, b) => {
+        this.props.fund.income.statList[0] && this.props.fund.income.statList[0].profitDateList.map((a, b) => {
             let c = b
             ++c
             columns.push({title: c, dataIndex: 'profitDateList[' + b + '].profit'})
@@ -326,30 +328,56 @@ class Home extends React.Component {
                                                 id: this.props.params.id,
                                                 month: e
                                             }, () => {
-                                                this.setState({month:e})
+                                                this.setState({month: e})
                                             })
                                         }} placeholder="选择月份">
-                                            <Option value="2018.01">1月</Option>
-                                            <Option value="2018.02">2月</Option>
-                                            <Option value="2018.03">3月</Option>
-                                            <Option value="2018.04">4月</Option>
-                                            <Option value="2018.05">5月</Option>
-                                            <Option value="2018.06">6月</Option>
-                                            <Option value="2018.07">7月</Option>
-                                            <Option value="2018.08">8月</Option>
-                                            <Option value="2018.09">9月</Option>
-                                            <Option value="2018.10">10月</Option>
-                                            <Option value="2018.11">11月</Option>
-                                            <Option value="2018.12">12月</Option>
+                                            <Option value="2018.01">2018年1月</Option>
+                                            <Option value="2018.02">2018年2月</Option>
+                                            <Option value="2018.03">2018年3月</Option>
+                                            <Option value="2018.04">2018年4月</Option>
+                                            <Option value="2018.05">2018年5月</Option>
+                                            <Option value="2018.06">2018年6月</Option>
+                                            <Option value="2018.07">2018年7月</Option>
+                                            <Option value="2018.08">2018年8月</Option>
+                                            <Option value="2018.09">2018年9月</Option>
+                                            <Option value="2018.10">2018年10月</Option>
+                                            <Option value="2018.11">2018年11月</Option>
+                                            <Option value="2018.12">2018年12月</Option>
                                         </Select>)}
                                 </div>
                             </FormItem>
-                            <a className={style.contentTBA} onClick={()=>{
-                                this.props.exportProfit({
-                                    id: this.props.params.id,
-                                    month:this.state.month
-                                }, () => {
-                                })
+                            <a className={style.contentTBA} onClick={() => {
+                                axios.defaults.headers.common['adminToken'] = sessionStorage.adminToken;
+                                axios.post(config.api_url + 'fund/exportprofit',
+                                    {
+                                        id: this.props.params.id,
+                                        month: this.state.month
+                                    },
+                                    {
+                                        headers: {
+                                            responseType: 'arraybuffer'
+                                        }
+                                    }).then(function (response) {
+
+                                    //这里res.data是返回的blob对象
+                                    var blob = new Blob([response.data], {type: 'application/x-xls'}); //application/vnd.openxmlformats-officedocument.spreadsheetml.sheet这里表示xlsx类型
+                                    var downloadElement = document.createElement('a');
+                                    var href = window.URL.createObjectURL(blob); //创建下载的链接
+                                    downloadElement.href = href;
+                                    downloadElement.download = 'bills.xlsx'; //下载后文件名
+                                    document.body.appendChild(downloadElement);
+                                    downloadElement.click(); //点击下载
+                                    document.body.removeChild(downloadElement); //下载完成移除元素
+                                    window.URL.revokeObjectURL(href); //释放掉blob对象
+
+                                }).catch(function (error) {
+
+                                });
+                                // this.props.exportProfit({
+                                //     id: this.props.params.id,
+                                //     month:this.state.month
+                                // }, () => {
+                                // })
                             }} href="javascript:void (0)">导出表格</a>
                         </div>
                         <Table columns={columns} dataSource={this.props.fund.income.statList} scroll={{x: 500}}/>

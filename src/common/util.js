@@ -125,6 +125,6 @@ export function filter(list, id) {
             data = item
         }
     })
-    debugger
+
     return data
 }

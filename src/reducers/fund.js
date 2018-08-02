@@ -7,7 +7,7 @@ export default function fund(state = initialState, action = {}) {
             state.fundList = action.data.data
             return Object.assign({}, state, {})
         case 'SET_RECOMMEND':
-            debugger
+
             state.fundList.list.map((item,index)=>{
                 if(item.id===action.data.id){
                     state.fundList.list[index].recommend = state.fundList.list[index].recommend?0:1
@@ -54,6 +54,10 @@ export default function fund(state = initialState, action = {}) {
             return Object.assign({}, state, {})
         case 'GET_AUDIT_FUND_LIST':
             state.auditList =  action.data.data
+            return Object.assign({}, state, {})
+        case 'CLEAR_EDIT_FUND_DATA':
+
+            state.editFundData =  []
             return Object.assign({}, state, {})
         default:
             return state

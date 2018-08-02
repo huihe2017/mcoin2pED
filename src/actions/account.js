@@ -52,7 +52,7 @@ export function setAccountStatus(data, callback) {
             callback,
             url:'adm/userstatus',
             success:(response)=>{
-                debugger
+
                 dispatch({type: 'SET_ACCOUNT_STATUS', data: data})
             }
 

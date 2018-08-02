@@ -193,7 +193,7 @@ class Home extends React.Component {
     }
 
     changeTreeData = (data) => {
-        debugger
+
         let attributes = {
             //id: 'id',
             parentId: 'parent',

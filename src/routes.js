@@ -77,7 +77,7 @@ export default () => {
                 <Route path="/addType/:id" component={AddType}/>
                 <Route path="/addNotice/:id" component={AddNotice}/>
                 <Route path="/addInformation/:id" component={AddInformation}/>
-                <Route path="/addFund" component={AddFund}/>
+                <Route path="/addFund/:id" component={AddFund}/>
                 <Route path="/earningsSetting/:id" component={EarningsSetting}/>
                 <Route path="/addHome/:id" component={AddHome}/>
                 <Route path="/addOperation/:id" component={AddOperation}/>

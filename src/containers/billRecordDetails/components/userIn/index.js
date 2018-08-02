@@ -26,7 +26,7 @@ class Home extends React.Component {
         // if (!this.props.log.logDetails) {
         //     return null
         // }
-debugger
+
         return (
             <div className={style.content}>
                     <span className={style.contentC}>

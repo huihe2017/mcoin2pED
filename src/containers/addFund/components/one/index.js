@@ -193,16 +193,16 @@ class Home extends React.Component {
                                 风险类型
                             </span>
                                 {getFieldDecorator('selectRisk', {
-                                    initialValue: this.props.fund.editFundData.riskType+'',
+                                    initialValue: this.props.fund.editFundData.riskType,
                                     rules: [
                                         {required: true, message: '请选择风险类型!'},
                                     ],
                                 })(<Select onChange={(e) => {
                                     this.props.setFundEditData({riskType: e})
                                 }} placeholder="请选择">
-                                    <Option value="0">进取型</Option>
-                                    <Option value="1">成长型</Option>
-                                    <Option value="2">保守型</Option>
+                                    <Option value={0}>进取型</Option>
+                                    <Option value={1}>成长型</Option>
+                                    <Option value={2}>保守型</Option>
                                 </Select>)}
                             </FormItem>
                         </div>
