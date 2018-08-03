@@ -49,6 +49,7 @@ class Home extends React.Component {
         });
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
+
             if (!err) {
                 this.props.getOutOrderList({
                     page: 1,
@@ -56,7 +57,8 @@ class Home extends React.Component {
                     endDate: this.state.endDate,
                     currency: this.state.currency
                 }, () => {
-
+                    console.log(this.state.beginDate);
+                    console.log(this.state.endDate);
                 })
             }
         });
@@ -113,7 +115,28 @@ class Home extends React.Component {
             },
             {title: '币种', dataIndex: 'currency', key: 'currency'},
             {title: '转出金额', dataIndex: 'amount', key: 'amount'},
-            {title: '状态', dataIndex: 'auditStatus', key: 'auditStatus'},
+            {title: '状态',  key: 'auditStatus',
+                render:(record) => {
+                    // console.log(11,record.auditStatus);
+                    if(record.auditStatus===0){
+                        return '未完成'
+                    }else if(record.auditStatus==1){
+                        return '验证确认完成'
+                    }else if(record.auditStatus==2){
+                        return '管理员审核通过'
+                    }else if(record.auditStatus==3){
+                        return '转出发送成功'
+                    }else if(record.auditStatus==4){
+                        return '审核不通过'
+                    }else if(record.auditStatus==5){
+                        return '转出失败'
+                    }else if(record.auditStatus==6){
+                        return '币额已经退回'
+                    }else if(record.auditStatus==7){
+                        return '已取消'
+                    }
+                }
+            },
             // {
             //     title: '操作', key: 'action', render: (record) => (<a href='javascript:void (0)' onClick={() => {
             //         if (record.action === '确认转出') {
@@ -122,8 +145,10 @@ class Home extends React.Component {
             //     }}>{record.action}</a>),
             // },
             {
-                title: '操作', key: 'action', render: (record) => {
-                    return record.status ? <a onClick={() => {
+                title: '操作', key: 'action', render: (record,value) => {
+
+                    if(record.auditStatus==2){
+                        return  <a onClick={() => {
                             this.props.getConfirmOutMsg({
                                 id: record.id
                             }, () => {
@@ -134,8 +159,9 @@ class Home extends React.Component {
                             })
 
                         }
-                        } href='javascript:void (0)'>确认转出</a> :
-                        <a onClick={() => {
+                        } href='javascript:void (0)'>确认转出</a>
+                    }else if(record==4){
+                        return  <a onClick={() => {
                             this.props.returnFund({
                                 id: record.id
                             }, () => {
@@ -146,7 +172,20 @@ class Home extends React.Component {
                             })
                         }
                         } href='javascript:void (0)'>回退金额</a>
-                },
+                    }else if(record==5){
+                        return  <a onClick={() => {
+                            this.props.returnFund({
+                                id: record.id
+                            }, () => {
+                                notification.open({
+                                    message: '提示',
+                                    description: '操作成功',
+                                });
+                            })
+                        }
+                        } href='javascript:void (0)'>回退金额</a>
+                    }
+                }
             },
         ];
         const rangeConfig = {

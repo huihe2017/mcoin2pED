@@ -63,6 +63,26 @@ class Home extends React.Component {
         });
     }
 
+    check(record){
+        if(record===0){
+            return '未完成'
+        }else if(record===1){
+            return '验证确认完成'
+        }else if(record===2){
+            return '管理员审核通过'
+        }else if(record===3){
+            return '转出发送成功'
+        }else if(record===4){
+            return '审核不通过'
+        }else if(record===5){
+            return '转出失败'
+        }else if(record===6){
+            return '币额已经退回'
+        }else if(record===7){
+            return '已取消'
+        }
+    }
+
     render() {
         // if (!this.props.log.logDetails) {
         //     return null
@@ -138,7 +158,8 @@ class Home extends React.Component {
                     <span className={style.contentC}>
                         审核状态：
                         <span className={style.contentCC}>
-                            {this.state.auditStatus}
+                            {this.check(this.state.auditStatus)}
+
                         </span>
                     </span>
                 </div>

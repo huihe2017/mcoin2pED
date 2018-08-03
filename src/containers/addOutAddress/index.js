@@ -122,7 +122,7 @@ class Home extends React.Component {
                             <FormItem>
                                 <Button type="primary" htmlType="submit" size={'large'}>提交</Button>
                             </FormItem>
-                            <Button size={'large'}>放弃</Button>
+                            <Button size={'large'} onClick={()=>hashHistory.push('/outAddressManage')}>放弃</Button>
                         </div>
 
                     </Form>

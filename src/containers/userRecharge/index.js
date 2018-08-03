@@ -1,8 +1,7 @@
 import React from 'react'
 import style from './index.css'
 import {hashHistory} from 'react-router'
-import {InCoin} from '../../actions/wallet'
-import {getCurrencyPrice} from '../../actions/wallet'
+import {getCurrencyPrice,InCoin} from '../../actions/wallet'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 import {Layout, Menu, Breadcrumb, Icon, Button, Table, Dropdown, notification, Steps, Input, Select, Form} from 'antd';
@@ -162,7 +161,7 @@ class Home extends React.Component {
                         <div className={style.inputBox}>
                             <FormItem>
                                 <span className={style.inputBoxT}>
-                                    转入金额
+                                    转入币额
                                 </span>
                                 {getFieldDecorator('inMoney', {
                                     rules: [{required: true, message: '请填写转入金额!'}],
@@ -201,7 +200,6 @@ class Home extends React.Component {
                 </Form>
             </div>
 
-
         )
     }
 }
@@ -215,7 +213,8 @@ function mapStateToProps(state, props) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        getCurrencyPrice: bindActionCreators(getCurrencyPrice, dispatch)
+        getCurrencyPrice: bindActionCreators(getCurrencyPrice, dispatch),
+        InCoin: bindActionCreators(InCoin, dispatch)
     }
 }
 

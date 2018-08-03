@@ -165,9 +165,10 @@ class Home extends React.Component {
                                 currency:e
                             })
                             this.setState({currency:e})
-                        }} placeholder="请选择" defaultValue="all">
-                            <Option value="btc">BTC</Option>
-                            <Option value="eth">ETH</Option>
+                        }} placeholder="请选择" defaultValue="ALL">
+                            <Option value="BTC">BTC</Option>
+                            <Option value="ETH">ETH</Option>
+                            <Option value="ALL">ALL</Option>
                         </Select>
                     </div>
                 </div>
