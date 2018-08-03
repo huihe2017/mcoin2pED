@@ -73,7 +73,7 @@ class Home extends React.Component {
                     <span className={style.contentC}>
                         申请人：
                         <span className={style.contentCC}>
-                            {this.state.auditor}
+                            {this.state.applyUserName}
                         </span>
                     </span>
                     <span className={style.contentC}>

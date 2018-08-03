@@ -129,7 +129,7 @@ class Home extends React.Component {
 
             }, {
                 title: '操作人',
-                dataIndex: 'auditor'
+                dataIndex: 'applyUserName'
 
             }, {
                 title: '操作',
