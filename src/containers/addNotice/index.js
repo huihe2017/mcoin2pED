@@ -4,12 +4,13 @@ import {hashHistory} from 'react-router'
 import {Editor} from 'react-draft-wysiwyg';
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
-import {EditorState, convertToRaw, ContentState} from 'draft-js';
+import {EditorState, convertToRaw, ContentState,convertFromRaw} from 'draft-js';
 import {createNotic, getNoticeList, setNoticeStatus} from '../../actions/notice';
 import draftToHtml from 'draftjs-to-html';
 import {filter} from '../../common/util';
 import {Layout, Menu, Breadcrumb, Icon, Button, Table, Dropdown, notification, Steps, Input, Select, Form} from 'antd';
 
+import htmlToDraft from 'html-to-draftjs';
 
 const Option = Select.Option;
 const {SubMenu} = Menu;
@@ -69,12 +70,26 @@ class Home extends React.Component {
         });
     };
 
+	
+	getContent = (data)=>{
+		//data = '<p>-- -- 11111</p>';
+    const contentBlock = htmlToDraft(data);
+    if (contentBlock) {
+      const contentState = ContentState.createFromBlockArray(contentBlock.contentBlocks);
+      const editorState = EditorState.createWithContent(contentState);
+      this.state = {
+        editorState,
+      };
+	  return editorState
+    }
+	}
+	
     componentDidMount() {
         if (this.props.params.id !== 'null') {
 
             let data = filter(this.props.notice.noticeList.list,this.props.params.id)
             this.setState({
-                content: data.content,
+                content: this.getContent(data.content),
                 id: data.id,
                 type: data.type,
                 showOrder: data.showOrder,
@@ -110,22 +125,15 @@ class Home extends React.Component {
                         </div>
 
                         <div className={style.editorBox}>
-                            <FormItem>
-                                <span className={style.inputBoxT}>
-                                    内容
-                                </span>
-                                {getFieldDecorator('content', {
-                                    initialValue: this.state.content,
-                                    rules: [{required: true, message: '内容不得为空!'}],
-                                })(
-                                    <Editor
+                           
+							
+							<Editor
                                         editorState={this.state.editorState}
                                         wrapperClassName="demo-wrapper"
                                         editorClassName="demo-editor"
                                         onEditorStateChange={this.onEditorStateChange}
-                                    />)
-                                }
-                            </FormItem>
+                                    />
+							
                         </div>
 
                         <div className={style.inputBox}>

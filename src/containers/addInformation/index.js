@@ -24,6 +24,7 @@ import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 import draftToHtml from 'draftjs-to-html';
 import {createInfo, getInfoTypeList} from "../../actions/information";
+import htmlToDraft from 'html-to-draftjs';
 
 const Option = Select.Option;
 const {SubMenu} = Menu;
@@ -42,7 +43,18 @@ class Home extends React.Component {
     handleChange(value) {
         console.log(`Selected: ${value}`);
     }
-
+getContent = (data)=>{
+		//data = '<p>-- -- 11111</p>';
+    const contentBlock = htmlToDraft(data);
+    if (contentBlock) {
+      const contentState = ContentState.createFromBlockArray(contentBlock.contentBlocks);
+      const editorState = EditorState.createWithContent(contentState);
+      this.state = {
+        editorState,
+      };
+	  return editorState
+    }
+	}
     componentDidMount() {
         this.props.getInfoTypeList({},()=>{
             upLoad('img',(value)=>{
@@ -51,7 +63,7 @@ class Home extends React.Component {
             if(this.props.params.id!=='null'){
                 let data = filter(this.props.info.infoList.list,this.props.params.id)
                 this.setState({
-                    content: data.content,
+                    content: this.getContent(data.content),
                     id: data.id,
                     typeId: data.typeId,
                     coverUrl: data.coverUrl,

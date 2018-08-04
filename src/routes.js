@@ -47,13 +47,12 @@ import RechargeManage from './containers/rechargeManage/'
 import UserRecharge from './containers/userRecharge/'
 import RechargeRecordDetails from './containers/rechargeRecordDetails/'
 import CheckDetails from './containers/checkDetails/'
-
+import Xxx from './containers/xxx/'
 
 export default () => {
     return (
         <Router history={hashHistory}>
             <Route path="/login" component={Login}/>
-            <Route path="/pin" component={PIN}/>
             <Route path="/" component={Wrap}>
                 <Route path="/Account" component={Account}/>
                 <Route path="/auditFund" component={AuditFund}/>
@@ -99,7 +98,8 @@ export default () => {
                 <Route path="/userRecharge" component={UserRecharge}/>
                 <Route path="/rechargeRecordDetails/:id" component={RechargeRecordDetails}/>
                 <Route path="/checkDetails/:id" component={CheckDetails}/>
-
+				<Route path="/pin" component={PIN}/>
+				<Route path="/xxx" component={Xxx}/>
             </Route>
 
         </Router>

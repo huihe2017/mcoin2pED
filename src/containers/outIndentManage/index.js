@@ -172,19 +172,9 @@ class Home extends React.Component {
                             })
                         }
                         } href='javascript:void (0)'>回退金额</a>
-                    }else if(record==5){
-                        return  <a onClick={() => {
-                            this.props.returnFund({
-                                id: record.id
-                            }, () => {
-                                notification.open({
-                                    message: '提示',
-                                    description: '操作成功',
-                                });
-                            })
-                        }
-                        } href='javascript:void (0)'>回退金额</a>
-                    }
+                    }else{
+						return ''
+					}
                 }
             },
         ];

@@ -142,8 +142,8 @@ class Home extends React.Component {
 
     componentDidMount() {
         this.props.getWalletSetData({},()=>{
-            this.setState({tag:this.props.wallet.walletSetData.setting.smsNoticeAdmin})
-            this.setState({tag1:this.props.wallet.walletSetData.setting.mailNoticeAdmin})
+            this.setState({tag:this.props.wallet.walletSetData.smsNoticeAdmin})
+            this.setState({tag1:this.props.wallet.walletSetData.mailNoticeAdmin})
 
         })
         this.props.getAllUser({})
