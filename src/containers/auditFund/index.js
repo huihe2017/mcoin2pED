@@ -118,7 +118,7 @@ class Home extends React.Component {
                 dataIndex: 'modifyTime'
             },{
                 title: '基金名称',
-                dataIndex: 'name'
+                dataIndex: 'title'
             },{
                 title: '货币类型',
                 dataIndex: 'currency'
@@ -138,11 +138,23 @@ class Home extends React.Component {
             },{
                 title: '类型',
                 dataIndex: 'status',
+                render: (text, record) => {
+
+                    if(record.status==0){
+                        return '创建审核'
+                    }else if(record.status==2){
+                        return  '暂停审核'
+                    }else if(record.status==5){
+                        return  '重启审核'
+                    }
+
+
+                },
             },{
                 title: '操作',
                 render: (text, record) => {
 
-                    if(record.status==='1'){
+                    if(record.status==0){
                         return (
 
                             <Link to={'/auditFundDetails/'+record.id} className="ant-dropdown-link" href="#">
@@ -150,8 +162,15 @@ class Home extends React.Component {
                             </Link>
 
                         )
-                    }
-                    if(record.status==='4'){
+                    }else if(record.status==5){
+                        return (
+
+                            <Link to={'/checkDetails/'+record.id} className="ant-dropdown-link" href="#">
+                                查看
+                            </Link>
+
+                        )
+                    }else if(record.status==2){
                         return (
 
                             <Link to={'/checkDetails/'+record.id} className="ant-dropdown-link" href="#">

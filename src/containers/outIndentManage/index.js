@@ -43,6 +43,17 @@ class Home extends React.Component {
     }
 
 
+    getTime(e){
+
+        let beginDateM=(new Date(e).getMonth()+1)>0?(new Date(e).getMonth()+1):('0'+new Date(e).getMonth()+1)
+        let beginDateD=(new Date(e).getDate())>0?(new Date(e).getDate()):('0'+new Date(e).getDate())
+        console.log(beginDateM);
+        console.log(beginDateD);
+        let beginDate=new Date(e).getFullYear()+'-'+beginDateM+'-'+beginDateD
+        return beginDate
+    }
+
+
     handleSubmit = (e) => {
         this.setState({
             selectedRowKeys: [],
@@ -53,11 +64,14 @@ class Home extends React.Component {
             if (!err) {
                 this.props.getOutOrderList({
                     page: 1,
-                    beginDate: this.state.beginDate,
-                    endDate: this.state.endDate,
+                    beginDate: this.getTime(this.state.beginDate),
+                    endDate: this.getTime(this.state.endDate),
                     currency: this.state.currency
                 }, () => {
                     console.log(this.state.beginDate);
+
+
+
                     console.log(this.state.endDate);
                 })
             }
@@ -218,9 +232,10 @@ class Home extends React.Component {
                                 })(
                                     <Select onChange={(e)=>{
                                         this.setState({currency:e})
-                                    }} placeholder="请选择" defaultValue="all">
-                                        <Option value="btc">BTC</Option>
-                                        <Option value="eth">ETH</Option>
+                                    }} placeholder="请选择" defaultValue="All">
+                                        <Option value="BTC">BTC</Option>
+                                        <Option value="ETH">ETH</Option>
+                                        <Option value="All">All</Option>
                                     </Select>)}
                             </FormItem>
                         </div>

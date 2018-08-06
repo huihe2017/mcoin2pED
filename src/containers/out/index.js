@@ -133,18 +133,31 @@ class Home extends React.Component {
                                         }} size="large" placeholder="请填写钱包余额"/>)}
                                 </FormItem>
                             </div>
-                            <div className={style.inputBox}>
+                            <div className={style.inputBox3}>
                                 <FormItem>
                                  <span className={style.inputBoxT}>
-                                     转出余额
+                                     转出余额 <span hidden={!this.state.show} style={{color:'red'}}>（已超出钱包余额的10%，请注意钱包余额）</span>
                                  </span>
-                                    {getFieldDecorator('outBalance', {
-                                        initialValue: '',
-                                        rules: [{required: true, message: '请填写转出余额!'}],
-                                    })(
-                                        <Input onChange={(e) => {
-                                            this.setState({amount: e.target.value})
-                                        }} size="large" placeholder="请填写转出余额"/>)}
+                                    <div className={style.inputBox4}>
+                                        {getFieldDecorator('outBalance', {
+                                            initialValue: '',
+                                            rules: [{required: true, message: '请填写转出余额!'}],
+                                        })(
+                                            <Input onChange={(e) => {
+                                                this.setState({amount: e.target.value},()=>{
+                                                    if(this.state.amount>this.props.wallet.plaBalance*0.1){
+                                                        this.setState({
+                                                            show:true
+                                                        })
+                                                    }else{
+                                                        this.setState({
+                                                            show:false
+                                                        })
+                                                    }
+                                                })
+                                            }} size="large" placeholder="请填写转出余额"/>)}
+                                    </div>
+
                                 </FormItem>
                             </div>
                             <div className={style.inputBox}>
@@ -154,7 +167,7 @@ class Home extends React.Component {
                                  </span>
                                     {getFieldDecorator('outBalance1', {
                                         initialValue: '',
-                                        rules: [{required: true, message: '请填写转出备注!'}],
+                                        // rules: [{required: true, message: '请填写转出备注!'}],
                                     })(
                                         <Input onChange={(e) => {
                                             this.setState({remark: e.target.value})
@@ -167,7 +180,7 @@ class Home extends React.Component {
                             <FormItem>
                                 <Button type="primary" htmlType="submit" size={'large'}>提交</Button>
                             </FormItem>
-                            <Button size={'large'}>放弃</Button>
+                            <Button size={'large'} onClick={()=>hashHistory.push('/outAddressManage')}>放弃</Button>
                         </div>
 
                     </Form>

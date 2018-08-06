@@ -43,16 +43,16 @@ class Home extends React.Component {
     handleChange(value) {
         console.log(`Selected: ${value}`);
     }
-getContent = (data)=>{
-		//data = '<p>-- -- 11111</p>';
-    const contentBlock = htmlToDraft(data);
-    if (contentBlock) {
-      const contentState = ContentState.createFromBlockArray(contentBlock.contentBlocks);
-      const editorState = EditorState.createWithContent(contentState);
-      this.state = {
-        editorState,
-      };
-	  return editorState
+    getContent = (data)=>{
+            //data = '<p>-- -- 11111</p>';
+        const contentBlock = htmlToDraft(data);
+        if (contentBlock) {
+          const contentState = ContentState.createFromBlockArray(contentBlock.contentBlocks);
+          const editorState = EditorState.createWithContent(contentState);
+          this.state = {
+            editorState,
+          };
+          return editorState
     }
 	}
     componentDidMount() {
@@ -102,10 +102,6 @@ getContent = (data)=>{
         //             });
         //         });
         // });
-
-
-
-
 
     }
 
