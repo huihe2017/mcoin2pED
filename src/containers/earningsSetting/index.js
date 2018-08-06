@@ -331,18 +331,18 @@ class Home extends React.Component {
                                                 this.setState({month: e})
                                             })
                                         }} placeholder="选择月份">
-                                            <Option value="2018.01">2018年1月</Option>
-                                            <Option value="2018.02">2018年2月</Option>
-                                            <Option value="2018.03">2018年3月</Option>
-                                            <Option value="2018.04">2018年4月</Option>
-                                            <Option value="2018.05">2018年5月</Option>
-                                            <Option value="2018.06">2018年6月</Option>
-                                            <Option value="2018.07">2018年7月</Option>
-                                            <Option value="2018.08">2018年8月</Option>
-                                            <Option value="2018.09">2018年9月</Option>
-                                            <Option value="2018.10">2018年10月</Option>
-                                            <Option value="2018.11">2018年11月</Option>
-                                            <Option value="2018.12">2018年12月</Option>
+                                            <Option value="201801">2018年1月</Option>
+                                            <Option value="201802">2018年2月</Option>
+                                            <Option value="201803">2018年3月</Option>
+                                            <Option value="201804">2018年4月</Option>
+                                            <Option value="201805">2018年5月</Option>
+                                            <Option value="201806">2018年6月</Option>
+                                            <Option value="201807">2018年7月</Option>
+                                            <Option value="201808">2018年8月</Option>
+                                            <Option value="201809">2018年9月</Option>
+                                            <Option value="201810">2018年10月</Option>
+                                            <Option value="201811">2018年11月</Option>
+                                            <Option value="201812">2018年12月</Option>
                                         </Select>)}
                                 </div>
                             </FormItem>
