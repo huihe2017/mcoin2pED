@@ -142,11 +142,13 @@ class Home extends React.Component {
 
     componentDidMount() {
         this.props.getWalletSetData({},()=>{
-            this.setState({tag:this.props.wallet.walletSetData.smsNoticeAdmin})
-            this.setState({tag1:this.props.wallet.walletSetData.mailNoticeAdmin})
+           
 
         })
-        this.props.getAllUser({})
+        this.props.getAllUser({},()=>{
+			 this.setState({tags:this.props.wallet.walletSetData.smsNoticeAdmin})
+            this.setState({tags1:this.props.wallet.walletSetData.mailNoticeAdmin})
+		})
     }
 
     render() {
@@ -155,6 +157,7 @@ class Home extends React.Component {
         }
         const {getFieldDecorator} = this.props.form;
         const {tags, tags1, inputVisible, inputValue, inputVisible1} = this.state;
+		console.log(3445,this.state)
         return (
             <div className={style.wlop}>
                 <span className={style.title}>管理设置</span>
@@ -313,6 +316,7 @@ class Home extends React.Component {
                                  </span>
                                     <div>
                                         {tags1.map((tag, index) => {
+											debugger
                                             let data = this.props.user.allUser && filter(this.props.user.allUser.list, tag)
                                             tag = data.name
                                             let id = data.id

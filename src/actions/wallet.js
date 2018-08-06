@@ -131,7 +131,7 @@ export function outCoin(data, callback) {
             callback,
             url: 'wallet/withdraw',
             success: (response) => {
-                dispatch({type: 'OUT_COIN', data: response.data})
+                dispatch({type: 'OUT_COIN', id: data.id})
             }
 
         })
@@ -206,7 +206,7 @@ export function returnFund(data, callback) {
             callback,
             url: 'wallet/refund',
             success: (response) => {
-                dispatch({type: 'RETURN_FUND', data: response.data})
+                dispatch({type: 'RETURN_FUND', id: data.id})
             }
 
         })

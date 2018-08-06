@@ -47,7 +47,6 @@ import RechargeManage from './containers/rechargeManage/'
 import UserRecharge from './containers/userRecharge/'
 import RechargeRecordDetails from './containers/rechargeRecordDetails/'
 import CheckDetails from './containers/checkDetails/'
-import Xxx from './containers/xxx/'
 
 export default () => {
     return (
@@ -99,7 +98,7 @@ export default () => {
                 <Route path="/rechargeRecordDetails/:id" component={RechargeRecordDetails}/>
                 <Route path="/checkDetails/:id" component={CheckDetails}/>
 				<Route path="/pin" component={PIN}/>
-				<Route path="/xxx" component={Xxx}/>
+			
             </Route>
 
         </Router>

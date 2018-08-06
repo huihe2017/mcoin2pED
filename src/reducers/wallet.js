@@ -48,6 +48,20 @@ export default function wallet(state = initialState, action = {}) {
         case 'GET_CURRENCY_PRICE':
             state[action.currency+'Price'] = action.data.data.price
             return Object.assign({}, state, {})
+			case 'OUT_COIN':
+            state.outOrderList.list.map((item,index)=>{
+                if(item.id===action.id){
+                    state.outOrderList.list[index].auditStatus = 3
+                }
+            })
+            return Object.assign({}, state, {})
+			case 'RETURN_FUND':
+            state.outOrderList.list.map((item,index)=>{
+                if(item.id===action.id){
+                    state.outOrderList.list[index].auditStatus = 6
+                }
+            })
+            return Object.assign({}, state, {})
         default:
             return state
     }
