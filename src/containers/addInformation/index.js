@@ -43,25 +43,27 @@ class Home extends React.Component {
     handleChange(value) {
         console.log(`Selected: ${value}`);
     }
-    getContent = (data)=>{
-            //data = '<p>-- -- 11111</p>';
+
+    getContent = (data) => {
+        //data = '<p>-- -- 11111</p>';
         const contentBlock = htmlToDraft(data);
         if (contentBlock) {
-          const contentState = ContentState.createFromBlockArray(contentBlock.contentBlocks);
-          const editorState = EditorState.createWithContent(contentState);
-          this.state = {
-            editorState,
-          };
-          return editorState
+            const contentState = ContentState.createFromBlockArray(contentBlock.contentBlocks);
+            const editorState = EditorState.createWithContent(contentState);
+            this.state = {
+                editorState,
+            };
+            return editorState
+        }
     }
-	}
+
     componentDidMount() {
-        this.props.getInfoTypeList({},()=>{
-            upLoad('img',(value)=>{
-                this.setState({coverUrl:value})
+        this.props.getInfoTypeList({}, () => {
+            upLoad('img', (value) => {
+                this.setState({coverUrl: value})
             })
-            if(this.props.params.id!=='null'){
-                let data = filter(this.props.info.infoList.list,this.props.params.id)
+            if (this.props.params.id !== 'null') {
+                let data = filter(this.props.info.infoList.list, this.props.params.id)
                 this.setState({
                     content: this.getContent(data.content),
                     id: data.id,
@@ -103,11 +105,14 @@ class Home extends React.Component {
         //         });
         // });
 
+
     }
 
     handleSubmit = (e) => {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
+            // console.log(333311,this.state.editorState.getCurrentContent())
+            // console.log(333311222,draftToHtml(convertToRaw(this.state.editorState.getCurrentContent())))
             if (!err) {
                 let param = {
                     content: draftToHtml(convertToRaw(this.state.editorState.getCurrentContent())),
@@ -115,7 +120,8 @@ class Home extends React.Component {
                     coverUrl: this.state.coverUrl,
                     title: this.state.title,
                 }
-                if(this.props.params.id!=='null'){
+
+                if (this.props.params.id !== 'null') {
                     param.id = this.props.params.id
                 }
                 this.props.createInfo(param, () => {
@@ -152,7 +158,7 @@ class Home extends React.Component {
 
         return (
             <div className={style.wlop}>
-                <span className={style.title}>{this.props.params.id!=='null'?'编辑资讯':'创建资讯'}</span>
+                <span className={style.title}>{this.props.params.id !== 'null' ? '编辑资讯' : '创建资讯'}</span>
                 <Form onSubmit={this.handleSubmit.bind(this)} className="login-form">
                     <div className={style.content}>
                         <div className={style.inputBox}>
@@ -179,14 +185,14 @@ class Home extends React.Component {
                                  </span>
                                 <div>
                                     {/*{getFieldDecorator('upload', {*/}
-                                        {/*valuePropName: 'fileList',*/}
-                                        {/*getValueFromEvent: this.normFile,*/}
+                                    {/*valuePropName: 'fileList',*/}
+                                    {/*getValueFromEvent: this.normFile,*/}
                                     {/*})(*/}
-                                        {/*<Upload name="logo" action="/upload.do" listType="picture">*/}
-                                            {/*<Button>*/}
-                                                {/*<Icon type="upload"/> Click to upload*/}
-                                            {/*</Button>*/}
-                                        {/*</Upload>*/}
+                                    {/*<Upload name="logo" action="/upload.do" listType="picture">*/}
+                                    {/*<Button>*/}
+                                    {/*<Icon type="upload"/> Click to upload*/}
+                                    {/*</Button>*/}
+                                    {/*</Upload>*/}
                                     {/*)}*/}
                                     {/*<input type="file" id="file" />*/}
                                     <div id="ossfile"></div>
@@ -232,16 +238,14 @@ class Home extends React.Component {
                                 <span className={style.inputBoxT}>
                                     内容
                                 </span>
-                                {getFieldDecorator('content', {
-                                    rules: [{required: true, message: '内容不得为空!'}],
-                                })(
-                                    <Editor
-                                        editorState={this.state.editorState}
-                                        wrapperClassName="demo-wrapper"
-                                        editorClassName="demo-editor"
-                                        onEditorStateChange={this.onEditorStateChange}
-                                    />)
-                                }
+
+                                <Editor
+                                    editorState={this.state.editorState}
+                                    wrapperClassName="demo-wrapper"
+                                    editorClassName="demo-editor"
+                                    onEditorStateChange={this.onEditorStateChange}
+                                />
+
                             </FormItem>
                         </div>
 
@@ -252,10 +256,10 @@ class Home extends React.Component {
                         <FormItem>
                             <Button type="primary" htmlType="submit" size={'large'}>
 
-                                {this.props.params.id!=='null'?'保存':'创建'}
+                                {this.props.params.id !== 'null' ? '保存' : '创建'}
                             </Button>
                         </FormItem>
-                        <Button size={'large'} onClick={()=>hashHistory.push('/information')}>取消</Button>
+                        <Button size={'large'} onClick={() => hashHistory.push('/information')}>取消</Button>
                     </div>
 
                 </Form>
