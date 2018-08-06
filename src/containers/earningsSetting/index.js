@@ -347,24 +347,25 @@ class Home extends React.Component {
                                 </div>
                             </FormItem>
                             <a className={style.contentTBA} onClick={() => {
+
                                 axios.defaults.headers.common['adminToken'] = sessionStorage.adminToken;
-                                axios.post(config.api_url + 'fund/exportprofit',
-                                    {
+                                axios.get(config.api_url + 'fund/exportprofit', {
+                                    params:{
                                         id: this.props.params.id,
                                         month: this.state.month
                                     },
-                                    {
-                                        headers: {
-                                            responseType: 'arraybuffer'
-                                        }
-                                    }).then(function (response) {
+                                    responseType: 'arraybuffer',
+                                    headers: {
+                                        responseType: 'arraybuffer'
+                                    }
+                                }).then(function (response) {
 
                                     //这里res.data是返回的blob对象
                                     var blob = new Blob([response.data], {type: 'application/x-xls'}); //application/vnd.openxmlformats-officedocument.spreadsheetml.sheet这里表示xlsx类型
                                     var downloadElement = document.createElement('a');
                                     var href = window.URL.createObjectURL(blob); //创建下载的链接
                                     downloadElement.href = href;
-                                    downloadElement.download = 'bills.xlsx'; //下载后文件名
+                                    downloadElement.download = 'template.xlsx'; //下载后文件名
                                     document.body.appendChild(downloadElement);
                                     downloadElement.click(); //点击下载
                                     document.body.removeChild(downloadElement); //下载完成移除元素
