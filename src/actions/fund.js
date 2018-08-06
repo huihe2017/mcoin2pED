@@ -209,6 +209,20 @@ export function auditReuseFund(data, callback) {
     }
 }
 
+export function auditStopFund(data, callback) {
+    return dispatch => {
+        http({
+            type: 'post',
+            data,
+            callback,
+            url: 'audit/fund/checkstop',
+            success: (response) => {
+
+            }
+        })
+    }
+}
+
 export function auditCreateFund(data, callback) {
     return dispatch => {
         http({

@@ -50,7 +50,17 @@ class Home extends React.Component {
                         操作时间：{this.props.log.logDetails.time}
                     </span>
                     <span className={style.contentC}>
-                        操作类型：{this.props.log.logDetails.account}
+                        操作类型：{(() => {
+                        if (this.props.log.logDetails.type === 1) {
+                            return '登录'
+                        }
+                        if (this.props.log.logDetails.type === 2) {
+                            return '新增'
+                        }
+                        if (this.props.log.logDetails.type === 3) {
+                            return '修改'
+                        }
+                    })()}
                     </span>
                 </div>
                 <div className={style.button}>

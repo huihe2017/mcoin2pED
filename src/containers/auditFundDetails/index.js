@@ -4,7 +4,7 @@ import {hashHistory} from 'react-router'
 import {Button,notification} from 'antd';
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
-import {auditReuseFund} from "../../actions/fund";
+import {auditReuseFund,auditStopFund} from "../../actions/fund";
 import {filter} from "../../common/util";
 
 class Home extends React.Component {
@@ -56,29 +56,60 @@ class Home extends React.Component {
                 <div className={style.button}>
 
                     <Button onClick={() => {
-                        this.props.auditReuseFund({
-                            id:this.props.params.id,
-                            pass:1
-                        },()=>{
-                            notification.open({
-                                message: '提示',
-                                description: '操作成功',
-                            });
-                            this.props.history.go(-1)
-                        })
+
+                        if(this.state.status==='2'){
+                            this.props.auditStopFund({
+                                id:this.props.params.id,
+                                pass:1
+                            },()=>{
+                                notification.open({
+                                    message: '提示',
+                                    description: '操作成功',
+                                });
+                                this.props.history.go(-1)
+                            })
+                        }
+                        if(this.state.status==='5'){
+                            this.props.auditReuseFund({
+                                id:this.props.params.id,
+                                pass:1
+                            },()=>{
+                                notification.open({
+                                    message: '提示',
+                                    description: '操作成功',
+                                });
+                                this.props.history.go(-1)
+                            })
+                        }
+
+
                     }} type="primary" size={'large'}>通过</Button>
 
                     <Button onClick={() => {
-                        this.props.auditReuseFund({
-                            id:this.props.params.id,
-                            pass:0
-                        },()=>{
-                            notification.open({
-                                message: '提示',
-                                description: '操作成功',
-                            });
-                            this.props.history.go(-1)
-                        })
+                        if(this.state.status==='2'){
+                            this.props.auditStopFund({
+                                id:this.props.params.id,
+                                pass:0
+                            },()=>{
+                                notification.open({
+                                    message: '提示',
+                                    description: '操作成功',
+                                });
+                                this.props.history.go(-1)
+                            })
+                        }
+                        if(this.state.status==='5'){
+                            this.props.auditReuseFund({
+                                id:this.props.params.id,
+                                pass:0
+                            },()=>{
+                                notification.open({
+                                    message: '提示',
+                                    description: '操作成功',
+                                });
+                                this.props.history.go(-1)
+                            })
+                        }
                     }} size={'large'}>拒绝</Button>
                 </div>
             </div>
