@@ -212,11 +212,12 @@ class Home extends React.Component {
                                      申购说明
                                  </span>
                                 {getFieldDecorator('buyMean', {
-                                    initialValue: this.props.fund.editFundData.productDesc,
+                                    initialValue: this.props.fund.editFundData.confirmDesc,
+                                    // initialValue: this.props.fund.editFundData.productDesc,字段保留
                                     rules: [{required: true, message: '请填写申购说明!'}],
                                 })(
                                     <TextArea onChange={(e) => {
-                                        this.props.setFundEditData({productDesc: e.target.value})
+                                        this.props.setFundEditData({confirmDesc: e.target.value})
                                     }} rows={4} placeholder="请编辑申购说明"/>)}
                             </FormItem>
                         </div>

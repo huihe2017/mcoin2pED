@@ -22,6 +22,16 @@ class Home extends React.Component {
         })
     }
 
+    show(e){
+        if(e==0){
+            return '创建审核'
+        }else if(e==2){
+            return  '暂停审核'
+        }else if(e==5){
+            return  '重启审核'
+        }
+    }
+
     render() {
         // if (!this.props.log.logDetails) {
         //     return null
@@ -48,7 +58,9 @@ class Home extends React.Component {
                     <span className={style.contentC}>
                         类型：
                         <span className={style.contentCC}>
-                            启动基金
+                            {
+                                this.show(this.data.status)
+                            }
                         </span>
                     </span>
 

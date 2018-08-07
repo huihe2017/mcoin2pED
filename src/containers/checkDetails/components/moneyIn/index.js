@@ -19,6 +19,15 @@ class Home extends React.Component {
 
     }
 
+    show(e){
+        if(e==0){
+            return '创建审核'
+        }else if(e==2){
+            return  '暂停审核'
+        }else if(e==5){
+            return  '重启审核'
+        }
+    }
 
     render() {
         // if (!this.props.log.logDetails) {
@@ -42,7 +51,9 @@ class Home extends React.Component {
                 <span className={style.contentC}>
                         类型：
                         <span className={style.contentCC}>
-                            启用基金
+                             {
+                                 this.show(this.props.data.status)
+                             }
                         </span>
                     </span>
                 <div className={style.button}>

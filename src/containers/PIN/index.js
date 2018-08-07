@@ -64,7 +64,7 @@ class Home extends React.Component {
                             )}
                         </FormItem>
                         <FormItem>
-                            <Link className={style.forget} to={'/pinSetting'}>忘记PIN码？</Link>
+                            <span className={style.forget}>忘记PIN码,请联系管理员</span>
                             <div className={style.button}>
                                 <Button type="primary" htmlType="submit" onClick={()=>{
 
