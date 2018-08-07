@@ -118,7 +118,7 @@ class Home extends React.Component {
                 <span className={style.title}>账号管理</span>
                 <Button type="primary" size='large' onClick={() => hashHistory.push('/addAccount/null')}>创建账号</Button>
                 <div className={style.table}>
-                    <Table pagination={{total:this.props.account.userList.pager.total}} columns={columns} onChange={(pagination) => {
+                    <Table pagination={{total:this.props.account.userList.pager.total,pageSize:this.props.account.userList.pager.pageSize}} columns={columns} onChange={(pagination) => {
                         this.props.getUserList({
                             page: pagination.current
                         })

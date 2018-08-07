@@ -19,10 +19,9 @@ export function getUserMsg(data, callback) {
                         flag = true
                     }
                 })
-                debugger
                 dispatch({type: 'SET_MENU', data: {
                         list: response.data.data.permissionList,
-                        id: index
+                        id: index||1
                     }})
                 dispatch({type: 'GET_USER_MSG', data: response.data})
             }

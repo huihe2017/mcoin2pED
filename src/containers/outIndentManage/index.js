@@ -247,7 +247,7 @@ class Home extends React.Component {
                 <div className={style.tableBox}>
                     <Table
                         className="components-table-demo-nested"
-                        pagination={{total:this.props.wallet.outOrderList.pager.total}}
+                        pagination={{total:this.props.wallet.outOrderList.pager.total,pageSize:this.props.wallet.outOrderList.pager.pageSize}}
                         columns={columns}
                         dataSource={this.props.wallet.outOrderList.list}
                         onChange={(pagination) => {

@@ -237,7 +237,7 @@ class Home extends React.Component {
                     hashHistory.push('/addFund/null')
                 }}>创建基金</Button>
                 <div className={style.table}>
-                    <Table pagination={{total: this.props.fund.fundList.pager.total}} onChange={(pagination) => {
+                    <Table pagination={{total: this.props.fund.fundList.pager.total,pageSize: this.props.fund.fundList.pager.pageSize}} onChange={(pagination) => {
                         this.props.getFundList({
                             page: pagination.current
                         })

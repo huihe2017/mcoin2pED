@@ -84,7 +84,7 @@ class Home extends React.Component {
                 <span className={style.title}>资讯</span>
                 <Button type="primary" size='large' onClick={() => hashHistory.push('/addInformation/null')}>创建资讯</Button>
                 <div className={style.table}>
-                    <Table pagination={{total:this.props.info.infoList.pager.total}} onChange={(pagination) => {
+                    <Table pagination={{total:this.props.info.infoList.pager.total,pageSize:this.props.info.infoList.pager.pageSize}} onChange={(pagination) => {
                         this.props.getInfoList({
                             page: pagination.current
                         })

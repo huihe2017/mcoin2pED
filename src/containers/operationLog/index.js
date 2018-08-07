@@ -214,7 +214,7 @@ class Home extends React.Component {
                     </div>
                 </Form>
                 <div className={style.tableBox}>
-                    <Table pagination={{total:this.props.log.logList.pager.total}}
+                    <Table pagination={{total:this.props.log.logList.pager.total,pageSize:this.props.log.logList.pager.pageSize}}
                         className="components-table-demo-nested"
                         columns={columns}
                         dataSource={this.props.log.logList.list}

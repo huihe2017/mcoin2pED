@@ -173,7 +173,7 @@ class Home extends React.Component {
                     </div>
                 </div>
                 <div className={style.table}>
-                    <Table pagination={{total:this.props.wallet.auditRechargeList.pager.total}} onChange={(pagination) => {
+                    <Table pagination={{total:this.props.wallet.auditRechargeList.pager.total,pageSize:this.props.wallet.auditRechargeList.pager.pageSize}} onChange={(pagination) => {
                         this.props.getRechargeAuditList({
                             page:pagination.current,
                             currency:this.state.currency
