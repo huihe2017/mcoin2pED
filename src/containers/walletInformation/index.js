@@ -26,7 +26,6 @@ class Home extends React.Component {
         if (!this.props.wallet.walletMsg) {
             return null
         }
-
         return (
             <div className={style.wlop}>
                 <span className={style.title}>钱包信息</span>

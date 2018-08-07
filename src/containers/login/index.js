@@ -60,6 +60,14 @@ class Home extends React.Component {
                                 <Input size={'large'} value={this.state.userName} onChange={(e)=>{this.setState({userName:e.target.value})}} prefix={<Icon type="user" style={{ fontSize: 13 }} />} placeholder="账号" />
                             )}
                         </FormItem>
+                        <FormItem>
+                            {getFieldDecorator('password', {
+                                rules: [{ required: true, message: '请输入密码!' }],
+                            })(
+                                <Input size={'large'} value={this.state.pwd} onChange={(e)=>{this.setState({pwd:e.target.value})}} prefix={<Icon type="lock" style={{ fontSize: 13 }} />} type="password" placeholder="密码" />
+                            )}
+                        </FormItem>
+                        <FormItem>
                         <div className={style.tuxing}>
                             <FormItem>
                                 {getFieldDecorator('code', {
@@ -72,14 +80,7 @@ class Home extends React.Component {
                             {this.state.picImg}
                         </div>
 
-                        <FormItem>
-                            {getFieldDecorator('password', {
-                                rules: [{ required: true, message: '请输入密码!' }],
-                            })(
-                                <Input size={'large'} value={this.state.pwd} onChange={(e)=>{this.setState({pwd:e.target.value})}} prefix={<Icon type="lock" style={{ fontSize: 13 }} />} type="password" placeholder="密码" />
-                            )}
-                        </FormItem>
-                        <FormItem>
+
 
                             <Button type="primary" htmlType="submit" className={style.button}>
                                 登录

@@ -170,7 +170,7 @@ class Home extends React.Component {
                                         // rules: [{required: true, message: '请填写转出备注!'}],
                                     })(
                                         <Input onChange={(e) => {
-                                            this.setState({remark: e.target.value})
+                                            this.setState({outRemark: e.target.value})
                                         }} size="large" placeholder="请填写转出备注"/>)}
                                 </FormItem>
                             </div>

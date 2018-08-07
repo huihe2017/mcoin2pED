@@ -89,7 +89,7 @@
 :local(.contentTwoTCP){
     font-size: 18px;
     color: #3B3D40;
-    width: 33%;
+    width: 400px;
     border-right: 1px solid #eee;
     padding-left: 40px;
 }
@@ -107,6 +107,7 @@
 }
 :local(.contentTwoTCPB){
     display: flex;
+    width: 390px;
 }
 :local(.contentTwoTCPBox){
     margin-right: 120px;
