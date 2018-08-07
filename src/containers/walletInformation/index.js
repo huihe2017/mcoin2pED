@@ -177,7 +177,7 @@ class Home extends React.Component {
                                         </div>
                                         <div className={style.contentTwoTCPBox}>
                                             <span className={style.contentTwoTCBP1}>
-                                                昨日转入
+                                                昨日转出
                                             </span>
                                             <span className={style.contentTwoTCBP}>
                                                 {this.props.wallet.walletMsg.list[0].yesterdayWithdraw}
@@ -200,7 +200,7 @@ class Home extends React.Component {
                                         </div>
                                         <div className={style.contentTwoTCPBox}>
                                             <span className={style.contentTwoTCBP1}>
-                                                昨日转入
+                                                昨日转出
                                             </span>
                                             <span className={style.contentTwoTCBP}>
                                                 {this.props.wallet.walletMsg.list[1].yesterdayWithdraw}
