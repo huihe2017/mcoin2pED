@@ -5,24 +5,31 @@ import {setMenu} from './menu'
 export function getUserMsg(data, callback) {
     return dispatch => {
         http({
-            type:'post',
+            type: 'post',
             data,
             callback,
-            url:'adm/privilege',
-            success:(response)=>{
+            url: 'adm/privilege',
+            success: (response) => {
                 let index;
-                let flag = false
-                let name
                 response.data.data.permissionList.map((obj) => {
-                    if (obj.level === 0 && flag === false) {
-                        index = obj.id
-                        flag = true
+                    if (obj.childPermission) {
+                        obj.childPermission.map((h) => {
+                            if (h.url === data.path) {
+                                index = obj.id
+                            }
+                        })
+                    }
+                    // if (obj.level === 0 && flag === false) {
+                    //     index = obj.id
+                    //     flag = true
+                    // }
+                })
+                dispatch({
+                    type: 'SET_MENU', data: {
+                        list: response.data.data.permissionList,
+                        id: index
                     }
                 })
-                dispatch({type: 'SET_MENU', data: {
-                        list: response.data.data.permissionList,
-                        id: index||1
-                    }})
                 dispatch({type: 'GET_USER_MSG', data: response.data})
             }
 
@@ -33,11 +40,11 @@ export function getUserMsg(data, callback) {
 export function login(data, callback) {
     return dispatch => {
         http({
-            type:'post',
+            type: 'post',
             data,
             callback,
-            url:'adm/login',
-            success:(response)=>{
+            url: 'adm/login',
+            success: (response) => {
                 dispatch({type: 'LOGIN', data: response.data})
             }
 
@@ -48,11 +55,11 @@ export function login(data, callback) {
 export function setPinCode(data, callback) {
     return dispatch => {
         http({
-            type:'post',
+            type: 'post',
             data,
             callback,
-            url:'adm/setpincode ',
-            success:(response)=>{
+            url: 'adm/setpincode ',
+            success: (response) => {
                 dispatch({type: 'SET_PIN_CODE'})
             }
 
@@ -63,39 +70,41 @@ export function setPinCode(data, callback) {
 export function modifyPinCode(data, callback) {
     return dispatch => {
         http({
-            type:'post',
+            type: 'post',
             data,
             callback,
-            url:'adm/updatepincode  ',
-            success:(response)=>{
+            url: 'adm/updatepincode  ',
+            success: (response) => {
                 //dispatch({type: 'MODIFY_PIN_CODE'})
             }
 
         })
     }
 }
+
 export function modifyPwd(data, callback) {
     return dispatch => {
         http({
-            type:'post',
+            type: 'post',
             data,
             callback,
-            url:'adm/updatepassword',
-            success:(response)=>{
+            url: 'adm/updatepassword',
+            success: (response) => {
                 //dispatch({type: 'MODIFY_PIN_CODE'})
             }
 
         })
     }
 }
+
 export function checkPin(data, callback) {
     return dispatch => {
         http({
-            type:'post',
+            type: 'post',
             data,
             callback,
-            url:'adm/checkpin',
-            success:(response)=>{
+            url: 'adm/checkpin',
+            success: (response) => {
                 dispatch({type: 'MODIFY_PIN_CODE'})
             }
 
@@ -106,11 +115,11 @@ export function checkPin(data, callback) {
 export function getAllUser(data, callback) {
     return dispatch => {
         http({
-            type:'post',
+            type: 'post',
             data,
             callback,
-            url:'adm/alluser',
-            success:(response)=>{
+            url: 'adm/alluser',
+            success: (response) => {
                 dispatch({type: 'GET_ALL_USER', data: response.data})
             }
 
@@ -121,11 +130,11 @@ export function getAllUser(data, callback) {
 export function logout(data, callback) {
     return dispatch => {
         http({
-            type:'post',
+            type: 'post',
             data,
             callback,
-            url:'adm/logout',
-            success:(response)=>{
+            url: 'adm/logout',
+            success: (response) => {
 
             }
 
@@ -136,11 +145,11 @@ export function logout(data, callback) {
 export function checkExistsPincode(data, callback) {
     return dispatch => {
         http({
-            type:'post',
+            type: 'post',
             data,
             callback,
-            url:'adm/isexists',
-            success:(response)=>{
+            url: 'adm/isexists',
+            success: (response) => {
                 dispatch({type: 'CHECK_EXISTS_PINCODE', data: response.data})
             }
 

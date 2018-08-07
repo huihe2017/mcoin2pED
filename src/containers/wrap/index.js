@@ -20,7 +20,7 @@ class Home extends React.Component {
     }
 
     componentDidMount() {
-        this.props.getUserMsg({}, () => {
+        this.props.getUserMsg({path:this.props.location.pathname}, () => {
         })
     }
 

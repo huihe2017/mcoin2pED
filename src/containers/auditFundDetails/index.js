@@ -69,7 +69,7 @@ class Home extends React.Component {
 
                     <Button onClick={() => {
 
-                        if(this.state.status==='2'){
+                        if(this.state.status===2){
                             this.props.auditStopFund({
                                 id:this.props.params.id,
                                 pass:1
@@ -81,7 +81,7 @@ class Home extends React.Component {
                                 this.props.history.go(-1)
                             })
                         }
-                        if(this.state.status==='5'){
+                        if(this.state.status===5){
                             this.props.auditReuseFund({
                                 id:this.props.params.id,
                                 pass:1
@@ -98,7 +98,7 @@ class Home extends React.Component {
                     }} type="primary" size={'large'}>通过</Button>
 
                     <Button onClick={() => {
-                        if(this.state.status==='2'){
+                        if(this.state.status===2){
                             this.props.auditStopFund({
                                 id:this.props.params.id,
                                 pass:0
@@ -110,7 +110,7 @@ class Home extends React.Component {
                                 this.props.history.go(-1)
                             })
                         }
-                        if(this.state.status==='5'){
+                        if(this.state.status===5){
                             this.props.auditReuseFund({
                                 id:this.props.params.id,
                                 pass:0
