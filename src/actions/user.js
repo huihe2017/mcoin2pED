@@ -12,6 +12,11 @@ export function getUserMsg(data, callback) {
             success: (response) => {
                 let index;
                 response.data.data.permissionList.map((obj) => {
+                    debugger
+                    if(data.path==='/'){
+
+                        data.path = '/account'
+                    }
                     if (obj.childPermission) {
                         obj.childPermission.map((h) => {
                             if (h.url === data.path) {
