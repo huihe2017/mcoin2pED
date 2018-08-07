@@ -71,7 +71,9 @@ class Home extends React.Component {
                         })
                     }} type="primary" size={'large'}>下一条</Button>
 
-                    <Button size={'large'}>返回</Button>
+                    <Button onClick={() => {
+                        this.props.history.go(-1)
+                    }} size={'large'}>返回</Button>
                 </div>
             </div>
         )

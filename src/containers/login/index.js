@@ -40,6 +40,11 @@ class Home extends React.Component {
                 },()=>{
                     hashHistory.push('/')
                 })
+                this.setState({picImg: this.getPicImg(),code:''},()=>{
+                    this.props.form.setFieldsValue({
+                        code: '',
+                    });
+                })
             }
         });
     }
@@ -71,9 +76,10 @@ class Home extends React.Component {
                         <div className={style.tuxing}>
                             <FormItem>
                                 {getFieldDecorator('code', {
+                                    initialValue: this.state.code,
                                     rules: [{ required: true, message: '请输入图形验证码!' }],
                                 })(
-                                    <Input size={'large'}  value={this.state.code} onChange={(e)=>{this.setState({code:e.target.value})}} prefix={<Icon type="info-circle-o" style={{ fontSize: 13 }} />} placeholder="图形验证码" />
+                                    <Input size={'large'}   onChange={(e)=>{this.setState({code:e.target.value})}} prefix={<Icon type="info-circle-o" style={{ fontSize: 13 }} />} placeholder="图形验证码" />
                                 )}
                             </FormItem>
                             {/*<img src={require('./images/code.jpg')} alt=""/>*/}
