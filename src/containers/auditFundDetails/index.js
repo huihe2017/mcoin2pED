@@ -30,7 +30,7 @@ class Home extends React.Component {
         return (
             <div className={style.wlop}>
                 <div className={style.contentT}>
-                    审核：启动基金名称001
+                    审核：{this.state.title}
                 </div>
                 <div className={style.content}>
                     <span className={style.contentC}>

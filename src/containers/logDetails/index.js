@@ -66,7 +66,7 @@ class Home extends React.Component {
                 <div className={style.button}>
 
                     <Button onClick={() => {
-                        this.props.getLogDetails({id: ++this.props.params.id}, () => {
+                        this.props.getLogDetails({id: --this.props.params.id}, () => {
 
                         })
                     }} type="primary" size={'large'}>下一条</Button>

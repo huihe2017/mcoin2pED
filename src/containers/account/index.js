@@ -5,6 +5,7 @@ import Header1 from '../../components/header'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 import {getUserList, resetPwd, resetPin, setAccountStatus} from '../../actions/account'
+import {toChartData} from '../../common/util'
 import {Layout, Menu, Breadcrumb, Icon, Button, Table, Dropdown, notification} from 'antd';
 
 const {SubMenu} = Menu;
@@ -27,7 +28,6 @@ class Home extends React.Component {
         if (!this.props.account.userList) {
             return null
         }
-        console.log(55552222,this.props.account.userList.list)
         const columns = [
             {
                 title: '账号',
@@ -39,7 +39,13 @@ class Home extends React.Component {
                 title: '角色',
                 dataIndex: 'roles',
                 render: (arr) => {
-                    return arr[0].name
+                    return (()=>{
+                        let nums =[]
+                        arr.map((obj)=>{
+                            nums.push(obj.name)
+                        })
+                        return nums.join(',')
+                    })()
                 }
             }, {
                 title: '联系电话',

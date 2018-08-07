@@ -157,7 +157,7 @@ class Home extends React.Component {
                     if(record.status==0){
                         return (
 
-                            <Link to={'/auditFundDetails/'+record.id} className="ant-dropdown-link" href="#">
+                            <Link to={'/checkDetails/'+record.id} className="ant-dropdown-link" href="#">
                                 查看
                             </Link>
 
@@ -165,7 +165,7 @@ class Home extends React.Component {
                     }else if(record.status==5){
                         return (
 
-                            <Link to={'/checkDetails/'+record.id} className="ant-dropdown-link" href="#">
+                            <Link to={'/auditFundDetails/'+record.id} className="ant-dropdown-link" href="#">
                                 查看
                             </Link>
 
@@ -173,7 +173,7 @@ class Home extends React.Component {
                     }else if(record.status==2){
                         return (
 
-                            <Link to={'/checkDetails/'+record.id} className="ant-dropdown-link" href="#">
+                            <Link to={'/auditFundDetails/'+record.id} className="ant-dropdown-link" href="#">
                                 查看
                             </Link>
 
