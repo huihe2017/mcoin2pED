@@ -211,7 +211,6 @@ class Home extends React.Component {
                                             rules: [{required: this.state.typeBuy, message: '请填写banner名称!'}],
                                         })(
                                             <Input
-
                                                 onChange={(e) => {
                                                     this.setState({buy1UpLimit: e.target.value})
                                                 }} size="large" placeholder="即2级申购返利本金上限"/>)}
@@ -231,6 +230,7 @@ class Home extends React.Component {
                                                 <Input
                                                     onChange={(e) => {
                                                         this.setState({buy2LowLimit: e.target.value})
+                                                        this.setState({buy3LowLimit: e.target.value})
                                                     }} size="large" placeholder="下限"/>)}
                                         </Col>
                                         <Col span={2}>
@@ -246,6 +246,7 @@ class Home extends React.Component {
                                                 <Input
                                                     onChange={(e) => {
                                                         this.setState({buy2UpLimit: e.target.value})
+                                                        this.setState({buy1UpLimit: e.target.value})
                                                     }} size="large" placeholder="上限"/>)}
                                         </Col>
 
@@ -257,12 +258,12 @@ class Home extends React.Component {
                                             3级申购返利本金
                                         </span>
                                         {getFieldDecorator('level2BuyDown', {
-                                            initialValue: this.state.buy2LowLimit,
+                                            initialValue: this.state.buy3LowLimit,
                                             rules: [{required: this.state.typeBuy, message: '请填写优先级!'}],
                                         })(
                                             <Input
-                                                value={this.state.priority || ''}
                                                 onChange={(e) => {
+                                                    this.setState({buy3LowLimit: e.target.value})
                                                     this.setState({buy2LowLimit: e.target.value})
                                                 }} size="large" placeholder="即2级申购返利本金下限"/>)}
                                     </FormItem>
@@ -369,15 +370,17 @@ class Home extends React.Component {
                                         <span className={style.inputBoxT1}>
                                             2级赎回返利本金
                                         </span>
+
                                         <Col span={11}>
-                                            {getFieldDecorator('level2RedeemUp', {
+                                            {getFieldDecorator('level2RedeemDown', {
                                                 initialValue: this.state.redeem2LowLimit,
                                                 rules: [{required: this.state.typeRedeem, message: '请填写跳转链接!'}],
                                             })(
                                                 <Input
                                                     onChange={(e) => {
                                                         this.setState({redeem2LowLimit: e.target.value})
-                                                    }} size="large" placeholder="上限"/>)}
+                                                        this.setState({redeem3LowLimit: e.target.value})
+                                                    }} size="large" placeholder="下限"/>)}
                                         </Col>
                                         <Col span={2}>
         <span style={{display: 'inline-block', width: '100%', textAlign: 'center'}}>
@@ -385,14 +388,15 @@ class Home extends React.Component {
         </span>
                                         </Col>
                                         <Col span={11}>
-                                            {getFieldDecorator('level2RedeemDown', {
+                                            {getFieldDecorator('level2RedeemUp', {
                                                 initialValue: this.state.redeem2UpLimit,
                                                 rules: [{required: this.state.typeRedeem, message: '请填写跳转链接!'}],
                                             })(
                                                 <Input
                                                     onChange={(e) => {
                                                         this.setState({redeem2UpLimit: e.target.value})
-                                                    }} size="large" placeholder="下限"/>)}
+                                                        this.setState({redeem1UpLimit: e.target.value})
+                                                    }} size="large" placeholder="上限"/>)}
                                         </Col>
 
                                     </FormItem>
@@ -410,6 +414,7 @@ class Home extends React.Component {
                                                 value={this.state.priority || ''}
                                                 onChange={(e) => {
                                                     this.setState({redeem3LowLimit: e.target.value})
+                                                    this.setState({redeem2LowLimit: e.target.value})
                                                 }} size="large" placeholder="即2级赎回返利本金下限"/>)}
                                     </FormItem>
                                 </div>

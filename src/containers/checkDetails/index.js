@@ -1,14 +1,14 @@
 import React from 'react'
 import style from './index.css'
 import {hashHistory} from 'react-router'
-import {Button,Modal} from 'antd';
+import {Button, Modal} from 'antd';
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 import MoneyIn from "./components/moneyIn";
 import MoneyOut from "./components/moneyOut";
 import UserIn from "./components/userIn";
 import UserOut from "./components/userOut";
-
+import {getFundDetails} from "../../actions/fund";
 import {Steps} from "antd/lib/index";
 import {filter} from "../../common/util";
 
@@ -23,37 +23,43 @@ class Home extends React.Component {
     }
 
     componentDidMount() {
-
+        this.props.getFundDetails({
+            id:this.props.params.id
+        })
 
     }
 
     handle = (flag) => {
-        this.setState({current: ++this.state.current},()=>{
-            if(this.state.current>3){
+        this.setState({current: ++this.state.current}, () => {
+            if (this.state.current > 3) {
                 hashHistory.push('/fund')
             }
         })
 
     }
     renderTab = () => {
-        let data = filter(this.props.fund.auditList.list, this.props.params.id)
+        // let data = filter(this.props.fund.auditList.list, this.props.params.id)
+        let data = this.props.fund.editFundData
         if (this.state.current === 0) {
             return <MoneyIn data={data} handle={this.handle.bind(this)}/>
         }
         if (this.state.current === 1) {
-            return <MoneyOut data={data} handle={(flag)=>{
-                this.handle(flag)}
-            } />
+            return <MoneyOut data={data} handle={(flag) => {
+                this.handle(flag)
+            }
+            }/>
         }
         if (this.state.current === 2) {
-            return <UserIn data={data} handle={(flag)=>{
-                this.handle(flag)}
-            } />
+            return <UserIn data={data} handle={(flag) => {
+                this.handle(flag)
+            }
+            }/>
         }
         if (this.state.current === 3) {
-            return <UserOut data={data} handle={(flag)=>{
-                this.handle(flag)}
-            } />
+            return <UserOut data={data} handle={(flag) => {
+                this.handle(flag)
+            }
+            }/>
         }
     }
     renderFoot = () => {
@@ -77,9 +83,9 @@ class Home extends React.Component {
     }
 
     render() {
-        // if (!this.props.log.logDetails) {
-        //     return null
-        // }
+        if (!this.props.fund.editFundData) {
+            return null
+        }
 
         return (
             <div className={style.wlop}>
@@ -112,7 +118,7 @@ function mapStateToProps(state, props) {
 
 function mapDispatchToProps(dispatch) {
     return {
-
+        getFundDetails: bindActionCreators(getFundDetails, dispatch)
     }
 }
 

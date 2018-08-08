@@ -316,7 +316,6 @@ class Home extends React.Component {
                                  </span>
                                     <div>
                                         {tags1.map((tag, index) => {
-											debugger
                                             let data = this.props.user.allUser && filter(this.props.user.allUser.list, tag)
                                             tag = data.name
                                             let id = data.id
