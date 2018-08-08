@@ -32,7 +32,7 @@ class Home extends React.Component {
                     mobile: this.state.mobile,
                     currency: this.state.currency,
                     realMoney: this.state.realMoney,
-                    price: this.state.price,
+                    price: this.state.buyMoney,
                     amount: this.state.amount,
                     remark: this.state.remark
                 }
@@ -110,7 +110,13 @@ class Home extends React.Component {
                                 })(
                                     <Input
                                         onChange={(e) => {
-                                            this.setState({realMoney: e.target.value})
+                                            this.setState({realMoney: e.target.value},()=>{
+                                                if(this.state.buyMoney){
+                                                    this.setState({
+                                                        inMoney:this.state.realMoney/this.state.buyMoney
+                                                    })
+                                                }
+                                            })
                                         }} size="large" placeholder=""/>)}
                             </FormItem>
                         </div>
@@ -125,19 +131,14 @@ class Home extends React.Component {
                                         rules: [{required: true, message: '请填入买入单价!'}],
                                     })(
                                         <Input
-
                                             onChange={(e)=>{
-                                                this.setState({price:e.target.value})
-                                            }}
+                                                this.setState({buyMoney:e.target.value},()=>{
+                                                    this.setState({
+                                                        inMoney:this.state.realMoney/this.state.buyMoney
+                                                    })
 
-                                            // onChange={(e) => {
-                                            //     this.setState({buyMoney: e.target.value},()=>{
-                                            //         this.setState({
-                                            //             inMoney:this.state.payMoney/this.state.buyMoney
-                                            //         })
-                                            //     })
-                                            // }}
-                                        size="large" placeholder=""/>)}
+                                                })
+                                            }} size="large" placeholder=""/>)}
                                 </FormItem>
                             </div>
                             <a onClick={()=>{
@@ -164,11 +165,15 @@ class Home extends React.Component {
                                     转入币额
                                 </span>
                                 {getFieldDecorator('inMoney', {
+                                    initialValue: this.state.inMoney,
                                     rules: [{required: true, message: '请填写转入金额!'}],
                                 })(
-                                    <Input onChange={(e)=>{
-                                        this.setState({amount:e.target.value})
-                                    }}  size="large" placeholder=""/>)}
+                                    <Input
+                                    //     onChange={(e)=>{
+                                    //     this.setState({amount:this.state.realMoney/this.state.buyMoney})
+                                    // }}
+                                        disabled={true}
+                                           size="large" placeholder=""/>)}
                             </FormItem>
                         </div>
                         <div className={style.inputBox}>
