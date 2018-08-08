@@ -20,7 +20,7 @@ import {
 } from 'antd';
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
-import {getBillList,getWalletBillList} from "../../actions/wallet";
+import {getBillList, getWalletBillList} from "../../actions/wallet";
 
 const Option = Select.Option;
 const {SubMenu} = Menu;
@@ -135,7 +135,25 @@ class Home extends React.Component {
 
         const columns = [
             {title: '日期', dataIndex: 'postTime', key: 'postTime'},
-            {title: '类型', dataIndex: 'type', key: 'type'},
+            {
+                title: '类型', dataIndex: 'type', key: 'type', render: (text) => {
+                    if(text===0){
+                        return '用户转入'
+                    }
+                    if(text===1){
+                        return '用户充值'
+                    }
+                    if(text===2){
+                        return '用户提币'
+                    }
+                    if(text===3){
+                        return '管理员充值'
+                    }
+                    if(text===4){
+                        return '管理员提币'
+                    }
+                }
+            },
             {title: '金额', dataIndex: 'amount', key: 'amount'},
             {title: '货币类型', dataIndex: 'currency', key: 'currency'},
             {title: '矿工费', dataIndex: 'fee', key: 'fee'},
@@ -185,8 +203,8 @@ class Home extends React.Component {
                                 {getFieldDecorator('account', {
                                     // rules: [{required: true, message: '请选择货币类型!'}],
                                 })(
-                                    <Select onChange={(e)=>{
-                                        this.setState({currency:e})
+                                    <Select onChange={(e) => {
+                                        this.setState({currency: e})
                                     }} placeholder="请选择货币类型">
                                         <Option value="btc">BTC</Option>
                                         <Option value="eth">ETH</Option>
@@ -201,8 +219,8 @@ class Home extends React.Component {
                                 {getFieldDecorator('name', {
                                     // rules: [{required: true, message: '请选择账单类型!'}],
                                 })(
-                                    <Select onChange={(e)=>{
-                                        this.setState({type:e})
+                                    <Select onChange={(e) => {
+                                        this.setState({type: e})
                                     }} placeholder="请选择账单类型">
                                         <Option value={0}>用户转入</Option>
                                         <Option value={1}>用户充值</Option>
@@ -218,21 +236,24 @@ class Home extends React.Component {
                     </div>
                 </Form>
                 <div className={style.tableBox}>
-                    <Table pagination={{total:this.props.wallet.walletBillList.pager.total,pageSize:this.props.wallet.walletBillList.pager.pageSize}}
-                        className="components-table-demo-nested"
-                        columns={columns}
-                        dataSource={this.props.wallet.walletBillList.list}
-                        onChange={(pagination) => {
-                            this.props.getWalletBillList({
-                                page: pagination.current,
-                                currency: this.state.currency,
-                                type: this.state.type,
-                                beginDate: this.state.beginDate,
-                                endDate: this.state.endDate
-                            }, () => {
+                    <Table pagination={{
+                        total: this.props.wallet.walletBillList.pager.total,
+                        pageSize: this.props.wallet.walletBillList.pager.pageSize
+                    }}
+                           className="components-table-demo-nested"
+                           columns={columns}
+                           dataSource={this.props.wallet.walletBillList.list}
+                           onChange={(pagination) => {
+                               this.props.getWalletBillList({
+                                   page: pagination.current,
+                                   currency: this.state.currency,
+                                   type: this.state.type,
+                                   beginDate: this.state.beginDate,
+                                   endDate: this.state.endDate
+                               }, () => {
 
-                            })
-                        }}
+                               })
+                           }}
                     />
                 </div>
             </div>

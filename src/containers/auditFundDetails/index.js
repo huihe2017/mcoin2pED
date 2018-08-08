@@ -137,8 +137,10 @@ function mapStateToProps(state, props) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        auditReuseFund: bindActionCreators(auditReuseFund, dispatch)
-    }
+        auditReuseFund: bindActionCreators(auditReuseFund, dispatch),
+        auditStopFund: bindActionCreators(auditStopFund, dispatch)
+
+}
 }
 
 Home = connect(mapStateToProps, mapDispatchToProps)(Home)

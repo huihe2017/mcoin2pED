@@ -222,21 +222,7 @@ class Home extends React.Component {
                                         <span className={style.inputBoxT1}>
                                             2级申购返利本金
                                         </span>
-                                        <Col span={11}>
-                                            {getFieldDecorator('level2BuyUp', {
-                                                initialValue: this.state.buy2UpLimit,
-                                                rules: [{required: this.state.typeBuy, message: '请填写跳转链接!'}],
-                                            })(
-                                                <Input
-                                                    onChange={(e) => {
-                                                        this.setState({buy2UpLimit: e.target.value})
-                                                    }} size="large" placeholder="上限"/>)}
-                                        </Col>
-                                        <Col span={2}>
-        <span style={{display: 'inline-block', width: '100%', textAlign: 'center'}}>
-          -
-        </span>
-                                        </Col>
+
                                         <Col span={11}>
                                             {getFieldDecorator('level2BuyDown', {
                                                 initialValue: this.state.buy2LowLimit,
@@ -246,6 +232,21 @@ class Home extends React.Component {
                                                     onChange={(e) => {
                                                         this.setState({buy2LowLimit: e.target.value})
                                                     }} size="large" placeholder="下限"/>)}
+                                        </Col>
+                                        <Col span={2}>
+        <span style={{display: 'inline-block', width: '100%', textAlign: 'center'}}>
+          -
+        </span>
+                                        </Col>
+                                        <Col span={11}>
+                                            {getFieldDecorator('level2BuyUp', {
+                                                initialValue: this.state.buy2UpLimit,
+                                                rules: [{required: this.state.typeBuy, message: '请填写跳转链接!'}],
+                                            })(
+                                                <Input
+                                                    onChange={(e) => {
+                                                        this.setState({buy2UpLimit: e.target.value})
+                                                    }} size="large" placeholder="上限"/>)}
                                         </Col>
 
                                     </FormItem>
