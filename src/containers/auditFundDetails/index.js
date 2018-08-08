@@ -59,7 +59,7 @@ class Home extends React.Component {
                         类型：
                         <span className={style.contentCC}>
                             {
-                                this.show(this.data.status)
+                                this.show(this.state.status)
                             }
                         </span>
                     </span>
