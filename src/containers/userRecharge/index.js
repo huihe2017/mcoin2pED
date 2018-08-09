@@ -96,7 +96,7 @@ class Home extends React.Component {
                                     style={{width: '100%'}}
                                 >
                                     <Option value={'BTC'}>BTC</Option>
-                                    <Option value={'ETC'}>ETC</Option>
+                                    <Option value={'ETH'}>ETH</Option>
                                 </Select>)}
                             </FormItem>
                         </div>

@@ -148,6 +148,11 @@ class Home extends React.Component {
         }
         return e && e.fileList;
     }
+    showImg = () => {
+        if(this.state.coverUrl){
+            return <img src={'https://img.coin2p.com/'+this.state.coverUrl}/>
+                }
+    }
 
     render() {
         if (!this.props.info.infoTypeList) {
@@ -183,6 +188,10 @@ class Home extends React.Component {
                                 <span className={style.inputBoxT}>
                                      资讯封面（可选）
                                  </span>
+
+                                {this.showImg()}
+
+
                                 <div>
                                     {/*{getFieldDecorator('upload', {*/}
                                     {/*valuePropName: 'fileList',*/}
