@@ -33,7 +33,7 @@ class Home extends React.Component {
                     currency: this.state.currency,
                     realMoney: this.state.realMoney,
                     price: this.state.buyMoney,
-                    amount: this.state.amount,
+                    // amount: this.state.amount,
                     remark: this.state.remark
                 }
 
@@ -114,6 +114,10 @@ class Home extends React.Component {
                                                 if(this.state.buyMoney){
                                                     this.setState({
                                                         inMoney:this.state.realMoney/this.state.buyMoney
+                                                    },()=>{
+                                                        this.props.form.setFieldsValue({
+                                                            inMoney: this.state.realMoney/this.state.buyMoney,
+                                                        });
                                                     })
                                                 }
                                             })
@@ -135,6 +139,10 @@ class Home extends React.Component {
                                                 this.setState({buyMoney:e.target.value},()=>{
                                                     this.setState({
                                                         inMoney:this.state.realMoney/this.state.buyMoney
+                                                    },()=>{
+                                                        this.props.form.setFieldsValue({
+                                                            inMoney: this.state.realMoney/this.state.buyMoney,
+                                                        });
                                                     })
 
                                                 })
@@ -152,7 +160,14 @@ class Home extends React.Component {
                                         currency:this.state.currency
                                     },()=>{
                                         console.log(this.props.wallet)
-                                        this.setState({buyMoney:this.props.wallet[this.state.currency+'Price']})
+                                        this.setState({buyMoney:this.props.wallet[this.state.currency+'Price']},()=>{
+                                            this.props.form.setFieldsValue({
+                                                buyMoney: this.props.wallet[this.state.currency+'Price'],
+                                            });
+                                            this.props.form.setFieldsValue({
+                                                inMoney: this.state.realMoney/this.state.buyMoney,
+                                            });
+                                        })
                                     })
                                 }
                             }} className={style.inputBBoxA} href="javascript:void (0)">

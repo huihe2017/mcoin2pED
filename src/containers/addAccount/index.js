@@ -173,7 +173,11 @@ class Home extends React.Component {
                                     }
 
                                     let pwd = shuffle(randomPassword(4))
-                                    this.setState({password: pwd})
+                                    this.setState({password: pwd},()=>{
+                                        this.props.form.setFieldsValue({
+                                            password: pwd,
+                                        });
+                                    })
                                 }} href="javascript:void (0)">
                                     随机生成
                                 </a>
