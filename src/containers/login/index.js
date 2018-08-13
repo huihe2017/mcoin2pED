@@ -39,12 +39,14 @@ class Home extends React.Component {
                     checkCode:this.state.code,
                 },()=>{
                     hashHistory.push('/')
+                },()=>{
+                    this.setState({picImg: this.getPicImg(),code:''},()=>{
+                        this.props.form.setFieldsValue({
+                            code: '',
+                        });
+                    })
                 })
-                this.setState({picImg: this.getPicImg(),code:''},()=>{
-                    this.props.form.setFieldsValue({
-                        code: '',
-                    });
-                })
+
             }
         });
     }

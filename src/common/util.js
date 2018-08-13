@@ -81,6 +81,7 @@ export function http(option) {
             } else if (response.data.code === 1009) {
                 hashHistory.push('/PIN')
             } else {
+                option.error&&option.error()
                 notification.open({
                     message: '提示',
                     description: response.data.msg,
