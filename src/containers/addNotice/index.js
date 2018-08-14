@@ -23,6 +23,7 @@ class Home extends React.Component {
         super(props);
         this.state = {
             editorState: EditorState.createEmpty(),
+            submitLoading:false
         };
     }
 
@@ -34,8 +35,10 @@ class Home extends React.Component {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
-                console.log(this.state.content)
-
+                // console.log(this.state.content)
+                this.setState({
+                    submitLoading:true
+                })
                 let param = {
                     content: draftToHtml(convertToRaw(this.state.editorState.getCurrentContent())),
                     type: this.state.type,
@@ -48,6 +51,9 @@ class Home extends React.Component {
 
 
                 this.props.createNotic(param, () => {
+                    this.setState({
+                        submitLoading:false
+                    })
                     this.props.history.go(-1)
 
                     // notification.config({
@@ -180,7 +186,7 @@ class Home extends React.Component {
 
                     <div className={style.button}>
                         <FormItem>
-                            <Button type="primary" htmlType="submit" size={'large'}>
+                            <Button type="primary" htmlType="submit" size={'large'} loading={this.state.submitLoading}>
                                 {this.props.params.id === 'null' ? '创建' : '保存'}
                             </Button>
                         </FormItem>

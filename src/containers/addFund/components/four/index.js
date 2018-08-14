@@ -29,17 +29,26 @@ const FormItem = Form.Item;
 class Home extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+            submitLoading:false
+
+        };
     }
 
     handleSubmit = (e) => {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
-                console.log('Received values of form: ', values);
+                this.setState({
+                    submitLoading:true
+                })
+                // console.log('Received values of form: ', values);
                 this.props.createFund(this.props.fund.editFundData, () => {
-                    console.log(this.props)
+                    // console.log(this.props)
                     // this.props.history.go(-1)
+                    this.setState({
+                        submitLoading:false
+                    })
                     hashHistory.push('/fund')
                     notification.open({
                         message: '提示',
@@ -91,7 +100,7 @@ class Home extends React.Component {
                             this.props.handle(0)
                         }} type="primary" size={'large'}>上一步</Button>
                         <FormItem>
-                            <Button type="primary" htmlType="submit" size={'large'}>提交</Button>
+                            <Button type="primary" htmlType="submit" size={'large'} loading={this.state.submitLoading}>提交</Button>
                         </FormItem>
                     </div>
 

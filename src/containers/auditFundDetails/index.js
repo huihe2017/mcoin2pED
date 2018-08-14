@@ -10,7 +10,9 @@ import {filter} from "../../common/util";
 class Home extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+            submitLoading:false
+        };
     }
 
     componentDidMount() {
@@ -18,7 +20,8 @@ class Home extends React.Component {
         this.setState({
             title: data.title,
             adminName: data.adminName,
-            status: data.status
+            status: data.status,
+
         })
     }
 
@@ -70,10 +73,16 @@ class Home extends React.Component {
                     <Button onClick={() => {
 
                         if(this.state.status===2){
+                            this.setState({
+                                submitLoading:true
+                            })
                             this.props.auditStopFund({
                                 id:this.props.params.id,
                                 pass:1
                             },()=>{
+                                this.setState({
+                                    submitLoading:false
+                                })
                                 notification.open({
                                     message: '提示',
                                     description: '操作成功',
@@ -82,10 +91,16 @@ class Home extends React.Component {
                             })
                         }
                         if(this.state.status===5){
+                            this.setState({
+                                submitLoading:true
+                            })
                             this.props.auditReuseFund({
                                 id:this.props.params.id,
                                 pass:1
                             },()=>{
+                                this.setState({
+                                    submitLoading:false
+                                })
                                 notification.open({
                                     message: '提示',
                                     description: '操作成功',
@@ -95,7 +110,7 @@ class Home extends React.Component {
                         }
 
 
-                    }} type="primary" size={'large'}>通过</Button>
+                    }} type="primary" loading={this.state.submitLoading} size={'large'}>通过</Button>
 
                     <Button onClick={() => {
                         if(this.state.status===2){

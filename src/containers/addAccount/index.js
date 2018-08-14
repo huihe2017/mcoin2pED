@@ -16,7 +16,9 @@ const FormItem = Form.Item;
 class Home extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+            submitLoading:false
+        };
     }
 
     handleChange = (value) => {
@@ -28,7 +30,9 @@ class Home extends React.Component {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
-
+                this.setState({
+                    submitLoading:true
+                })
 
                 let params = {
                     password: this.state.password,
@@ -41,7 +45,9 @@ class Home extends React.Component {
                 if (this.props.params.id!=='null') {
                     params.id = this.props.params.id
                 }
-
+                this.setState({
+                    submitLoading:false
+                })
                 this.props.addAccount(params, () => {
                     this.props.history.go(-1)
                 })
@@ -243,7 +249,7 @@ class Home extends React.Component {
 
                     <div className={style.button}>
                         <FormItem>
-                            <Button type="primary" htmlType="submit" size={'large'}>
+                            <Button type="primary" htmlType="submit" size={'large'} loading={this.state.submitLoading}>
                                 {this.props.params.id !== 'null' ? '保存' : '创建'}
                             </Button>
                         </FormItem>

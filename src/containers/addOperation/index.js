@@ -39,8 +39,8 @@ class Home extends React.Component {
             typeBuy: 0,
             typeRedeem: 0,
             typeReg: 0,
-            typeProfit: 0
-
+            typeProfit: 0,
+            submitLoading:false
 
         };
     }
@@ -53,6 +53,9 @@ class Home extends React.Component {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
+                this.setState({
+                    submitLoading:true
+                })
                 let typeBuy = this.state.typeBuy
                 let typeRedeem = this.state.typeRedeem
                 let typeReg = this.state.typeReg
@@ -66,6 +69,9 @@ class Home extends React.Component {
                 }
 
                 this.props.createActivity(this.state, () => {
+                    this.setState({
+                        submitLoading:false
+                    })
                     notification.open({
                         message: '提示',
                         description: '操作成功',
@@ -583,7 +589,7 @@ class Home extends React.Component {
 
                     <div className={style.button}>
                         <FormItem>
-                            <Button type="primary" htmlType="submit" size={'large'}>创建</Button>
+                            <Button type="primary" htmlType="submit" size={'large'} loading={this.state.submitLoading}>创建</Button>
                         </FormItem>
                         <Button onClick={() => {
                             this.props.history.go(-1)

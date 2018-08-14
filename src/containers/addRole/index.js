@@ -127,6 +127,7 @@ class Home extends React.Component {
         super(props);
         this.state = {
             selectedRowKeys: [212], // Check here to configure the default column
+            submitLoading:false
         };
     }
 
@@ -144,6 +145,9 @@ class Home extends React.Component {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
+                this.setState({
+                    submitLoading:true
+                })
                 let param = {
                     permissions: this.state.selectedRowKeys,
                     name: this.state.name,
@@ -165,6 +169,9 @@ class Home extends React.Component {
                         message: '提示',
                         description: '操作成功',
                     });
+                    this.setState({
+                        submitLoading:false
+                    })
                     this.props.history.go(-1)
                 })
             }
@@ -314,7 +321,7 @@ class Home extends React.Component {
                     {/*<Table rowSelection={rowSelection}  columns={columns} dataSource={data}/>*/}
 
                     <div className={style.button}>
-                        <Button type="primary" htmlType="submit" size={'large'}>完成</Button>
+                        <Button type="primary" htmlType="submit" size={'large'} loading={this.state.submitLoading}>完成</Button>
                     </div>
                 </Form>
             </div>)

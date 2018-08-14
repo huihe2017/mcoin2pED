@@ -13,18 +13,26 @@ const FormItem = Form.Item;
 class Home extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+            submitLoading:false
+        };
     }
 
     handleSubmit = (e) => {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
+                this.setState({
+                    submitLoading:true
+                })
                 this.props.modifyPwd({
                     password:	this.state.password,
                     oldPassword:this.state.oldPassword,
                     confirmPassword: this.state.confirmPassword,
                 },()=>{
+                    this.setState({
+                        submitLoading:false
+                    })
                     this.props.history.go(-1)
                     notification.open({
                         message: '提示',
@@ -103,7 +111,7 @@ class Home extends React.Component {
 
                     </div>
                     <div className={style.button}>
-                        <Button type="primary" htmlType="submit" size={'large'}>修改</Button>
+                        <Button type="primary" htmlType="submit" size={'large'} loading={this.state.submitLoading}>修改</Button>
                         <Button size={'large'}>取消</Button>
                     </div>
                 </Form>

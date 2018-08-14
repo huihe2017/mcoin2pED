@@ -213,7 +213,7 @@ class Home extends React.Component {
                                  </span>
                                 {getFieldDecorator('buyMean', {
                                     initialValue: this.props.fund.editFundData.confirmDesc,
-                                    // initialValue: this.props.fund.editFundData.productDesc,字段保留
+                                    // initialValue: this.props.fund.editFundData.productDesc,z字段保留
                                     rules: [{required: true, message: '请填写申购说明!'}],
                                 })(
                                     <TextArea onChange={(e) => {

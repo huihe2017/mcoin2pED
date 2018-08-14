@@ -15,7 +15,9 @@ const FormItem = Form.Item;
 class Home extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+            submitLoading:false
+        };
     }
 
     handleChange = (value) => {
@@ -26,7 +28,9 @@ class Home extends React.Component {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
-
+                this.setState({
+                    submitLoading:true
+                })
 
                 let params = {
                     mobile: this.state.mobile,
@@ -38,6 +42,9 @@ class Home extends React.Component {
                 }
 
                 this.props.InCoin(params, () => {
+                    this.setState({
+                        submitLoading:false
+                    })
                     this.props.history.go(-1)
                     notification.open({
                         message: '提示',
@@ -210,7 +217,7 @@ class Home extends React.Component {
 
                     <div className={style.button}>
                         <FormItem>
-                            <Button type="primary" htmlType="submit" size={'large'}>充值</Button>
+                            <Button type="primary" htmlType="submit" size={'large'} loading={this.state.submitLoading}>充值</Button>
                         </FormItem>
                         <Button onClick={() => {
                             this.props.history.go(-1)

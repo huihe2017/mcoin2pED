@@ -37,6 +37,7 @@ class Home extends React.Component {
         super(props);
         this.state = {
             editorState: EditorState.createEmpty(),
+            submitLoading:false
         };
     }
 
@@ -114,6 +115,9 @@ class Home extends React.Component {
             // console.log(333311,this.state.editorState.getCurrentContent())
             // console.log(333311222,draftToHtml(convertToRaw(this.state.editorState.getCurrentContent())))
             if (!err) {
+                this.setState({
+                    submitLoading:true
+                })
                 let param = {
                     content: draftToHtml(convertToRaw(this.state.editorState.getCurrentContent())),
                     typeId: this.state.typeId,
@@ -125,6 +129,9 @@ class Home extends React.Component {
                     param.id = this.props.params.id
                 }
                 this.props.createInfo(param, () => {
+                    this.setState({
+                        submitLoading:false
+                    })
                     this.props.history.go(-1)
                     notification.open({
                         message: '提示',
@@ -263,7 +270,7 @@ class Home extends React.Component {
 
                     <div className={style.button}>
                         <FormItem>
-                            <Button type="primary" htmlType="submit" size={'large'}>
+                            <Button type="primary" htmlType="submit" size={'large'} loading={this.state.submitLoading}>
 
                                 {this.props.params.id !== 'null' ? '保存' : '创建'}
                             </Button>

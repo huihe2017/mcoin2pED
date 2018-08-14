@@ -11,7 +11,9 @@ import {auditCreateFund} from '../../../../actions/fund'
 class Home extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+            submitLoading:false
+        };
     }
 
     componentDidMount() {
@@ -37,10 +39,16 @@ class Home extends React.Component {
                 </span>
                 <div className={style.button}>
                     <Popconfirm placement="top" title={'确认通过该步骤？'} onConfirm={() => {
+                        this.setState({
+                            submitLoading:true
+                        })
                         this.props.auditCreateFund({
                             id:this.props.data.id,
                             pass:1
                         },()=>{
+                            this.setState({
+                                submitLoading:false
+                            })
                             hashHistory.push('/auditFund')
                             notification.open({
                                 message: '提示',
@@ -48,7 +56,7 @@ class Home extends React.Component {
                             });
                         })
                     }} okText="Yes" cancelText="No">
-                        <Button type="primary" size={'large'}>通过</Button>
+                        <Button type="primary" size={'large'} loading={this.state.submitLoading}>通过</Button>
                     </Popconfirm>
                     <Popconfirm placement="top" title={'确认拒绝该步骤？'} onConfirm={() => {
                         this.props.auditCreateFund({

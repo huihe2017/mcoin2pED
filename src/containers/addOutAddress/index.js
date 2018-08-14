@@ -16,7 +16,7 @@ class Home extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-
+            submitLoading:false
         };
     }
 
@@ -37,7 +37,9 @@ class Home extends React.Component {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
-
+                this.setState({
+                    submitLoading:true
+                })
                 let param = {
                     currency: this.state.currency,
                     address: this.state.address,
@@ -49,6 +51,9 @@ class Home extends React.Component {
 
 
                 this.props.createOutAddress(param, () => {
+                    this.setState({
+                        submitLoading:false
+                    })
                     this.props.history.go(-1)
                     notification.open({
                         message: '提示',
@@ -120,7 +125,7 @@ class Home extends React.Component {
 
                         <div className={style.button}>
                             <FormItem>
-                                <Button type="primary" htmlType="submit" size={'large'}>提交</Button>
+                                <Button type="primary" htmlType="submit" size={'large'} loading={this.state.submitLoading}>提交</Button>
                             </FormItem>
                             <Button size={'large'} onClick={()=>hashHistory.push('/outAddressManage')}>放弃</Button>
                         </div>

@@ -13,13 +13,18 @@ const FormItem = Form.Item;
 class Home extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+            submitLoading:false
+        };
     }
 
     handleSubmit = (e) => {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
+                this.setState({
+                    submitLoading:true
+                })
                 this.props.modifyPinCode({
                     pinCode:this.state.pinCode,
                     oldPinCode:this.state.oldPinCode,
@@ -29,6 +34,9 @@ class Home extends React.Component {
                         message: '提示',
                         description: '操作成功',
                     });
+                    this.setState({
+                        submitLoading:false
+                    })
                     this.props.history.go(-1)
                 })
             }
@@ -88,7 +96,7 @@ class Home extends React.Component {
 
                     </div>
                     <div className={style.button}>
-                        <Button type="primary" htmlType="submit" size={'large'}>提交</Button>
+                        <Button type="primary" htmlType="submit" size={'large'} loading={this.state.submitLoading}>提交</Button>
                         <Button size={'large'}>取消</Button>
                     </div>
                 </Form>

@@ -11,7 +11,9 @@ class Home extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            visible: false
+            visible: false,
+            submitLoading:false,
+            submitLoading1:false
         };
     }
 
@@ -38,10 +40,16 @@ class Home extends React.Component {
         });
     }
     handleOk = (e) => {
+        this.setState({
+            submitLoading:true
+        })
         this.props.auditRecharge({
             id: this.props.params.id,
             pass: 1
         }, () => {
+            this.setState({
+                submitLoading:false
+            })
             notification.open({
                 message: '提示',
                 description: '操作成功',
@@ -127,20 +135,26 @@ class Home extends React.Component {
                 </div>
                 <div className={style.button}>
 
-                    <Button onClick={this.showModal} type="primary" size={'large'}>通过</Button>
+                    <Button onClick={this.showModal} type="primary" size={'large'} loading={this.state.submitLoading}>通过</Button>
 
                     <Button onClick={() => {
+                        this.setState({
+                            submitLoading1:true
+                        })
                         this.props.auditRecharge({
                             id: this.props.params.id,
                             pass: 0
                         }, () => {
+                            this.setState({
+                                submitLoading1:false
+                            })
                             notification.open({
                                 message: '提示',
                                 description: '操作成功',
                             });
                             this.props.history.go(-1)
                         })
-                    }} size={'large'}>拒绝</Button>
+                    }} size={'large'} loading={this.state.submitLoading1}>拒绝</Button>
                 </div>
                 <Modal
                     title="确认通过"

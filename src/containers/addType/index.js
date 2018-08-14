@@ -14,7 +14,9 @@ const FormItem = Form.Item;
 class Home extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+            submitLoading:false
+        };
     }
 
     componentDidMount(){
@@ -34,7 +36,9 @@ class Home extends React.Component {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
-
+                this.setState({
+                    submitLoading:true
+                })
                 let param = {
                     name: this.state.name
 
@@ -44,6 +48,9 @@ class Home extends React.Component {
                 }
 
                 this.props.createInfoType(param,()=>{
+                    this.setState({
+                        submitLoading:false
+                    })
                     this.props.history.go(-1)
                     notification.open({
                         message: '提示',
@@ -80,7 +87,7 @@ class Home extends React.Component {
 
                     </div>
                     <div className={style.button}>
-                        <Button type="primary" htmlType="submit" size={'large'}>创建</Button>
+                        <Button type="primary" htmlType="submit" size={'large'} loading={this.state.submitLoading}>创建</Button>
                         <Button size={'large'} onClick={()=>hashHistory.push('/informationType')}>取消</Button>
                     </div>
                 </Form>

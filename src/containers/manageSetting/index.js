@@ -26,6 +26,7 @@ class Home extends React.Component {
             inputVisible: false,
             inputVisible1: false,
             inputValue: '',
+            submitLoading:false
         };
     }
 
@@ -34,7 +35,9 @@ class Home extends React.Component {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
-
+                this.setState({
+                    submitLoading:true
+                })
                 let param = {
                     withdrawAlarm: this.state.withdrawAlarm,
                     balanceBTC: this.state.balanceBTC,
@@ -48,6 +51,9 @@ class Home extends React.Component {
                 }
 
                 this.props.setWallet(param, () => {
+                    this.setState({
+                        submitLoading:false
+                    })
                     // this.props.history.go(-1)
                     notification.open({
                         message: '提示',
@@ -354,7 +360,7 @@ class Home extends React.Component {
 
                         <div className={style.button}>
                             <FormItem>
-                                <Button type="primary" htmlType="submit" size={'large'}>保存</Button>
+                                <Button type="primary" htmlType="submit" size={'large'} loading={this.state.submitLoading}>保存</Button>
                             </FormItem>
                         </div>
 
