@@ -6,7 +6,7 @@ import {Layout, Menu, Breadcrumb, Icon, Button, Table, Dropdown, notification} f
 import {connect} from 'react-redux'
 import {Link} from 'react-router'
 import {bindActionCreators} from 'redux'
-import {getUserMsg,logout} from '../../actions/user'
+import {getUserMsg, logout} from '../../actions/user'
 import {setMenu} from '../../actions/menu'
 
 const {SubMenu} = Menu;
@@ -20,7 +20,7 @@ class Home extends React.Component {
     }
 
     componentDidMount() {
-        this.props.getUserMsg({path:this.props.location.pathname}, () => {
+        this.props.getUserMsg({path: this.props.location.pathname}, () => {
         })
     }
 
@@ -39,26 +39,63 @@ class Home extends React.Component {
                             <Menu
                                 theme="dark"
                                 mode="horizontal"
-                                defaultSelectedKeys={['1']}
+                                defaultSelectedKeys={(() => {
+                                    let num
+                                    this.props.menu.level1.map((obj, index) => {
+                                        if (obj.childPermission) {
+                                            obj.childPermission.map((obj2, index2) => {
+                                                if (this.props.location.pathname === obj2.url) {
+                                                    num = obj2.parent
+                                                }
+                                            })
+                                        }
+
+                                    })
+                                    if (num === undefined) {
+
+                                        return this.props.menu.level1[0].id + ''
+                                    }
+                                    return [num + '']
+                                })()}
                                 style={{lineHeight: '64px'}}
                                 onClick={(a, b) => {
-                                    console.log(this.props);
+                                    // console.log(this.props);
+                                    // this.props.setMenu({
+                                    //     list: this.props.user.userMsg.permissionList,
+                                    //     id: a.key
+                                    // })
+                                    // console.log(a.key);
                                     this.props.setMenu({
                                         list: this.props.user.userMsg.permissionList,
                                         id: a.key
                                     })
-                                    console.log(a.key);
+                                    this.props.menu.level1.map((obj, index) => {
+                                        if (a.key - 0 === obj.id) {
+                                            hashHistory.push(obj.childPermission[0].url)
+                                        }
+
+                                        // if(obj.childPermission){
+                                        //     obj.childPermission.map((obj2, index2)=>{
+                                        //         if (a.key === obj2.url) {
+                                        //             num = obj2.parent
+                                        //         }
+                                        //     })
+                                        // }
+
+                                    })
+
+
                                 }}
                             >
 
                                 {this.props.menu.level1.map((obj, index) => {
                                     return <Menu.Item onChange={() => {
-                                        alert(11)
+
                                     }} key={obj.id}>{obj.name}</Menu.Item>
                                 })}
                             </Menu>
                             <div className={style.out} onClick={() => {
-                                this.props.logout({},()=>{
+                                this.props.logout({}, () => {
                                     sessionStorage.removeItem('adminToken')
                                     hashHistory.push('/login')
                                 })
@@ -73,7 +110,19 @@ class Home extends React.Component {
                         <Sider width={200} style={{background: '#fff'}}>
                             <Menu
                                 mode="inline"
-                                defaultSelectedKeys={['1']}
+                                defaultSelectedKeys={(() => {
+                                    let num
+                                    this.props.menu.level2.map((obj, index) => {
+                                        if (this.props.location.pathname === obj.url) {
+                                            num = index
+                                        }
+                                    })
+                                    if (num === undefined) {
+
+                                        return ['0']
+                                    }
+                                    return [num + '']
+                                })()}
                                 defaultOpenKeys={['sub1']}
                                 style={{height: '100%', borderRight: 0}}
                             >
