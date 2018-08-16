@@ -52,7 +52,7 @@ class Home extends React.Component {
     }
 
     render() {
-        const { getFieldDecorator } = this.props.form;
+        const { getFieldDecorator ,getFieldError} = this.props.form;
         return (
             <div className={style.wlop}>
                 <div className={style.wlopContent}>
@@ -67,13 +67,31 @@ class Home extends React.Component {
                                 <Input size={'large'} value={this.state.userName} onChange={(e)=>{this.setState({userName:e.target.value})}} prefix={<Icon type="user" style={{ fontSize: 13 }} />} placeholder="账号" />
                             )}
                         </FormItem>
-                        <FormItem>
-                            {getFieldDecorator('password', {
-                                rules: [{ required: true, message: '请输入密码!' }],
-                            })(
-                                <Input size={'large'} value={this.state.pwd} onChange={(e)=>{this.setState({pwd:e.target.value})}} prefix={<Icon type="lock" style={{ fontSize: 13 }} />} type="password" placeholder="密码" />
-                            )}
-                        </FormItem>
+                        <div className={style.pass}>
+                            <FormItem>
+                                {getFieldDecorator('password', {
+                                    rules: [
+                                        {  required: true,message: `密码长度必须至少8-20位！` ,pattern:/^.{8,20}$/,},
+                                        {  message: '密码必须由数字和字母组成！' ,pattern:/(?!^\d+$)(?!^[a-zA-Z]+$)[0-9a-zA-Z]/,},
+                                    ],
+                                })(<Input size={'large'} value={this.state.pwd} onChange={(e)=>{this.setState({pwd:e.target.value})}} prefix={<Icon type="lock" style={{ fontSize: 13 }} />} type="password" placeholder="密码" />
+                                )}
+                                <span className={style.tip}>
+                                    <div>
+                                        {
+                                            getFieldError('password')&&getFieldError('password')[0]
+                                        }
+                                    </div>
+                                    <div>
+                                        {
+                                            getFieldError('password')&&getFieldError('password')[1]
+                                        }
+                                    </div>
+                                </span>
+
+                            </FormItem>
+                        </div>
+
                         <FormItem>
                         <div className={style.tuxing}>
                             <FormItem>
@@ -87,7 +105,6 @@ class Home extends React.Component {
                             {/*<img src={require('./images/code.jpg')} alt=""/>*/}
                             {this.state.picImg}
                         </div>
-
 
 
                             <Button type="primary" htmlType="submit" className={style.button}>
