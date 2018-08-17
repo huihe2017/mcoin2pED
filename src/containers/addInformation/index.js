@@ -18,12 +18,13 @@ import {
     Input,
     Select,
     Form,
-    Upload
+    Upload,
+    message
 } from 'antd';
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 import draftToHtml from 'draftjs-to-html';
-import {createInfo, getInfoTypeList} from "../../actions/information";
+import {createInfo, getInfoTypeList,getUpLoadUrl} from "../../actions/information";
 import htmlToDraft from 'html-to-draftjs';
 
 const Option = Select.Option;
@@ -73,6 +74,10 @@ class Home extends React.Component {
                     title: data.title,
                 })
             }
+        });
+        this.props.getUpLoadUrl((e) => {
+            console.log('地址获取');
+            console.log(e);
         })
 
         // document.getElementById('file').addEventListener('change', function (e) {
@@ -260,6 +265,57 @@ class Home extends React.Component {
                                     wrapperClassName="demo-wrapper"
                                     editorClassName="demo-editor"
                                     onEditorStateChange={this.onEditorStateChange}
+
+                                    toolbar={{
+                                        options: ['inline', 'blockType', 'fontSize', 'fontFamily', 'list', 'textAlign', 'colorPicker', 'link', 'embedded', 'emoji', 'image', 'remove', 'history'],
+                                        image: {
+                                            // icon: image,
+                                            className: undefined,
+                                            component: undefined,
+                                            popupClassName: undefined,
+                                            urlEnabled: true,
+                                            uploadEnabled: true,
+                                            alignmentEnabled: true,
+                                            uploadCallback : file =>{
+                                                return new Promise(
+                                                    (resolve, reject) => {
+                                                        let formData = new FormData()
+                                                        formData.append('image', file)
+                                                        let subsystemTourInfo = JSON.parse(localStorage.getItem('subsystemTourInfo')) || {}
+                                                        console.log(this.props.info.upImgUrl);
+                                                        fetch(`${this.props.info.upImgUrl}`, {
+                                                            method: 'POST',
+                                                            headers: {
+                                                                'store-user-token':subsystemTourInfo.token
+                                                            },
+                                                            body: formData,
+                                                        }).then(res => {
+                                                            return res.json()
+                                                        }).then(res => {
+                                                            console.log('上传图片返回');
+                                                            console.log(res);
+                                                            if (res.data.errcode !== '20000') {
+                                                                message.error('图片上传失败', 2)
+                                                                reject(res)
+                                                            } else {
+                                                                resolve({data: {link: res.data.url}})
+                                                            }
+
+                                                        }).catch(err => {
+                                                            reject(err)
+                                                        })
+                                                    }
+                                                )
+                                            },
+                                            previewImage: false,
+                                            inputAccept: 'image/gif,image/jpeg,image/jpg,image/png,image/svg',
+                                            alt: { present: false, mandatory: false },
+                                            defaultSize: {
+                                                height: 'auto',
+                                                width: 'auto',
+                                            },
+                                        },
+                                    }}
                                 />
 
                             </FormItem>
@@ -295,7 +351,8 @@ function mapStateToProps(state, props) {
 function mapDispatchToProps(dispatch) {
     return {
         createInfo: bindActionCreators(createInfo, dispatch),
-        getInfoTypeList: bindActionCreators(getInfoTypeList, dispatch)
+        getInfoTypeList: bindActionCreators(getInfoTypeList, dispatch),
+        getUpLoadUrl: bindActionCreators(getUpLoadUrl, dispatch),
     }
 }
 

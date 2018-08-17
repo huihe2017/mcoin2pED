@@ -74,5 +74,21 @@ export function getInfoTypeList(data, callback) {
         })
     }
 }
+export function getUpLoadUrl(callback) {
+    return dispatch => {
+        http({
+            type: 'post',
+            data: {type: 0},
+            callback,
+            url: 'oss/getpolicy',
+            success: (response) => {
+                console.log('地址获取1');
+                console.log(response);
+                dispatch({type: 'UP_IMG_URL', data: response.data})
+            }
+
+        })
+    }
+}
 
 

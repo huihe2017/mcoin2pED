@@ -23,6 +23,12 @@ export default function information(state = initialState, action = {}) {
         case 'GET_INFO_TYPE_LIST':
             state.infoTypeList = action.data.data
             return Object.assign({}, state, {})
+
+        case 'UP_IMG_URL':
+            console.log(action.data)
+            state.upImgUrl = action.data.data.policy.host+action.data.data.policy.dir
+            return Object.assign({}, state, {})
+
         default:
             return state
     }
