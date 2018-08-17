@@ -286,7 +286,7 @@ class Home extends React.Component {
                                                         fetch(`${this.props.info.upImgUrl}`, {
                                                             method: 'POST',
                                                             headers: {
-                                                                'store-user-token':subsystemTourInfo.token
+                                                                adminToken:sessionStorage.adminToken
                                                             },
                                                             body: formData,
                                                         }).then(res => {
